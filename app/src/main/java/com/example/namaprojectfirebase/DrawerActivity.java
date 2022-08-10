@@ -1,6 +1,8 @@
 package com.example.namaprojectfirebase;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
@@ -28,6 +30,7 @@ public class DrawerActivity extends AppCompatActivity {
     private ActivityDrawerBinding binding;
     public TextView activeUserEmail;
     private ImageButton btnPLus;
+    public Button action_settings;
 
 
 
@@ -39,6 +42,12 @@ public class DrawerActivity extends AppCompatActivity {
         binding = ActivityDrawerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarDrawer.toolbar);
+
+        action_settings = (Button)findViewById(R.id.action_settings);
+
+
+
+
 
 
 
@@ -73,6 +82,8 @@ public class DrawerActivity extends AppCompatActivity {
         activeUserEmail.setText("You are logged with " + Login.mAuth.getCurrentUser().getEmail());
         activeUserName.setText("Welcome, " + Login.nameFromDB);
 
+
+
     }
 
 
@@ -90,5 +101,13 @@ public class DrawerActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+    //TODO Log out
+    public void LogOut(MenuItem item) {
+        System.out.println("HEHYYYYY LOGGOUT");
+        Login.mAuth.signOut();
+//        Intent intent = new Intent(this, Login.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        startActivity(intent);
     }
 }

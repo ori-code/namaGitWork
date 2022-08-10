@@ -47,7 +47,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         signIn = (Button) findViewById(R.id.login);
         clientRegister = (Button) findViewById(R.id.clientRegisterBtn);
         mAuth = FirebaseAuth.getInstance();
@@ -55,25 +54,29 @@ public class Login extends AppCompatActivity {
         editTextPassword = (EditText) findViewById (R.id.editTextTextPassword);
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         currentUser = databaseReference.orderByChild("adressText");
-
-
         databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
         databaseReference.addListenerForSingleValueEvent(valueEventListenerNew);
     }
 
+
+
     ValueEventListener valueEventListenerNew = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            if (dataSnapshot.exists()) {
-                for (DataSnapshot snapshotUserType : dataSnapshot.getChildren()) {
-                    System.out.println("IUSERRR"  + snapshotUserType.child("permission").getValue());
-                    if(snapshotUserType.child("email").getValue().equals(mAuth.getCurrentUser().getEmail())){
-                        System.out.println("THE TYPE IS : " + snapshotUserType.child("permission").getValue() + "The user " + mAuth.getCurrentUser().getEmail());
-                        globalPermission = Integer.parseInt(snapshotUserType.child("permission").getValue().toString()) ;
-                        System.out.println("THE permission : " + globalPermission);
+            System.out.println("BEFORE RUNNNING" + FirebaseAuth.getInstance().getCurrentUser());
+            if(!FirebaseAuth.getInstance().getCurrentUser().equals(null)) {
+                System.out.println("AFTER RUNNNING" + FirebaseAuth.getInstance().getCurrentUser());
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshotUserType : dataSnapshot.getChildren()) {
+                        System.out.println("IUSERRR" + snapshotUserType.child("permission").getValue());
+                        if (snapshotUserType.child("email").getValue().equals(mAuth.getCurrentUser().getEmail())) {
+                            System.out.println("THE TYPE IS : " + snapshotUserType.child("permission").getValue() + "The user " + mAuth.getCurrentUser().getEmail());
+                            globalPermission = Integer.parseInt(snapshotUserType.child("permission").getValue().toString());
+                            System.out.println("THE permission : " + globalPermission);
+                        }
                     }
+//                adapter.notifyDataSetChanged();
                 }
-                //adapter.notifyDataSetChanged();
             }
         }
 
@@ -86,6 +89,7 @@ public class Login extends AppCompatActivity {
 
     //login button
     public void loginFunc(View view) {
+
         email = editTextEmail.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
         //System.out.println("The email is " + email + " and password " + password);
