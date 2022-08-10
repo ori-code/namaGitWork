@@ -48,7 +48,7 @@ public class HomeFragment<puiblic> extends Fragment {
     final String chief = "chief@nama.com";
     private FragmentHomeBinding binding;
     public TextView activeUserNameHomeFragment;
-    public ImageButton btnPLus,btnTable, btnAdd,  ordrButton, userControl, grafBtn, overdueBtn;
+    public ImageButton btnPLus,btnTable, btnAdd,  ordrButton, userControl, grafBtn, overdueBtn,ordrButton2;
     public TextView iRemember;
 /*    public EditText iForget;
     public Button rememberMe, rememberYou;*/
@@ -131,9 +131,12 @@ public class HomeFragment<puiblic> extends Fragment {
         btnPLus = (ImageButton) root.findViewById(R.id.plusButton);
         btnAdd = (ImageButton) root.findViewById(R.id.addUser);
         ordrButton = (ImageButton) root.findViewById(R.id.orderButton);
+        ordrButton2 = (ImageButton) root.findViewById(R.id.orderButton2);
+
         userControl = (ImageButton) root.findViewById(R.id.controlUser);
         grafBtn = (ImageButton) root.findViewById(R.id.grafBtn);
         overdueBtn = (ImageButton) root.findViewById(R.id.overdueBtn);
+
 
 
         System.out.println("global permission" + Login.globalPermission);
@@ -162,6 +165,16 @@ public class HomeFragment<puiblic> extends Fragment {
             btnPLus.setVisibility(View.INVISIBLE);
             overdueBtn.setVisibility(View.INVISIBLE);
             ordrButton.setVisibility(View.INVISIBLE);
+        }
+        if(Login.globalPermission == 5) {
+            //client
+
+            btnPLus.setVisibility(View.INVISIBLE);
+            btnAdd.setVisibility(View.INVISIBLE);
+            userControl.setVisibility(View.INVISIBLE);
+            grafBtn.setVisibility(View.INVISIBLE);
+            overdueBtn.setVisibility(View.INVISIBLE);
+            ordrButton2.setVisibility(View.INVISIBLE);
         }
 
 

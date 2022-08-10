@@ -98,6 +98,16 @@ public class Login extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     //redirect to the activity profile
                     //System.out.println("Yeeeeey we got in to the system with email !!!! " + mAuth.getCurrentUser().getEmail());
+                    if(globalPermission == 5){
+                        System.out.println("IM USERRR");
+                        Intent i = new Intent(Login.this, MainActivity.class);
+                        i.putExtra("id", nameFromDB);
+                        //System.out.println(nameFromDB);
+//                    if(nameFromDB!=null) {
+                        startActivity(i);
+//                    }
+                    }
+
                     Intent i = new Intent(Login.this, DrawerActivity.class);
                     i.putExtra("id", nameFromDB);
                     //System.out.println(nameFromDB);
