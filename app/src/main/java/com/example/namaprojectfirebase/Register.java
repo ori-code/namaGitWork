@@ -154,7 +154,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             editTextPassword.requestFocus();
             return;
         }
-/////
+//
 
 //        if(permission > 0 && permission <5) {
             mAuth.createUserWithEmailAndPassword(email, password)
