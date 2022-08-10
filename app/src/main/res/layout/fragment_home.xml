@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bckrgd"
+    tools:context=".ui.home.HomeFragment">
+
+
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aldrich"
+        android:shadowColor="@color/black"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:shadowRadius="15"
+        android:text="NAMA SYSTEM"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+
+    <LinearLayout
+        android:layout_width="404dp"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.162">
+
+        <ImageButton
+            android:id="@+id/orderButton2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:padding="0px"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/orders"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For starting, please, choose the option"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.102" />
+
+    <LinearLayout
+        android:layout_width="404dp"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.302">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.302">
+
+            <ImageButton
+                android:id="@+id/tableButton"
+                android:layout_width="201sp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/white"
+                android:padding="0px"
+                android:soundEffectsEnabled="true"
+                android:src="@drawable/show"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/orderButton"
+                android:layout_width="201sp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/white"
+                android:padding="0px"
+                android:soundEffectsEnabled="true"
+                android:src="@drawable/cart"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="404dp"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.723">
+
+        <ImageButton
+            android:id="@+id/grafBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:padding="0px"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/graf"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="404dp"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.583">
+
+        <ImageButton
+            android:id="@+id/addUser"
+            android:layout_width="201sp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:padding="0px"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/newuser"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/controlUser"
+            android:layout_width="201sp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:padding="0px"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/users"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="404dp"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.443">
+
+        <ImageButton
+            android:id="@+id/plusButton"
+            android:layout_width="201sp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:onClick="addProduct"
+            android:padding="0px"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/newnew"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/overdueBtn"
+            android:layout_width="201sp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:padding="0px"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/overdue"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+    </LinearLayout>
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/iRemember"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="37dp"-->
+    <!--        android:layout_marginTop="300dp"-->
+    <!--        android:text="TextView"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textColorHint="@color/white"-->
+    <!--        android:textSize="20dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.373"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/iForget"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="37dp"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textColorHint="@color/white"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.378"-->
+    <!--        tools:layout_editor_absoluteX="0dp" />-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/rememberMe"-->
+    <!--        android:layout_width="154dp"-->
+    <!--        android:layout_height="66dp"-->
+    <!--        android:layout_marginStart="36dp"-->
+    <!--        android:layout_marginTop="340dp"-->
+    <!--        android:backgroundTint="@color/black"-->
+    <!--        android:fontFamily="@font/aldrich"-->
+    <!--        android:text="Please, Remember me"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/rememberYou"-->
+    <!--        app:layout_constraintHorizontal_bias="1.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <Switch-->
+    <!--        android:id="@+id/switch1"-->
+    <!--        android:layout_width="67dp"-->
+    <!--        android:layout_height="35dp"-->
+    <!--        android:textColorHint="@color/white"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.62" />-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/rememberYou"-->
+    <!--        android:layout_width="158dp"-->
+    <!--        android:layout_height="66dp"-->
+    <!--        android:layout_marginTop="340dp"-->
+    <!--        android:layout_marginEnd="52dp"-->
+    <!--        android:backgroundTint="@color/black"-->
+    <!--        android:fontFamily="@font/aldrich"-->
+    <!--        android:text="I am remembering to you"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "323825552757",
+    "project_id": "namaprojectfirebase",
+    "storage_bucket": "namaprojectfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323825552757:android:312e21b84d718dace7573c",
+        "android_client_info": {
+          "package_name": "com.example.namaprojectfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323825552757-557466fg01di2r6goto18j5ugoht8bh6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaOzlWduvv4qqwCGl2i3TV2Ys5ikmHT0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323825552757-557466fg01di2r6goto18j5ugoht8bh6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
