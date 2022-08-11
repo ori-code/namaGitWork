@@ -23,6 +23,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,11 +64,51 @@ public class Order extends Activity {
         editComments = (EditText) findViewById(R.id.editComments);
 
 
+
+
+
+
         List productsInCartNameQuantity = new ArrayList();
 
         getOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+               String editCName = editClientName.getText().toString().trim();
+                String editCAddress = editAddress.getText().toString().trim();
+                String editCPhone =  editPhone.getText().toString().trim();
+               String editCComments =   editComments.getText().toString().trim();
+
+
+
+                if (editCName.isEmpty()) {
+                    editClientName.setError("Full name is required!");
+                    editClientName.requestFocus();
+                    return;
+                }
+                if (editCAddress.isEmpty()) {
+                    editAddress.setError("Address is required!");
+                    editAddress.requestFocus();
+                    return;
+                }
+
+                if (editCPhone.isEmpty()) {
+                    editPhone.setError("Phone is required!");
+                    editPhone.requestFocus();
+                    return;
+                }
+
+                if (editCComments.isEmpty()) {
+                    editComments.setError("You dont wnat to comment something ??! No problem ... ");
+                    editComments.setText("No comments");
+                    return;
+                }
+
+
+
+
+
                 count = 0;
                 productsInCartNameQuantity.clear();
                 flagRunningCart = 0;
@@ -107,8 +148,17 @@ public class Order extends Activity {
                                 dataOfCart.put(productsInCartNameQuantity.get(z).toString(), productsInCartNameQuantity.get(z+1));
 //                            }
                         }
-                        dataOfCart.put("status", "1");
 
+                        Long tsLong = System.currentTimeMillis()/1000;
+                        String ts = tsLong.toString();
+
+
+                        dataOfCart.put("status", "1");
+                        dataOfCart.put("Time of Placed Order" , ts);
+                        dataOfCart.put("clientName",editCName);
+                        dataOfCart.put("clientAddress",editCAddress);
+                        dataOfCart.put("clientPhone",editCPhone);
+                        dataOfCart.put("clientCommetns",editCComments);
                         FirebaseDatabase.getInstance()
                                 .getReference("orders")
                                 .child(HomeFragment.uniqueOfCartID)
