@@ -108,7 +108,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         //TODO DATE COLOR EXP BUG IS FROM THE LATS PRODUCT AND RESULT GOING TO THE FIRST
         if(result > expBorder)
         {
-
+//
             System.out.println("RESULT" + result);
             System.out.println("EXP" + epochExp);
             System.out.println("CURRENT " + epochCurrent);
