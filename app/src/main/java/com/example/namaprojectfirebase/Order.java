@@ -34,6 +34,7 @@ public class Order extends Activity {
     public int count = 0,flagRunningCart =0,valueUpdated=0;
     public EditText editClientName, editAddress, editPhone, editComments ;
     public Button addPurchases;
+    public static int deliveryType = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +71,12 @@ public class Order extends Activity {
 
         List productsInCartNameQuantity = new ArrayList();
 
+
+
+
+
+
+
         getOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +88,7 @@ public class Order extends Activity {
                String editCComments =   editComments.getText().toString().trim();
 
 
-               
+
                 if (editCName.isEmpty()) {
                     editClientName.setError("Full name is required!");
                     editClientName.requestFocus();
@@ -159,6 +166,7 @@ public class Order extends Activity {
                         dataOfCart.put("clientAddress",editCAddress);
                         dataOfCart.put("clientPhone",editCPhone);
                         dataOfCart.put("clientCommetns",editCComments);
+                        dataOfCart.put("deliveryType",  deliveryType);
                         FirebaseDatabase.getInstance()
                                 .getReference("orders")
                                 .child(HomeFragment.uniqueOfCartID)
@@ -302,4 +310,21 @@ public class Order extends Activity {
         getWindow().setLayout((int) (width*.95) , (int) (height*.8));
 
     }
+
+
+
+
+    public void radioTypeButtonDeliveryMan(View view) {
+        deliveryType=1;
+        System.out.println("radioTypeButtonDeliveryMan");
+    }
+    public void radioTypeDrone(View view) {
+        deliveryType=2;
+        System.out.println("radioTypeDrone");
+    }
+    public void radioTypePickup(View view) {
+        deliveryType=3;
+        System.out.println("radioTypePickup");
+    }
+
 }

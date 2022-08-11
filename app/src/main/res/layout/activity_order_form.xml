@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bckrgd"
-    tools:context=".Purchases"
+    tools:context=".Order"
     tools:layout_editor_absoluteX="-92dp"
     tools:layout_editor_absoluteY="146dp">
     //
@@ -151,13 +151,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+
+<RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="460dp"
+    android:orientation="horizontal">
     <RadioButton
         android:id="@+id/radioTypeMan"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:text="Deliveryman "
+        android:onClick="radioTypeButtonDeliveryMan"
         android:textColor="@color/black"
+        android:checked="true"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -173,6 +181,7 @@
         android:background="@color/white"
         android:text="Drone "
         android:textSize="17dp"
+        android:onClick="radioTypeDrone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.195"
@@ -187,12 +196,13 @@
         android:background="@color/white"
         android:text="Pickup "
         android:textSize="17dp"
+        android:onClick="radioTypePickup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.688" />
-
+</RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

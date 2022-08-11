@@ -32,6 +32,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public static Bundle extrasFromRegister;
 
     public RadioGroup buttonsGroupJava;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +106,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         permission = 4;
         System.out.println("Accountant");
     }
+
+
+
 
     private void registeruser() {
 
