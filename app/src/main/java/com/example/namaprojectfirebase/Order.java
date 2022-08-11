@@ -81,7 +81,7 @@ public class Order extends Activity {
                String editCComments =   editComments.getText().toString().trim();
 
 
-
+               
                 if (editCName.isEmpty()) {
                     editClientName.setError("Full name is required!");
                     editClientName.requestFocus();
