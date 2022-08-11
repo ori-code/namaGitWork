@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("BEFORE FILTER");
             if(item.getNameOfProduct().toLowerCase().contains(text.toLowerCase())){
                 System.out.println("PRODUCT FILTER TYPE IS " + item.getType());
+                //TODO type of Product ASK VERONIKA
                 if(FoodCheckBox.isChecked() && item.getType()==1)
                      filteredList.add(item);
                 if(FruitsAndVegetablesCheckBox.isChecked() && item.getType() ==2)
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
                     productList.add(product);
 
-                    //TODO type of Product
+
                     System.out.println("TYPE IS TO LISSS" + product.getType());
 
                 }
