@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public String typeFromDb;
     DatabaseReference dataSnapshot;
     DatabaseReference dbProducts,addToCartDb;
+    public CheckBox FoodCheckBox, DrinkCheckBox, FruitsAndVegetablesCheckBox, MeatCheckBox, GrainCheckBox, DairyCheckBox;
 //    public static int globalPermission;
 
     @Override
@@ -84,11 +86,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
+
+
+
+
+
     private void filter (String text){
         ArrayList <Product> filteredList = new ArrayList<>();
+
+        FoodCheckBox = (CheckBox)findViewById(R.id.checkBoxFood);
+        DrinkCheckBox = (CheckBox)findViewById(R.id.checkBoxDrink);
+        FruitsAndVegetablesCheckBox = (CheckBox)findViewById(R.id.checkBoxFruitsAndVegetables);
+        MeatCheckBox = (CheckBox)findViewById(R.id.checkBoxMeat);
+        GrainCheckBox = (CheckBox)findViewById(R.id.checkBoxGrain);
+        DairyCheckBox = (CheckBox)findViewById(R.id.checkBoxDairy);
+
+
+
+
+
+
+
+
         for(Product item : productList ){
             if(item.getNameOfProduct().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
+//                if(DairyCheckBox.isChecked() && item.getType()==5)
+                System.out.println("PRODUCT FILTER TYPE IS " + item.getType());
+                     filteredList.add(item);
+//                if(DrinkCheckBox.isChecked() && item.getType() ==2)
+//                    filteredList.add(item);
+
             }
         }
         adapter.filteredList(filteredList);
@@ -106,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
                     Product product = snapshot.getValue(Product.class);
                     System.out.println("The before sending to list " + product.getBestBefore());
                     productList.add(product);
+
+                    //TODO type of Product
+                    System.out.println("TYPE IS TO LISSS" + product.getType());
 
                 }
                 adapter.notifyDataSetChanged();

@@ -82,11 +82,11 @@ public class Product {
 
     public String getImageID() { return imageID; }
 
+    public int getType() {
+        return type;
+    }
 
-
-
-
- /*   public Product (String nameOfProduct, String description, double buyPrice, double quantity, String imageUrl){
+    /*   public Product (String nameOfProduct, String description, double buyPrice, double quantity, String imageUrl){
         this.nameOfProduct = nameOfProduct;
         this.description = description;
         this.buyPrice = buyPrice;
