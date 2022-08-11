@@ -104,6 +104,7 @@ public class AddCart extends AppCompatActivity implements View.OnClickListener {
 //STOP HERE //
 
     public static void purchaseFunc (String productName, double price, double quantity){
+
         Map<String, Object> dataOfCart = new HashMap<>();
         sum += Double.valueOf(price);
         dataOfCart.put("URL", "hey");

@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.namaprojectfirebase.ui.home.HomeFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,11 +23,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Order extends Activity {
-    public static DatabaseReference orderDbSnap,allProducts;
+    public static DatabaseReference orderDbSnap,allProducts,ordersReference;
     public int count = 0,flagRunningCart =0,valueUpdated=0;
     public EditText editClientName, editAddress, editPhone, editComments ;
     public Button addPurchases;
@@ -36,7 +40,7 @@ public class Order extends Activity {
         setContentView(R.layout.activity_order_form);
         Button getOrder = (Button) findViewById(R.id.markOrderRecieved);
         System.out.println("IM IN ORDER CARD ");
-        Query orderQueryCopyAllToOrders, updateQuantityFromGlobal;
+        Query orderQueryCopyAllToOrders, updateQuantityFromGlobal,ordersQuery;
 
         orderDbSnap = FirebaseDatabase.getInstance().getReference("carts").child(HomeFragment.uniqueOfCartID);
         orderQueryCopyAllToOrders = orderDbSnap.orderByKey();
@@ -44,6 +48,13 @@ public class Order extends Activity {
 
         allProducts = FirebaseDatabase.getInstance().getReference("products");
         updateQuantityFromGlobal = allProducts.orderByKey();
+
+
+        //ORDERS QUERY
+        ordersReference = FirebaseDatabase.getInstance().getReference("orders");
+        ordersQuery = ordersReference.orderByKey();
+
+
 
 
         editClientName = (EditText) findViewById(R.id.nameOfTheClient);
@@ -57,7 +68,6 @@ public class Order extends Activity {
         getOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 count = 0;
                 productsInCartNameQuantity.clear();
                 flagRunningCart = 0;
@@ -73,14 +83,55 @@ public class Order extends Activity {
                             productsInCartNameQuantity.add(String.valueOf(postSnapshot.child("quantity").getValue()));
 //                            System.out.println("The values in list" + productsInCartNameQuantity);
 //                            System.out.println("COUNT IS" + count);
+
+
+
                             count++;
 //                            System.out.println("COUNT IS : "+ count);
                         }
                         flagRunningCart = 1;
+
+
+
+                        //ADDING TO ORDER
+                        Map<String, Object> dataOfCart = new HashMap<>();
+                        dataOfCart.put("orderer", Login.mAuth.getCurrentUser().getEmail());
+                        for(int z = 0; z < productsInCartNameQuantity.size()-2; z=z+2 ){
+                            System.out.println("THE PRODUCT IN CART" + productsInCartNameQuantity.get(z));
+                            if(productsInCartNameQuantity.get(z).equals("currentUserEmail")){
+                                System.out.println("IM IN BREAKKK!!!");
+                                break;
+                            }
+//                            if(!productsInCartNameQuantity.get(z).getClass().equals(Number.class)){
+                                System.out.println("CLASS IS" + productsInCartNameQuantity.get(z).getClass());
+                                dataOfCart.put(productsInCartNameQuantity.get(z).toString(), productsInCartNameQuantity.get(z+1));
+//                            }
+                        }
+                        dataOfCart.put("status", "1");
+
+                        FirebaseDatabase.getInstance()
+                                .getReference("orders")
+                                .child(HomeFragment.uniqueOfCartID)
+                                .setValue(dataOfCart)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+
+
+                                        } else {
+
+                                        }
+
+                                    }
+
+
+                                });
                     }
                     else{
 //                        System.out.println("the flagRunningCart is : " +flagRunningCart);
                     }
+
+
                     }
 
                     @Override
@@ -134,7 +185,9 @@ public class Order extends Activity {
 
                                             postSnapshot.getRef().child("quantity").setValue(result);
 
-
+                                   for(int j = 0; j < productsInCartNameQuantity.size(); j ++ ){
+                                       System.out.println("THE PRODUCT IN CART" + productsInCartNameQuantity.get(j));
+                                   }
                                 }
 
                             }
@@ -147,11 +200,49 @@ public class Order extends Activity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
+
+
                 });
 
 
+
+
+
+
+
+
+
+
+
+                //CREATE AND UPDATE ORDER
+                ///////@@@@@@@@@@/////////
+                ordersReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                   System.out.println(     "The value of list" + postSnapshot.getValue());
+
+
+                            }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
+
+
+
         });
+
+
+
+
+
+
+
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 

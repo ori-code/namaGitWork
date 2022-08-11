@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
     private EditText editTextEmail, editTextPassword;
     private Button signIn, Register,clientRegister;
     ProductAdapter adapter;
-    private String users,email,password;
+    public String users,email = "s",password;
     public static FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private ProgressBar progressBar;
@@ -54,9 +54,13 @@ public class Login extends AppCompatActivity {
         editTextPassword = (EditText) findViewById (R.id.editTextTextPassword);
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         currentUser = databaseReference.orderByChild("adressText");
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
-        databaseReference.addListenerForSingleValueEvent(valueEventListenerNew);
+        if(!email.equals("s")) {
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+            databaseReference.addListenerForSingleValueEvent(valueEventListenerNew);
+        }
     }
+
+
 
 
 
