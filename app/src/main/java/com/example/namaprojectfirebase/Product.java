@@ -45,14 +45,20 @@ public class Product {
     public void setBestBefore(long bestBefore) {
         bestBeforeList = bestBefore;
     }
+
     public void setQuantity(double quantity) {
         System.out.println("I SET QUANTITY");
         this.quantity = quantity;
     }
+
+    public void setType(int type) {
+        System.out.println("I SET TYPE");
+        this.type = type;
+    }
+
     public void setMinQty ( double minQty) {
         this.minQty = minQty;
     }
-
 
     public String getNameOfProduct() {
         return nameOfProduct;
@@ -82,9 +88,7 @@ public class Product {
 
     public String getImageID() { return imageID; }
 
-    public int getType() {
-        return type;
-    }
+    public int getType() {return type;}
 
     /*   public Product (String nameOfProduct, String description, double buyPrice, double quantity, String imageUrl){
         this.nameOfProduct = nameOfProduct;
