@@ -112,12 +112,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         for(Product item : productList ){
+            System.out.println("BEFORE FILTER");
             if(item.getNameOfProduct().toLowerCase().contains(text.toLowerCase())){
-//                if(DairyCheckBox.isChecked() && item.getType()==5)
                 System.out.println("PRODUCT FILTER TYPE IS " + item.getType());
+                if(FoodCheckBox.isChecked() && item.getType()==1)
                      filteredList.add(item);
-//                if(DrinkCheckBox.isChecked() && item.getType() ==2)
-//                    filteredList.add(item);
+                if(FruitsAndVegetablesCheckBox.isChecked() && item.getType() ==2)
+                    filteredList.add(item);
+                if(MeatCheckBox.isChecked() && item.getType() ==3)
+                    filteredList.add(item);
+                if(GrainCheckBox.isChecked() && item.getType() ==4)
+                    filteredList.add(item);
+                if(DairyCheckBox.isChecked() && item.getType() ==5)
+                    filteredList.add(item);
+                if(DrinkCheckBox.isChecked() && item.getType() ==6)
+                    filteredList.add(item);
 
             }
         }
@@ -136,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
                     Product product = snapshot.getValue(Product.class);
                     product.setType(Integer.parseInt(snapshot.child("typeOfProduct").getValue().toString()));
                     System.out.println("The before sending to list " + product.getBestBefore());
+
+                    productList.add(product);
+
                     //TODO type of Product
                     System.out.println("TYPE IS TO LISSS" + product.getType());
 
