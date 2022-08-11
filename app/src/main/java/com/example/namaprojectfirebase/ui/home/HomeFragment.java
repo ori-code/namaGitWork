@@ -30,6 +30,7 @@ import com.example.namaprojectfirebase.MainActivity;
 import com.example.namaprojectfirebase.ProductAdapter;
 import com.example.namaprojectfirebase.R;
 import com.example.namaprojectfirebase.Register;
+import com.example.namaprojectfirebase.Users;
 import com.example.namaprojectfirebase.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -233,6 +234,15 @@ public class HomeFragment<puiblic> extends Fragment {
                 Intent i = new Intent(getActivity(), MainActivity.class);
                 startActivity(i);
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+        userControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), Users.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0,0);
+
             }
         });
 //        activeUserNameHomeFragment = root.findViewById(R.id.activeUserNameHomeFragment);

@@ -63,6 +63,7 @@ public class User {
     //    public User(String name, String email) {
 //
 //    }
+    public User (){};
     public User(String fullName, String license, String email, String phoneNum, String address, int salary, int permission){
         this.fullName = fullName;
         this.licenseNum = license;
