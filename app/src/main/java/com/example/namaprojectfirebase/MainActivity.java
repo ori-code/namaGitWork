@@ -134,9 +134,8 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     System.out.println("THE BEST BEFORE FROM DB " +snapshot.child("bestBefore").getValue());
                     Product product = snapshot.getValue(Product.class);
+                    product.setType(Integer.parseInt(snapshot.child("typeOfProduct").getValue().toString()));
                     System.out.println("The before sending to list " + product.getBestBefore());
-                    productList.add(product);
-
                     //TODO type of Product
                     System.out.println("TYPE IS TO LISSS" + product.getType());
 

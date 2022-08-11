@@ -52,7 +52,7 @@ public class Product {
     }
 
     public void setType(int type) {
-        System.out.println("I SET TYPE");
+        System.out.println("I SET TYPE ");
         this.type = type;
     }
 
