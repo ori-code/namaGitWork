@@ -50,7 +50,7 @@ public class Orders extends AppCompatActivity {
         dbOrdersPlaced = FirebaseDatabase.getInstance().getReference("orders");
         dbOrdersPlaced.addListenerForSingleValueEvent(valueEventListener);
 
-        ordersList.add(new OrderForList("dkl", "ldkld", "lkdl", "dlkdl", "ldklkd", "dlkd","dlkd"));
+//        ordersList.add(new OrderForList("dkl", "ldkld", "lkdl", "dlkdl", "ldklkd", "dlkd","dlkd"));
 //        ordersList.add(new OrderForList(1, "hey", "Hey", 12, 13345677));
 //
         //creating recyclerview adapter
@@ -79,9 +79,9 @@ public class Orders extends AppCompatActivity {
                         System.out.println("IM IN SNAP ORDERS" + snapshot.getKey());
                         OrderForList order = snapshot.getValue(OrderForList.class);
                         System.out.println(snapshot.getValue().toString());
-                        System.out.println("TRYYY" + order.getOrderer());
+                        System.out.println("TRYYY" + order.getTimeOfOrderStatusChange());
                         ordersList.add(order);
-                        System.out.println("THE LIST " + ordersList.get(0).getOrderer());
+                        System.out.println("THE LIST " + ordersList.get(0).getTimeOfOrderStatusChange());
                     }
 
 

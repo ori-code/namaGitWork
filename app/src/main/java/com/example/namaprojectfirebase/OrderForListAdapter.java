@@ -36,9 +36,23 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
             OrderForList order = ordersList.get(position);
 //            System.out.println("Print from LIST: " + order.getId() + " CLIENT DETAILS " +order.getClientDetails() + " time of order " + order.getTimeOfOrder()+"status ");
 
-            holder.TextViewClientDetail.setText(order.getClientAddress());
-            holder.TextViewOrderStatus.setText(order.getStatus());
-            holder.TextViewOrderSum.setText(order.getClientPhone());
+            holder.TextViewClientDetail.setText("The client name: " + order.getClientName() + " \nAdress: " + order.getClientAddress() + "\nPhone: " + order.getClientPhone());
+            String status = new String ();
+            if(order.getStatus().equals("1")){
+                status = "Order Placed";
+                System.out.println("Order Placed");
+            }
+            if(order.getStatus().equals("2")){
+                status = "Order Shipped";
+                System.out.println("Order Shipped");
+            }
+            if(order.getStatus().equals("3")){
+                status = "Order Received";
+                System.out.println("Order Received");
+             }
+
+            holder.TextViewOrderStatus.setText(status + " at "  + order.getTimeOfOrderStatusChange());
+            holder.TextViewOrderSum.setText("The shippment type" + order.getDeliveryType());
     }
 
     @Override

@@ -10,8 +10,8 @@
         android:layout_margin="5dp">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="400dp"
+            android:layout_height="120dp"
             android:padding="8dp">
 
 
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
 
                 android:text="Status of order"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="70dp"
 
                 android:text="Total: 2034 NIS"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"

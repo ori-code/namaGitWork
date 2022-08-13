@@ -2,9 +2,11 @@ package com.example.namaprojectfirebase;
 
 public class OrderForList {
 
-    private String timeOfOrderStatusChange,clientName,orderer,clientAddress,clientCommetns,clientPhone,status;
+    private String timeOfOrderStatusChange, clientName,orderer,clientAddress,clientCommetns,clientPhone,status;
+    private Long deliveryType;
 
     public String getTimeOfOrderStatusChange() {
+        System.out.println("timeOfOrderStatusChange " + timeOfOrderStatusChange);
         return timeOfOrderStatusChange;
     }
 
@@ -52,6 +54,14 @@ public class OrderForList {
         this.clientPhone = clientPhone;
     }
 
+    public Long getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Long deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -60,7 +70,7 @@ public class OrderForList {
         this.status = status;
     }
 
-    public OrderForList(String timeOfOrderStatusChange, String clientName, String orderer, String clientAddress, String clientCommetns, String clientPhone, String status) {
+    public OrderForList(String timeOfOrderStatusChange, String clientName, String orderer, String clientAddress, String clientCommetns, String clientPhone, long deliveryType, String status) {
         System.out.println("IM IN FULL CONSTRUCTOR");
         this.timeOfOrderStatusChange = timeOfOrderStatusChange;
         this.clientName = clientName;
@@ -68,8 +78,8 @@ public class OrderForList {
         this.clientAddress = clientAddress;
         this.clientCommetns = clientCommetns;
         this.clientPhone = clientPhone;
+        this.deliveryType = deliveryType;
         this.status = status;
-
     }
 
 
