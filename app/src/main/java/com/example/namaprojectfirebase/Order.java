@@ -161,7 +161,7 @@ public class Order extends Activity {
 
 
                         dataOfCart.put("status", "1");
-                        dataOfCart.put("Time of Placed Order" , ts);
+                        dataOfCart.put("TimeofPlacedOrder" , ts);
                         dataOfCart.put("clientName",editCName);
                         dataOfCart.put("clientAddress",editCAddress);
                         dataOfCart.put("clientPhone",editCPhone);

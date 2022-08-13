@@ -1,17 +1,18 @@
 package com.example.namaprojectfirebase;
 
+
 public class OrderForList {
 
-    private String timeOfOrderStatusChange, clientName,orderer,clientAddress,clientCommetns,clientPhone,status;
+    private String TimeofPlacedOrder, clientName,orderer,clientAddress,clientCommetns,clientPhone,status;
     private Long deliveryType;
 
     public String getTimeOfOrderStatusChange() {
-        System.out.println("timeOfOrderStatusChange " + timeOfOrderStatusChange);
-        return timeOfOrderStatusChange;
+        System.out.println("timeOfOrderStatusChange " + TimeofPlacedOrder);
+        return TimeofPlacedOrder;
     }
 
-    public void setTimeOfOrderStatusChange(String timeOfOrderStatusChange) {
-        this.timeOfOrderStatusChange = timeOfOrderStatusChange;
+    public void setTimeOfOrderStatusChange(String TimeofPlacedOrder) {
+        this.TimeofPlacedOrder = TimeofPlacedOrder;
     }
 
     public String getClientName() {
@@ -70,9 +71,11 @@ public class OrderForList {
         this.status = status;
     }
 
-    public OrderForList(String timeOfOrderStatusChange, String clientName, String orderer, String clientAddress, String clientCommetns, String clientPhone, long deliveryType, String status) {
+
+
+    public OrderForList (String TimeofPlacedOrder, String clientName, String orderer, String clientAddress, String clientCommetns, String clientPhone, long deliveryType, String status) {
         System.out.println("IM IN FULL CONSTRUCTOR");
-        this.timeOfOrderStatusChange = timeOfOrderStatusChange;
+        this.TimeofPlacedOrder = TimeofPlacedOrder;
         this.clientName = clientName;
         this.orderer = orderer;
         this.clientAddress = clientAddress;

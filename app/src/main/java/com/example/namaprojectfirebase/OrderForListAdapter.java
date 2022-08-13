@@ -34,8 +34,7 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
     @Override
     public void onBindViewHolder(@NonNull OrderForListViewHolder holder, int position) {
             OrderForList order = ordersList.get(position);
-//            System.out.println("Print from LIST: " + order.getId() + " CLIENT DETAILS " +order.getClientDetails() + " time of order " + order.getTimeOfOrder()+"status ");
-
+            System.out.println(order.toString() + " FROM LIST ");
             holder.TextViewClientDetail.setText("The client name: " + order.getClientName() + " \nAdress: " + order.getClientAddress() + "\nPhone: " + order.getClientPhone());
             String status = new String ();
             if(order.getStatus().equals("1")){
