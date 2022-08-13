@@ -27,6 +27,8 @@ import com.example.namaprojectfirebase.AddProduct;
 import com.example.namaprojectfirebase.Cart;
 import com.example.namaprojectfirebase.Login;
 import com.example.namaprojectfirebase.MainActivity;
+import com.example.namaprojectfirebase.Order;
+import com.example.namaprojectfirebase.Orders;
 import com.example.namaprojectfirebase.ProductAdapter;
 import com.example.namaprojectfirebase.R;
 import com.example.namaprojectfirebase.Register;
@@ -211,6 +213,20 @@ public class HomeFragment<puiblic> extends Fragment {
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
         });
+
+        ordrButton2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //System.out.println("Going to Orders");
+                Intent i = new Intent(getActivity(), Orders.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+
+
 
         btnPLus.setOnClickListener(new View.OnClickListener()
         {

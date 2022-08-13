@@ -27,8 +27,8 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-
-    List<Product> productList;
+    //ALL PRODUCTS IN productList
+    public static List<Product> productList;
     RecyclerView recyclerView;
     ProductAdapter adapter;
     public ImageButton addToCart;
