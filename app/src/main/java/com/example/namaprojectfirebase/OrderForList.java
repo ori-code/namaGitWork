@@ -3,16 +3,13 @@ package com.example.namaprojectfirebase;
 
 public class OrderForList {
 
-    private String TimeofPlacedOrder, clientName,orderer,clientAddress,clientCommetns,clientPhone,status;
-    private Long deliveryType;
 
-    public String getTimeOfOrderStatusChange() {
-        System.out.println("timeOfOrderStatusChange " + TimeofPlacedOrder);
-        return TimeofPlacedOrder;
+    public String getTimeOfPlacedOrder() {
+        return timeOfPlacedOrder;
     }
 
-    public void setTimeOfOrderStatusChange(String TimeofPlacedOrder) {
-        this.TimeofPlacedOrder = TimeofPlacedOrder;
+    public void setTimeOfPlacedOrder(String timeOfPlacedOrder) {
+        this.timeOfPlacedOrder = timeOfPlacedOrder;
     }
 
     public String getClientName() {
@@ -55,14 +52,6 @@ public class OrderForList {
         this.clientPhone = clientPhone;
     }
 
-    public Long getDeliveryType() {
-        return deliveryType;
-    }
-
-    public void setDeliveryType(Long deliveryType) {
-        this.deliveryType = deliveryType;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -71,19 +60,46 @@ public class OrderForList {
         this.status = status;
     }
 
+    public String getIdOfOrder() {
+        return idOfOrder;
+    }
 
+    public void setIdOfOrder(String idOfOrder) {
+        this.idOfOrder = idOfOrder;
+    }
 
-    public OrderForList (String TimeofPlacedOrder, String clientName, String orderer, String clientAddress, String clientCommetns, String clientPhone, long deliveryType, String status) {
-        System.out.println("IM IN FULL CONSTRUCTOR");
-        this.TimeofPlacedOrder = TimeofPlacedOrder;
+    public int getNumOfOrder() {
+        return numOfOrder;
+    }
+
+    public void setNumOfOrder(int numOfOrder) {
+        this.numOfOrder = numOfOrder;
+    }
+
+    public Long getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Long deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    public OrderForList(String timeOfPlacedOrder, String clientName, String orderer, String clientAddress, String clientCommetns, String clientPhone, String status, String idOfOrder, int numOfOrder, Long deliveryType) {
+        this.timeOfPlacedOrder = timeOfPlacedOrder;
         this.clientName = clientName;
         this.orderer = orderer;
         this.clientAddress = clientAddress;
         this.clientCommetns = clientCommetns;
         this.clientPhone = clientPhone;
-        this.deliveryType = deliveryType;
         this.status = status;
+        this.idOfOrder = idOfOrder;
+        this.numOfOrder = numOfOrder;
+        this.deliveryType = deliveryType;
     }
+
+    private String timeOfPlacedOrder, clientName,orderer,clientAddress,clientCommetns,clientPhone,status, idOfOrder;
+    private int numOfOrder;
+    private Long deliveryType;
 
 
 

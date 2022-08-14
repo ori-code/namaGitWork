@@ -128,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
                     filteredList.add(item);
                 if(DrinkCheckBox.isChecked() && item.getType() ==6)
                     filteredList.add(item);
-
             }
         }
         adapter.filteredList(filteredList);

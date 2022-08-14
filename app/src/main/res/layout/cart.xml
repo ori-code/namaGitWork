@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#30000000">
+    >
+<!--    android:background="#30000000"-->
 
 
     <!--    <ListView-->
@@ -59,10 +60,11 @@
 
     <Button
         android:id="@+id/placeOrderBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="50dp"
+        android:textSize="10dp"
         android:backgroundTint="@color/white"
         android:text="PLACE ORDER"
         android:textColor="@color/black"
@@ -75,12 +77,13 @@
 
     <Button
         android:id="@+id/removeOrderBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:textSize="10dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="36dp"
         android:backgroundTint="@color/white"
-        android:text="REMOVE"
+        android:text="REMOVE ORDER"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +110,8 @@
 
             <TextView
                 android:id="@+id/sumTotal"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"

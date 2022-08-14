@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 public class Order extends Activity {
@@ -159,14 +160,16 @@ public class Order extends Activity {
                         Long tsLong = System.currentTimeMillis()/1000;
                         String ts = tsLong.toString();
 
-
+                        int random = new Random().nextInt(99999999 - 1) + 1;
                         dataOfCart.put("status", "1");
-                        dataOfCart.put("TimeofPlacedOrder" , ts);
+                        dataOfCart.put("timeOfPlacedOrder" , ts);
                         dataOfCart.put("clientName",editCName);
                         dataOfCart.put("clientAddress",editCAddress);
                         dataOfCart.put("clientPhone",editCPhone);
                         dataOfCart.put("clientCommetns",editCComments);
                         dataOfCart.put("deliveryType",  deliveryType);
+                        dataOfCart.put("idOfOrder", HomeFragment.uniqueOfCartID);
+                        dataOfCart.put("numOfOrder", random);
                         FirebaseDatabase.getInstance()
                                 .getReference("orders")
                                 .child(HomeFragment.uniqueOfCartID)

@@ -39,7 +39,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
          //System.out.println("QNTY" + holder.textViewQuantity.getText());
          holder.textViewTitle.setText(product.getNameOfProduct());
          holder.textViewQuantity.setText(String.valueOf(product.getQuantity()));
-         holder.textViewPrice.setText(String.valueOf("Price per unit: " +product.getBuyPrice()));
+         holder.textViewPrice.setText(String.valueOf("Price: " +product.getBuyPrice()));
 
     }
 

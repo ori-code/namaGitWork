@@ -12,6 +12,7 @@
         android:layout_height="45dp"
         android:hint="Enter client name of order                                              "
         android:textSize="15dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -28,6 +29,7 @@
         android:background="@color/white"
         android:clickable="false"
         android:padding="13dp"
+        android:visibility="gone"
         android:scaleType="fitCenter"
         android:src="@drawable/searchglass"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,8 +44,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:text="Order details"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:text="ORDERS LIST"
+        android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"></TextView>
 

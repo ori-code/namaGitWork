@@ -31,7 +31,7 @@
             android:backgroundTint="@color/black"
             android:fontFamily="@font/audiowide"
             android:onClick="registerFunc"
-            android:text="Register"
+            android:text="Client Registration"
             android:textSize="15dp"
             app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"

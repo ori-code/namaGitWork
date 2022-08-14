@@ -79,9 +79,9 @@ public class Orders extends AppCompatActivity {
                         System.out.println("IM IN SNAP ORDERS" + snapshot.getKey());
                         OrderForList order = snapshot.getValue(OrderForList.class);
                         System.out.println(snapshot.getValue().toString());
-                        System.out.println("TRYYY" + order.getTimeOfOrderStatusChange());
+
                         ordersList.add(order);
-                        System.out.println("THE LIST " + ordersList.get(0).getTimeOfOrderStatusChange());
+                        System.out.println("THE LIST " + ordersList.get(0).getTimeOfPlacedOrder());
                     }
 
 
