@@ -100,7 +100,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         //current time
         Date currentTime = Calendar.getInstance().getTime();
         long epochCurrent = currentTime.getTime();
-        
+
         long toOrder = bestBefore - 86400 * 3;
 
         if(epochCurrent >= toOrder )

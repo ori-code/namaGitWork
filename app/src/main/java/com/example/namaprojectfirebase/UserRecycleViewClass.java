@@ -56,8 +56,9 @@ public class UserRecycleViewClass extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                filter(s.toString());
+                filterUserList(s.toString());
             }
+
         });
 
 
@@ -65,17 +66,9 @@ public class UserRecycleViewClass extends AppCompatActivity {
         recyclerViewUsers.setAdapter(adapter2);
 
 
-
-
-
     }
 
-//    public void filteredList (ArrayList<User> filteredList){
-//        userList = filteredList;
-//        notifyDataSetChanged();
-//    }
-
-    private void filter (String text){
+    private void filterUserList (String text){
         ArrayList <User> filteredUserList = new ArrayList<>();
         adminCheckBox = (CheckBox)findViewById(R.id.adminCheckBox);
         workerCheckBox = (CheckBox)findViewById(R.id.workerCheckBox);
@@ -105,7 +98,7 @@ public class UserRecycleViewClass extends AppCompatActivity {
 
             }
         }
-//        adapter2.filteredList;
+        adapter2.filteredListUsers(filteredUserList);
     }
 
 

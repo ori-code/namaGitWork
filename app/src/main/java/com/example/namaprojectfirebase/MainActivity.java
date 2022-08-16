@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         EditText editTextSearch = findViewById(R.id.editTextSearch);
 
-
         editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -90,15 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
-
-
-
-
-
 
     private void filter (String text){
         ArrayList <Product> filteredList = new ArrayList<>();
