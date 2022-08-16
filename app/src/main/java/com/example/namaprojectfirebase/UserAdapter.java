@@ -150,7 +150,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 //            @Override
 //            public void onComplete(@NonNull Task<Void> task) {
 //                if (task.isSuccessful()) {
-//                    System.out.println("DELETED");
+//                    System.out.println("DELETED");//
 //
 //                } else {
 //
