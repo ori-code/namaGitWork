@@ -21,7 +21,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         EditText editTextSearch = findViewById(R.id.editTextSearch);
+
+
         editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -96,19 +102,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void filter (String text){
         ArrayList <Product> filteredList = new ArrayList<>();
-
         FoodCheckBox = (CheckBox)findViewById(R.id.checkBoxFood);
         DrinkCheckBox = (CheckBox)findViewById(R.id.checkBoxDrink);
         FruitsAndVegetablesCheckBox = (CheckBox)findViewById(R.id.checkBoxFruitsAndVegetables);
         MeatCheckBox = (CheckBox)findViewById(R.id.checkBoxMeat);
         GrainCheckBox = (CheckBox)findViewById(R.id.checkBoxGrain);
         DairyCheckBox = (CheckBox)findViewById(R.id.checkBoxDairy);
-
-
-
-
-
-
 
 
         for(Product item : productList ){
@@ -185,7 +184,27 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+//TODO WEATHER
 
+//        OkHttpClient client = new OkHttpClient();
+//
+//        Request request = new Request.Builder()
+//                .url("https://weatherbit-v1-mashape.p.rapidapi.com/forecast/3hourly?lat=35.5&lon=-78.5")
+//                .get()
+//                .addHeader("Master API Key", "b5d00ae48e384ca1b56afcf1316a9778")
+//                .addHeader("X-RapidAPI-Host", "weatherbit-v1-mashape.p.rapidapi.com")
+//                .build();
+//
+//        Response response;
+//
+//        {
+//            try {
+//                response = client.newCall(request).execute();
+//                System.out.println("WEATHER" + response);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 //    public void theLogOut(MenuItem item) {
 //        System.out.println("SIGNT OOUT");
 ////        FirebaseAuth.getInstance().signOut();

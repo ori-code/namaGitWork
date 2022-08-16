@@ -19,4 +19,11 @@
         <item>Grain</item>
         <item>Dairy</item>
     </string-array>
+
+
+    <string-array name = "statusOfOrder">
+        <item>Received</item>
+        <item>Packed and ready for shipment</item>
+        <item>Shipped</item>
+    </string-array>
 </resources>

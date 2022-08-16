@@ -92,8 +92,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="180dp"
         android:layout_marginTop="30dp"
-        android:text="Fruits And Vegetables"
         android:checked="true"
+        android:text="Fruits And Vegetables"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,8 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="60dp"
-        android:text="Meat"
         android:checked="true"
+        android:text="Meat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

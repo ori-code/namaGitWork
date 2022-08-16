@@ -34,6 +34,9 @@
             android:name=".FinalCheck"
             android:exported="false"/>
         <activity
+            android:name=".UserRecycleViewClass"
+            android:exported="false"/>
+        <activity
             android:theme="@style/Theme.NamaProjectFirebase.CustomTheme"
             android:name=".Order"
             android:exported="false"/>

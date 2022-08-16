@@ -157,6 +157,7 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:padding="0px"
+            android:onClick="userList"
             android:soundEffectsEnabled="true"
             android:src="@drawable/users"
             tools:ignore="MissingConstraints" />

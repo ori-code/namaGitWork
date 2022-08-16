@@ -140,9 +140,15 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
 
                      String orderForThisCard = new String();
                     orderForThisCard= ordersList.get(position).getIdOfOrder();
+
+                    int numberOfOrder,typeOfShipment;
+                    numberOfOrder= ordersList.get(position).getNumOfOrder();
+                    typeOfShipment= Math.toIntExact(ordersList.get(position).getDeliveryType());
 //
                     Intent intentToEditProduct = new Intent(oCtx, FinalCheck.class);
-                    intentToEditProduct.putExtra("orderForThisCard",orderForThisCard );
+                        intentToEditProduct.putExtra("orderForThisCardInList",orderForThisCard );
+                         intentToEditProduct.putExtra("orderNumber",numberOfOrder );
+                         intentToEditProduct.putExtra("shipmentType", typeOfShipment);
                     v.getContext().startActivity(intentToEditProduct);
 
 

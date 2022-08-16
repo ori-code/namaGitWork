@@ -32,6 +32,7 @@ import com.example.namaprojectfirebase.Orders;
 import com.example.namaprojectfirebase.ProductAdapter;
 import com.example.namaprojectfirebase.R;
 import com.example.namaprojectfirebase.Register;
+import com.example.namaprojectfirebase.UserRecycleViewClass;
 import com.example.namaprojectfirebase.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -136,6 +137,7 @@ public class HomeFragment<puiblic> extends Fragment {
         ordrButton2 = (ImageButton) root.findViewById(R.id.orderButton2);
 
         userControl = (ImageButton) root.findViewById(R.id.controlUser);
+
         grafBtn = (ImageButton) root.findViewById(R.id.grafBtn);
         overdueBtn = (ImageButton) root.findViewById(R.id.overdueBtn);
 
@@ -202,6 +204,7 @@ public class HomeFragment<puiblic> extends Fragment {
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
         });
+
         ordrButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -245,8 +248,23 @@ public class HomeFragment<puiblic> extends Fragment {
             @Override
             public void onClick(View v)
             {
-                //System.out.println("Going to Table");
+//                System.out.println("Going to Table");
                 Intent i = new Intent(getActivity(), MainActivity.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+
+
+
+
+        userControl.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                     System.out.println("GIOIII");
+                Intent i = new Intent(getActivity(), UserRecycleViewClass.class);
                 startActivity(i);
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }

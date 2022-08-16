@@ -1,5 +1,7 @@
 package com.example.namaprojectfirebase;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class User {
     public String fullName, licenseNum, email, phoneNum, address;
     public int salary, permission;
@@ -60,12 +62,9 @@ public class User {
         this.permission = permission;
     }
 
-    //    public User(String name, String email) {
-//
-//    }
-    public User(String fullName, String license, String email, String phoneNum, String address, int salary, int permission){
+    public User(String fullName, String licenseNum, String email, String phoneNum, String address, int salary, int permission){
         this.fullName = fullName;
-        this.licenseNum = license;
+        this.licenseNum = licenseNum;
         this.email = email;
         this.phoneNum = phoneNum;
         this.address = address;
@@ -86,4 +85,8 @@ public class User {
         }
 
     }
+    public User () {
+
+    }
+
 }

@@ -103,6 +103,8 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             }
         });
 
+
+
         BestBefore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +124,9 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                 //System.out.println("date out");
             }
         });
+
+
+
 
         AddingDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -165,6 +170,8 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
 
 
+
+
     public static double StoNum (@NonNull String s) throws ParsingException {
         try {
             double num = Double.parseDouble(s.trim());
@@ -175,6 +182,9 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             throw new ParsingException("NumberFormatException: " + nfe.getMessage());
         }
     }
+
+
+
 
 //
     @Override
@@ -235,6 +245,9 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         intentChooser.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intentChooser,1);
     }
+
+
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
