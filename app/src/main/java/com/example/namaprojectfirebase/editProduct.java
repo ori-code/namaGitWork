@@ -142,12 +142,12 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
                         if(nameOfProduct.equals(snapshotRun.child("nameOfProduct").getValue())){
                             System.out.println("THE KEY IS FOUNDED" + snapshotRun.getKey());
                             theKeyOfProduct = snapshotRun.getKey();
-                            editProductName = (EditText) findViewById(R.id.nameOfProductEditPage);
+//                            editProductName = (EditText) findViewById(R.id.nameOfProductEditPage);
                             editProductSellPrice = (EditText) findViewById(R.id.sellPriceEditPage);
                             editProductNameTitle = (TextView) findViewById(R.id.nameOfProductEdit);
                             editProductQnty = (TextView) findViewById(R.id.quantityOfProductEditPage);
                             editProductMinQnty = (EditText) findViewById(R.id.minQuantityOfProductEditPage);
-                            editProductName.setHint(snapshotRun.child("nameOfProduct").getValue().toString());
+//                            editProductName.setHint(snapshotRun.child("nameOfProduct").getValue().toString());
                             editProductSellPrice.setHint(snapshotRun.child("sellPrice").getValue().toString());
                             editProductNameTitle.setText(snapshotRun.child("nameOfProduct").getValue().toString());
                             editProductQnty.setHint(snapshotRun.child("quantity").getValue().toString());

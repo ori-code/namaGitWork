@@ -25,6 +25,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.namaprojectfirebase.AddProduct;
 import com.example.namaprojectfirebase.Cart;
+import com.example.namaprojectfirebase.ExpDateItems;
+import com.example.namaprojectfirebase.GraphClass;
 import com.example.namaprojectfirebase.Login;
 import com.example.namaprojectfirebase.MainActivity;
 import com.example.namaprojectfirebase.Order;
@@ -191,8 +193,28 @@ public class HomeFragment<puiblic> extends Fragment {
             btnPLus.setVisibility(View.INVISIBLE);
 
         }*/
-
-
+        grafBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //System.out.println("Going to Register");
+                Intent i = new Intent(getActivity(), GraphClass.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+        overdueBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //System.out.println("Going to Register");
+                Intent i = new Intent(getActivity(), ExpDateItems.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
         btnAdd.setOnClickListener(new View.OnClickListener()
         {
             @Override

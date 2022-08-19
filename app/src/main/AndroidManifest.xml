@@ -37,10 +37,17 @@
             android:name=".UserRecycleViewClass"
             android:exported="false"/>
         <activity
+            android:name=".GraphClass"
+            android:exported="false"/>
+
+        <activity
             android:theme="@style/Theme.NamaProjectFirebase.CustomTheme"
             android:name=".Order"
             android:exported="false"/>
-
+        <activity
+            android:theme="@style/Theme.NamaProjectFirebase.CustomTheme"
+            android:name=".ExpDateItems"
+            android:exported="false"/>
         <activity
             android:theme="@style/Theme.NamaProjectFirebase.CustomTheme"
             android:name=".editProduct"

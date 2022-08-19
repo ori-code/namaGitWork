@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public String typeFromDb;
     DatabaseReference dataSnapshot;
     DatabaseReference dbProducts,addToCartDb;
-    public CheckBox FoodCheckBox, DrinkCheckBox, FruitsAndVegetablesCheckBox, MeatCheckBox, GrainCheckBox, DairyCheckBox;
+    public CheckBox expCheckBox, FoodCheckBox, DrinkCheckBox, FruitsAndVegetablesCheckBox, MeatCheckBox, GrainCheckBox, DairyCheckBox;
 //    public static int globalPermission;
 
     @Override
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         MeatCheckBox = (CheckBox)findViewById(R.id.checkBoxMeat);
         GrainCheckBox = (CheckBox)findViewById(R.id.checkBoxGrain);
         DairyCheckBox = (CheckBox)findViewById(R.id.checkBoxDairy);
+//        expCheckBox = (CheckBox)findViewById(R.id.checkBoxDairy);
 
 
         for(Product item : productList ){
@@ -117,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
                     filteredList.add(item);
                 if(DrinkCheckBox.isChecked() && item.getType() ==6)
                     filteredList.add(item);
+//                if(expCheckBox.isChecked() && item.getType() ==6)
+//                    filteredList.add(item);
             }
         }
         adapter.filteredList(filteredList);
@@ -134,9 +137,7 @@ public class MainActivity extends AppCompatActivity {
                     Product product = snapshot.getValue(Product.class);
                     product.setType(Integer.parseInt(snapshot.child("typeOfProduct").getValue().toString()));
                     System.out.println("The before sending to list " + product.getBestBefore());
-
                     productList.add(product);
-
 
                     System.out.println("TYPE IS TO LISSS" + product.getType());
 
@@ -174,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+
 //TODO WEATHER
 
 //        OkHttpClient client = new OkHttpClient();

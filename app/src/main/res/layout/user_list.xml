@@ -15,7 +15,8 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/usersRecycleView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></EditText>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></EditText>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -37,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:checked="true"
         android:text="Admin"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +48,8 @@
         android:id="@+id/workerCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="75dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="50dp"
         android:checked="true"
         android:text="Worker"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,8 +59,8 @@
         android:id="@+id/courierCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="50dp"
         android:checked="true"
         android:text="Courier"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,8 +70,8 @@
         android:id="@+id/accountantCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="225dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="80dp"
         android:checked="true"
         android:text="Accountant"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,8 +82,8 @@
         android:id="@+id/userClientCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="320dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="80dp"
         android:checked="true"
         android:text="Client"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +95,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-    android:layout_marginTop="100dp"
+    android:layout_marginTop="130dp"
     android:id="@+id/usersRecycleView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

@@ -100,21 +100,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         //current time
         Date currentTime = Calendar.getInstance().getTime();
         long epochCurrent = currentTime.getTime();
-
         long toOrder = bestBefore - 86400 * 3;
-
         if(epochCurrent >= toOrder )
         {
-//
             //System.out.println("TO ORDERRRR" + toOrder);
             System.out.println("CURRENT " + epochCurrent);
             holder.expDateInList.setTextColor(Color.parseColor("#FE0100"));
             holder.expDateInList.setTypeface(holder.expDateInList.getTypeface(), Typeface.BOLD);
-
             //overdueProdList.add(product);
             //System.out.println("overdue name'" + product.getNameOfProduct() + "sfssfs" + overdueProdList);
-
         }
+
+
+
+
+
 
         Picasso.get().load(product.getImageUrl()).into(imageDB);
         holder.expDateInList.setText("Exp. date: " +  text);
