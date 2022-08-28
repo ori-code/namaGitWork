@@ -89,7 +89,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         //EPOCH TO STRING
         long bestBefore = productList.get(position).getBestBefore();
         Date date = new Date(bestBefore);
-        long addingDate = productList.get(position).getAddingDate();
+        long addingDate [] = productList.get(position).getAddingDate();
 
         long epochExp = date.getTime();
 
@@ -164,7 +164,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                             public void onClick(View v) {
                                                 int position = getAdapterPosition();
                                                 Product product = productList.get(position);
-                                                System.out.println("WTFFFF"  +  product.getAddingDate());
+                                                System.out.println("THE ADDING DATE LONG LIST  "  +  product.getAddingDate());
 
                                                 String strNameOfProduct = productList.get(position).getNameOfProduct();
                                                 System.out.println("Send String " + strNameOfProduct);

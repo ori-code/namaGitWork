@@ -349,7 +349,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         dataOfProduct.put("sellPrice", sellPr);
         dataOfProduct.put("quantity", quantity);
         dataOfProduct.put("minQty", minQuantity);
-        dataOfProduct.put("dataOfAdding", calendarAdd.getTimeInMillis());
+        dataOfProduct.put("dataOfAdding", "");
         dataOfProduct.put("bestBefore", calendarExp.getTimeInMillis());
         dataOfProduct.put("typeOfProduct", Type);
         dataOfProduct.put("description", description);
@@ -368,6 +368,50 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                 }
             }
         });
+
+
+        FirebaseDatabase.getInstance()
+                .getReference("products")
+                .child(uniqueOfProducID)
+                .child("dataOfAdding")
+                .child("0")
+                .setValue(calendarAdd.getTimeInMillis())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            //System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                        } else {
+
+                        }
+
+                    }
+
+
+                });
+
+
+        FirebaseDatabase.getInstance()
+                .getReference("products")
+                .child(uniqueOfProducID)
+                .child("dataOfAdding")
+                .child("1")
+                .setValue(quantity)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            //System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                        } else {
+
+                        }
+
+                    }
+
+
+                });
+
+
     }
     private void addProduct() {
         uploadImage();

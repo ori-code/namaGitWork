@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.namaprojectfirebase.ui.home.HomeFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class editProduct extends AppCompatActivity implements View.OnClickListener {
@@ -34,6 +38,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
     Button updateBtn, deleteBtn;
     public static String firstAttempQnty,theKeyOfProduct;
     DatabaseReference deleteDocument;
+    public static ArrayList dateOfAdding;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +57,12 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
 //TODO EDITABLE PRODUCT DELETE
         findProduct = FirebaseDatabase.getInstance().getReference("products");
         findProduct.addListenerForSingleValueEvent(valueEventListenerForUpdateProduct);
+
+        findProduct.addListenerForSingleValueEvent(arrayListReadvalueEventListenerForUpdateProduct);
+
+
+
+
         productQuery = findProduct.orderByKey();
         System.out.println(findProduct);
         deleteProduct = FirebaseDatabase.getInstance().getReference();
@@ -63,9 +74,33 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
 //        workWithExistFunc(nameOfProduct);
 
 
-
-
     }
+
+//LIST  OF ADDING PRODUCTS
+    ValueEventListener arrayListReadvalueEventListenerForUpdateProduct = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            System.out.println("IN RUNNING ");
+            for (DataSnapshot snapshotRun : snapshot.getChildren()) {
+                if(nameOfProduct.equals(snapshotRun.child("nameOfProduct").getValue())){
+                    System.out.println("THE NEEDED PRODUCT : " + snapshotRun.child("dataOfAdding").getValue());
+                    dateOfAdding = (ArrayList) snapshotRun.child("dataOfAdding").getValue();
+                    System.out.println("THE LIST ISSSS " +dateOfAdding );
+                }
+                System.out.println("THE VALUE OF PRODUCT" + snapshotRun.getValue() + " AND NAME IS " + snapshotRun.child("nameOfProduct").getValue());
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
+
+
+
+
+
 
 
     public void onClick(View v) {
@@ -75,6 +110,83 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
                 if(!editProductQnty.getText().toString().isEmpty()){
                      System.out.println("IM NOT NULLLL" +  findProduct.child(theKeyOfProduct).child("nameOfProfuct").getKey());
                      findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(editProductQnty.getText().toString()));
+                     // HASSSHH
+
+
+            System.out.println("CHECKKK  "  + dateOfAdding.get(dateOfAdding.size()-1));
+
+
+
+
+
+//                    Map<String, Object> dataOfAddingUpdate = new HashMap<>();
+
+
+                    Integer.parseInt(editProductQnty.getText().toString());
+
+//                    findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(editProductQnty.getText().toString()));
+
+//                    dataOfAddingUpdate.put("24", 1231516151);
+
+                    int sizeAndLastPLace = dateOfAdding.size();
+
+                    String.valueOf(sizeAndLastPLace+1);
+
+                    long time= System.currentTimeMillis();
+
+                    FirebaseDatabase.getInstance()
+                            .getReference("products")
+                            .child(theKeyOfProduct)
+                            .child("dataOfAdding")
+                            .child(String.valueOf(sizeAndLastPLace+1))
+                            .setValue(time)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                                    } else {
+
+                                    }
+
+                                }
+
+
+                            });
+                    FirebaseDatabase.getInstance()
+                            .getReference("products")
+                            .child(theKeyOfProduct)
+                            .child("dataOfAdding")
+                            .child(String.valueOf(sizeAndLastPLace+2))
+                            .setValue(Integer.parseInt(editProductQnty.getText().toString()))
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                                    } else {
+
+                                    }
+
+                                }
+
+
+                            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 }
                 if(!editProductMinQnty.getText().toString().isEmpty()){
                     System.out.println("IM NOT MINQUANTITY" +  findProduct.child(theKeyOfProduct).child("minQty").getKey());

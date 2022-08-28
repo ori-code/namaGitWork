@@ -1,18 +1,14 @@
 package com.example.namaprojectfirebase;
 
-import android.app.DatePickerDialog;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.util.HashMap;
 
 public class Product {
 
     public String id, nameOfProduct, description;
     public int type;
     public double buyPrice, sellPrice, quantity, minQty;
-    public long addingDateList, bestBeforeList;
+    public long bestBeforeList;
+    public long addingDateList [];
     public String URL;
     public String imageID;
     ImageView imageView;
@@ -38,7 +34,7 @@ public class Product {
 //    }
 
 
-    public void setAddingDate(long addingDate) {
+    public void setAddingDate(long[] addingDate) {
         addingDateList = addingDate;
     }
 
@@ -82,7 +78,7 @@ public class Product {
         return URL;
     }
 
-    public long getAddingDate() { return addingDateList; }
+    public long[] getAddingDate() { return addingDateList; }
 
     public long getBestBefore() { return bestBeforeList; }
 
