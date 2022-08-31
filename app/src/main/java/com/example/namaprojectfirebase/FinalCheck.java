@@ -76,6 +76,9 @@ public class FinalCheck extends Activity implements AdapterView.OnItemSelectedLi
 
 //        nameOfProductInTotal = findViewById(R.id.nameOfProductInTotal);
 
+
+
+        //spinner example
         Spinner spinner = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.statusOfOrder, android.R.layout.simple_spinner_item );
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
