@@ -102,7 +102,7 @@ public class DrawerActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-    //TODO Log out
+
     public void LogOut(MenuItem item) {
         System.out.println("HEHYYYYY LOGGOUT");
         Login.mAuth.signOut();

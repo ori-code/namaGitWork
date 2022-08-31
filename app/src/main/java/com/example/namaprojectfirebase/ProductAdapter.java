@@ -2,6 +2,7 @@ package com.example.namaprojectfirebase;
 
 
 import static com.example.namaprojectfirebase.R.id.*;
+import static com.example.namaprojectfirebase.R.id.overallCart;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,6 +61,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public CardView cardForRecycle;
     public ImageView imageArrow;
     public static ArrayList <Product> overdueProdList = null;
+    public LinearLayout overallCart;
+    public long [] dataCounting = new long[1000];
+    public long allCountItem;
+
+
+
 
     public ProductAdapter(Context mCtx, List<Product> productList) {
         this.mCtx = mCtx;
@@ -72,14 +82,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         ProductViewHolder holder = new ProductViewHolder(view);
         cartDb = FirebaseDatabase.getInstance().getReference("carts").child(HomeFragment.uniqueOfCartID);
         cartQuery = cartDb.orderByKey();
+
         //TODO PERMISSION SETUP
         if(Login.globalPermission != 1) {
             imageArrow.setVisibility(View.GONE);
 
         }
+
+
         return holder;
 
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
@@ -95,18 +109,40 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 
 
+
+
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         String text = format.format(date);
         //current time
         Date currentTime = Calendar.getInstance().getTime();
         long epochCurrent = currentTime.getTime();
         long toOrder = bestBefore - 86400 * 3;
+
+//TODO changeBackground
+        System.out.println("HEYYY the list in adapter" +productList.get(position).getAddingDate() + "the name " + productList.get(position).getNameOfProduct());
+        dataCounting = productList.get(0).getAddingDate();
+        for(int i = 0; i < dataCounting.length; i++ ){
+            if(i%2!=0){
+                allCountItem = dataCounting[i] + allCountItem;
+                System.out.println("ALL COUNT ITEM " + allCountItem);
+            }
+            else{
+                System.out.println(" THE RECORDS IN THIS IS " + dataCounting[i]);
+            }
+            }
+
+        overallCart.setBackgroundColor(Color.parseColor("#007F00"));
+
+
+
         if(epochCurrent >= toOrder )
         {
             //System.out.println("TO ORDERRRR" + toOrder);
             System.out.println("CURRENT " + epochCurrent);
             holder.expDateInList.setTextColor(Color.parseColor("#FE0100"));
             holder.expDateInList.setTypeface(holder.expDateInList.getTypeface(), Typeface.BOLD);
+
+
             //overdueProdList.add(product);
             //System.out.println("overdue name'" + product.getNameOfProduct() + "sfssfs" + overdueProdList);
         }
@@ -117,6 +153,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 
         Picasso.get().load(product.getImageUrl()).into(imageDB);
+
         holder.expDateInList.setText("Exp. date: " +  text);
         holder.textViewTitle.setText(product.getNameOfProduct());
         holder.textViewDesc.setText(product.getDescription());
@@ -142,11 +179,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         ImageButton addToCardRecycle;
 
 
+
+        //        View view = inflater.inflate(R.layout.my_list_item, null);
+
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
-
-
-
             imageDB = itemView.findViewById(R.id.imageDB);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewPrice = itemView.findViewById(R.id.textViewPrice);
@@ -156,6 +194,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             expDateInList = itemView.findViewById(R.id.expDateInList);
             imageArrow = itemView.findViewById(R.id.imageArrow);
             cardForRecycle = itemView.findViewById(R.id.cardForRecycle);
+
+
+            overallCart = itemView.findViewById(R.id.overallCart);
+
+
+
+
 
 
 
@@ -171,6 +216,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
                                                 Intent intentToEditProduct = new Intent(mCtx, editProduct.class);
                                                 intentToEditProduct.putExtra("keyName", strNameOfProduct);
+
+
+
+
+
                                                 if(Login.globalPermission == 1) {
                                                     v.getContext().startActivity(intentToEditProduct);
                                                 }

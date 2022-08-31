@@ -8,7 +8,8 @@ public class Product {
     public int type;
     public double buyPrice, sellPrice, quantity, minQty;
     public long bestBeforeList;
-    public long addingDateList [];
+    public long addingDateList [] ;
+//     = new long[1000]
     public String URL;
     public String imageID;
     ImageView imageView;
@@ -35,7 +36,12 @@ public class Product {
 
 
     public void setAddingDate(long[] addingDate) {
+
+        System.out.println(" IN SEETTER " + addingDate);
         addingDateList = addingDate;
+        for(int i = 0; i < addingDate.length; i ++ ){
+            System.out.println( addingDate[i]);
+        }
     }
 
     public void setBestBefore(long bestBefore) {
@@ -78,7 +84,9 @@ public class Product {
         return URL;
     }
 
-    public long[] getAddingDate() { return addingDateList; }
+    public long[] getAddingDate() {
+        System.out.println(" IM IN ADDING DATE GETTT " + addingDateList[0]);
+        return addingDateList; }
 
     public long getBestBefore() { return bestBeforeList; }
 

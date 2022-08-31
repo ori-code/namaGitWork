@@ -54,7 +54,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
         Bundle extras = getIntent().getExtras();
         nameOfProduct= extras.getString("keyName");
         System.out.println("NAME IN EDIT" + nameOfProduct);
-//TODO EDITABLE PRODUCT DELETE
+
         findProduct = FirebaseDatabase.getInstance().getReference("products");
         findProduct.addListenerForSingleValueEvent(valueEventListenerForUpdateProduct);
 
@@ -112,7 +112,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
                      findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(editProductQnty.getText().toString()));
                      // HASSSHH
 
-
+            //TODO HERE YOU FIND THE LIST OF DATA ADDING
             System.out.println("CHECKKK  "  + dateOfAdding.get(dateOfAdding.size()-1));
 
 

@@ -28,6 +28,8 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -135,7 +137,31 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     System.out.println("THE BEST BEFORE FROM DB " +snapshot.child("bestBefore").getValue());
                         System.out.println("NEW VALUES " + snapshot.getValue());
+
                     Product product = snapshot.getValue(Product.class);
+                    String arr = snapshot.child("dataOfAdding").getValue().toString();
+                    System.out.println("THE ARR FROM DATABASE " + arr);
+
+
+                    int count = 0;
+                    long dataOfAdding [] = new long[1000];
+                    Matcher matcher = Pattern.compile("\\d+").matcher(arr);
+
+
+                        while (matcher.find()) {
+                            System.out.println("FOUNDED" + Long.valueOf(matcher.group()));
+                            dataOfAdding[count] = Long.valueOf(matcher.group());
+                            count++;
+                        }
+
+                    for(int i = 0; i < arr.length(); i++){
+                        System.out.println("!!!" + dataOfAdding[i]);
+                    }
+
+                    product.setAddingDate(dataOfAdding);
+
+                    System.out.println("LOOKING FOR VALUE OF DATA ADDING " + snapshot + "AFTER BUILDER " + product.getAddingDate().toString());
+
                     product.setType(Integer.parseInt(snapshot.child("typeOfProduct").getValue().toString()));
                     System.out.println("The before sending to list " + product.getBestBefore());
                     productList.add(product);
