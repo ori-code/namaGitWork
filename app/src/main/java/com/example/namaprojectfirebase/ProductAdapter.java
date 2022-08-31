@@ -64,8 +64,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public LinearLayout overallCart;
     public long [] dataCounting = new long[1000];
     public long allCountItem;
-
-
+    public int flagGreenBckg;
+    public long theLastQntyAdded;
+    public long theLastTimeAdded;
 
 
     public ProductAdapter(Context mCtx, List<Product> productList) {
@@ -120,18 +121,50 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 //TODO changeBackground
         System.out.println("HEYYY the list in adapter" +productList.get(position).getAddingDate() + "the name " + productList.get(position).getNameOfProduct());
-        dataCounting = productList.get(0).getAddingDate();
+        dataCounting = productList.get(position).getAddingDate();
         for(int i = 0; i < dataCounting.length; i++ ){
             if(i%2!=0){
                 allCountItem = dataCounting[i] + allCountItem;
                 System.out.println("ALL COUNT ITEM " + allCountItem);
+                if(dataCounting[i]!=0){
+                    theLastQntyAdded = dataCounting[i];
+                    theLastTimeAdded = dataCounting[i-1];
+                    System.out.println("LAST QUABTITY " + theLastQntyAdded*0.5 + " the real wuanityt "+  productList.get(position).getQuantity());
+
+
+                }
             }
             else{
                 System.out.println(" THE RECORDS IN THIS IS " + dataCounting[i]);
             }
             }
 
-        overallCart.setBackgroundColor(Color.parseColor("#007F00"));
+
+
+//GREEN PRODUCT
+        if(theLastQntyAdded*0.5 > productList.get(position).getQuantity()){
+            System.out.println("Im THE GREEN PRODUCT " + theLastTimeAdded);
+            if(epochCurrent - theLastTimeAdded < 1662508800){
+                System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
+                overallCart.setBackgroundColor(Color.parseColor("#007F00"));
+            }
+
+        }
+//RED PRODUCT
+        if(theLastQntyAdded*0.8 < productList.get(position).getQuantity()){
+            System.out.println("Im THE RED PRODUCT " + theLastTimeAdded);
+            if(epochCurrent - theLastTimeAdded > 1662508800){
+//                227238713
+                overallCart.setBackgroundColor(Color.parseColor("#FF0000"));
+                System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
+            }
+
+        }
+
+
+
+
+
 
 
 
