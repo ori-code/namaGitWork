@@ -39,6 +39,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
     public static String firstAttempQnty,theKeyOfProduct;
     DatabaseReference deleteDocument;
     public static ArrayList dateOfAdding;
+    public static long theNowQuantity;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +87,8 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
                     System.out.println("THE NEEDED PRODUCT : " + snapshotRun.child("dataOfAdding").getValue());
                     dateOfAdding = (ArrayList) snapshotRun.child("dataOfAdding").getValue();
                     System.out.println("THE LIST ISSSS " +dateOfAdding );
+                    theNowQuantity =  Long.parseLong(snapshotRun.child("quantity").getValue().toString());
+                    System.out.println("THE QUANTITY NOW IS  " +theNowQuantity );
                 }
                 System.out.println("THE VALUE OF PRODUCT" + snapshotRun.getValue() + " AND NAME IS " + snapshotRun.child("nameOfProduct").getValue());
             }
@@ -108,8 +111,11 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
             case  R.id.productButtonPageEditUpdate: {
                 System.out.println("FIRST ATTEMPT STRING "  + firstAttempQnty  + " EDIT" + editProductQnty.getText().toString());
                 if(!editProductQnty.getText().toString().isEmpty()){
-                     System.out.println("IM NOT NULLLL" +  findProduct.child(theKeyOfProduct).child("nameOfProfuct").getKey());
-                     findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(editProductQnty.getText().toString()));
+                     System.out.println("IM NOT NULLLL" +  findProduct.child(theKeyOfProduct).child("nameOfProfuct").getKey() + " REAL QUANTITY " +   findProduct.child(theKeyOfProduct).child("quantity").getKey());
+                    theNowQuantity = theNowQuantity + Integer.parseInt(editProductQnty.getText().toString());
+                    findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(String.valueOf(theNowQuantity)));
+//                     findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(editProductQnty.getText().toString() + theNowQuantity));
+
                      // HASSSHH
 
             //TODO HERE YOU FIND THE LIST OF DATA ADDING

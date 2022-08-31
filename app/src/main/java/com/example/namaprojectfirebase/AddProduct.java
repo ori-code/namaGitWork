@@ -290,6 +290,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         String CellPrice = editSellPrice.getText().toString().trim();
 
         String quantityString= editQuantity.getText().toString();
+
         double quantity = Integer.parseInt(quantityString);
 
         double minQty = quantity*0.1;
