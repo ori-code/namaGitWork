@@ -182,6 +182,8 @@ public class Login extends AppCompatActivity {
                       anArrayOfProducts[count] = snapshot.child("sellPrice").getValue().toString();
                      System.out.println(anArrayOfProducts[count]);
                       count++;
+
+
                 }
 
             }

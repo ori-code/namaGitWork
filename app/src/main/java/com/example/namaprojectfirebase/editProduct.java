@@ -77,6 +77,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
 
     }
 
+
 //LIST  OF ADDING PRODUCTS
     ValueEventListener arrayListReadvalueEventListenerForUpdateProduct = new ValueEventListener() {
         @Override

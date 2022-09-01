@@ -35,29 +35,25 @@ public class GraphClass extends AppCompatActivity {
     LineChart mpLineChart;
     String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     String [] days = {"1","2","3","4","5","6","7","8","9"};
+    public static String [] workArray = new String[1000];
+//public static String [] workArray = {"dlkdlkd", " dokodk"};
+    public int workArrayCount = 0;
+
     ArrayList<String> purchasesForGraphs;
     DatabaseReference finalCheckPurchases;
     //Sales of product // name or id // running on sales // counting name + quantity // capturing time
-
+    public AutoCompleteTextView editText;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphs_layout);
-        AutoCompleteTextView editText = findViewById(R.id.autoComplete);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, months);
-        editText.setAdapter(adapter);
+
+
         finalCheckPurchases = FirebaseDatabase.getInstance().getReference("orders");
-        finalCheckPurchases.addListenerForSingleValueEvent(valueEventListener);
+        finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+
+
         purchasesForGraphs = new ArrayList<String>();
-
-
-
-
-
-
-
-
-
 
         //to fill your Spinner
         List<String> spinnerArray = new ArrayList<String>();
@@ -70,21 +66,18 @@ public class GraphClass extends AppCompatActivity {
         spinnerArray.add("Maam");
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spinnerArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = (Spinner) findViewById(R.id.spinnerGraphs);
         spinner.setAdapter(adapter1);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 
                 Object item = adapterView.getItemAtPosition(position);
-                if (item != null) {
+                if (item == "Sales of product") {
                    System.out.println("HEYYY");
                 }
-
-
             }
 
             @Override
@@ -95,23 +88,25 @@ public class GraphClass extends AppCompatActivity {
         });
 
 
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    Product product = snapshot.getValue(Product.class);
-                        System.out.println("PURCHASES DATA : " + snapshot);
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
+//        ValueEventListener valueEventListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+////                    Product product = snapshot.getValue(Product.class);
+//                        System.out.println("PURCHASES DATA : " + snapshot);
+//
+//
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        };
 
 
 
@@ -158,11 +153,6 @@ public class GraphClass extends AppCompatActivity {
             valueSet1.add(entry);
         }
 
-
-
-
-
-
         List<IBarDataSet> dataSets = new ArrayList<>();
         BarDataSet barDataSet = new BarDataSet(valueSet1, "");
         barDataSet.setColor(Color.CYAN);
@@ -173,6 +163,7 @@ public class GraphClass extends AppCompatActivity {
         BarData data = new BarData(dataSets);
         mChart.setData(data);
         mChart.invalidate();
+
 
 
 
@@ -269,14 +260,44 @@ public class GraphClass extends AppCompatActivity {
     }
 
 
-    ValueEventListener valueEventListener = new ValueEventListener() {
+    ValueEventListener valueEventListenerSalesOfProduct = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {
+                final List <String> nameOfProducts = new ArrayList<String>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    Product product = snapshot.getValue(Product.class);
+                    Product product = snapshot.getValue(Product.class);
                     System.out.println("PURCHASES DATA : " + snapshot);
+                    String runningString = snapshot.getValue().toString();
+                    nameOfProducts.add(runningString);
+                    System.out.println("LIST ITEM " +nameOfProducts);
+
+
+
+//                    for(int j = 0; j < Login.anArrayOfProducts.length; j+=2){
+//                        if(Login.anArrayOfProducts[j]!=null) {
+//                            System.out.println("HEYYYYYaaa " + Login.anArrayOfProducts[j].toString());
+//                            String lkal = new String();
+//                            lkal = Login.anArrayOfProducts[j].toString();
+//                            System.out.println("THE NEW TRING " + lkal);
+//                              workArray[workArrayCount] = lkal;
+//                                System.out.println("work is : " + workArray[workArrayCount]);
+//                                if(workArrayCount<999)
+//                                    workArrayCount++;
+//                        }
+//                    }
                 }
+
+
+//                Spinner areaSpinner = (Spinner) findViewById(R.id.spinner);
+//                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(UAdminActivity.this, android.R.layout.simple_spinner_item, areas);
+//                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                areaSpinner.setAdapter(areasAdapter);
+
+
+                editText = findViewById(R.id.autoComplete);
+                ArrayAdapter <String> adapter = new ArrayAdapter<String>(GraphClass.this, android.R.layout.simple_list_item_1, nameOfProducts);
+                editText.setAdapter(adapter);
 
             }
         }
@@ -288,7 +309,10 @@ public class GraphClass extends AppCompatActivity {
     };
 
 
-
-
+    public void sendData(View view) {
+        System.out.println("the send is clicked");
+        String textFromAutoComplete = editText.getText().toString();
+        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+    }
 }
 
