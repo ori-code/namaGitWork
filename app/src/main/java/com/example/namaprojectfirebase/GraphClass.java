@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
@@ -12,22 +13,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.android.gms.common.internal.IAccountAccessor;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +35,29 @@ public class GraphClass extends AppCompatActivity {
     LineChart mpLineChart;
     String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     String [] days = {"1","2","3","4","5","6","7","8","9"};
-
-
+    ArrayList<String> purchasesForGraphs;
+    DatabaseReference finalCheckPurchases;
+    //Sales of product // name or id // running on sales // counting name + quantity // capturing time
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphs_layout);
+        AutoCompleteTextView editText = findViewById(R.id.autoComplete);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, months);
+        editText.setAdapter(adapter);
+        finalCheckPurchases = FirebaseDatabase.getInstance().getReference("orders");
+        finalCheckPurchases.addListenerForSingleValueEvent(valueEventListener);
+        purchasesForGraphs = new ArrayList<String>();
+
+
+
+
+
+
+
+
+
 
         //to fill your Spinner
         List<String> spinnerArray = new ArrayList<String>();
@@ -54,11 +68,11 @@ public class GraphClass extends AppCompatActivity {
         spinnerArray.add("Specific shipments");
         spinnerArray.add("Revenue overall year/month/day");
         spinnerArray.add("Maam");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = (Spinner) findViewById(R.id.spinnerGraphs);
-        spinner.setAdapter(adapter);
+        spinner.setAdapter(adapter1);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -81,7 +95,23 @@ public class GraphClass extends AppCompatActivity {
         });
 
 
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    Product product = snapshot.getValue(Product.class);
+                        System.out.println("PURCHASES DATA : " + snapshot);
+                    }
 
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
 
 
 
@@ -237,5 +267,28 @@ public class GraphClass extends AppCompatActivity {
 //
 //        }
     }
+
+
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    Product product = snapshot.getValue(Product.class);
+                    System.out.println("PURCHASES DATA : " + snapshot);
+                }
+
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+
+
+
+
 }
 

@@ -21,16 +21,15 @@
         tools:layout_editor_absoluteX="55dp"
         tools:layout_editor_absoluteY="87dp" />
 
-    <EditText
-        android:id="@+id/editTextSearchUser"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
-        android:hint="Enter the name of user                                                     "
-        android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></EditText>
+        <AutoCompleteTextView
+            android:id="@+id/autoComplete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Start type relevant field"
+            android:popupTheme="@color/browser_actions_bg_grey"
+            android:completionThreshold="1">
+
+        </AutoCompleteTextView>
 
     <RelativeLayout
         android:layout_width="match_parent"
