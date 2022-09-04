@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
     public Query currentUser;
     DatabaseReference databaseReference,finalCheckAllProducts;
     public static int globalPermission;
-    public static String[] anArrayOfProducts = new String[10000];;
+    public static String[] anArrayOfProducts = new String[50];;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

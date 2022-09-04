@@ -60,6 +60,8 @@ public class Order extends Activity {
 
 
 
+
+
         editClientName = (EditText) findViewById(R.id.nameOfTheClient);
         editAddress = (EditText) findViewById(R.id.editAddressClient);
         editPhone = (EditText) findViewById(R.id.phoneOfClient);
@@ -122,6 +124,14 @@ public class Order extends Activity {
                 flagRunningCart = 0;
                 orderQueryCopyAllToOrders.addValueEventListener(new ValueEventListener() {
 
+
+
+
+
+
+
+
+
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 //                        System.out.println("CLICK BUTTON START RUNNING FUNC BEFORE FOR");
@@ -157,6 +167,10 @@ public class Order extends Activity {
 //                            }
                         }
 
+
+
+
+
                         Long tsLong = System.currentTimeMillis()/1000;
                         String ts = tsLong.toString();
 
@@ -164,6 +178,21 @@ public class Order extends Activity {
                         dataOfCart.put("status", "1");
                         dataOfCart.put("timeOfPlacedOrder" , ts);
                         dataOfCart.put("clientName",editCName);
+                        for(int i = 0; i< productsInCartNameQuantity.size()-2; i = i+2){
+                            System.out.println("THE ARRAY TO ADDD "  + productsInCartNameQuantity.get(i)) ;
+                            if(productsInCartNameQuantity.get(i).equals("currentUserEmail") ||
+                                    productsInCartNameQuantity.get(i).equals("orderPlaced")){
+                                System.out.println("NOTHING");
+                            }
+                            else{
+                                System.out.println("PRODUCT TO ADD " + productsInCartNameQuantity.get(i) + "QNTY" +
+                                        productsInCartNameQuantity.get(i+1));
+                                dataOfCart.put(productsInCartNameQuantity.get(i).toString(),productsInCartNameQuantity.get(i+1));
+                            }
+                        }
+
+                        //ARRAY OF PRODUCTS WITH PUT
+
                         dataOfCart.put("clientAddress",editCAddress);
                         dataOfCart.put("clientPhone",editCPhone);
                         dataOfCart.put("clientCommetns",editCComments);

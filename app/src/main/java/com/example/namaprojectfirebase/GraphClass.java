@@ -2,6 +2,7 @@ package com.example.namaprojectfirebase;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -269,8 +270,45 @@ public class GraphClass extends AppCompatActivity {
                     Product product = snapshot.getValue(Product.class);
                     System.out.println("PURCHASES DATA : " + snapshot);
                     String runningString = snapshot.getValue().toString();
+                    System.out.println("running " +runningString);
+                    String search = new String();
+
+
+                    String sentence = runningString;
+
+
+
+
+//                    for(int j = 0; j< runningString.length(); j++){
+//                        runningString.sub
+//                    }
+
+
+
+                    for(int i = 0; i < Login.anArrayOfProducts.length-1; i++){
+
+                        if( Login.anArrayOfProducts[i]!= null){
+                            search  = Login.anArrayOfProducts[i];
+                        }
+
+                        System.out.println("the search string " + search);
+                        if ( sentence.toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
+
+                            System.out.println("I found the keyword" + search);
+
+                        } else {
+
+                            System.out.println("not found");
+
+                        }
+                    }
+
+
+
+
                     nameOfProducts.add(runningString);
                     System.out.println("LIST ITEM " +nameOfProducts);
+                    System.out.println("PRODUCTS IS " + Login.anArrayOfProducts[0]);
 
 
 
@@ -307,6 +345,7 @@ public class GraphClass extends AppCompatActivity {
 
         }
     };
+
 
 
     public void sendData(View view) {

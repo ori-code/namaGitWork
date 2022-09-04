@@ -89,16 +89,13 @@ public class FinalCheck extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     ArrayList<String> finalCheckList = new ArrayList<String>();
-
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
 //            finalCheckList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
                     System.out.println("FINAL CHECK "  + snapshot.getKey());
-
                     try {
                         for(int i = 0; i < anArrayOfProducts.length; i++ ) {
                            System.out.println("PRODUCTS FROM LIST :" + anArrayOfProducts[i].toString());
@@ -109,9 +106,6 @@ public class FinalCheck extends Activity implements AdapterView.OnItemSelectedLi
                                     finalCheckList.add(snapshot.getValue().toString());
                                     finalCheckList.add(anArrayOfProducts[i+1]);
                                     i++;
-
-
-
                                     System.out.println("LIST STRING" + finalCheckList);
                             }
                         }
