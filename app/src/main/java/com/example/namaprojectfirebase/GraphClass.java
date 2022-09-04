@@ -39,9 +39,10 @@ public class GraphClass extends AppCompatActivity {
     public static String [] workArray = new String[1000];
 //public static String [] workArray = {"dlkdlkd", " dokodk"};
     public int workArrayCount = 0;
-
+    public List<String> nameOfProducts;
     ArrayList<String> purchasesForGraphs;
     DatabaseReference finalCheckPurchases;
+    public static ValueEventListener valueEventListenerSalesOfProduct;
     //Sales of product // name or id // running on sales // counting name + quantity // capturing time
     public AutoCompleteTextView editText;
     @Override
@@ -51,7 +52,7 @@ public class GraphClass extends AppCompatActivity {
 
 
         finalCheckPurchases = FirebaseDatabase.getInstance().getReference("orders");
-        finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+
 
 
         purchasesForGraphs = new ArrayList<String>();
@@ -77,7 +78,8 @@ public class GraphClass extends AppCompatActivity {
 
                 Object item = adapterView.getItemAtPosition(position);
                 if (item == "Sales of product") {
-                   //System.out.println("HEYYY");
+                    runSalesProduct();
+                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                 }
             }
 
@@ -260,76 +262,76 @@ public class GraphClass extends AppCompatActivity {
 //        }
     }
 
-
-    ValueEventListener valueEventListenerSalesOfProduct = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            if (dataSnapshot.exists()) {
-                final List <String> nameOfProducts = new ArrayList<String>();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Product product = snapshot.getValue(Product.class);
-                    //System.out.println("PURCHASES DATA : " + snapshot);
-                    String runningString = snapshot.getValue().toString();
-                    //System.out.println("running " +runningString);
-                    String search = new String();
-                    String sentence = runningString;
+    private void runSalesProduct() {
+        valueEventListenerSalesOfProduct = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    nameOfProducts = new ArrayList<String>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Product product = snapshot.getValue(Product.class);
+                        //System.out.println("PURCHASES DATA : " + snapshot);
+                        String runningString = snapshot.getValue().toString();
+                        //System.out.println("running " +runningString);
+                        String search = new String();
+                        String sentence = runningString;
 //                    for(int j = 0; j< runningString.length(); j++){
 //                        runningString.sub
 //                    }
 
-                    for(int i = 0; i < Login.anArrayOfProducts.length-1; i++){
+                        for (int i = 0; i < Login.anArrayOfProducts.length - 1; i++) {
 
-                        if( Login.anArrayOfProducts[i]!= null){
-                            search  = Login.anArrayOfProducts[i];
-                        }
+                            if (Login.anArrayOfProducts[i] != null) {
+                                search = Login.anArrayOfProducts[i];
+                            }
 
 
-                        //System.out.println("the search string " + search);
-                        if ( sentence.toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
-                            StringBuffer sbf = new StringBuffer();
-                            //System.out.println("I found the keyword " + search + "THE VALUE IS " + sentence.charAt(sentence.toLowerCase().indexOf(search)+3));
-                                for(int z = sentence.toLowerCase().indexOf(search); z < sentence.toLowerCase().indexOf(search)+30; z++){
-                                    if(sentence.charAt(z)>='0' && sentence.charAt(z)<='9'){
+                            //System.out.println("the search string " + search);
+                            if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
+                                StringBuffer sbf = new StringBuffer();
+                                //System.out.println("I found the keyword " + search + "THE VALUE IS " + sentence.charAt(sentence.toLowerCase().indexOf(search)+3));
+                                for (int z = sentence.toLowerCase().indexOf(search); z < sentence.toLowerCase().indexOf(search) + 30; z++) {
+                                    if (sentence.charAt(z) >= '0' && sentence.charAt(z) <= '9') {
                                         //System.out.println(sentence.charAt(z));
                                         //System.out.println("THE CHAR IS " +sentence.charAt(z));
                                         sbf.append(sentence.charAt(z));
                                     }
-                                    }
-                        if(nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase())== -1) {
-                            nameOfProducts.add(search);
-                            System.out.println("THE LIST IS  " + nameOfProducts);
-                        }else{
-                            System.out.println("NOTHING");
-                        }
+                                }
+                                if (nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase()) == -1) {
+                                    nameOfProducts.add(search);
+                                    System.out.println("THE LIST IS  " + nameOfProducts);
+                                } else {
+                                    System.out.println("NOTHING");
+                                }
 //                                nameOfProducts.add(search);
 //                                nameOfProducts.add(sbf.toString());
-                                System.out.println("THE PRODUCT IS " +search + " VALUE " + sbf);
+                                System.out.println("THE PRODUCT IS " + search + " VALUE " + sbf);
 //                                System.out.println("THE LIST IS  " + nameOfProducts);
-                        } else {
+                            } else {
 
-                            //System.out.println("not found");
+                                //System.out.println("not found");
 
+                            }
                         }
-                    }
 
 //                    nameOfProducts.add(runningString);
 
-                }
+                    }
 
-                editText = findViewById(R.id.autoComplete);
-                ArrayAdapter <String> adapter = new ArrayAdapter<String>(GraphClass.this, android.R.layout.simple_list_item_1, nameOfProducts);
-                editText.setAdapter(adapter);
+                    editText = findViewById(R.id.autoComplete);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(GraphClass.this, android.R.layout.simple_list_item_1, nameOfProducts);
+                    editText.setAdapter(adapter);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    };
-
-
+        };
+System.out.println(nameOfProducts);
+    }
 
     public void sendData(View view) {
         //System.out.println("the send is clicked");
