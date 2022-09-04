@@ -75,15 +75,15 @@ public class UserRecycleViewClass extends AppCompatActivity {
         courierCheckBox = (CheckBox)findViewById(R.id.courierCheckBox);
         accountantCheckBox = (CheckBox)findViewById(R.id.accountantCheckBox);
         userClientCheckBox = (CheckBox)findViewById(R.id.userClientCheckBox);
-            System.out.println("Admin");
-            System.out.println("Worker");
-            System.out.println("Courier");
-            System.out.println("Accountant");
+            ////System.out.println("Admin");
+            ////System.out.println("Worker");
+            ////System.out.println("Courier");
+            ////System.out.println("Accountant");
 
         for(User item : userList ){
-            System.out.println("BEFORE FILTER");
+            ////System.out.println("BEFORE FILTER");
             if(item.getFullName().toLowerCase().contains(text.toLowerCase())){
-                System.out.println("PRODUCT FILTER TYPE IS " + item.getPermission());
+                //System.out.println("PRODUCT FILTER TYPE IS " + item.getPermission());
                 //TODO type of Product ASK VERONIKA
                 if(adminCheckBox.isChecked() && item.getPermission()==1)
                     filteredUserList.add(item);
@@ -108,11 +108,11 @@ public class UserRecycleViewClass extends AppCompatActivity {
             userList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    System.out.println("USERSSSS " +snapshot.getValue());
+                    //System.out.println("USERSSSS " +snapshot.getValue());
                     User user = snapshot.getValue(User.class);
 
                     userList.add(user);
-//                    System.out.println("USERS EMAIL" + user.getEmail());
+//                    //System.out.println("USERS EMAIL" + user.getEmail());
 
                 }
                 adapter2.notifyDataSetChanged();

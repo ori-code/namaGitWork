@@ -52,8 +52,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             newInt = extrasFromRegister.getInt("typeFiveUser");
 
             permission = newInt;
-            System.out.println(newInt + "PERMISSION");
-            System.out.println(permission + "THE REAL PERMISSION");
+            ////System.out.println(newInt + "PERMISSION");
+            ////System.out.println(permission + "THE REAL PERMISSION");
 
         }
         editTextFullName = (EditText) findViewById(R.id.fulLName);
@@ -80,7 +80,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.registerUser:
-                //System.out.println("Register blah");
+                //////System.out.println("Register blah");
                 registeruser();
                 break;
             case R.id.loginButton:
@@ -92,19 +92,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     public void onRadioButtonClickedAdmin(View view) {
         permission = 1;
-        System.out.println("Admin");
+        ////System.out.println("Admin");
     }
     public void onRadioButtonClickedWorker(View view) {
         permission = 2;
-        System.out.println("Worker");
+        ////System.out.println("Worker");
     }
     public void onRadioButtonClickedCourier(View view) {
         permission = 3;
-        System.out.println("Courier");
+        ////System.out.println("Courier");
     }
     public void onRadioButtonClickedAccountant(View view) {
         permission = 4;
-        System.out.println("Accountant");
+        ////System.out.println("Accountant");
     }
 
 
@@ -125,7 +125,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         {
             String salaryStr = editSalary.getText().toString().trim();
             salary = Integer.parseInt(salaryStr);
-            System.out.println("kfjnikdfmmsmdwsf   " + salary);
+            ////System.out.println("kfjnikdfmmsmdwsf   " + salary);
         }
 
 
@@ -166,11 +166,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            System.out.println("After task new user, the permission is   " + permission);
+                            ////System.out.println("After task new user, the permission is   " + permission);
 
                             if (task.isSuccessful()) {
                                 User user = new User(fullName, license, email,phone, address, salary, permission);
-                                System.out.println("After builder new user" + permission);
+                                //System.out.println("After builder new user" + permission);
                                 FirebaseDatabase.getInstance().getReference("users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

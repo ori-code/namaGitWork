@@ -104,7 +104,7 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     public void LogOut(MenuItem item) {
-        System.out.println("HEHYYYYY LOGGOUT");
+        ////System.out.println("HEHYYYYY LOGGOUT");
         Login.mAuth.signOut();
         Intent intent = new Intent(this, Login.class);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

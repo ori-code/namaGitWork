@@ -77,7 +77,7 @@ public class GraphClass extends AppCompatActivity {
 
                 Object item = adapterView.getItemAtPosition(position);
                 if (item == "Sales of product") {
-                   System.out.println("HEYYY");
+                   //System.out.println("HEYYY");
                 }
             }
 
@@ -95,7 +95,7 @@ public class GraphClass extends AppCompatActivity {
 //                if (dataSnapshot.exists()) {
 //                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 ////                    Product product = snapshot.getValue(Product.class);
-//                        System.out.println("PURCHASES DATA : " + snapshot);
+//                        //System.out.println("PURCHASES DATA : " + snapshot);
 //
 //
 //                    }
@@ -188,9 +188,9 @@ public class GraphClass extends AppCompatActivity {
 ////        lineDataSet2.setColors(ColorTemplate.PASTEL_COLORS);
 //        dataSets.add(lineDataSet1);
 ////        dataSets.add(lineDataSet2);
-//        System.out.println("DONT GET WHAT IS GOING ON " + dataSets.toString());
+//        //System.out.println("DONT GET WHAT IS GOING ON " + dataSets.toString());
 //        LineData data = new LineData(dataSets);
-//        System.out.println("DONT GET WHAT IS GOING ON " + dataSets.toString() + "DATA TO STRING " + data.getXMin());
+//        //System.out.println("DONT GET WHAT IS GOING ON " + dataSets.toString() + "DATA TO STRING " + data.getXMin());
 //        mpLineChart.setDescription(description);
 //        mpLineChart.setData(data);
 //        mpLineChart.invalidate();
@@ -247,7 +247,7 @@ public class GraphClass extends AppCompatActivity {
 //
 ////        for(int i = 0; i < 5; i++){
 ////            for(int j = 0; j < 5; j++){
-////                System.out.println("I is : " + i + "J IS : "+ j);
+////                //System.out.println("I is : " + i + "J IS : "+ j);
 ////                barArryList.add(new BarEntry(i, j));
 ////            }
 ////        }
@@ -268,22 +268,14 @@ public class GraphClass extends AppCompatActivity {
                 final List <String> nameOfProducts = new ArrayList<String>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Product product = snapshot.getValue(Product.class);
-                    System.out.println("PURCHASES DATA : " + snapshot);
+                    //System.out.println("PURCHASES DATA : " + snapshot);
                     String runningString = snapshot.getValue().toString();
-                    System.out.println("running " +runningString);
+                    //System.out.println("running " +runningString);
                     String search = new String();
-
-
                     String sentence = runningString;
-
-
-
-
 //                    for(int j = 0; j< runningString.length(); j++){
 //                        runningString.sub
 //                    }
-
-
 
                     for(int i = 0; i < Login.anArrayOfProducts.length-1; i++){
 
@@ -291,47 +283,38 @@ public class GraphClass extends AppCompatActivity {
                             search  = Login.anArrayOfProducts[i];
                         }
 
-                        System.out.println("the search string " + search);
+
+                        //System.out.println("the search string " + search);
                         if ( sentence.toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
-
-                            System.out.println("I found the keyword" + search);
-
+                            StringBuffer sbf = new StringBuffer();
+                            //System.out.println("I found the keyword " + search + "THE VALUE IS " + sentence.charAt(sentence.toLowerCase().indexOf(search)+3));
+                                for(int z = sentence.toLowerCase().indexOf(search); z < sentence.toLowerCase().indexOf(search)+30; z++){
+                                    if(sentence.charAt(z)>='0' && sentence.charAt(z)<='9'){
+                                        //System.out.println(sentence.charAt(z));
+                                        //System.out.println("THE CHAR IS " +sentence.charAt(z));
+                                        sbf.append(sentence.charAt(z));
+                                    }
+                                    }
+                        if(nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase())== -1) {
+                            nameOfProducts.add(search);
+                            System.out.println("THE LIST IS  " + nameOfProducts);
+                        }else{
+                            System.out.println("NOTHING");
+                        }
+//                                nameOfProducts.add(search);
+//                                nameOfProducts.add(sbf.toString());
+                                System.out.println("THE PRODUCT IS " +search + " VALUE " + sbf);
+//                                System.out.println("THE LIST IS  " + nameOfProducts);
                         } else {
 
-                            System.out.println("not found");
+                            //System.out.println("not found");
 
                         }
                     }
 
+//                    nameOfProducts.add(runningString);
 
-
-
-                    nameOfProducts.add(runningString);
-                    System.out.println("LIST ITEM " +nameOfProducts);
-                    System.out.println("PRODUCTS IS " + Login.anArrayOfProducts[0]);
-
-
-
-//                    for(int j = 0; j < Login.anArrayOfProducts.length; j+=2){
-//                        if(Login.anArrayOfProducts[j]!=null) {
-//                            System.out.println("HEYYYYYaaa " + Login.anArrayOfProducts[j].toString());
-//                            String lkal = new String();
-//                            lkal = Login.anArrayOfProducts[j].toString();
-//                            System.out.println("THE NEW TRING " + lkal);
-//                              workArray[workArrayCount] = lkal;
-//                                System.out.println("work is : " + workArray[workArrayCount]);
-//                                if(workArrayCount<999)
-//                                    workArrayCount++;
-//                        }
-//                    }
                 }
-
-
-//                Spinner areaSpinner = (Spinner) findViewById(R.id.spinner);
-//                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(UAdminActivity.this, android.R.layout.simple_spinner_item, areas);
-//                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                areaSpinner.setAdapter(areasAdapter);
-
 
                 editText = findViewById(R.id.autoComplete);
                 ArrayAdapter <String> adapter = new ArrayAdapter<String>(GraphClass.this, android.R.layout.simple_list_item_1, nameOfProducts);
@@ -349,7 +332,7 @@ public class GraphClass extends AppCompatActivity {
 
 
     public void sendData(View view) {
-        System.out.println("the send is clicked");
+        //System.out.println("the send is clicked");
         String textFromAutoComplete = editText.getText().toString();
         System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
     }

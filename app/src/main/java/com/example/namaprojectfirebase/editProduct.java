@@ -44,7 +44,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_edit);
-        System.out.println("IM HERE ");
+        //System.out.println("IM HERE ");
         updateBtn = (Button) findViewById(R.id.productButtonPageEditUpdate);
         updateBtn.setOnClickListener(this);
         deleteBtn = (Button) findViewById(R.id.productButtonPageEditDelete);
@@ -54,7 +54,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
 
         Bundle extras = getIntent().getExtras();
         nameOfProduct= extras.getString("keyName");
-        System.out.println("NAME IN EDIT" + nameOfProduct);
+        //System.out.println("NAME IN EDIT" + nameOfProduct);
 
         findProduct = FirebaseDatabase.getInstance().getReference("products");
         findProduct.addListenerForSingleValueEvent(valueEventListenerForUpdateProduct);
@@ -65,12 +65,12 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
 
 
         productQuery = findProduct.orderByKey();
-        System.out.println(findProduct);
+        //System.out.println(findProduct);
         deleteProduct = FirebaseDatabase.getInstance().getReference();
 
 
 
-        System.out.println(deleteDocument);
+        //System.out.println(deleteDocument);
 
 //        workWithExistFunc(nameOfProduct);
 
@@ -82,16 +82,16 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
     ValueEventListener arrayListReadvalueEventListenerForUpdateProduct = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
-            System.out.println("IN RUNNING ");
+            //System.out.println("IN RUNNING ");
             for (DataSnapshot snapshotRun : snapshot.getChildren()) {
                 if(nameOfProduct.equals(snapshotRun.child("nameOfProduct").getValue())){
-                    System.out.println("THE NEEDED PRODUCT : " + snapshotRun.child("dataOfAdding").getValue());
+                    //System.out.println("THE NEEDED PRODUCT : " + snapshotRun.child("dataOfAdding").getValue());
                     dateOfAdding = (ArrayList) snapshotRun.child("dataOfAdding").getValue();
-                    System.out.println("THE LIST ISSSS " +dateOfAdding );
+                    //System.out.println("THE LIST ISSSS " +dateOfAdding );
                     theNowQuantity =  Long.parseLong(snapshotRun.child("quantity").getValue().toString());
-                    System.out.println("THE QUANTITY NOW IS  " +theNowQuantity );
+                    //System.out.println("THE QUANTITY NOW IS  " +theNowQuantity );
                 }
-                System.out.println("THE VALUE OF PRODUCT" + snapshotRun.getValue() + " AND NAME IS " + snapshotRun.child("nameOfProduct").getValue());
+                //System.out.println("THE VALUE OF PRODUCT" + snapshotRun.getValue() + " AND NAME IS " + snapshotRun.child("nameOfProduct").getValue());
             }
         }
 
@@ -110,9 +110,9 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case  R.id.productButtonPageEditUpdate: {
-                System.out.println("FIRST ATTEMPT STRING "  + firstAttempQnty  + " EDIT" + editProductQnty.getText().toString());
+                //System.out.println("FIRST ATTEMPT STRING "  + firstAttempQnty  + " EDIT" + editProductQnty.getText().toString());
                 if(!editProductQnty.getText().toString().isEmpty()){
-                     System.out.println("IM NOT NULLLL" +  findProduct.child(theKeyOfProduct).child("nameOfProfuct").getKey() + " REAL QUANTITY " +   findProduct.child(theKeyOfProduct).child("quantity").getKey());
+                     //System.out.println("IM NOT NULLLL" +  findProduct.child(theKeyOfProduct).child("nameOfProfuct").getKey() + " REAL QUANTITY " +   findProduct.child(theKeyOfProduct).child("quantity").getKey());
                     theNowQuantity = theNowQuantity + Integer.parseInt(editProductQnty.getText().toString());
                     findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(String.valueOf(theNowQuantity)));
 //                     findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(editProductQnty.getText().toString() + theNowQuantity));
@@ -120,7 +120,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
                      // HASSSHH
 
             //TODO HERE YOU FIND THE LIST OF DATA ADDING
-            System.out.println("CHECKKK  "  + dateOfAdding.get(dateOfAdding.size()-1));
+            //System.out.println("CHECKKK  "  + dateOfAdding.get(dateOfAdding.size()-1));
 
 
 
@@ -150,7 +150,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        //System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                     } else {
 
@@ -169,7 +169,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        //System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                     } else {
 
@@ -196,12 +196,12 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
 
                 }
                 if(!editProductMinQnty.getText().toString().isEmpty()){
-                    System.out.println("IM NOT MINQUANTITY" +  findProduct.child(theKeyOfProduct).child("minQty").getKey());
+                    //System.out.println("IM NOT MINQUANTITY" +  findProduct.child(theKeyOfProduct).child("minQty").getKey());
                     findProduct.child(theKeyOfProduct).child("minQty").setValue(Integer.parseInt(editProductMinQnty.getText().toString()));
 
                 }
                 if(!editProductSellPrice.getText().toString().isEmpty()){
-                    System.out.println("IM NOT MINQUANTITY" +  findProduct.child(theKeyOfProduct).child("sellPrice").getKey());
+                    //System.out.println("IM NOT MINQUANTITY" +  findProduct.child(theKeyOfProduct).child("sellPrice").getKey());
                         findProduct.child(theKeyOfProduct).child("sellPrice").setValue(Integer.parseInt(editProductSellPrice.getText().toString()));
                 }
                 break;
@@ -234,13 +234,13 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
 //            public void onDataChange(DataSnapshot dataSnapshot) {
 ////                List<String> products = new ArrayList();
 //                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    System.out.println("THE VALUE OF PRODUCT" + postSnapshot.getValue());
+//                    //System.out.println("THE VALUE OF PRODUCT" + postSnapshot.getValue());
 //
 ////                    Product product = postSnapshot.getValue(Product.class);
-////                    System.out.println("THE PRODUCT IS FROM SNAP " + product);
+////                    //System.out.println("THE PRODUCT IS FROM SNAP " + product);
 ////
 ////                    if(postSnapshot.child("nameOfProduct").equals(nameOfProduct)){
-////                        System.out.println("THE NAME FROM DB IS " + postSnapshot.child("nameOfProduct"));
+////                        //System.out.println("THE NAME FROM DB IS " + postSnapshot.child("nameOfProduct"));
 ////                    }
 //                }
 //
@@ -256,10 +256,10 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
         ValueEventListener valueEventListenerForUpdateProduct = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
-            System.out.println("IN RUNNING ");
+            //System.out.println("IN RUNNING ");
                     for (DataSnapshot snapshotRun : snapshot.getChildren()) {
                         if(nameOfProduct.equals(snapshotRun.child("nameOfProduct").getValue())){
-                            System.out.println("THE KEY IS FOUNDED" + snapshotRun.getKey());
+                            //System.out.println("THE KEY IS FOUNDED" + snapshotRun.getKey());
                             theKeyOfProduct = snapshotRun.getKey();
 //                            editProductName = (EditText) findViewById(R.id.nameOfProductEditPage);
                             editProductSellPrice = (EditText) findViewById(R.id.sellPriceEditPage);
@@ -273,7 +273,7 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
                             firstAttempQnty = snapshotRun.child("quantity").getValue().toString();
                             editProductMinQnty.setHint(snapshotRun.child("minQty").getValue().toString());
                         }
-                        System.out.println("THE VALUE OF PRODUCT" + snapshotRun.getValue() + " AND NAME IS " + snapshotRun.child("nameOfProduct").getValue());
+                        //System.out.println("THE VALUE OF PRODUCT" + snapshotRun.getValue() + " AND NAME IS " + snapshotRun.child("nameOfProduct").getValue());
                     }
                 }
 

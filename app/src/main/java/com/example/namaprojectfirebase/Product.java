@@ -37,10 +37,10 @@ public class Product {
 
     public void setAddingDate(long[] addingDate) {
 
-        System.out.println(" IN SEETTER " + addingDate);
+        ////System.out.println(" IN SEETTER " + addingDate);
         addingDateList = addingDate;
         for(int i = 0; i < addingDate.length; i ++ ){
-            System.out.println( addingDate[i]);
+            ////System.out.println( addingDate[i]);
         }
     }
 
@@ -49,12 +49,12 @@ public class Product {
     }
 
     public void setQuantity(double quantity) {
-        System.out.println("I SET QUANTITY");
+        ////System.out.println("I SET QUANTITY");
         this.quantity = quantity;
     }
 
     public void setType(int type) {
-        System.out.println("I SET TYPE ");
+        ////System.out.println("I SET TYPE ");
         this.type = type;
     }
 
@@ -85,7 +85,7 @@ public class Product {
     }
 
     public long[] getAddingDate() {
-        System.out.println(" IM IN ADDING DATE GETTT " + addingDateList[0]);
+        ////System.out.println(" IM IN ADDING DATE GETTT " + addingDateList[0]);
         return addingDateList; }
 
     public long getBestBefore() { return bestBeforeList; }

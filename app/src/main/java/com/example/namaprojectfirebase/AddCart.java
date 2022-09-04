@@ -52,7 +52,7 @@ public class AddCart extends AppCompatActivity implements View.OnClickListener {
         buyerEmail = user.getEmail();
 
         Toast.makeText(AddCart.this, "Your summary is " + sum, Toast.LENGTH_LONG).show();
-            //System.out.println("HEEEEY");
+            ////System.out.println("HEEEEY");
         dbCarts = FirebaseDatabase.getInstance().getReference("carts").child(HomeFragment.uniqueOfCartID);
 //        dbCarts.addValueEventListener(valueEventListener);
 
@@ -71,7 +71,7 @@ public class AddCart extends AppCompatActivity implements View.OnClickListener {
 
     private void showData(DataSnapshot snapshot) {
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                //System.out.println("RUN ON CARTS " + dataSnapshot.getKey());
+                ////System.out.println("RUN ON CARTS " + dataSnapshot.getKey());
             }
     }
 
@@ -87,10 +87,10 @@ public class AddCart extends AppCompatActivity implements View.OnClickListener {
 //    ValueEventListener valueEventListener = new ValueEventListener() {
 //        @Override
 //        public void onDataChange(DataSnapshot dataSnapshot) {
-//            //System.out.println("RUNNNN");
+//            ////System.out.println("RUNNNN");
 //            if (dataSnapshot.exists()) {
 //                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    //System.out.println("RUN ON CARTS " + snapshot.getKey());
+//                    ////System.out.println("RUN ON CARTS " + snapshot.getKey());
 //                }
 //                adapter.notifyDataSetChanged();
 //            }
@@ -120,7 +120,7 @@ public class AddCart extends AppCompatActivity implements View.OnClickListener {
                .addOnCompleteListener(new OnCompleteListener<Void>() {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    //System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                    ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                 } else {
 

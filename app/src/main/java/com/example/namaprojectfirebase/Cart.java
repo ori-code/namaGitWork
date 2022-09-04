@@ -44,7 +44,7 @@ public class Cart extends AppCompatActivity {
         setContentView(R.layout.cart);
         productList = new ArrayList<>();
         orderPlaced=0;
-        //System.out.println("At the create orderPlaced flag " + orderPlaced);
+        //////System.out.println("At the create orderPlaced flag " + orderPlaced);
 
         recyclerView = (RecyclerView) findViewById(R.id.allItemsRecyclerViewCart);
         recyclerView.setHasFixedSize(true);
@@ -70,15 +70,15 @@ public class Cart extends AppCompatActivity {
 
         //DELETE CART * From Products
 
-        //System.out.println("THE CARD IS NUM" + HomeFragment.uniqueOfCartID);
+        //////System.out.println("THE CARD IS NUM" + HomeFragment.uniqueOfCartID);
         removeOrderBtn = (Button) findViewById(R.id.removeOrderBtn);
         placeOrderBtn = (Button) findViewById(R.id.placeOrderBtn);
         sumTotal = findViewById(R.id.sumTotal);
         removeOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //System.out.println("HEYYY REMOVE");
-                //System.out.println("TRY TO REMOVE" + dbProducts.child("orderPlaced").setValue(2));
+                //////System.out.println("HEYYY REMOVE");
+                //////System.out.println("TRY TO REMOVE" + dbProducts.child("orderPlaced").setValue(2));
 
                 // create cart
                 HomeFragment.createCartFuncUnique(mAuth.getCurrentUser().getEmail());
@@ -91,16 +91,16 @@ public class Cart extends AppCompatActivity {
         placeOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //System.out.println("HEYYY I PLACE THE ORDER");
-//                //System.out.println("TRY TO PLACE" + dbProducts.child("orderPlaced").setValue(1));
+                //////System.out.println("HEYYY I PLACE THE ORDER");
+//                //////System.out.println("TRY TO PLACE" + dbProducts.child("orderPlaced").setValue(1));
 
 
                 startActivity(new Intent(Cart.this, Order.class));
 
 
-                //System.out.println(orderPlaced + " THIS IS ORDER PLACED FLAG BEFORE");
+                //////System.out.println(orderPlaced + " THIS IS ORDER PLACED FLAG BEFORE");
                 orderPlaced = 1;
-                //System.out.println(orderPlaced + " THIS IS ORDER PLACED FLAG AFTER");
+                //////System.out.println(orderPlaced + " THIS IS ORDER PLACED FLAG AFTER");
 
 
 
@@ -115,41 +115,41 @@ public class Cart extends AppCompatActivity {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshotAllProducts : dataSnapshot.getChildren()) {
                     inCartFlag = 0;
-                    //System.out.println("THE PRODUCTS" + snapshotAllProducts);
+                    //////System.out.println("THE PRODUCTS" + snapshotAllProducts);
                     if (snapshotAllProducts.getKey().equals("currentUserEmail") || snapshotAllProducts.getKey().equals("orderPlaced")){
-                        //System.out.println("IT IS THE WRONG KEY");
+                        ////System.out.println("IT IS THE WRONG KEY");
                     }
                     else{
                     Product product = snapshotAllProducts.getValue(Product.class);
 //UPDATE QUANTITY
                     for(int i = 0; i < productList.size(); i ++){
-                        //System.out.println("RUN ON " +   productList.get(i).getNameOfProduct());
+                        ////System.out.println("RUN ON " +   productList.get(i).getNameOfProduct());
                         if (productList.get(i).getNameOfProduct().equals(product.getNameOfProduct())){
                                 productList.get(i).setQuantity(productList.get(i).getQuantity() + ProductAdapter.valueQnty);
-                                //System.out.println("THE NAME IS SAME ");
+                                ////System.out.println("THE NAME IS SAME ");
 //                                product.setQuantity(productList.get(i).getQuantity() + ProductAdapter.valueQnty);
                             inCartFlag = 1;
                         }
                     }
                     if(inCartFlag == 0){
-                        //System.out.println("I add product to list!!!");
+                        ////System.out.println("I add product to list!!!");
                         productList.add(product);
                     }
                     else {
 //                        product.setQuantity(productList.get(i).getQuantity() + ProductAdapter.valueQnty);
-                        //System.out.println("Quantity Updated " + ProductAdapter.valueQnty);
+                        ////System.out.println("Quantity Updated " + ProductAdapter.valueQnty);
                     }
-//                    //System.out.println(productList.get(0).getNameOfProduct());
+//                    ////System.out.println(productList.get(0).getNameOfProduct());
 
-                    //System.out.println(" PRODUCTS LIST " + product.getNameOfProduct());
+                    ////System.out.println(" PRODUCTS LIST " + product.getNameOfProduct());
                     }
                 }
             // THE TOTAL
                 sum = 0;
                 for(int i = 0; i < productList.size(); i ++){
-                    //System.out.println("Product name: " + productList.get(i).getNameOfProduct() + " The sum price of this product " + productList.get(i).getQuantity()*productList.get(i).getBuyPrice());
+                    ////System.out.println("Product name: " + productList.get(i).getNameOfProduct() + " The sum price of this product " + productList.get(i).getQuantity()*productList.get(i).getBuyPrice());
                     sum += productList.get(i).getQuantity()*productList.get(i).getBuyPrice();
-                    //System.out.println(sum + "the sum");
+                    ////System.out.println(sum + "the sum");
                     sumTotal.setText("TOTAL FOR THIS ORDER: " + sum);
                 }
                 adapter.notifyDataSetChanged();
@@ -164,7 +164,7 @@ public class Cart extends AppCompatActivity {
     };
 
     public void createNewCart(){
-        //System.out.println("Creating new CART FROM CART AFTER orderPlaced 1");
+        ////System.out.println("Creating new CART FROM CART AFTER orderPlaced 1");
         HomeFragment.createCartFuncUnique(mAuth.getCurrentUser().getEmail());
         orderPlaced = 1;
         finish();
@@ -185,14 +185,14 @@ public class Cart extends AppCompatActivity {
                     for (DataSnapshot snapshotRun : snapshot.getChildren()) {
 
                         if (snapshotRun.getKey().contains("currentUserEmail") || snapshotRun.getKey().contains("orderPlaced")) {
-                            //System.out.println("THE PRODUCTS NEW SNAPSHOOT" + snapshotRun.getKey());
+                            ////System.out.println("THE PRODUCTS NEW SNAPSHOOT" + snapshotRun.getKey());
                         } else {
 
-                            //System.out.println("IM PRODUCT" + snapshotRun.child("nameOfProduct").getValue() + "THE QUANTITY " + snapshotRun.child("quantity").getValue());
+                            ////System.out.println("IM PRODUCT" + snapshotRun.child("nameOfProduct").getValue() + "THE QUANTITY " + snapshotRun.child("quantity").getValue());
 
                         }
                     }
-                    //System.out.println("Before order placed FLAG" + orderPlaced);
+                    ////System.out.println("Before order placed FLAG" + orderPlaced);
 
                     adapter.notifyDataSetChanged();
                 }

@@ -45,14 +45,14 @@ public class MyCustomListAdapter extends ArrayAdapter <Product> {
 ////        nameOfProduct.setText(product.getName());
 ////        imageOfProduct.setImageResource();
 //
-//        //System.out.println("name of product " + nameOfProduct);
+//        ////System.out.println("name of product " + nameOfProduct);
 ////        categoryOfProduct.setText(product.getType());
 ////        productImage.setImageDrawable(mCtx.getResources().getDrawable(product.getImage), null);
 //
 ////        view.findViewById(R.id.addToCard).setOnClickListener(new View.OnClickListener() {
 ////            @Override
 ////            public void onClick(View view) {
-////                //System.out.println("ADD TO CARD !!!");
+////                ////System.out.println("ADD TO CARD !!!");
 ////            }
 ////        });
 //        return view;
