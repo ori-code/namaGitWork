@@ -1,5 +1,6 @@
 package com.example.namaprojectfirebase;
 
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
@@ -29,9 +31,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class GraphClass extends AppCompatActivity {
+public class GraphClass extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     public static ArrayList barArryList;
     LineChart mpLineChart;
     String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
@@ -40,6 +43,7 @@ public class GraphClass extends AppCompatActivity {
 //public static String [] workArray = {"dlkdlkd", " dokodk"};
     public int workArrayCount = 0;
     public List<String> nameOfProducts;
+    StringBuffer dates = new StringBuffer();
     ArrayList<String> purchasesForGraphs;
     DatabaseReference finalCheckPurchases;
     public static ValueEventListener valueEventListenerSalesOfProduct;
@@ -280,12 +284,9 @@ public class GraphClass extends AppCompatActivity {
 //                    }
 
                         for (int i = 0; i < Login.anArrayOfProducts.length - 1; i++) {
-
                             if (Login.anArrayOfProducts[i] != null) {
                                 search = Login.anArrayOfProducts[i];
                             }
-
-
                             //System.out.println("the search string " + search);
                             if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
                                 StringBuffer sbf = new StringBuffer();
@@ -337,6 +338,50 @@ System.out.println(nameOfProducts);
         //System.out.println("the send is clicked");
         String textFromAutoComplete = editText.getText().toString();
         System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+        showDatePickerDialogStart();
+        showDatePickerDialogEnd();
+        if(dates!=null){
+            dates.delete(0,dates.length());
+        }
+
+    }
+
+    private void showDatePickerDialogStart() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+
+    private void showDatePickerDialogEnd() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String date = year +""+ month +""+ dayOfMonth;
+        if(dates!=null){
+            dates.append(date);
+            dates.append("|");
+        }
+        else{
+            dates.append(date);
+            dates.append("|");
+        }
+
+        System.out.println(dates);
     }
 }
 
