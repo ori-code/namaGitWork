@@ -30,8 +30,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class GraphClass extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -49,6 +53,8 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static ValueEventListener valueEventListenerSalesOfProduct;
     //Sales of product // name or id // running on sales // counting name + quantity // capturing time
     public AutoCompleteTextView editText;
+    public  Calendar calendarStartTime, calendarEndTime;
+    public int flagDateSet = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -370,18 +376,24 @@ System.out.println(nameOfProducts);
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String date = year +""+ month +""+ dayOfMonth;
-        if(dates!=null){
-            dates.append(date);
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        String date = day + "/" + month + "/" + year;
+        calendarStartTime = new GregorianCalendar(year, month, day);
+        calendarEndTime = calendarStartTime;
+
+        if(flagDateSet == 0){
+            dates.append(calendarStartTime.getTimeInMillis());
             dates.append("|");
+            flagDateSet = 1;
         }
         else{
-            dates.append(date);
+            dates.append(calendarEndTime.getTimeInMillis());
             dates.append("|");
         }
 
-        System.out.println(dates);
+        System.out.println("START TIME " + calendarStartTime.getTimeInMillis());
+        System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
+        System.out.println("DATES" + dates);
     }
 }
 
