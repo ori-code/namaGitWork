@@ -150,6 +150,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             }
 
         }
+
 //RED PRODUCT
         if(theLastQntyAdded*0.8 < productList.get(position).getQuantity()){
             ////System.out.println("Im THE RED PRODUCT " + theLastTimeAdded);

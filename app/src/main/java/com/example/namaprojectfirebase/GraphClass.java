@@ -28,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
@@ -41,30 +42,34 @@ import java.util.List;
 public class GraphClass extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     public static ArrayList barArryList;
     LineChart mpLineChart;
-    String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-    String [] days = {"1","2","3","4","5","6","7","8","9"};
-    public static String [] workArray = new String[1000];
-//public static String [] workArray = {"dlkdlkd", " dokodk"};
+    public static String[] datesArr = new String[500]; // array of dates for graph first date and second the value of sales
+    //    public static String[] datesArr = {"12","33"};
+    public static String [] valuesFromDb = new String [500];
+    public static String[] days = new String[500];
+
+    public static String[] workArray = new String[1000];
+    //public static String [] workArray = {"dlkdlkd", " dokodk"};
     public int workArrayCount = 0;
     public List<String> nameOfProducts;
     StringBuffer dates = new StringBuffer();
     ArrayList<String> purchasesForGraphs;
     DatabaseReference finalCheckPurchases;
+    public static DatabaseReference refForGraphs;
+    public static DatabaseReference graphRef;
     public static ValueEventListener valueEventListenerSalesOfProduct;
+    public static ValueEventListener valueEventListenerSalesProductGraph;
     //Sales of product // name or id // running on sales // counting name + quantity // capturing time
     public AutoCompleteTextView editText;
-    public  Calendar calendarStartTime, calendarEndTime;
+    public Calendar calendarStartTime, calendarEndTime;
     public int flagDateSet = 0;
+    public int flagFinishedRead = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphs_layout);
-
-
         finalCheckPurchases = FirebaseDatabase.getInstance().getReference("orders");
-
-
-
+        refForGraphs = FirebaseDatabase.getInstance().getReference("orders");
         purchasesForGraphs = new ArrayList<String>();
 
         //to fill your Spinner
@@ -76,11 +81,13 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         spinnerArray.add("Specific shipments");
         spinnerArray.add("Revenue overall year/month/day");
         spinnerArray.add("Maam");
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, spinnerArray);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = (Spinner) findViewById(R.id.spinnerGraphs);
         spinner.setAdapter(adapter1);
+
+
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -91,6 +98,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                     runSalesProduct();
                     finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                 }
+
             }
 
             @Override
@@ -100,256 +108,87 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
             }
         });
 
-
-//        ValueEventListener valueEventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists()) {
-//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-////                    Product product = snapshot.getValue(Product.class);
-//                        //System.out.println("PURCHASES DATA : " + snapshot);
-//
-//
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        };
-
-
-
-
-
-
-        //@@@@@@@@@@@
-
-
-
-
-        BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
-        mChart.setDrawBarShadow(false);
-        mChart.setDrawValueAboveBar(false);
-        mChart.getDescription().setEnabled(false);
-        mChart.setDrawGridBackground(false);
-
-        XAxis xaxis = mChart.getXAxis();
-        xaxis.setDrawGridLines(false);
-        xaxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xaxis.setGranularity(1f);
-        xaxis.setDrawLabels(true);
-        xaxis.setDrawAxisLine(false);
-        xaxis.setValueFormatter(new IndexAxisValueFormatter(months));
-
-
-        YAxis yAxisLeft = mChart.getAxisLeft();
-        yAxisLeft.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-        yAxisLeft.setDrawGridLines(false);
-        yAxisLeft.setDrawAxisLine(true);
-        yAxisLeft.setEnabled(true);
-        yAxisLeft.setValueFormatter(new IndexAxisValueFormatter(days));
-
-        mChart.getAxisRight().setEnabled(false);
-
-
-
-        Legend legend = mChart.getLegend();
-        legend.setEnabled(false);
-
-        ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
-        for (int i = 0; i < 12; ++i) {
-            BarEntry entry = new BarEntry(i, (i+1)*10);
-            valueSet1.add(entry);
-        }
-
-        List<IBarDataSet> dataSets = new ArrayList<>();
-        BarDataSet barDataSet = new BarDataSet(valueSet1, "");
-        barDataSet.setColor(Color.CYAN);
-        barDataSet.setDrawValues(true);
-        barDataSet.setValueTextSize(12f);
-        dataSets.add(barDataSet);
-
-        BarData data = new BarData(dataSets);
-        mChart.setData(data);
-        mChart.invalidate();
-
-
-
-
-//line charts
-
-//
-////        ArrayList<Entry>dataVals = new ArrayList<Entry>();
-////        dataVals.add(new Entry(0,20));
-////        dataVals.add(new Entry(1,30));
-////        dataVals.add(new Entry(2,40));
-////LINES
-//        mpLineChart = (LineChart) findViewById(R.id.line_chart);
-//        Description description = new Description();
-//        description.setText("The new table");
-//        LineDataSet lineDataSet1 = new LineDataSet(dataValues1(), "Jelly");
-////        LineDataSet lineDataSet2 = new LineDataSet(dataValues2(), "Pomodoro");
-//        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-//        lineDataSet1.setColors(ColorTemplate.PASTEL_COLORS);
-//        lineDataSet1.setValueTextSize(8f);
-//        lineDataSet1.setLineWidth(4f);
-////        lineDataSet2.setColors(ColorTemplate.PASTEL_COLORS);
-//        dataSets.add(lineDataSet1);
-////        dataSets.add(lineDataSet2);
-//        //System.out.println("DONT GET WHAT IS GOING ON " + dataSets.toString());
-//        LineData data = new LineData(dataSets);
-//        //System.out.println("DONT GET WHAT IS GOING ON " + dataSets.toString() + "DATA TO STRING " + data.getXMin());
-//        mpLineChart.setDescription(description);
-//        mpLineChart.setData(data);
-//        mpLineChart.invalidate();
-//    }
-////LINES
-//
-//
-////BAR CHART
-////        BarChart barChart = findViewById(R.id.line_chart);
-////        getData();
-////        BarDataSet barDataSet = new BarDataSet(barArryList, "Sales per Date" );
-////        BarData barData = new BarData(barDataSet);
-////        barChart.setData(barData);
-////        //color bar data set
-////        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-////        //text color
-////        barDataSet.setValueTextColor(Color.BLACK);
-////
-////        //set text size
-////        barDataSet.setValueTextSize(1f);
-////        barChart.getDescription().setEnabled(false);
-////
-////    }
-////BAR CHART END
-//        private ArrayList<Entry> dataValues1() {
-//            ArrayList<Entry> dataVals = new ArrayList<Entry>();
-//            dataVals.add(new Entry(0, 2));
-//            dataVals.add(new Entry(1,4));
-//      ;
-//
-//            return dataVals;
-//        }
-//
-//
-//
-//
-//
-//
-////    private ArrayList<Entry> dataValues2() {
-////        ArrayList<Entry> dataVals = new ArrayList<Entry>();
-////        dataVals.add(new Entry(0, 0));
-////        dataVals.add(new Entry(1,4,15));
-////        dataVals.add(new Entry(2, 20));
-////        dataVals.add(new Entry(3, 10));
-////        dataVals.add(new Entry(5, 30));
-////        return dataVals;
-////    }
-//
-//
-//
-//        private void getData ()
-//        {
-//            barArryList = new ArrayList();
-//
-////        for(int i = 0; i < 5; i++){
-////            for(int j = 0; j < 5; j++){
-////                //System.out.println("I is : " + i + "J IS : "+ j);
-////                barArryList.add(new BarEntry(i, j));
-////            }
-////        }
-//
-//            barArryList.add(new BarEntry(0f, 25));
-//            barArryList.add(new BarEntry(2f, 25));
-//            barArryList.add(new BarEntry(3f, 45));
-//            barArryList.add(new BarEntry(4f, 55));
-//
-//        }
     }
 
+
+
+
+
     private void runSalesProduct() {
+        System.out.println("HEYYY IN INSALES RUN");
         valueEventListenerSalesOfProduct = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     nameOfProducts = new ArrayList<String>();
+
+                    System.out.println("PRODUCTS " + nameOfProducts);
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Product product = snapshot.getValue(Product.class);
-                        //System.out.println("PURCHASES DATA : " + snapshot);
+                        System.out.println("PURCHASES DATA : " + snapshot);
                         String runningString = snapshot.getValue().toString();
                         //System.out.println("running " +runningString);
                         String search = new String();
                         String sentence = runningString;
-//                    for(int j = 0; j< runningString.length(); j++){
-//                        runningString.sub
-//                    }
-
                         for (int i = 0; i < Login.anArrayOfProducts.length - 1; i++) {
                             if (Login.anArrayOfProducts[i] != null) {
-                                search = Login.anArrayOfProducts[i];
-                            }
-                            //System.out.println("the search string " + search);
-                            if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
-                                StringBuffer sbf = new StringBuffer();
-                                //System.out.println("I found the keyword " + search + "THE VALUE IS " + sentence.charAt(sentence.toLowerCase().indexOf(search)+3));
-                                for (int z = sentence.toLowerCase().indexOf(search); z < sentence.toLowerCase().indexOf(search) + 30; z++) {
-                                    if (sentence.charAt(z) >= '0' && sentence.charAt(z) <= '9') {
-                                        //System.out.println(sentence.charAt(z));
-                                        //System.out.println("THE CHAR IS " +sentence.charAt(z));
-                                        sbf.append(sentence.charAt(z));
+                                System.out.println("PRODUCT NAME RUNNING "+ Login.anArrayOfProducts[i]);
+                                if (Login.anArrayOfProducts[i].charAt(0) <'0' ||  Login.anArrayOfProducts[i].charAt(0)>'9') {
+                                    search = Login.anArrayOfProducts[i];
+                                    System.out.println("SHUGAR " + search);
+                                    if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
+
+                                        if (nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase()) == -1) {
+                                                 nameOfProducts.add(search);
+                                             System.out.println("THE LIST IS HHH" + nameOfProducts);
+                                        } else {
+                                              System.out.println("NOTHING");
+                                        }
                                     }
-                                }
-                                if (nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase()) == -1) {
-                                    nameOfProducts.add(search);
-                                    System.out.println("THE LIST IS  " + nameOfProducts);
-                                } else {
-                                    System.out.println("NOTHING");
-                                }
-//                                nameOfProducts.add(search);
-//                                nameOfProducts.add(sbf.toString());
-                                System.out.println("THE PRODUCT IS " + search + " VALUE " + sbf);
-//                                System.out.println("THE LIST IS  " + nameOfProducts);
-                            } else {
 
-                                //System.out.println("not found");
+
+//                            if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
+//                                StringBuffer sbf = new StringBuffer();
+//                                System.out.println("SBF 1 " + sbf);
+////                                System.out.println("I found the keyword " + search + "THE VALUE IS " + sentence.charAt(sentence.toLowerCase().indexOf(search)+3));
+//                                for (int z = sentence.toLowerCase().indexOf(search); z < sentence.toLowerCase().indexOf(search); z++) {
+//                                            if (sentence.charAt(z) >= '0' && sentence.charAt(z) <= '9') {
+//                                                System.out.println("SBF 2" + sbf);
+//                                                sbf.append(sentence.charAt(z));
+//                                            }
+//                                        }
+//
+//
+//                                if (nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase()) == -1) {
+//                                    nameOfProducts.add(search);
+//                                    System.out.println("THE LIST IS HHH" + nameOfProducts);
+//                                } else {
+//                                    System.out.println("NOTHING");
+//                                }
+//                                System.out.println("THE PRODUCT IS " + search + " VALUE " + sbf);
+//                            } else {
+//
+//
+//                            }
+
+                                }
 
                             }
+
                         }
-
-//                    nameOfProducts.add(runningString);
-
                     }
 
                     editText = findViewById(R.id.autoComplete);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(GraphClass.this, android.R.layout.simple_list_item_1, nameOfProducts);
                     editText.setAdapter(adapter);
-
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         };
-System.out.println(nameOfProducts);
-    }
-
-    public void sendData(View view) {
-        //System.out.println("the send is clicked");
-        String textFromAutoComplete = editText.getText().toString();
-        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
-        showDatePickerDialogStart();
-        showDatePickerDialogEnd();
-        if(dates!=null){
-            dates.delete(0,dates.length());
-        }
-
+        System.out.println(nameOfProducts);
     }
 
     private void showDatePickerDialogStart() {
@@ -363,7 +202,6 @@ System.out.println(nameOfProducts);
         datePickerDialog.show();
     }
 
-
     private void showDatePickerDialogEnd() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
@@ -375,25 +213,202 @@ System.out.println(nameOfProducts);
         datePickerDialog.show();
     }
 
+    public void startData(View view) {
+        //System.out.println("the send is clicked");
+        String textFromAutoComplete = editText.getText().toString();
+        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+        showDatePickerDialogStart();
+
+        if (dates != null) {
+            dates.delete(0, dates.length());
+        }
+
+    }
+
+    public void endData(View view) {
+        //System.out.println("the send is clicked");
+        String textFromAutoComplete = editText.getText().toString();
+        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+        showDatePickerDialogEnd();
+//        if(dates!=null){
+//            dates.delete(0,dates.length());
+//        }
+
+    }
+
+    public void showGraph(View view) {
+
+        String textFromAutoComplete = editText.getText().toString();
+        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete + " DATES " + dates);
+        createSalesProductGraph(textFromAutoComplete, dates);
+
+    }
+
+//    public void createGraphVisual(String arr[]) {
+//        BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
+//        mChart.setDrawBarShadow(false);
+//        mChart.setDrawValueAboveBar(false);
+//        mChart.getDescription().setEnabled(false);
+//        mChart.setDrawGridBackground(false);
+//
+//        //X AXIS ARR valuesFromDb
+//        XAxis xaxis = mChart.getXAxis();
+//        xaxis.setDrawGridLines(false);
+//        xaxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+//        xaxis.setGranularity(1f);
+//        xaxis.setDrawLabels(true);
+//        xaxis.setDrawAxisLine(false);
+//        xaxis.setValueFormatter(new IndexAxisValueFormatter(valuesFromDb));
+//
+//        //Y AXIS ARR days
+//        YAxis yAxisLeft = mChart.getAxisLeft();
+//        yAxisLeft.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+//        yAxisLeft.setDrawGridLines(false);
+//        yAxisLeft.setDrawAxisLine(true);
+//        yAxisLeft.setEnabled(true);
+//        yAxisLeft.setValueFormatter(new IndexAxisValueFormatter(days));
+//
+//        mChart.getAxisRight().setEnabled(false);
+//
+//
+//        Legend legend = mChart.getLegend();
+//        legend.setEnabled(false);
+//
+
+
+
+//
+//
+//
+//}
+//
+//
+//
+////        System.out.println("VALUE SET "  + valueSet1.get(0));
+//
+//
+//
+//        List<IBarDataSet> dataSets = new ArrayList<>();
+//        BarDataSet barDataSet = new BarDataSet(valueSet1(), "");
+//        barDataSet.setColor(Color.CYAN);
+//        barDataSet.setDrawValues(true);
+//        barDataSet.setValueTextSize(12f);
+//        dataSets.add(barDataSet);
+//
+//        BarData data = new BarData(dataSets);
+//        mChart.setData(data);
+//        mChart.invalidate();
+//
+//    }
+
+    public void createGraphAgainVisual (String arr[]){
+        BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
+        ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
+//
+//        int j = 0;
+//        int k = 0;
+////       TODO RUN THE GRAPH NEED TO MAKE DATA OF VALUE IN Y AXIS data ARR AND THE TIME IN X AXIS days
+//        if(arr.length!=0) {
+//            for (int i = 0; i < arr.length - 2; i = i + 2) {
+//                valuesFromDb[k] = datesArr[i];
+//                if (datesArr[i + 1] != null) {
+//                    Date d = new Date(Long.parseLong(datesArr[i + 1]));
+//                    String newstring = new SimpleDateFormat("yyyy-MM-dd").format(d);
+//                    days[j] = newstring;
+//                    System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
+//                    j++;
+//                }
+//                if (valuesFromDb[k] != null) {
+//                    System.out.println("VALUES FROM DB  in k place + " + k + " <-k " + valuesFromDb[k]);
+//                }
+//                k++;
+//            }
+//
+//
+//            for (int i = 0; i < valuesFromDb.length; i++) {
+//                j = 0;
+//                k = 0;
+//                System.out.println("VALUE " + valuesFromDb[k] + " DAYS " + days[j]);
+//                j++;
+//                k++;
+//                valueSet1.add(new BarEntry(i, i * 3));
+//            }
+//        }
+//
+        BarDataSet barDataSet1 = new BarDataSet(dataValues1(), "Data Set 1");
+        BarData barData = new BarData();
+        barData.addDataSet(barDataSet1);
+        mChart.setData(barData);
+        mChart.invalidate();
+    }
+
+    private ArrayList<BarEntry> dataValues1(){
+        ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
+        valueSet1.add(new BarEntry(33,3));
+        valueSet1.add(new BarEntry(2,5));
+        valueSet1.add(new BarEntry(6,9));
+        return valueSet1;
+    }
+
+
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         String date = day + "/" + month + "/" + year;
         calendarStartTime = new GregorianCalendar(year, month, day);
-        calendarEndTime = calendarStartTime;
-
         if(flagDateSet == 0){
             dates.append(calendarStartTime.getTimeInMillis());
             dates.append("|");
             flagDateSet = 1;
+            System.out.println("START TIME " + calendarStartTime.getTimeInMillis());
         }
         else{
+            calendarEndTime = calendarStartTime;
             dates.append(calendarEndTime.getTimeInMillis());
             dates.append("|");
+            System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
         }
-
-        System.out.println("START TIME " + calendarStartTime.getTimeInMillis());
-        System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
-        System.out.println("DATES" + dates);
+        System.out.println("DATES : START | END " + dates);
     }
+
+    public void createSalesProductGraph (String name, StringBuffer dates) {
+        System.out.println(name + " THE DATES IS " + dates);
+        refForGraphs.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        int i = 0;
+                        flagFinishedRead = 0;
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            if(snapshot.child(name).getValue()!=null){
+                                datesArr[i] = snapshot.child(name).getValue().toString();
+                                    i++;
+                                datesArr[i] = snapshot.child("timeOfPlacedOrder").getValue().toString();
+                                    i++;
+                                System.out.println("QNTY PLEASE FROM DB" + snapshot.child(name).getValue());
+                                System.out.println("DATE PLEASE " + snapshot.child("timeOfPlacedOrder").getValue());
+
+                                for(int j = 0; j < datesArr.length; j++){
+                                    if(datesArr[j]!=null){
+                                        System.out.println("THE AQTUALY => " + datesArr[j]);
+                                    }
+                                }
+
+
+                                //time and quantity
+                            }
+                            System.out.println("WORK PLEASE " + snapshot.child(name).getValue());
+
+                        }
+                        flagFinishedRead = 1;
+                        System.out.println(datesArr[0] + " <- 0 " + datesArr[1] + " <- 1 "+ datesArr[2]+  " <-2 " );
+                        createGraphAgainVisual(datesArr);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+                });
+    }
+
 }
 
