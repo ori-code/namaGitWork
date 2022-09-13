@@ -299,7 +299,6 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         System.out.println(nameOfProducts);
     }
 
-
     //BUTTON SENDING
     public void showGraph(View view) {
         String textFromAutoComplete = editText.getText().toString();
@@ -368,35 +367,35 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
         ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
 //
-//        int j = 0;
-//        int k = 0;
+        int j = 0;
+        int k = 0;
 ////       TODO RUN THE GRAPH NEED TO MAKE DATA OF VALUE IN Y AXIS data ARR AND THE TIME IN X AXIS days
-//        if(arr.length!=0) {
-//            for (int i = 0; i < arr.length - 2; i = i + 2) {
-//                valuesFromDb[k] = datesArr[i];
-//                if (datesArr[i + 1] != null) {
-//                    Date d = new Date(Long.parseLong(datesArr[i + 1]));
-//                    String newstring = new SimpleDateFormat("yyyy-MM-dd").format(d);
-//                    days[j] = newstring;
-//                    System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
-//                    j++;
-//                }
-//                if (valuesFromDb[k] != null) {
-//                    System.out.println("VALUES FROM DB  in k place + " + k + " <-k " + valuesFromDb[k]);
-//                }
-//                k++;
-//            }
-//
-//
-//            for (int i = 0; i < valuesFromDb.length; i++) {
-//                j = 0;
-//                k = 0;
-//                System.out.println("VALUE " + valuesFromDb[k] + " DAYS " + days[j]);
-//                j++;
-//                k++;
+        if(arr.length!=0) {
+            for (int i = 0; i < arr.length - 2; i = i + 2) {
+                valuesFromDb[k] = datesArr[i];
+                if (datesArr[i + 1] != null) {
+                    Date d = new Date(Long.parseLong(datesArr[i + 1]));
+                    String newstring = new SimpleDateFormat("yyyy-MM-dd").format(d);
+                    days[j] = newstring;
+                    System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
+                    j++;
+                }
+                if (valuesFromDb[k] != null) {
+                    System.out.println("VALUES FROM DB VALUES  in k place + " + k + " <-k " + valuesFromDb[k]);
+                }
+                k++;
+            }
+
+
+            for (int i = 0; i < valuesFromDb.length; i++) {
+                j = 0;
+                k = 0;
+                System.out.println("VALUE " + valuesFromDb[k] + " DAYS " + days[j]);
+                j++;
+                k++;
 //                valueSet1.add(new BarEntry(i, i * 3));
-//            }
-//        }
+            }
+        }
 //
 
         mChart.setDrawBarShadow(false);
@@ -416,14 +415,14 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         xaxis.setGranularityEnabled(true);
         xaxis.setDrawLabels(true);
         xaxis.setDrawAxisLine(false);
-        xaxis.setValueFormatter(new IndexAxisValueFormatter(datesArrStrings));
+        xaxis.setValueFormatter(new IndexAxisValueFormatter(days));
 
         YAxis yAxisLeft = mChart.getAxisLeft();
         yAxisLeft.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
         yAxisLeft.setDrawGridLines(true);
         yAxisLeft.setDrawAxisLine(true);
         yAxisLeft.setEnabled(true);
-//        yAxisLeft.setValueFormatter(new IndexAxisValueFormatter(valueArrStrings));
+
         mChart.getAxisRight().setEnabled(false);
 
         Legend legend = mChart.getLegend();
@@ -431,14 +430,16 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 
         ArrayList<String> ylabels = new ArrayList<>();
 
-        for (int i = 0; i < datesArrStrings.length; i++) {
+        for (int i = 0; i < days.length; i++) {
             System.out.println(" THE datesArr it is FUll value and DATE in epoch " + datesArr[i]);
-            System.out.println(" THE valuesFromDb " + valuesFromDb[i]);
+//            System.out.println(" THE valuesFromDb " + valuesFromDb[i]);
             System.out.println(" THE days " + days[i]);
-            System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
-            BarEntry entry = new BarEntry(i,10); // x - place in array of dates y - values in array of values
-            valueSet1.add(entry);
-
+//            System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
+           if(days[i]!=null) {
+               BarEntry entry = new BarEntry(i, 10); // x - place in array of dates y - values in array of values
+               valueSet1.add(entry);
+            break;
+           }
 //            ylabels.add(" " + i);
         }
 
