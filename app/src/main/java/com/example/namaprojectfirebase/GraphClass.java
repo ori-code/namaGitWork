@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -43,7 +44,8 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static ArrayList barArryList;
     LineChart mpLineChart;
     public static String[] datesArr = new String[500]; // array of dates for graph first date and second the value of sales
-    //    public static String[] datesArr = {"12","33"};
+        public static String[] datesArrStrings = {"12/05/22","13/05/22"};
+        public static String [] valueArrStrings = {"10","20"};
     public static String [] valuesFromDb = new String [500];
     public static String[] days = new String[500];
 
@@ -110,10 +112,116 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 
     }
 
+    private void showDatePickerDialogStart() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    private void showDatePickerDialogEnd() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    //converting dates to epoch
+
+    public void startData(View view) {
+        //System.out.println("the send is clicked");
+        String textFromAutoComplete = editText.getText().toString();
+        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+        showDatePickerDialogStart();
+
+        if (dates != null) {
+            dates.delete(0, dates.length());
+        }
+
+    }
+
+    public void endData(View view) {
+        //System.out.println("the send is clicked");
+        String textFromAutoComplete = editText.getText().toString();
+        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+        showDatePickerDialogEnd();
+//        if(dates!=null){
+//            dates.delete(0,dates.length());
+//        }
+
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        String date = day + "/" + month + "/" + year;
+        calendarStartTime = new GregorianCalendar(year, month, day);
+        if(flagDateSet == 0){
+            dates.append(calendarStartTime.getTimeInMillis());
+            dates.append("|");
+            flagDateSet = 1;
+            System.out.println("START TIME " + calendarStartTime.getTimeInMillis());
+        }
+        else{
+            calendarEndTime = calendarStartTime;
+            dates.append(calendarEndTime.getTimeInMillis());
+            dates.append("|");
+            System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
+        }
+        System.out.println("DATES : START | END " + dates);
+    }
 
 
 
+    // GETTING SELLING VALUES AND DATES
+    public void createSalesProductGraph (String name, StringBuffer dates) {
+        System.out.println(name + " THE DATES IS " + dates);
+        refForGraphs.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                flagFinishedRead = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if(snapshot.child(name).getValue()!=null){
+                        datesArr[i] = snapshot.child(name).getValue().toString();
+                        i++;
+                        datesArr[i] = snapshot.child("timeOfPlacedOrder").getValue().toString();
+                        i++;
+                        System.out.println("QNTY PLEASE FROM DB" + snapshot.child(name).getValue());
+                        System.out.println("DATE PLEASE " + snapshot.child("timeOfPlacedOrder").getValue());
+                        for(int j = 0; j < datesArr.length; j++){
+                            if(datesArr[j]!=null){
+                                System.out.println("THE AQTUALY => " + datesArr[j]);
+                            }
+                        }
 
+
+                        //time and quantity
+                    }
+                    System.out.println("WORK PLEASE " + snapshot.child(name).getValue());
+
+                }
+                flagFinishedRead = 1;
+                System.out.println(datesArr[0] + " <- 0 " + datesArr[1] + " <- 1 "+ datesArr[2]+  " <-2 " + datesArr[3]+  " <-3 " );
+                createGraphAgainVisual(datesArr);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
+        });
+    }
+
+
+//Sales of product List Getter
     private void runSalesProduct() {
         System.out.println("HEYYY IN INSALES RUN");
         valueEventListenerSalesOfProduct = new ValueEventListener() {
@@ -191,57 +299,12 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         System.out.println(nameOfProducts);
     }
 
-    private void showDatePickerDialogStart() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                this,
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        );
-        datePickerDialog.show();
-    }
 
-    private void showDatePickerDialogEnd() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                this,
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        );
-        datePickerDialog.show();
-    }
-
-    public void startData(View view) {
-        //System.out.println("the send is clicked");
-        String textFromAutoComplete = editText.getText().toString();
-        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
-        showDatePickerDialogStart();
-
-        if (dates != null) {
-            dates.delete(0, dates.length());
-        }
-
-    }
-
-    public void endData(View view) {
-        //System.out.println("the send is clicked");
-        String textFromAutoComplete = editText.getText().toString();
-        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
-        showDatePickerDialogEnd();
-//        if(dates!=null){
-//            dates.delete(0,dates.length());
-//        }
-
-    }
-
+    //BUTTON SENDING
     public void showGraph(View view) {
-
         String textFromAutoComplete = editText.getText().toString();
         System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete + " DATES " + dates);
         createSalesProductGraph(textFromAutoComplete, dates);
-
     }
 
 //    public void createGraphVisual(String arr[]) {
@@ -335,79 +398,76 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 //            }
 //        }
 //
-        BarDataSet barDataSet1 = new BarDataSet(dataValues1(), "Data Set 1");
-        BarData barData = new BarData();
-        barData.addDataSet(barDataSet1);
-        mChart.setData(barData);
+
+        mChart.setDrawBarShadow(false);
+        mChart.setDrawValueAboveBar(false);
+        mChart.getDescription().setEnabled(false);
+        mChart.setDrawGridBackground(false);
+
+        //**add renderer**
+//        BarChartCustomRenderer barChartCustomRenderer = new BarChartCustomRenderer(mChart, mChart.getAnimator(),   mChart.getViewPortHandler());
+//        mChart.setRenderer(barChartCustomRenderer);
+
+
+        XAxis xaxis = mChart.getXAxis();
+        xaxis.setDrawGridLines(false);
+        xaxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xaxis.setGranularity(0.5f);
+        xaxis.setGranularityEnabled(true);
+        xaxis.setDrawLabels(true);
+        xaxis.setDrawAxisLine(false);
+        xaxis.setValueFormatter(new IndexAxisValueFormatter(datesArrStrings));
+
+        YAxis yAxisLeft = mChart.getAxisLeft();
+        yAxisLeft.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        yAxisLeft.setDrawGridLines(true);
+        yAxisLeft.setDrawAxisLine(true);
+        yAxisLeft.setEnabled(true);
+//        yAxisLeft.setValueFormatter(new IndexAxisValueFormatter(valueArrStrings));
+        mChart.getAxisRight().setEnabled(false);
+
+        Legend legend = mChart.getLegend();
+        legend.setEnabled(false);
+
+        ArrayList<String> ylabels = new ArrayList<>();
+
+        for (int i = 0; i < datesArrStrings.length; i++) {
+            System.out.println(" THE datesArr it is FUll value and DATE in epoch " + datesArr[i]);
+            System.out.println(" THE valuesFromDb " + valuesFromDb[i]);
+            System.out.println(" THE days " + days[i]);
+            System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
+            BarEntry entry = new BarEntry(i,10); // x - place in array of dates y - values in array of values
+            valueSet1.add(entry);
+
+//            ylabels.add(" " + i);
+        }
+
+        List<IBarDataSet> dataSets = new ArrayList<>();
+        BarDataSet barDataSet = new BarDataSet(valueSet1, " ");
+        barDataSet.setColor(Color.CYAN);
+        barDataSet.setDrawValues(true);
+        dataSets.add(barDataSet);
+
+
+        BarData data = new BarData(dataSets);
+        data.setBarWidth(0.4f);
+        data.setValueTextSize(10f);
+        data.setValueTextColor(Color.BLACK);
+        mChart.setData(data);
+        mChart.setFitBars(true);
         mChart.invalidate();
     }
 
+
+
+
+
     private ArrayList<BarEntry> dataValues1(){
         ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
-        valueSet1.add(new BarEntry(33,3));
-        valueSet1.add(new BarEntry(2,5));
-        valueSet1.add(new BarEntry(6,9));
+        valueSet1.add(new BarEntry(1,2));
+        valueSet1.add(new BarEntry(2,4));
+        valueSet1.add(new BarEntry(4,8));
         return valueSet1;
-    }
-
-
-    @Override
-    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        String date = day + "/" + month + "/" + year;
-        calendarStartTime = new GregorianCalendar(year, month, day);
-        if(flagDateSet == 0){
-            dates.append(calendarStartTime.getTimeInMillis());
-            dates.append("|");
-            flagDateSet = 1;
-            System.out.println("START TIME " + calendarStartTime.getTimeInMillis());
-        }
-        else{
-            calendarEndTime = calendarStartTime;
-            dates.append(calendarEndTime.getTimeInMillis());
-            dates.append("|");
-            System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
-        }
-        System.out.println("DATES : START | END " + dates);
-    }
-
-    public void createSalesProductGraph (String name, StringBuffer dates) {
-        System.out.println(name + " THE DATES IS " + dates);
-        refForGraphs.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        int i = 0;
-                        flagFinishedRead = 0;
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            if(snapshot.child(name).getValue()!=null){
-                                datesArr[i] = snapshot.child(name).getValue().toString();
-                                    i++;
-                                datesArr[i] = snapshot.child("timeOfPlacedOrder").getValue().toString();
-                                    i++;
-                                System.out.println("QNTY PLEASE FROM DB" + snapshot.child(name).getValue());
-                                System.out.println("DATE PLEASE " + snapshot.child("timeOfPlacedOrder").getValue());
-
-                                for(int j = 0; j < datesArr.length; j++){
-                                    if(datesArr[j]!=null){
-                                        System.out.println("THE AQTUALY => " + datesArr[j]);
-                                    }
-                                }
-
-
-                                //time and quantity
-                            }
-                            System.out.println("WORK PLEASE " + snapshot.child(name).getValue());
-
-                        }
-                        flagFinishedRead = 1;
-                        System.out.println(datesArr[0] + " <- 0 " + datesArr[1] + " <- 1 "+ datesArr[2]+  " <-2 " );
-                        createGraphAgainVisual(datesArr);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        //handle databaseError
-                    }
-                });
     }
 
 }
