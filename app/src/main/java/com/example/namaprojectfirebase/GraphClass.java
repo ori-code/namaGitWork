@@ -39,6 +39,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 public class GraphClass extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     public static ArrayList barArryList;
@@ -366,7 +367,6 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public void createGraphAgainVisual (String arr[]){
         BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
         ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
-//
         int j = 0;
         int k = 0;
 ////       TODO RUN THE GRAPH NEED TO MAKE DATA OF VALUE IN Y AXIS data ARR AND THE TIME IN X AXIS days
@@ -374,9 +374,13 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
             for (int i = 0; i < arr.length - 2; i = i + 2) {
                 valuesFromDb[k] = datesArr[i];
                 if (datesArr[i + 1] != null) {
-                    Date d = new Date(Long.parseLong(datesArr[i + 1]));
-                    String newstring = new SimpleDateFormat("yyyy-MM-dd").format(d);
-                    days[j] = newstring;
+                    System.out.println("THE EPOCH STAMP " + datesArr[i + 1]);
+                    long dv = Long.valueOf(datesArr[i + 1])*1000;// its need to be in milisecond
+                    Date df = new java.util.Date(dv);
+                    String vv = new SimpleDateFormat("MM-dd-yyyy hh:mma").format(df);
+                    System.out.println("VV " + vv);
+                    System.out.println("THE EPOCH " + datesArr[i + 1] + " AFTER CONVERSION DATE NEW" + vv  );
+                    days[j] = vv;
                     System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
                     j++;
                 }
@@ -384,16 +388,6 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                     System.out.println("VALUES FROM DB VALUES  in k place + " + k + " <-k " + valuesFromDb[k]);
                 }
                 k++;
-            }
-
-
-            for (int i = 0; i < valuesFromDb.length; i++) {
-                j = 0;
-                k = 0;
-                System.out.println("VALUE " + valuesFromDb[k] + " DAYS " + days[j]);
-                j++;
-                k++;
-//                valueSet1.add(new BarEntry(i, i * 3));
             }
         }
 //
