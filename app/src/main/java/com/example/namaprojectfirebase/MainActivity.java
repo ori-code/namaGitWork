@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO type of Product ASK VERONIKA
                 if(FoodCheckBox.isChecked() && item.getType()==1)
                      filteredList.add(item);
-                if(FruitsAndVegetablesCheckBox.isChecked() && item.getType() ==2)
+                if(FruitsAndVegetablesCheckBox.isChecked() && item.getType() ==6)
                     filteredList.add(item);
                 if(MeatCheckBox.isChecked() && item.getType() ==3)
                     filteredList.add(item);
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     filteredList.add(item);
                 if(DairyCheckBox.isChecked() && item.getType() ==5)
                     filteredList.add(item);
-                if(DrinkCheckBox.isChecked() && item.getType() ==6)
+                if(DrinkCheckBox.isChecked() && item.getType() ==2)
                     filteredList.add(item);
 //                if(expCheckBox.isChecked() && item.getType() ==6)
 //                    filteredList.add(item);
