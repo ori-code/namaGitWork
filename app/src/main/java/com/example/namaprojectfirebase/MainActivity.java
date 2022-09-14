@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
-////
+///////
             @Override
             public void afterTextChanged(Editable s) {
                 filter(s.toString());
