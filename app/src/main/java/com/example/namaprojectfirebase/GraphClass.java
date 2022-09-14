@@ -425,16 +425,20 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         ArrayList<String> ylabels = new ArrayList<>();
 
         for (int i = 0; i < days.length; i++) {
-            System.out.println(" THE datesArr it is FUll value and DATE in epoch " + datesArr[i]);
+//            System.out.println(" THE datesArr it is value " +datesArr[i]  +  " and DATE in epoch " + datesArr[i+1]);
 //            System.out.println(" THE valuesFromDb " + valuesFromDb[i]);
             System.out.println(" THE days " + days[i]);
 //            System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
            if(days[i]!=null) {
+               System.out.println(" THE days IN IF  " + days[i]);
                BarEntry entry = new BarEntry(i, 10); // x - place in array of dates y - values in array of values
                valueSet1.add(entry);
-            break;
+               if(days[i+1]==null){
+                   break;
+               }
+
            }
-//            ylabels.add(" " + i);
+
         }
 
         List<IBarDataSet> dataSets = new ArrayList<>();
