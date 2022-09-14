@@ -272,6 +272,11 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             Type = 5;
             ////System.out.println("The type is " + Type);
         }
+        if (text.equals("Fruits and Vegetables")){
+            Type = 6;
+            System.out.println("The type is " + Type);
+
+        }
         Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
 
     }
