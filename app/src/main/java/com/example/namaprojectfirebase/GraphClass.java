@@ -49,7 +49,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         public static String [] valueArrStrings = {"10","20"};
     public static String [] valuesFromDb = new String [500];
     public static String[] days = new String[500];
-
+    public static long startDateInMilliseconds = 0,endDateInMilliseconds = 0;
     public static String[] workArray = new String[1000];
     //public static String [] workArray = {"dlkdlkd", " dokodk"};
     public int workArrayCount = 0;
@@ -165,6 +165,8 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         String date = day + "/" + month + "/" + year;
         calendarStartTime = new GregorianCalendar(year, month, day);
         if(flagDateSet == 0){
+            startDateInMilliseconds = calendarStartTime.getTimeInMillis();
+            System.out.println("LONG START  " + startDateInMilliseconds);
             dates.append(calendarStartTime.getTimeInMillis());
             dates.append("|");
             flagDateSet = 1;
@@ -172,14 +174,15 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         }
         else{
             calendarEndTime = calendarStartTime;
+
+            endDateInMilliseconds = calendarEndTime.getTimeInMillis();
+            System.out.println("LONG END  " + endDateInMilliseconds);
             dates.append(calendarEndTime.getTimeInMillis());
             dates.append("|");
             System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
         }
         System.out.println("DATES : START | END " + dates);
     }
-
-
 
     // GETTING SELLING VALUES AND DATES
     public void createSalesProductGraph (String name, StringBuffer dates) {
@@ -220,7 +223,6 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
             }
         });
     }
-
 
 //Sales of product List Getter
     private void runSalesProduct() {
@@ -374,15 +376,21 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
             for (int i = 0; i < arr.length - 2; i = i + 2) {
                 valuesFromDb[k] = datesArr[i];
                 if (datesArr[i + 1] != null) {
-                    System.out.println("THE EPOCH STAMP " + datesArr[i + 1]);
+
+
                     long dv = Long.valueOf(datesArr[i + 1])*1000;// its need to be in milisecond
-                    Date df = new java.util.Date(dv);
-                    String vv = new SimpleDateFormat("MM-dd-yyyy hh:mma").format(df);
-                    System.out.println("VV " + vv);
-                    System.out.println("THE EPOCH " + datesArr[i + 1] + " AFTER CONVERSION DATE NEW" + vv  );
-                    days[j] = vv;
-                    System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
-                    j++;
+                    System.out.println("THE DV IS " + dv);
+                    System.out.println("THE EPOCH STAMP " + datesArr[i + 1]);
+                    if(dv>startDateInMilliseconds && dv<endDateInMilliseconds) {
+                        Date df = new java.util.Date(dv);
+                        String vv = new SimpleDateFormat("MM-dd-yyyy hh:mma").format(df);
+                        System.out.println("VV " + vv);
+                        System.out.println("THE EPOCH " + datesArr[i + 1] + " AFTER CONVERSION DATE NEW" + vv);
+
+                        days[j] = vv;
+                        System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
+                        j++;
+                    }
                 }
                 if (valuesFromDb[k] != null) {
                     System.out.println("VALUES FROM DB VALUES  in k place + " + k + " <-k " + valuesFromDb[k]);
@@ -456,10 +464,6 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         mChart.setFitBars(true);
         mChart.invalidate();
     }
-
-
-
-
 
     private ArrayList<BarEntry> dataValues1(){
         ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
