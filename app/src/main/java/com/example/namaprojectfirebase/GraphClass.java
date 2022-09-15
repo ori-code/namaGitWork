@@ -49,6 +49,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         public static String [] valueArrStrings = {"10","20"};
     public static String [] valuesFromDb = new String [500];
     public static String[] days = new String[500];
+    public static int [] values = new int [500];
     public static long startDateInMilliseconds = 0,endDateInMilliseconds = 0;
     public static String[] workArray = new String[1000];
     //public static String [] workArray = {"dlkdlkd", " dokodk"};
@@ -100,6 +101,12 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                 if (item == "Sales of product") {
                     runSalesProduct();
                     finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+                }
+                if (item == "Sales and buying") {
+                    System.out.println("THE SALES BUYING");
+                    System.out.println(Login.anArrayOfProducts[0]);
+//                    runSalesProduct();
+//                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                 }
 
             }
@@ -184,6 +191,13 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         System.out.println("DATES : START | END " + dates);
     }
 
+    //BUTTON SENDING
+    public void showGraph(View view) {
+        String textFromAutoComplete = editText.getText().toString();
+        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete + " DATES " + dates);
+        createSalesProductGraph(textFromAutoComplete, dates);
+    }
+
     // GETTING SELLING VALUES AND DATES
     public void createSalesProductGraph (String name, StringBuffer dates) {
         System.out.println(name + " THE DATES IS " + dates);
@@ -224,21 +238,19 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         });
     }
 
-//Sales of product List Getter
+    //SALES OF PRODUCT GETTER
     private void runSalesProduct() {
-        System.out.println("HEYYY IN INSALES RUN");
+        System.out.println("HEY IM GETTING THE PRODUCTS FOR THE LIST");
         valueEventListenerSalesOfProduct = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     nameOfProducts = new ArrayList<String>();
-
                     System.out.println("PRODUCTS " + nameOfProducts);
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Product product = snapshot.getValue(Product.class);
                         System.out.println("PURCHASES DATA : " + snapshot);
                         String runningString = snapshot.getValue().toString();
-                        //System.out.println("running " +runningString);
                         String search = new String();
                         String sentence = runningString;
                         for (int i = 0; i < Login.anArrayOfProducts.length - 1; i++) {
@@ -248,7 +260,6 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                                     search = Login.anArrayOfProducts[i];
                                     System.out.println("SHUGAR " + search);
                                     if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
-
                                         if (nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase()) == -1) {
                                                  nameOfProducts.add(search);
                                              System.out.println("THE LIST IS HHH" + nameOfProducts);
@@ -256,36 +267,8 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                                               System.out.println("NOTHING");
                                         }
                                     }
-
-
-//                            if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
-//                                StringBuffer sbf = new StringBuffer();
-//                                System.out.println("SBF 1 " + sbf);
-////                                System.out.println("I found the keyword " + search + "THE VALUE IS " + sentence.charAt(sentence.toLowerCase().indexOf(search)+3));
-//                                for (int z = sentence.toLowerCase().indexOf(search); z < sentence.toLowerCase().indexOf(search); z++) {
-//                                            if (sentence.charAt(z) >= '0' && sentence.charAt(z) <= '9') {
-//                                                System.out.println("SBF 2" + sbf);
-//                                                sbf.append(sentence.charAt(z));
-//                                            }
-//                                        }
-//
-//
-//                                if (nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase()) == -1) {
-//                                    nameOfProducts.add(search);
-//                                    System.out.println("THE LIST IS HHH" + nameOfProducts);
-//                                } else {
-//                                    System.out.println("NOTHING");
-//                                }
-//                                System.out.println("THE PRODUCT IS " + search + " VALUE " + sbf);
-//                            } else {
-//
-//
-//                            }
-
                                 }
-
                             }
-
                         }
                     }
 
@@ -302,91 +285,36 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         System.out.println(nameOfProducts);
     }
 
-    //BUTTON SENDING
-    public void showGraph(View view) {
-        String textFromAutoComplete = editText.getText().toString();
-        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete + " DATES " + dates);
-        createSalesProductGraph(textFromAutoComplete, dates);
-    }
-
-//    public void createGraphVisual(String arr[]) {
-//        BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
-//        mChart.setDrawBarShadow(false);
-//        mChart.setDrawValueAboveBar(false);
-//        mChart.getDescription().setEnabled(false);
-//        mChart.setDrawGridBackground(false);
-//
-//        //X AXIS ARR valuesFromDb
-//        XAxis xaxis = mChart.getXAxis();
-//        xaxis.setDrawGridLines(false);
-//        xaxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-//        xaxis.setGranularity(1f);
-//        xaxis.setDrawLabels(true);
-//        xaxis.setDrawAxisLine(false);
-//        xaxis.setValueFormatter(new IndexAxisValueFormatter(valuesFromDb));
-//
-//        //Y AXIS ARR days
-//        YAxis yAxisLeft = mChart.getAxisLeft();
-//        yAxisLeft.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-//        yAxisLeft.setDrawGridLines(false);
-//        yAxisLeft.setDrawAxisLine(true);
-//        yAxisLeft.setEnabled(true);
-//        yAxisLeft.setValueFormatter(new IndexAxisValueFormatter(days));
-//
-//        mChart.getAxisRight().setEnabled(false);
-//
-//
-//        Legend legend = mChart.getLegend();
-//        legend.setEnabled(false);
-//
-
-
-
-//
-//
-//
-//}
-//
-//
-//
-////        System.out.println("VALUE SET "  + valueSet1.get(0));
-//
-//
-//
-//        List<IBarDataSet> dataSets = new ArrayList<>();
-//        BarDataSet barDataSet = new BarDataSet(valueSet1(), "");
-//        barDataSet.setColor(Color.CYAN);
-//        barDataSet.setDrawValues(true);
-//        barDataSet.setValueTextSize(12f);
-//        dataSets.add(barDataSet);
-//
-//        BarData data = new BarData(dataSets);
-//        mChart.setData(data);
-//        mChart.invalidate();
-//
-//    }
 
     public void createGraphAgainVisual (String arr[]){
         BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
         ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
         int j = 0;
         int k = 0;
+        int o = 0;
 ////       TODO RUN THE GRAPH NEED TO MAKE DATA OF VALUE IN Y AXIS data ARR AND THE TIME IN X AXIS days
         if(arr.length!=0) {
             for (int i = 0; i < arr.length - 2; i = i + 2) {
                 valuesFromDb[k] = datesArr[i];
                 if (datesArr[i + 1] != null) {
-
-
                     long dv = Long.valueOf(datesArr[i + 1])*1000;// its need to be in milisecond
                     System.out.println("THE DV IS " + dv);
                     System.out.println("THE EPOCH STAMP " + datesArr[i + 1]);
                     if(dv>startDateInMilliseconds && dv<endDateInMilliseconds) {
+                        //find the value
+                        for(int t = 0 ; t < datesArr.length; t ++){
+                            if(datesArr[t]!= null) {
+                                if (dv == (Long.parseLong(datesArr[t])) * 1000) {
+                                    System.out.println("The time is " + datesArr[t] + "the value of selling is " + datesArr[t - 1]);
+                                    values[o] = Integer.parseInt(datesArr[t-1]);
+                                    o++;
+                                }
+                            }
+                        }
                         Date df = new java.util.Date(dv);
                         String vv = new SimpleDateFormat("MM-dd-yyyy hh:mma").format(df);
                         System.out.println("VV " + vv);
                         System.out.println("THE EPOCH " + datesArr[i + 1] + " AFTER CONVERSION DATE NEW" + vv);
-
                         days[j] = vv;
                         System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
                         j++;
@@ -439,7 +367,8 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 //            System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
            if(days[i]!=null) {
                System.out.println(" THE days IN IF  " + days[i]);
-               BarEntry entry = new BarEntry(i, 10); // x - place in array of dates y - values in array of values
+               System.out.println(" THE values IN IF  " + values[i]);
+               BarEntry entry = new BarEntry(i, values[i]); // x - place in array of dates y - values in array of values
                valueSet1.add(entry);
                if(days[i+1]==null){
                    break;
