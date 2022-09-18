@@ -45,8 +45,8 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static ArrayList barArryList;
     LineChart mpLineChart;
     public static String[] datesArr = new String[500]; // array of dates for graph first date and second the value of sales
-        public static String[] datesArrStrings = {"12/05/22","13/05/22"};
-        public static String [] valueArrStrings = {"10","20"};
+    public static String[] datesArrStrings = {"12/05/22","13/05/22"};
+    public static String [] valueArrStrings = {"10","20"};
     public static String [] valuesFromDb = new String [500];
     public static String[] days = new String[500];
     public static int [] values = new int [500];
@@ -289,7 +289,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 
             }
         };
-        ////System.out.println(nameOfProducts);
+
     }
 
     private void runSalesAndBuyingProduct() {
@@ -406,19 +406,12 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
             });
           if(salesFinished==1 ){
               System.out.println("IT IS DONE ");
-//              createSalesAndBuyingGraph();
           }
           else{
               System.out.println("NOT FINISHED YET");
           }
 
         }
-
-//        System.out.println("THE PRODUCT " + nameOfProductsInAllBuyingAndSale[checkPlace] + valuesOfProductsInAllBuyingAndSale[checkPlace]);
-//        createGraphAgainVisualForSalesAndBuyingProduct();
-//        createSalesAndBuyingGraph();
-//    }
-
 
     public void createGraphAgainVisual (String arr[]){
         BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
@@ -575,43 +568,16 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
 //runSalesAndBuyingProduct
 
-//        for(int u = 0; u < nameOfProductsInAllBuyingAndSale.length; u++ ){
-//            ////System.out.println("TRY TO RUN RED GRAPH NAME IS " + "ON U " + u + "AND NAME IS " +   nameOfProductsInAllBuyingAndSale[u] +  " THE VALUE IN THIS PLACE " + valuesOfProductsInAllBuyingAndSale[u]);
-            //red all added products
-//            BarEntry entry1 = new BarEntry(u, 13); // x - place in array of dates y - values in array of values
-//            valueSet1.add(entry1);
-//
-//            //blue all sold products
-//            BarEntry entry2 = new BarEntry(u, 10); // x - place in array of dates y - values in array of values
-//            valueSet2.add(entry2);
-//        }
+        for(int u = 0; u < nameOfProductsInAllBuyingAndSale.length; u++ ){
+            ////System.out.println("TRY TO RUN RED GRAPH NAME IS " + "ON U " + u + "AND NAME IS " +   nameOfProductsInAllBuyingAndSale[u] +  " THE VALUE IN THIS PLACE " + valuesOfProductsInAllBuyingAndSale[u]);
+            //            red all added products
+            BarEntry entry1 = new BarEntry(u, Integer.parseInt(valuesOfProductsInAllBuyingAndSale[u])); // x - place in array of dates y - values in array of values
+            valueSet1.add(entry1);
 
-
-
-
-
-
-
-
-
-        //red graph SELLS
-
-        BarEntry entry1 = new BarEntry(0, 20); // x - place in array of dates y - values in array of values
-        valueSet1.add(entry1);
-//
-//        BarEntry entry3 = new BarEntry(1, 40); // x - place in array of dates y - values in array of values
-//        valueSet1.add(entry3);
-
-
-
-
-        //blue graph BUYING OVERALL QUANTITY IN ADDING PLUS ALL
-        BarEntry entry2 = new BarEntry(0, 10); // x - place in array of dates y - values in array of values
-        valueSet2.add(entry2);
-
-//        BarEntry entry4 = new BarEntry(1, 30); // x - place in array of dates y - values in array of values
-//        valueSet2.add(entry4);
-
+            //blue all sold products
+            BarEntry entry2 = new BarEntry(u, valuesOfProductsSales[u]); // x - place in array of dates y - values in array of values
+            valueSet2.add(entry2);
+        }
 
         List<IBarDataSet> dataSets = new ArrayList<>();
 
@@ -633,8 +599,6 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
         mChart.setData(data);
         mChart.setFitBars(true);
         mChart.invalidate();
-
-
 
     }
 
