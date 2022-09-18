@@ -51,6 +51,8 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static String[] days = new String[500];
     public static int [] values = new int [500];
     public static long startDateInMilliseconds = 0,endDateInMilliseconds = 0;
+    public static String [] valuesOfProductsInAllBuyingAndSale;
+    public static int [] valuesOfProductsSales;
     public static String[] workArray = new String[1000];
     //public static String [] workArray = {"dlkdlkd", " dokodk"};
     public int workArrayCount = 0;
@@ -58,16 +60,18 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     StringBuffer dates = new StringBuffer();
     ArrayList<String> purchasesForGraphs;
     DatabaseReference finalCheckPurchases;
-    public static DatabaseReference refForGraphs;
+    public static DatabaseReference refForGraphs, salesAndBuyingProducts;
     public static DatabaseReference graphRef;
     public static ValueEventListener valueEventListenerSalesOfProduct;
+    public static String[] nameOfProductsInAllBuyingAndSale;
     public static ValueEventListener valueEventListenerSalesProductGraph;
     //Sales of product // name or id // running on sales // counting name + quantity // capturing time
     public AutoCompleteTextView editText;
     public Calendar calendarStartTime, calendarEndTime;
     public int flagDateSet = 0;
     public int flagFinishedRead = 0;
-    public String [] nameOfProductsInAllBuyingAndSale;
+    public int salesFinished;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +79,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         setContentView(R.layout.graphs_layout);
         finalCheckPurchases = FirebaseDatabase.getInstance().getReference("orders");
         refForGraphs = FirebaseDatabase.getInstance().getReference("orders");
+        salesAndBuyingProducts = FirebaseDatabase.getInstance().getReference("products");
         purchasesForGraphs = new ArrayList<String>();
 
         //to fill your Spinner
@@ -104,8 +109,9 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                     finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                 }
                 if (item == "Sales and buying") {
-                    System.out.println("THE SALES BUYING");
-                    System.out.println(Login.anArrayOfProducts[0]);
+                    ////System.out.println("THE SALES BUYING");
+                    ////System.out.println(Login.anArrayOfProducts[0]);
+                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                     runSalesAndBuyingProduct();
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                 }
@@ -146,9 +152,9 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     //converting dates to epoch
 
     public void startData(View view) {
-        //System.out.println("the send is clicked");
+        //////System.out.println("the send is clicked");
         String textFromAutoComplete = editText.getText().toString();
-        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+        ////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
         showDatePickerDialogStart();
 
         if (dates != null) {
@@ -158,9 +164,9 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     }
 
     public void endData(View view) {
-        //System.out.println("the send is clicked");
+        //////System.out.println("the send is clicked");
         String textFromAutoComplete = editText.getText().toString();
-        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+        ////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
         showDatePickerDialogEnd();
 //        if(dates!=null){
 //            dates.delete(0,dates.length());
@@ -174,34 +180,34 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         calendarStartTime = new GregorianCalendar(year, month, day);
         if(flagDateSet == 0){
             startDateInMilliseconds = calendarStartTime.getTimeInMillis();
-            System.out.println("LONG START  " + startDateInMilliseconds);
+            ////System.out.println("LONG START  " + startDateInMilliseconds);
             dates.append(calendarStartTime.getTimeInMillis());
             dates.append("|");
             flagDateSet = 1;
-            System.out.println("START TIME " + calendarStartTime.getTimeInMillis());
+            ////System.out.println("START TIME " + calendarStartTime.getTimeInMillis());
         }
         else{
             calendarEndTime = calendarStartTime;
 
             endDateInMilliseconds = calendarEndTime.getTimeInMillis();
-            System.out.println("LONG END  " + endDateInMilliseconds);
+            ////System.out.println("LONG END  " + endDateInMilliseconds);
             dates.append(calendarEndTime.getTimeInMillis());
             dates.append("|");
-            System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
+            ////System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
         }
-        System.out.println("DATES : START | END " + dates);
+        ////System.out.println("DATES : START | END " + dates);
     }
 
     //BUTTON SENDING
     public void showGraph(View view) {
         String textFromAutoComplete = editText.getText().toString();
-        System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete + " DATES " + dates);
+        ////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete + " DATES " + dates);
         createSalesProductGraph(textFromAutoComplete, dates);
     }
 
     // GETTING SELLING VALUES AND DATES
     public void createSalesProductGraph (String name, StringBuffer dates) {
-        System.out.println(name + " THE DATES IS " + dates);
+        ////System.out.println(name + " THE DATES IS " + dates);
         refForGraphs.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -213,22 +219,22 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                         i++;
                         datesArr[i] = snapshot.child("timeOfPlacedOrder").getValue().toString();
                         i++;
-                        System.out.println("QNTY PLEASE FROM DB" + snapshot.child(name).getValue());
-                        System.out.println("DATE PLEASE " + snapshot.child("timeOfPlacedOrder").getValue());
+                        ////System.out.println("QNTY PLEASE FROM DB" + snapshot.child(name).getValue());
+                        ////System.out.println("DATE PLEASE " + snapshot.child("timeOfPlacedOrder").getValue());
                         for(int j = 0; j < datesArr.length; j++){
                             if(datesArr[j]!=null){
-                                System.out.println("THE AQTUALY => " + datesArr[j]);
+                                ////System.out.println("THE AQTUALY => " + datesArr[j]);
                             }
                         }
 
 
                         //time and quantity
                     }
-                    System.out.println("WORK PLEASE " + snapshot.child(name).getValue());
+                    ////System.out.println("WORK PLEASE " + snapshot.child(name).getValue());
 
                 }
                 flagFinishedRead = 1;
-                System.out.println(datesArr[0] + " <- 0 " + datesArr[1] + " <- 1 "+ datesArr[2]+  " <-2 " + datesArr[3]+  " <-3 " );
+                ////System.out.println(datesArr[0] + " <- 0 " + datesArr[1] + " <- 1 "+ datesArr[2]+  " <-2 " + datesArr[3]+  " <-3 " );
                 createGraphAgainVisual(datesArr);
             }
 
@@ -241,31 +247,31 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 
     //SALES OF PRODUCT GETTER
     private void runSalesProduct() {
-        System.out.println("HEY IM GETTING THE PRODUCTS FOR THE LIST");
+        ////System.out.println("HEY IM GETTING THE PRODUCTS FOR THE LIST");
         valueEventListenerSalesOfProduct = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     nameOfProducts = new ArrayList<String>();
-                    System.out.println("PRODUCTS " + nameOfProducts);
+                    ////System.out.println("PRODUCTS " + nameOfProducts);
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Product product = snapshot.getValue(Product.class);
-                        System.out.println("PURCHASES DATA : " + snapshot);
+                        ////System.out.println("PURCHASES DATA : " + snapshot);
                         String runningString = snapshot.getValue().toString();
                         String search = new String();
                         String sentence = runningString;
                         for (int i = 0; i < Login.anArrayOfProducts.length - 1; i++) {
                             if (Login.anArrayOfProducts[i] != null) {
-                                System.out.println("PRODUCT NAME RUNNING "+ Login.anArrayOfProducts[i]);
+                                ////System.out.println("PRODUCT NAME RUNNING "+ Login.anArrayOfProducts[i]);
                                 if (Login.anArrayOfProducts[i].charAt(0) <'0' ||  Login.anArrayOfProducts[i].charAt(0)>'9') {
                                     search = Login.anArrayOfProducts[i];
-                                    System.out.println("SHUGAR " + search);
+                                    ////System.out.println("SHUGAR " + search);
                                     if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
                                         if (nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase()) == -1) {
                                                  nameOfProducts.add(search);
-                                             System.out.println("THE LIST IS HHH" + nameOfProducts);
+                                             ////System.out.println("THE LIST IS HHH" + nameOfProducts);
                                         } else {
-                                              System.out.println("NOTHING");
+                                              ////System.out.println("NOTHING");
                                         }
                                     }
                                 }
@@ -283,194 +289,135 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 
             }
         };
-        System.out.println(nameOfProducts);
+        ////System.out.println(nameOfProducts);
     }
 
     private void runSalesAndBuyingProduct() {
-
-        int count = 0;
-        System.out.println("HEY IM THE SALES BUYING");
-        for(int i = 0; i < Login.anArrayOfProducts.length; i++){
-            System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
-            count ++;
-        }
-
-        valueEventListenerSalesOfProduct = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-//                    nameOfProducts = new ArrayList<String>();
-
-
-//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                        Product product = snapshot.getValue(Product.class);
-//                        System.out.println("PURCHASES DATA : " + snapshot);
-//                        String runningString = snapshot.getValue().toString();
-//                        String search = new String();
-//                        String sentence = runningString;
-//                        for (int i = 0; i < Login.anArrayOfProducts.length - 1; i++) {
-//                            if (Login.anArrayOfProducts[i] != null) {
-//                                System.out.println("PRODUCT NAME RUNNING "+ Login.anArrayOfProducts[i]);
-//                                if (Login.anArrayOfProducts[i].charAt(0) <'0' ||  Login.anArrayOfProducts[i].charAt(0)>'9') {
-//                                    search = Login.anArrayOfProducts[i];
-//                                    System.out.println("SHUGAR " + search);
-//                                    if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
-//                                        if (nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase()) == -1) {
-//                                            nameOfProducts.add(search);
-//                                            System.out.println("THE LIST IS HHH" + nameOfProducts);
-//                                        } else {
-//                                            System.out.println("NOTHING");
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-
-//                    editText = findViewById(R.id.autoComplete);
-//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(GraphClass.this, android.R.layout.simple_list_item_1, nameOfProducts);
-//                    editText.setAdapter(adapter);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        createGraphAgainVisualForSalesAndBuyingProduct();
-//        System.out.println(nameOfProducts);
-    }
-    public void createGraphAgainVisualForSalesAndBuyingProduct (){
-        System.out.println("createGraphAgainVisualForSalesAndBuyingProduct");
         int count = 0;
         int place = 0 ;
-        System.out.println("HEY IM THE SALES BUYING");
+        int checkPlace = 0;
+        ////System.out.println("HEY IM THE SALES BUYING");
         for(int i = 0; i < Login.anArrayOfProducts.length; i=i+2){
-            System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
+            ////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
             if(Login.anArrayOfProducts[i]!=null){
-                System.out.println("THE PRODUCTS  iSSSS"  + Login.anArrayOfProducts[i]);
+//                System.out.println("THE PRODUCTS  iSSSS"  + Login.anArrayOfProducts[i]);
                 count ++;
             }
-
-
         }
 
-        String [] nameOfProductsInAllBuyingAndSale = new String [count];
 
+       nameOfProductsInAllBuyingAndSale = new String[count];
 
-        for(int i = 0; i < Login.anArrayOfProducts.length; i=i+2){
-            System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
-            if(Login.anArrayOfProducts[i]!=null){
+        for (int i = 0; i < Login.anArrayOfProducts.length; i = i + 2) {
+            ////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
+            if (Login.anArrayOfProducts[i] != null) {
                 nameOfProductsInAllBuyingAndSale[place] = Login.anArrayOfProducts[i];
-                    System.out.println("THE PRODUCT ISssss "  + nameOfProductsInAllBuyingAndSale[place]);
+                System.out.println("THE PRODUCT ISssss " + nameOfProductsInAllBuyingAndSale[place]);
                 place++;
-
             }
         }
 
 
 
+        valuesOfProductsInAllBuyingAndSale = new String[count];
 
+//        for (int f = 0; f < nameOfProductsInAllBuyingAndSale.length; f++) {
+            //products ref counting all added FROM DB
+            salesAndBuyingProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+                public int placceForValues = 0;
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //TODO need to count from the string all values and
+                        ////System.out.println("RUNNING IN PRODUCTSsss " + " THE NAME IS " + snapshot.child("nameOfProduct").getValue() + " DATA OF ADDING " + snapshot.child("dataOfAdding").getValue());
+                        String arrrayOfAdding = new String();
+                        arrrayOfAdding = snapshot.child("dataOfAdding").getValue().toString();
+                        String[] words = arrrayOfAdding.split("\\s+");
+                        long sumOfValues = 0;
+                        //convert string to words of each product
+                        for (int i = 0; i < words.length; i++) {
+                            // You may want to check for a non-word character before blindly
+                            // performing a replacement
+                            // It may also be necessary to adjust the character class
+                            words[i] = words[i].replaceAll("[^\\w]", "");
+                            try {
+                                if (!words[i].equals(null)) {
+                                    ////System.out.println("THE WORDS IS " + words[i]);
+                                    if (Long.parseLong(words[i]) < 160000000000L) {
+                                        ////System.out.println("THE WORDS IS AFTER IF" + words[i]);
+                                        sumOfValues = Long.parseLong(words[i]) + sumOfValues;
+                                        ////System.out.println("THE SUM IS AFTER IF" + sumOfValues);
 
-        BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
-        ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
-        ArrayList<BarEntry> valueSet2 = new ArrayList<BarEntry>();
-        int j = 0;
-        int k = 0;
-        int o = 0;
-////       TODO RUN THE GRAPH NEED TO MAKE DATA OF VALUE IN Y AXIS data ARR AND THE TIME IN X AXIS days
+                                    }
+//                                    valuesOfProductsInAllBuyingAndSale[0] = String.valueOf(sumOfValues);
 
-        mChart.setDrawBarShadow(false);
-        mChart.setDrawValueAboveBar(false);
-        mChart.getDescription().setEnabled(false);
-        mChart.setDrawGridBackground(false);
+                                }
+                            } catch (Exception e) {
+                                ////System.out.println("THE VALUE OF E " + e);
+                            }
+                        }
+                        valuesOfProductsInAllBuyingAndSale[placceForValues] = String.valueOf(sumOfValues);
+                        System.out.println("THE SUM IN STRING " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
+                        System.out.println("PLACE OF VALUES IS " + placceForValues + " NAME : " + nameOfProductsInAllBuyingAndSale[placceForValues] + " GOING TO NEXT PRODUCT ON SNAPSHOOT RUN and VALUES is " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
+                        placceForValues++;
 
-        //**add renderer**
-//        BarChartCustomRenderer barChartCustomRenderer = new BarChartCustomRenderer(mChart, mChart.getAnimator(),   mChart.getViewPortHandler());
-//        mChart.setRenderer(barChartCustomRenderer);
+                        if(placceForValues == nameOfProductsInAllBuyingAndSale.length){
+                            System.out.println("I FINISHED RUNNN ");
+                            createSalesAndBuyingGraph();
 
+                        }
+                    }
 
+                }
 
-        XAxis xaxis = mChart.getXAxis();
-        xaxis.setDrawGridLines(false);
-        xaxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xaxis.setGranularity(0.5f);
-        xaxis.setGranularityEnabled(true);
-        xaxis.setDrawLabels(true);
-        xaxis.setDrawAxisLine(false);
-        xaxis.setValueFormatter(new IndexAxisValueFormatter(nameOfProductsInAllBuyingAndSale));
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //handle databaseError
+                }
 
-        YAxis yAxisLeft = mChart.getAxisLeft();
-        yAxisLeft.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-        yAxisLeft.setDrawGridLines(true);
-        yAxisLeft.setDrawAxisLine(true);
-        yAxisLeft.setEnabled(true);
+            });
 
-        mChart.getAxisRight().setEnabled(false);
+            refForGraphs.addListenerForSingleValueEvent(new ValueEventListener() {
 
-        Legend legend = mChart.getLegend();
-        legend.setEnabled(false);
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    salesFinished = 0;
+                    valuesOfProductsSales = new int [nameOfProductsInAllBuyingAndSale.length];
+                    for (int j = 0; j < nameOfProductsInAllBuyingAndSale.length; j ++) {
+                        int sum = 0;
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                            for (int j = 0; j < nameOfProductsInAllBuyingAndSale.length; j++) {
+                                System.out.println("NAME IS " + nameOfProductsInAllBuyingAndSale[j] + " VALUE FROM DB " + snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue());
+                                if(snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()!=null) {
+                                    sum = Integer.parseInt((String) snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()) + sum;
+                                    System.out.println("SALES SUM " + sum);
+                                 }
+                        }
+                        valuesOfProductsSales[j] = sum;
+                    }
+                    salesFinished = 1;
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //handle databaseError
+                }
 
-//        for (int i = 0; i < days.length; i++) {
-////            System.out.println(" THE datesArr it is value " +datesArr[i]  +  " and DATE in epoch " + datesArr[i+1]);
-////            System.out.println(" THE valuesFromDb " + valuesFromDb[i]);
-//            System.out.println(" THE days " + days[i]);
-////            System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
-//            if(days[i]!=null) {
-//                System.out.println(" THE days IN IF  " + days[i]);
-//                System.out.println(" THE values IN IF  " + values[i]);
-//                BarEntry entry = new BarEntry(1, 20); // x - place in array of dates y - values in array of values
-//                valueSet1.add(entry);
-//                if(days[i+1]==null){
-//                    break;
-//                }
-//
-//            }
-//
-//        }
+            });
+          if(salesFinished==1 ){
+              System.out.println("IT IS DONE ");
+//              createSalesAndBuyingGraph();
+          }
+          else{
+              System.out.println("NOT FINISHED YET");
+          }
 
+        }
 
-
-
-
-
-        //red graph SELLS
-        BarEntry entry1 = new BarEntry(0, 20); // x - place in array of dates y - values in array of values
-        valueSet1.add(entry1);
-
-        BarEntry entry3 = new BarEntry(1, 40); // x - place in array of dates y - values in array of values
-        valueSet1.add(entry3);
-
-        //blue graph BUYING OVERALL QUANTITY IN ADDING PLUS ALL
-        BarEntry entry2 = new BarEntry(0, 10); // x - place in array of dates y - values in array of values
-        valueSet2.add(entry2);
-
-        BarEntry entry4 = new BarEntry(1, 30); // x - place in array of dates y - values in array of values
-        valueSet2.add(entry4);
-
-
-        List<IBarDataSet> dataSets = new ArrayList<>();
-
-        BarDataSet barDataSet1 = new BarDataSet(valueSet1, " ");
-        barDataSet1.setColor(Color.RED);
-        barDataSet1.setDrawValues(true);
-        dataSets.add(barDataSet1);
-
-        BarDataSet barDataSet2 = new BarDataSet(valueSet2, " ");
-        barDataSet2.setColor(Color.BLUE);
-        barDataSet2.setDrawValues(true);
-        dataSets.add(barDataSet2);
-
-
-        BarData data = new BarData(barDataSet1, barDataSet2);
-        data.setBarWidth(0.4f);
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.BLACK);
-        mChart.setData(data);
-        mChart.setFitBars(true);
-        mChart.invalidate();
-    }
+//        System.out.println("THE PRODUCT " + nameOfProductsInAllBuyingAndSale[checkPlace] + valuesOfProductsInAllBuyingAndSale[checkPlace]);
+//        createGraphAgainVisualForSalesAndBuyingProduct();
+//        createSalesAndBuyingGraph();
+//    }
 
 
     public void createGraphAgainVisual (String arr[]){
@@ -485,14 +432,14 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                 valuesFromDb[k] = datesArr[i];
                 if (datesArr[i + 1] != null) {
                     long dv = Long.valueOf(datesArr[i + 1])*1000;// its need to be in milisecond
-                    System.out.println("THE DV IS " + dv);
-                    System.out.println("THE EPOCH STAMP " + datesArr[i + 1]);
+                    ////System.out.println("THE DV IS " + dv);
+                    ////System.out.println("THE EPOCH STAMP " + datesArr[i + 1]);
                     if(dv>startDateInMilliseconds && dv<endDateInMilliseconds) {
                         //find the value
                         for(int t = 0 ; t < datesArr.length; t ++){
                             if(datesArr[t]!= null) {
                                 if (dv == (Long.parseLong(datesArr[t])) * 1000) {
-                                    System.out.println("The time is " + datesArr[t] + "the value of selling is " + datesArr[t - 1]);
+                                    ////System.out.println("The time is " + datesArr[t] + "the value of selling is " + datesArr[t - 1]);
                                     values[o] = Integer.parseInt(datesArr[t-1]);
                                     o++;
                                 }
@@ -500,15 +447,15 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                         }
                         Date df = new java.util.Date(dv);
                         String vv = new SimpleDateFormat("MM-dd-yyyy hh:mma").format(df);
-                        System.out.println("VV " + vv);
-                        System.out.println("THE EPOCH " + datesArr[i + 1] + " AFTER CONVERSION DATE NEW" + vv);
+                        ////System.out.println("VV " + vv);
+                        ////System.out.println("THE EPOCH " + datesArr[i + 1] + " AFTER CONVERSION DATE NEW" + vv);
                         days[j] = vv;
-                        System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
+                        ////System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
                         j++;
                     }
                 }
                 if (valuesFromDb[k] != null) {
-                    System.out.println("VALUES FROM DB VALUES  in k place + " + k + " <-k " + valuesFromDb[k]);
+                    ////System.out.println("VALUES FROM DB VALUES  in k place + " + k + " <-k " + valuesFromDb[k]);
                 }
                 k++;
             }
@@ -548,13 +495,13 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         ArrayList<String> ylabels = new ArrayList<>();
 
         for (int i = 0; i < days.length; i++) {
-//            System.out.println(" THE datesArr it is value " +datesArr[i]  +  " and DATE in epoch " + datesArr[i+1]);
-//            System.out.println(" THE valuesFromDb " + valuesFromDb[i]);
-            System.out.println(" THE days " + days[i]);
-//            System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
+//            ////System.out.println(" THE datesArr it is value " +datesArr[i]  +  " and DATE in epoch " + datesArr[i+1]);
+//            ////System.out.println(" THE valuesFromDb " + valuesFromDb[i]);
+            ////System.out.println(" THE days " + days[i]);
+//            ////System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
            if(days[i]!=null) {
-               System.out.println(" THE days IN IF  " + days[i]);
-               System.out.println(" THE values IN IF  " + values[i]);
+               ////System.out.println(" THE days IN IF  " + days[i]);
+               ////System.out.println(" THE values IN IF  " + values[i]);
                BarEntry entry = new BarEntry(i, values[i]); // x - place in array of dates y - values in array of values
                valueSet1.add(entry);
                if(days[i+1]==null){
@@ -564,7 +511,6 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
            }
 
         }
-
         List<IBarDataSet> dataSets = new ArrayList<>();
         BarDataSet barDataSet = new BarDataSet(valueSet1, " ");
         barDataSet.setColor(Color.CYAN);
@@ -581,12 +527,115 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         mChart.invalidate();
     }
 
-    private ArrayList<BarEntry> dataValues1(){
+    public void createSalesAndBuyingGraph(){
+
+System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllBuyingAndSale[0] + " all ADDS "  + valuesOfProductsSales[0] + " VALUES " + valuesOfProductsInAllBuyingAndSale[0]);
+        BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
         ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
-        valueSet1.add(new BarEntry(1,2));
-        valueSet1.add(new BarEntry(2,4));
-        valueSet1.add(new BarEntry(4,8));
-        return valueSet1;
+        ArrayList<BarEntry> valueSet2 = new ArrayList<BarEntry>();
+        int j = 0;
+        int k = 0;
+        int o = 0;
+////       TODO RUN THE GRAPH NEED TO MAKE DATA OF VALUE IN Y AXIS data ARR AND THE TIME IN X AXIS days
+
+        mChart.setDrawBarShadow(false);
+        mChart.setDrawValueAboveBar(false);
+        mChart.getDescription().setEnabled(false);
+        mChart.setDrawGridBackground(false);
+
+        //**add renderer**
+//        BarChartCustomRenderer barChartCustomRenderer = new BarChartCustomRenderer(mChart, mChart.getAnimator(),   mChart.getViewPortHandler());
+//        mChart.setRenderer(barChartCustomRenderer);
+
+
+        XAxis xaxis = mChart.getXAxis();
+        xaxis.setDrawGridLines(false);
+        xaxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xaxis.setGranularity(0.5f);
+        xaxis.setGranularityEnabled(true);
+        xaxis.setDrawLabels(true);
+        xaxis.setDrawAxisLine(false);
+        xaxis.setValueFormatter(new IndexAxisValueFormatter(nameOfProductsInAllBuyingAndSale));
+
+        YAxis yAxisLeft = mChart.getAxisLeft();
+        yAxisLeft.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        yAxisLeft.setDrawGridLines(true);
+        yAxisLeft.setDrawAxisLine(true);
+        yAxisLeft.setEnabled(true);
+
+        mChart.getAxisRight().setEnabled(false);
+
+        Legend legend = mChart.getLegend();
+        legend.setEnabled(false);
+
+        //adding values for the graphs for all products that run with names nameOfProductsInAllBuyingAndSale
+
+
+
+
+//runSalesAndBuyingProduct
+
+//        for(int u = 0; u < nameOfProductsInAllBuyingAndSale.length; u++ ){
+//            ////System.out.println("TRY TO RUN RED GRAPH NAME IS " + "ON U " + u + "AND NAME IS " +   nameOfProductsInAllBuyingAndSale[u] +  " THE VALUE IN THIS PLACE " + valuesOfProductsInAllBuyingAndSale[u]);
+            //red all added products
+//            BarEntry entry1 = new BarEntry(u, 13); // x - place in array of dates y - values in array of values
+//            valueSet1.add(entry1);
+//
+//            //blue all sold products
+//            BarEntry entry2 = new BarEntry(u, 10); // x - place in array of dates y - values in array of values
+//            valueSet2.add(entry2);
+//        }
+
+
+
+
+
+
+
+
+
+        //red graph SELLS
+
+        BarEntry entry1 = new BarEntry(0, 20); // x - place in array of dates y - values in array of values
+        valueSet1.add(entry1);
+//
+//        BarEntry entry3 = new BarEntry(1, 40); // x - place in array of dates y - values in array of values
+//        valueSet1.add(entry3);
+
+
+
+
+        //blue graph BUYING OVERALL QUANTITY IN ADDING PLUS ALL
+        BarEntry entry2 = new BarEntry(0, 10); // x - place in array of dates y - values in array of values
+        valueSet2.add(entry2);
+
+//        BarEntry entry4 = new BarEntry(1, 30); // x - place in array of dates y - values in array of values
+//        valueSet2.add(entry4);
+
+
+        List<IBarDataSet> dataSets = new ArrayList<>();
+
+        BarDataSet barDataSet1 = new BarDataSet(valueSet1, " ");
+        barDataSet1.setColor(Color.RED);
+        barDataSet1.setDrawValues(true);
+        dataSets.add(barDataSet1);
+
+        BarDataSet barDataSet2 = new BarDataSet(valueSet2, " ");
+        barDataSet2.setColor(Color.CYAN);
+        barDataSet2.setDrawValues(true);
+        dataSets.add(barDataSet2);
+
+
+        BarData data = new BarData(barDataSet1, barDataSet2);
+        data.setBarWidth(0.4f);
+        data.setValueTextSize(10f);
+        data.setValueTextColor(Color.BLACK);
+        mChart.setData(data);
+        mChart.setFitBars(true);
+        mChart.invalidate();
+
+
+
     }
 
 }
