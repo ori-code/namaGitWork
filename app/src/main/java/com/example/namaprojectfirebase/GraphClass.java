@@ -10,12 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -23,8 +26,13 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -68,9 +76,12 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     //Sales of product // name or id // running on sales // counting name + quantity // capturing time
     public AutoCompleteTextView editText;
     public Calendar calendarStartTime, calendarEndTime;
+    public static int revenueProductsArr [];
     public int flagDateSet = 0;
     public int flagFinishedRead = 0;
     public int salesFinished;
+    public PieChart pieChart;
+    public TextView pieChartTotalRevenue;
 
 
     @Override
@@ -81,6 +92,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         refForGraphs = FirebaseDatabase.getInstance().getReference("orders");
         salesAndBuyingProducts = FirebaseDatabase.getInstance().getReference("products");
         purchasesForGraphs = new ArrayList<String>();
+        pieChart = findViewById(R.id.pie_chart);
 
         //to fill your Spinner
         List<String> spinnerArray = new ArrayList<String>();
@@ -105,15 +117,28 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 
                 Object item = adapterView.getItemAtPosition(position);
                 if (item == "Sales of product") {
+                    pieChart.setVisibility(View.GONE);
                     runSalesProduct();
                     finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                 }
                 if (item == "Sales and buying") {
+                    pieChart.setVisibility(View.GONE);
                     ////System.out.println("THE SALES BUYING");
                     ////System.out.println(Login.anArrayOfProducts[0]);
                     finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                     runSalesAndBuyingProduct();
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+                }
+                if (item == "Overall sales") {
+                    ////System.out.println("THE SALES BUYING");
+                    ////System.out.println(Login.anArrayOfProducts[0]);
+//                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+//                    runSalesAndBuyingProduct();
+//                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+                    pieChart.setVisibility(View.VISIBLE);
+                    setupPieChart();
+                    getPieChartData();
+
                 }
 
             }
@@ -205,7 +230,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         createSalesProductGraph(textFromAutoComplete, dates);
     }
 
-    // GETTING SELLING VALUES AND DATES
+    //GETTING SELLING VALUES AND DATES
     public void createSalesProductGraph (String name, StringBuffer dates) {
         ////System.out.println(name + " THE DATES IS " + dates);
         refForGraphs.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -412,8 +437,9 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
           }
 
         }
-
+    //timefilter
     public void createGraphAgainVisual (String arr[]){
+
         BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
         ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
         int j = 0;
@@ -602,5 +628,206 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
     }
 
+    private void setupPieChart() {
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setUsePercentValues(true);
+        pieChart.setEntryLabelTextSize(12);
+        pieChart.setEntryLabelColor(Color.BLACK);
+        pieChart.setCenterText("Sales by products");
+        pieChart.setCenterTextSize(24);
+        pieChart.getDescription().setEnabled(false);
+
+        Legend l = pieChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+        l.setEnabled(true);
+    }
+
+    private void getPieChartData(){
+        int count = 0;
+        int place = 0 ;
+        int checkPlace = 0;
+        ////System.out.println("HEY IM THE SALES BUYING");
+        for(int i = 0; i < Login.anArrayOfProducts.length; i=i+2){
+            ////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
+            if(Login.anArrayOfProducts[i]!=null){
+//                System.out.println("THE PRODUCTS  iSSSS"  + Login.anArrayOfProducts[i]);
+                count ++;
+            }
+        }
+        nameOfProductsInAllBuyingAndSale = new String[count];
+
+        for (int i = 0; i < Login.anArrayOfProducts.length; i = i + 2) {
+            ////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
+            if (Login.anArrayOfProducts[i] != null) {
+                nameOfProductsInAllBuyingAndSale[place] = Login.anArrayOfProducts[i];
+                System.out.println("THE PRODUCT ISssss " + nameOfProductsInAllBuyingAndSale[place]);
+                place++;
+            }
+        }
+
+        valuesOfProductsInAllBuyingAndSale = new String[count];
+//        revenueProductsArr = new int [23];
+        revenueProductsArr = new int [nameOfProductsInAllBuyingAndSale.length];
+//        for (int f = 0; f < nameOfProductsInAllBuyingAndSale.length; f++) {
+        //products ref counting all added FROM DB
+        salesAndBuyingProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+            public int placceForValues = 0;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    //TODO need to count from the string all values and
+                    ////System.out.println("RUNNING IN PRODUCTSsss " + " THE NAME IS " + snapshot.child("nameOfProduct").getValue() + " DATA OF ADDING " + snapshot.child("dataOfAdding").getValue());
+                    String arrrayOfAdding = new String();
+                    String priceOfBuying = new String();
+                    String priceOfSale = new String();
+                    int revenueResult = 0;
+                    arrrayOfAdding = snapshot.child("dataOfAdding").getValue().toString();
+                    priceOfBuying = snapshot.child("buyPrice").getValue().toString();
+                    priceOfSale = snapshot.child("sellPrice").getValue().toString();
+
+                    revenueResult = Integer.parseInt(priceOfSale) - Integer.parseInt(priceOfBuying);
+                    revenueProductsArr[placceForValues] = revenueResult;
+                    System.out.println("REVENUE " + revenueProductsArr[placceForValues]);
+                    String[] words = arrrayOfAdding.split("\\s+");
+                    long sumOfValues = 0;
+                    //convert string to words of each product
+                    for (int i = 0; i < words.length; i++) {
+                        // You may want to check for a non-word character before blindly
+                        // performing a replacement
+                        // It may also be necessary to adjust the character class
+                        words[i] = words[i].replaceAll("[^\\w]", "");
+                        try {
+                            if (!words[i].equals(null)) {
+                                ////System.out.println("THE WORDS IS " + words[i]);
+                                if (Long.parseLong(words[i]) < 160000000000L) {
+                                    ////System.out.println("THE WORDS IS AFTER IF" + words[i]);
+                                    sumOfValues = Long.parseLong(words[i]) + sumOfValues;
+                                    ////System.out.println("THE SUM IS AFTER IF" + sumOfValues);
+
+                                }
+//                                    valuesOfProductsInAllBuyingAndSale[0] = String.valueOf(sumOfValues);
+
+                            }
+                        } catch (Exception e) {
+                            ////System.out.println("THE VALUE OF E " + e);
+                        }
+                    }
+                    valuesOfProductsInAllBuyingAndSale[placceForValues] = String.valueOf(sumOfValues);
+                    System.out.println("THE SUM IN STRING " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
+                    System.out.println("PLACE OF VALUES IS " + placceForValues + " NAME : " + nameOfProductsInAllBuyingAndSale[placceForValues] + " GOING TO NEXT PRODUCT ON SNAPSHOOT RUN and VALUES is " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
+                    placceForValues++;
+
+                    if(placceForValues == nameOfProductsInAllBuyingAndSale.length){
+                        System.out.println("I FINISHED RUNNN ");
+//                        createSalesAndBuyingGraph();
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
+
+        });
+
+        refForGraphs.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                salesFinished = 0;
+                valuesOfProductsSales = new int [nameOfProductsInAllBuyingAndSale.length];
+                for (int j = 0; j < nameOfProductsInAllBuyingAndSale.length; j ++) {
+                    int sum = 0;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                            for (int j = 0; j < nameOfProductsInAllBuyingAndSale.length; j++) {
+                        System.out.println("NAME IS PIE " + nameOfProductsInAllBuyingAndSale[j] + " VALUE FROM DB " + snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue());
+                        if(snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()!=null) {
+                            sum = Integer.parseInt((String) snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()) + sum;
+                            System.out.println("SALES SUM " + sum);
+                        }
+                    }
+                    valuesOfProductsSales[j] = sum;
+                }
+                salesFinished = 1;
+                loadPieChartData();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
+
+        });
+
+
+        if(salesFinished==1 ){
+            System.out.println("IT IS DONE ");
+        }
+        else{
+            System.out.println("NOT FINISHED YET");
+        }
+
+
+    }
+
+
+
+    private void loadPieChartData() {
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        int summaryRev = 0;
+//        nameOfProductsInAllBuyingAndSale // <= names
+//        valuesOfProductsSales // <= allsalescounting
+//        revenueProductsArr // <= revenue
+
+        pieChartTotalRevenue = findViewById(R.id.pie_chart_total_revenue);
+
+        for(int i = 0; i < nameOfProductsInAllBuyingAndSale.length; i++){
+            System.out.println("THE TOTAl" + revenueProductsArr[i]  + " HEY " + Integer.parseInt(String.valueOf(valuesOfProductsSales[i])));
+            int total = revenueProductsArr[i]*Integer.parseInt(String.valueOf(valuesOfProductsSales[i]));
+            System.out.println("THE TOTAl" + total);
+            entries.add(new PieEntry(total, nameOfProductsInAllBuyingAndSale[i] + " | " + valuesOfProductsSales[i] + " | " + total));
+            summaryRev = total + summaryRev;
+        }
+        pieChartTotalRevenue.setText("THE TOTAL REVENUE IS :" + summaryRev);
+
+
+        //percentage in value
+//        entries.add(new PieEntry(20, "Food & Dining 2344"));
+//        entries.add(new PieEntry(2, "Medical"));
+//        entries.add(new PieEntry(3, "Entertainment"));
+//        entries.add(new PieEntry(4, "Electricity and Gas"));
+//        entries.add(new PieEntry(5, "Housing"));
+
+        ArrayList<Integer> colors = new ArrayList<>();
+        for (int color: ColorTemplate.MATERIAL_COLORS) {
+            colors.add(color);
+        }
+
+        for (int color: ColorTemplate.VORDIPLOM_COLORS) {
+            colors.add(color);
+        }
+
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(colors);
+
+        PieData data = new PieData(dataSet);
+        data.setDrawValues(true);
+        data.setValueFormatter(new PercentFormatter(pieChart));
+        data.setValueTextSize(12f);
+        data.setValueTextColor(Color.BLACK);
+
+        pieChart.setData(data);
+        pieChart.invalidate();
+
+        pieChart.animateY(1400, Easing.EaseInOutQuad);
+    }
 }
+
+
 

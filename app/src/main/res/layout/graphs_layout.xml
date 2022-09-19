@@ -98,8 +98,28 @@
             android:layout_height="378dp"
             android:layout_marginTop="50dp">
         </com.github.mikephil.charting.charts.BarChart>
+<RelativeLayout
+    android:id="@+id/pie_chart_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    </RelativeLayout>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pie_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+        </com.github.mikephil.charting.charts.PieChart>
+
+    <TextView
+        android:id="@+id/pie_chart_total_revenue"
+        android:layout_marginTop="400dp"
+        android:layout_width="200dp"
+        android:text="THE TOTAL REVENUE : "
+        android:layout_height="50dp">
+
+    </TextView>
+</RelativeLayout>
+</RelativeLayout>
 
 
 
