@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,12 +27,16 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,9 +73,11 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     StringBuffer dates = new StringBuffer();
     ArrayList<String> purchasesForGraphs;
     DatabaseReference finalCheckPurchases;
+    DatabaseReference refAllShipments;
     public static DatabaseReference refForGraphs, salesAndBuyingProducts;
     public static DatabaseReference graphRef;
     public static ValueEventListener valueEventListenerSalesOfProduct;
+    public static ValueEventListener valueEventListenerAllShipments;
     public static String[] nameOfProductsInAllBuyingAndSale;
     public static ValueEventListener valueEventListenerSalesProductGraph;
     //Sales of product // name or id // running on sales // counting name + quantity // capturing time
@@ -81,7 +88,14 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public int flagFinishedRead = 0;
     public int salesFinished;
     public PieChart pieChart;
+    public BarChart barChart;
+    public LineChart lineChart;
     public TextView pieChartTotalRevenue;
+    public static Query shipmentsQuery;
+    public int graphSelected = 0;
+    public static String shipmentsDates [];
+    public static int shipmentsCount [];
+//    private int mFillColorAll = Color.argb(150,51,181,229)
 
 
     @Override
@@ -89,10 +103,20 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphs_layout);
         finalCheckPurchases = FirebaseDatabase.getInstance().getReference("orders");
+        refAllShipments = FirebaseDatabase.getInstance().getReference("orders");
         refForGraphs = FirebaseDatabase.getInstance().getReference("orders");
         salesAndBuyingProducts = FirebaseDatabase.getInstance().getReference("products");
+        shipmentsQuery = refAllShipments.orderByChild("timeOfPlacedOrder");
+
         purchasesForGraphs = new ArrayList<String>();
         pieChart = findViewById(R.id.pie_chart);
+        barChart = findViewById(R.id.bar_chart);
+        lineChart = findViewById(R.id.line_chart);
+        lineChart.setBackgroundColor(Color.WHITE);
+        lineChart.setGridBackgroundColor(Color.WHITE);
+        lineChart.setDrawGridBackground(true);
+        
+
 
         //to fill your Spinner
         List<String> spinnerArray = new ArrayList<String>();
@@ -117,12 +141,18 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 
                 Object item = adapterView.getItemAtPosition(position);
                 if (item == "Sales of product") {
+                    graphSelected = 0;
+                    barChart.setVisibility(View.VISIBLE);
                     pieChart.setVisibility(View.GONE);
+                    lineChart.setVisibility(View.GONE);
                     runSalesProduct();
                     finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                 }
                 if (item == "Sales and buying") {
+                    graphSelected = 1;
+                    barChart.setVisibility(View.VISIBLE);
                     pieChart.setVisibility(View.GONE);
+                    lineChart.setVisibility(View.GONE);
                     ////System.out.println("THE SALES BUYING");
                     ////System.out.println(Login.anArrayOfProducts[0]);
                     finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
@@ -130,15 +160,36 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                 }
                 if (item == "Overall sales") {
+                    graphSelected = 2;
                     ////System.out.println("THE SALES BUYING");
                     ////System.out.println(Login.anArrayOfProducts[0]);
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
 //                    runSalesAndBuyingProduct();
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+                    barChart.setVisibility(View.GONE);
+                    lineChart.setVisibility(View.GONE);
                     pieChart.setVisibility(View.VISIBLE);
                     setupPieChart();
                     getPieChartData();
 
+                }
+                if (item == "Overall shipments") {
+                    graphSelected = 3;
+
+
+
+                    ////System.out.println("THE SALES BUYING");
+                    ////System.out.println(Login.anArrayOfProducts[0]);
+//                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+//                    runSalesAndBuyingProduct();
+//                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+                    barChart.setVisibility(View.GONE);
+                    pieChart.setVisibility(View.GONE);
+                    lineChart.setVisibility(View.VISIBLE);
+
+                    setupLineChart();
+                    runLineAllShipments();
+//                    getLineChart();
                 }
 
             }
@@ -180,7 +231,10 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         //////System.out.println("the send is clicked");
         String textFromAutoComplete = editText.getText().toString();
         ////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
-        showDatePickerDialogStart();
+            showDatePickerDialogStart();
+
+
+
 
         if (dates != null) {
             dates.delete(0, dates.length());
@@ -227,7 +281,18 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public void showGraph(View view) {
         String textFromAutoComplete = editText.getText().toString();
         ////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete + " DATES " + dates);
-        createSalesProductGraph(textFromAutoComplete, dates);
+        if(graphSelected == 0){
+            createSalesProductGraph(textFromAutoComplete, dates);
+        }
+        if(graphSelected == 1) {
+            System.out.println("NOTHING IN DATES");
+        }
+        if(graphSelected == 2) {
+            if(dates!=null){
+                System.out.println("I GET DATESSS");
+                getPieChartData();
+            }
+        }
     }
 
     //GETTING SELLING VALUES AND DATES
@@ -657,6 +722,8 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
                 count ++;
             }
         }
+
+
         nameOfProductsInAllBuyingAndSale = new String[count];
 
         for (int i = 0; i < Login.anArrayOfProducts.length; i = i + 2) {
@@ -667,6 +734,9 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
                 place++;
             }
         }
+
+
+
 
         valuesOfProductsInAllBuyingAndSale = new String[count];
 //        revenueProductsArr = new int [23];
@@ -742,16 +812,27 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
             public void onDataChange(DataSnapshot dataSnapshot) {
                 salesFinished = 0;
                 valuesOfProductsSales = new int [nameOfProductsInAllBuyingAndSale.length];
+                long placedOrder = 0;
                 for (int j = 0; j < nameOfProductsInAllBuyingAndSale.length; j ++) {
                     int sum = 0;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 //                            for (int j = 0; j < nameOfProductsInAllBuyingAndSale.length; j++) {
-                        System.out.println("NAME IS PIE " + nameOfProductsInAllBuyingAndSale[j] + " VALUE FROM DB " + snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue());
-                        if(snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()!=null) {
-                            sum = Integer.parseInt((String) snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()) + sum;
-                            System.out.println("SALES SUM " + sum);
+
+                        if(snapshot.child("timeOfPlacedOrder").getValue()!=null) {
+                            System.out.println(snapshot.child("timeOfPlacedOrder").getValue().toString()  + "JJJ");
+                            placedOrder = Long.valueOf(snapshot.child("timeOfPlacedOrder").getValue().toString());
                         }
-                    }
+                            if (placedOrder * 1000 > startDateInMilliseconds && placedOrder * 1000 < endDateInMilliseconds) {
+                                System.out.println("NAME IS PIE " + nameOfProductsInAllBuyingAndSale[j] + " VALUE FROM DB " + snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue());
+                                if (snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue() != null)
+                                {
+                                    sum = Integer.parseInt((String) snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()) + sum;
+                                    System.out.println("SALES SUM " + sum);
+                                }
+
+                            }
+                        }
+//
                     valuesOfProductsSales[j] = sum;
                 }
                 salesFinished = 1;
@@ -781,6 +862,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
     private void loadPieChartData() {
         ArrayList<PieEntry> entries = new ArrayList<>();
         int summaryRev = 0;
+
 //        nameOfProductsInAllBuyingAndSale // <= names
 //        valuesOfProductsSales // <= allsalescounting
 //        revenueProductsArr // <= revenue
@@ -826,6 +908,85 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
         pieChart.invalidate();
 
         pieChart.animateY(1400, Easing.EaseInOutQuad);
+    }
+
+    private void setupLineChart(){
+        LineDataSet lineDataSet1 = new LineDataSet(dataValues(), "Data Set 1");
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(lineDataSet1);
+
+        LineData data = new LineData(dataSets);
+
+
+        lineChart.setData(data);
+        lineChart.invalidate();
+    }
+
+
+    private void runLineAllShipments() {
+        shipmentsCount  = new int [300];
+        shipmentsDates = new String[300];
+        ////System.out.println("HEY IM GETTING THE PRODUCTS FOR THE LIST");
+        shipmentsQuery.addValueEventListener(new ValueEventListener() {
+            int index = 0;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+//                shipmentsDates[0]="start";
+                for (DataSnapshot shipmentSnapshot : dataSnapshot.getChildren()) {
+                    try {
+                    System.out.println("HHH" + shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                    if(index==0){
+                        System.out.println("The first time");
+                        System.out.println("THE DATA IS " + shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                        shipmentsDates[index] = (shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                        shipmentsCount[index] = 1;
+                        System.out.println("DATE " +  shipmentsDates[index] + " COUNT " +  shipmentsCount[index]);
+                        index++;
+                    }
+                    else {
+                        if (shipmentsDates[index - 1].equals(shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString()) ) {
+                            System.out.println("The same time ");
+                            shipmentsCount[index - 1] = 1 + shipmentsCount[index - 1];
+                            System.out.println("DATE " + shipmentsDates[index - 1] + " COUNT " + shipmentsCount[index - 1]);
+                        } else {
+                            System.out.println("The new time");
+                            shipmentsDates[index] = (shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                            shipmentsCount[index] = 1;
+                            System.out.println("DATE " + shipmentsDates[index] + " COUNT " + shipmentsCount[index]);
+                            index++;
+                        }
+                    }
+                    }
+                    catch (Exception e){
+                        System.out.println("tttt" + e);
+                    }
+                }
+                for(int j = 0; j<shipmentsDates.length; j++){
+                    if(shipmentsDates[j]!=null) {
+                        System.out.println("DATE ARR " + shipmentsDates[j] + " COUNT " + shipmentsCount[j]);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
+    }
+
+
+
+
+    private ArrayList<Entry> dataValues()
+    {
+        ArrayList<Entry> dataVals = new ArrayList<Entry>();
+        dataVals.add(new Entry(0,2));
+        dataVals.add(new Entry(1,4));
+        dataVals.add(new Entry(3,3));
+        return dataVals;
     }
 }
 

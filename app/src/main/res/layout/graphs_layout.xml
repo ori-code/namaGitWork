@@ -119,6 +119,22 @@
 
     </TextView>
 </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line_chart_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+            </com.github.mikephil.charting.charts.LineChart>
+        </RelativeLayout>
+
+
+
 </RelativeLayout>
 
 
