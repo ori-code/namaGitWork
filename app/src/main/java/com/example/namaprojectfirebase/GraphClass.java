@@ -21,6 +21,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -35,9 +36,11 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.Utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,11 +70,14 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static String [] valuesOfProductsInAllBuyingAndSale;
     public static int [] valuesOfProductsSales;
     public static String[] workArray = new String[1000];
-    //public static String [] workArray = {"dlkdlkd", " dokodk"};
+//    public static String [] workArray1 = {"dlkdlkd", " dokodk"};
+    public static String [] workArray1 = new String[100];
     public int workArrayCount = 0;
     public List<String> nameOfProducts;
     StringBuffer dates = new StringBuffer();
+    public static List <String> checkArray = new ArrayList<>();
     ArrayList<String> purchasesForGraphs;
+    public static int finishedGetDataAllShipments;
     DatabaseReference finalCheckPurchases;
     DatabaseReference refAllShipments;
     public static DatabaseReference refForGraphs, salesAndBuyingProducts;
@@ -112,6 +118,18 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         pieChart = findViewById(R.id.pie_chart);
         barChart = findViewById(R.id.bar_chart);
         lineChart = findViewById(R.id.line_chart);
+
+        XAxis xAxis = lineChart.getXAxis();
+        YAxis leftAxis = lineChart.getAxisLeft();
+        XAxis.XAxisPosition position = XAxis.XAxisPosition.BOTTOM;
+        xAxis.setPosition(position);
+        lineChart.getDescription().setEnabled(true);
+        Description description = new Description();
+        description.setText("Date");
+        description.setTextSize(15f);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(workArray1));
+
+
         lineChart.setBackgroundColor(Color.WHITE);
         lineChart.setGridBackgroundColor(Color.WHITE);
         lineChart.setDrawGridBackground(true);
@@ -187,7 +205,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
                     pieChart.setVisibility(View.GONE);
                     lineChart.setVisibility(View.VISIBLE);
 
-                    setupLineChart();
+
                     runLineAllShipments();
 //                    getLineChart();
                 }
@@ -202,6 +220,47 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
         });
 
     }
+
+//CUSTOM X LINE FORMATTER
+
+//    public class ClaimsXAxisValueFormatter extends ValueFormatter {
+//
+//        List<String> datesList;
+//
+//        public ClaimsXAxisValueFormatter(List<String> arrayOfDates) {
+//            this.datesList = arrayOfDates;
+//        }
+//
+//
+//        @Override
+//        public String getAxisLabel(float value, AxisBase axis) {
+///*
+//Depends on the position number on the X axis, we need to display the label, Here, this is the logic to convert the float value to integer so that I can get the value from array based on that integer and can convert it to the required value here, month and date as value. This is required for my data to show properly, you can customize according to your needs.
+//*/
+//            Integer position = Math.round(value);
+//            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd");
+//
+////            if (value > 1 && value < 2) {
+////                position = 0;
+////            } else if (value > 2 && value < 3) {
+////                position = 1;
+////            } else if (value > 3 && value < 4) {
+////                position = 2;
+////            } else if (value > 4 && value <= 5) {
+////                position = 3;
+////            }
+////            if (position < datesList.size())
+////                for(int i = 0; i < checkArray.size(); i++){
+////                    return checkArray.get(i);
+////                }
+//
+//            return "123";
+//        }
+//    }
+
+
+
+
 
     private void showDatePickerDialogStart() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -924,8 +983,9 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
 
     private void runLineAllShipments() {
-        shipmentsCount  = new int [300];
-        shipmentsDates = new String[300];
+        finishedGetDataAllShipments = 0;
+        shipmentsCount  = new int [100];
+        shipmentsDates = new String[100];
         ////System.out.println("HEY IM GETTING THE PRODUCTS FOR THE LIST");
         shipmentsQuery.addValueEventListener(new ValueEventListener() {
             int index = 0;
@@ -961,11 +1021,40 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
                         System.out.println("tttt" + e);
                     }
                 }
+
+
                 for(int j = 0; j<shipmentsDates.length; j++){
                     if(shipmentsDates[j]!=null) {
                         System.out.println("DATE ARR " + shipmentsDates[j] + " COUNT " + shipmentsCount[j]);
+                        String epochString = shipmentsDates[j];
+                        long epoch = Long.parseLong(epochString);
+                        Date expiry = new Date(epoch * 1000);
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM", Locale.US);
+                        //dd-MM-yyyy
+                        String time = df.format(expiry);
+                        workArray1[j] = time;
                     }
+                    else{
+                        finishedGetDataAllShipments = 1;
+                    }
+
                 }
+
+                System.out.println("run setup line chart");
+                setupLineChart();
+
+
+//                System.out.println("BEFORE FINISHED finishedGetDataAllShipments");
+//                if(finishedGetDataAllShipments == 1) {
+//                    System.out.println("INSIDE FINISHED finishedGetDataAllShipments");
+//                    for (int j = 0; j < shipmentsDates.length; j++) {
+//                        if (shipmentsDates[j] != null) {
+//                            System.out.println("DATE ARR1 " + shipmentsDates[j] + " COUNT " + shipmentsCount[j]);
+//                        }
+////                        setupLineChart();
+//                    }
+//                }
+
             }
 
             @Override
@@ -982,10 +1071,57 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
     private ArrayList<Entry> dataValues()
     {
+        int count = 0;
         ArrayList<Entry> dataVals = new ArrayList<Entry>();
-        dataVals.add(new Entry(0,2));
-        dataVals.add(new Entry(1,4));
-        dataVals.add(new Entry(3,3));
+
+
+//        for(int j = 0; j<shipmentsDates.length; j++){
+//            try {
+//                if (!shipmentsDates[j].equals(null)) {
+//                    count++;
+//                    System.out.println("COUNT IS SSS " + count + " AND DATES ARR " + shipmentsDates[j] + " AND J IS " + j);
+//                }
+//            }catch(Exception e) {
+////            System.out.println("THE PROBLEM CATCHED"  + e);
+//            }
+//        }
+//
+//        workArray1 = new String [count];
+//
+//        for(int j = 0; j<shipmentsDates.length; j++){
+//            try {
+//                if (!shipmentsDates[j].equals(null)) {
+//                    workArray1[j] = shipmentsDates[j];
+//                    System.out.println("COUNT IS SSS " + count + " AND DATES ARR " + shipmentsDates[j] + " AND J IS " + j);
+//                }
+//            }catch(Exception e) {
+////            System.out.println("THE PROBLEM CATCHED"  + e);
+//            }
+//        }
+
+
+
+//        for(int a = 0; a < workArray1.length; a ++ ) {
+//            System.out.println("INISDE DATA VALUES " + shipmentsCount[a] + "THE DATES IS " + shipmentsDates[a]);
+//            if(workArray1[a]!=null){
+//                System.out.println("THE DATE IN WORK ARRAY" + workArray1[a]);
+//                dataVals.add(new Entry(a, shipmentsCount[a]));
+//            }
+//        }
+//@
+//        dataVals.add(new Entry(workArray1.length,shipmentsCount[count]));
+
+        for(int g = 0; g < workArray1.length; g++){
+         if (workArray1[g] != null) {
+             System.out.println(" HYE " + g + " || " + workArray1[g] + " || " + shipmentsCount[g]);
+             dataVals.add(new Entry(g, shipmentsCount[g]));
+         }
+     }
+
+//     int last = workArray1.length+1;
+//        dataVals.add(new Entry(workArray1.length,4f));
+//        dataVals.add(new Entry(1,2f));
+//        dataVals.add(new Entry(2,2f));
         return dataVals;
     }
 }

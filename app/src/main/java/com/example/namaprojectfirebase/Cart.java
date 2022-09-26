@@ -27,7 +27,7 @@ import java.util.logging.Handler;
 
 
 public class Cart extends AppCompatActivity {
-    RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
     CartProductAdapter adapter;
     List<Product> productList;
     static DatabaseReference dbProducts,dbProductsInCart;
@@ -98,6 +98,7 @@ public class Cart extends AppCompatActivity {
                 startActivity(new Intent(Cart.this, Order.class));
 
 
+
                 //////System.out.println(orderPlaced + " THIS IS ORDER PLACED FLAG BEFORE");
                 orderPlaced = 1;
                 //////System.out.println(orderPlaced + " THIS IS ORDER PLACED FLAG AFTER");
@@ -106,6 +107,7 @@ public class Cart extends AppCompatActivity {
 
             }
         });
+
     }
 
     ValueEventListener valueEventListener = new ValueEventListener() {
@@ -152,7 +154,9 @@ public class Cart extends AppCompatActivity {
                     ////System.out.println(sum + "the sum");
                     sumTotal.setText("TOTAL FOR THIS ORDER: " + sum);
                 }
+
                 adapter.notifyDataSetChanged();
+
             }
 
         }
@@ -198,16 +202,20 @@ public class Cart extends AppCompatActivity {
                 }
                 createNewCart();
             }
+
             }
 
         @Override
         public void onCancelled(@NonNull DatabaseError error) {
 
         }
+
     };
 
 
+    public void resetGraph(){
 
+    }
 
 
 

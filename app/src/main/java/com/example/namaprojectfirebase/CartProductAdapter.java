@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.CartProductAdapterViewHolder>{
+
 
     private Context mCtx;
     private List<Product> productList;
@@ -65,7 +67,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                     int position = getAdapterPosition();
                     if(!productList.isEmpty()){
                         productList.get(position).setQuantity(productList.get(position).getQuantity() +1);
-                        ////System.out.println("QUANTITY FROM LIST "+ productList.get(position).getQuantity());
+                        System.out.println("QUANTITY FROM LIST "+ productList.get(position).getQuantity());
                         Cart.dbProducts.child(productList.get(position).getNameOfProduct()).child("quantity").setValue(productList.get(position).getQuantity());
 
                     }
@@ -74,15 +76,19 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 //                    //////System.out.println("PLUSS" + " To the product "+ Cart.dbProducts.child("-N75vtUd5iOR1aluZC7n").child("quantity").get());
 
                 }
+
             });
 
             itemView.findViewById(R.id.quantityMinus).setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     productList.get(position).setQuantity(productList.get(position).getQuantity() - 1);
                     //System.out.println("QUANTITY FROM LIST "+ productList.get(position).getQuantity());
                     Cart.dbProducts.child(productList.get(position).getNameOfProduct()).child("quantity").setValue(productList.get(position).getQuantity());
+
+
                 }
             });
 
@@ -112,5 +118,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 
 
         }
+
     }
+
 }

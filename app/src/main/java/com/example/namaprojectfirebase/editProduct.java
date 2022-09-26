@@ -122,10 +122,6 @@ public class editProduct extends AppCompatActivity implements View.OnClickListen
             //TODO HERE YOU FIND THE LIST OF DATA ADDING
             //System.out.println("CHECKKK  "  + dateOfAdding.get(dateOfAdding.size()-1));
 
-
-
-
-
 //                    Map<String, Object> dataOfAddingUpdate = new HashMap<>();
 
 

@@ -30,7 +30,7 @@
 
 
     <LinearLayout
-        android:layout_width="404dp"
+        android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +50,6 @@
             android:src="@drawable/orders"
             tools:ignore="MissingConstraints" />
     </LinearLayout>
-
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -86,30 +85,47 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.302">
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+               >
+
             <ImageButton
+                android:layout_marginLeft="-3dp"
                 android:id="@+id/tableButton"
-                android:layout_width="201sp"
+                android:layout_width="201dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/white"
-                android:padding="0px"
                 android:soundEffectsEnabled="true"
                 android:src="@drawable/show"
                 tools:ignore="MissingConstraints" />
 
             <ImageButton
                 android:id="@+id/orderButton"
-                android:layout_width="201sp"
+                android:layout_width="204dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/white"
                 android:padding="0px"
                 android:soundEffectsEnabled="true"
                 android:src="@drawable/cart"
                 tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="404dp"
+        android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -131,19 +147,19 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="404dp"
+        android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.583">
 
         <ImageButton
             android:id="@+id/addUser"
-            android:layout_width="201sp"
+            android:layout_width="202dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:padding="0px"
@@ -153,7 +169,7 @@
 
         <ImageButton
             android:id="@+id/controlUser"
-            android:layout_width="201sp"
+            android:layout_width="204dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:padding="0px"
@@ -164,19 +180,19 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="404dp"
+        android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.443">
 
         <ImageButton
             android:id="@+id/plusButton"
-            android:layout_width="201sp"
+            android:layout_width="202dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:onClick="addProduct"
@@ -187,7 +203,7 @@
 
         <ImageButton
             android:id="@+id/overdueBtn"
-            android:layout_width="201sp"
+            android:layout_width="203dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:padding="0px"

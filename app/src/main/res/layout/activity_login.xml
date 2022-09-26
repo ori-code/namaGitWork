@@ -26,19 +26,24 @@
 
         <Button
             android:id="@+id/clientRegisterBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:fontFamily="@font/audiowide"
             android:onClick="registerFunc"
-            android:text="Client Registration"
-            android:textSize="15dp"
-            app:cornerRadius="15dp"
+            android:text="Client \n Registration"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
-            app:layout_constraintVertical_bias="0.717" />
+            app:layout_constraintVertical_bias="0.717"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/audiowide"
+            android:textSize="20dp"
+            app:cornerRadius="5dp"
+
+
+
+            />
 
     <!--    <TextView-->
     <!--        android:id="@+id/textView3"-->
@@ -69,8 +74,8 @@
         android:text="The count is matter "
         android:fontFamily="@font/audiowide"
         android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +106,7 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="150dp"
+        android:layout_width="220dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/audiowide"
@@ -119,7 +124,7 @@
 
     <EditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="43dp"
         android:background="@color/white"
         android:ems="10"
@@ -138,7 +143,7 @@
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="43dp"
         android:background="@color/white"
         android:ems="10"

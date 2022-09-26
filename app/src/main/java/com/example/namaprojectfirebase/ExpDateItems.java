@@ -97,8 +97,10 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-//            finalCheckList.clear();
+            finalCheckList.clear();
+            count = 0;
             if (dataSnapshot.exists()) {
+//                finalCheckList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     long exp = (long) snapshot.child("bestBefore").getValue();
                     exp = exp/1000;
@@ -162,29 +164,29 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
             }
 
 
-            for (int i = 0; i < finalCheckList.size() - 2; i++) {
-                TableRow row = new TableRow(ExpDateItems.this);
-                String debt = "\n\n" + "   " + finalCheckList.get(i) + "\n" + "\n" + "   " + finalCheckList.get(i + 1) + " x " + finalCheckList.get(i + 2);
-                TextView tvDebt = new TextView(ExpDateItems.this);
-                tvDebt.setTextSize(14);
-                tvDebt.setTextColor(Color.BLACK);
-                tvDebt.setText("" + debt);
-                row.addView(tvDebt);
-                table.addView(row);
-                int qnty, price;
-                qnty = Integer.parseInt(finalCheckList.get(i + 1));
-                price = Integer.parseInt(finalCheckList.get(i + 2));
-
-                sumForOrder = (sumForOrder + (qnty * price)) + shipmentFee;
-
-
-                sumTotalShipping.setText("SHIPPING : " + shipmentFee + "\nTOTAL IS : " + String.valueOf(sumForOrder));
-
-                //System.out.println("SUM IS IN THIS ORDER " + sumForOrder);
-                i++;
-                i++;
-
-            }
+//            for (int i = 0; i < finalCheckList.size() - 2; i++) {
+//                TableRow row = new TableRow(ExpDateItems.this);
+//                String debt = "\n\n" + "   " + finalCheckList.get(i) + "\n" + "\n" + "   " + finalCheckList.get(i + 1) + " x " + finalCheckList.get(i + 2);
+//                TextView tvDebt = new TextView(ExpDateItems.this);
+//                tvDebt.setTextSize(14);
+//                tvDebt.setTextColor(Color.BLACK);
+//                tvDebt.setText("" + debt);
+//                row.addView(tvDebt);
+//                table.addView(row);
+////                int qnty, price;
+////                qnty = Integer.parseInt(finalCheckList.get(i + 1));
+////                price = Integer.parseInt(finalCheckList.get(i + 2));
+//
+////                sumForOrder = (sumForOrder + (qnty * price)) + shipmentFee;
+//
+//
+////                sumTotalShipping.setText("SHIPPING : " + shipmentFee + "\nTOTAL IS : " + String.valueOf(sumForOrder));
+//
+//                //System.out.println("SUM IS IN THIS ORDER " + sumForOrder);
+//                i++;
+//                i++;
+//
+//            }
 
 
             ViewCompat.setNestedScrollingEnabled(table, true);
