@@ -287,17 +287,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 
                                                             });
-
-
-
-
-
-//                                                    long lassAddingCount1 = (long) (lassAddingCount*1.5);
-//                                                                System.out.println("LAST COUNt " + lassAddingCount + " 150 % is " + lassAddingCount1);
-////                                                                theNowQuantity = theNowQuantity + Integer.parseInt(editProductQnty.getText().toString());
-////                                                                findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(String.valueOf(theNowQuantity)));
-//                                                    System.out.println("FROM DB " + product.child("nameOfProduct").getValue());
-//                                                    System.out.println("FROM DB " + product.child("dataOfAdding").getValue());
+//
                                                 }
 
                                             }
@@ -326,6 +316,98 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         "ORDER THE SAME AMOUNT",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                productUpdateQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            // dataSnapshot is the "issue" node with all children with id 0
+                                            for (DataSnapshot product : dataSnapshot.getChildren()) {
+                                                if(product.child("nameOfProduct").getValue().equals(productList.get(position).getNameOfProduct())){
+
+                                                    dateOfAdding1 = (ArrayList) product.child("dataOfAdding").getValue();
+                                                    theNowQuantity1 =  Long.parseLong(product.child("quantity").getValue().toString());
+
+                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size()-1);
+
+                                                    System.out.println("THE LAST count of added qnty " + theLastCountAdding);
+                                                    theKeyOfProduct1 = product.getKey();
+                                                    long lassAddingCount1 = (long) (theLastCountAdding*1.0);
+                                                    long updatedQnty = theNowQuantity1 + lassAddingCount1;
+                                                    int sizeAndLastPLace = dateOfAdding1.size();
+                                                    long time= System.currentTimeMillis();
+                                                    FirebaseDatabase.getInstance()
+                                                            .getReference("products")
+                                                            .child(theKeyOfProduct1)
+                                                            .child("dataOfAdding")
+                                                            .child(String.valueOf(sizeAndLastPLace+1))
+                                                            .setValue(time)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                                                                    } else {
+
+                                                                    }
+
+                                                                }
+
+
+                                                            });
+                                                    FirebaseDatabase.getInstance()
+                                                            .getReference("products")
+                                                            .child(theKeyOfProduct1)
+                                                            .child("dataOfAdding")
+                                                            .child(String.valueOf(sizeAndLastPLace+2))
+                                                            .setValue(lassAddingCount1)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                                                                    } else {
+
+                                                                    }
+
+                                                                }
+
+
+                                                            });
+                                                    FirebaseDatabase.getInstance()
+                                                            .getReference("products")
+                                                            .child(theKeyOfProduct1)
+                                                            .child("quantity")
+                                                            .setValue(updatedQnty)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                                                                    } else {
+
+                                                                    }
+
+                                                                }
+
+
+                                                            });
+//
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+
+
                                 dialog.cancel();
                             }
                         });
@@ -334,7 +416,240 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 alert11.show();
             }
             else{
+
+                System.out.println("THE NAME OF PRODUCT AFTER IF " + productList.get(position).getNameOfProduct());
+                System.out.println("THE LAST TIME ADDED " + theLastTimeAdded+ " epochCurrent " +epochCurrent+ " THE RESULT " + (epochCurrent - theLastTimeAdded));
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(mCtx);
+                builder1.setMessage("The " + productList.get(position).getNameOfProduct() + " reached the minimum quantity parameter, are you want to order 100% of quantity from the last adding? ");
+                builder1.setCancelable(true);
+                long[] longAddingDateArr;// = new long[productList.get(position).getAddingDate().toString().length()];
+                longAddingDateArr = productList.get(position).getAddingDate();
+
+                for(int i = 0; i < longAddingDateArr.length; i++){
+                    if(longAddingDateArr[i] == 0){
+                        lastAddingDate = longAddingDateArr[i-2];
+                        lassAddingCount = longAddingDateArr[i-1];
+                        System.out.println("HHHH in place: " + i + " DATA=> " +longAddingDateArr[i-1] + " and " + longAddingDateArr[i-2]);
+                        System.out.println("GGGG in place: " + i + " DATA=> " +lassAddingCount + " and " + lastAddingDate);
+                        break;
+                    }
+
+                }
+                //not less than week
                 System.out.println("Another alerts and movements");
+                builder1.setPositiveButton(
+                        "ORDER 100% OF THE LAST ADDING AMOUNT",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                productUpdateQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            // dataSnapshot is the "issue" node with all children with id 0
+                                            for (DataSnapshot product : dataSnapshot.getChildren()) {
+                                                if(product.child("nameOfProduct").getValue().equals(productList.get(position).getNameOfProduct())){
+
+                                                    dateOfAdding1 = (ArrayList) product.child("dataOfAdding").getValue();
+                                                    theNowQuantity1 =  Long.parseLong(product.child("quantity").getValue().toString());
+
+                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size()-1);
+
+                                                    System.out.println("THE LAST count of added qnty " + theLastCountAdding);
+                                                    theKeyOfProduct1 = product.getKey();
+                                                    long lassAddingCount1 = (long) (theLastCountAdding*1.0);
+                                                    long updatedQnty = theNowQuantity1 + lassAddingCount1;
+                                                    int sizeAndLastPLace = dateOfAdding1.size();
+                                                    long time= System.currentTimeMillis();
+                                                    FirebaseDatabase.getInstance()
+                                                            .getReference("products")
+                                                            .child(theKeyOfProduct1)
+                                                            .child("dataOfAdding")
+                                                            .child(String.valueOf(sizeAndLastPLace+1))
+                                                            .setValue(time)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                                                                    } else {
+
+                                                                    }
+
+                                                                }
+
+
+                                                            });
+                                                    FirebaseDatabase.getInstance()
+                                                            .getReference("products")
+                                                            .child(theKeyOfProduct1)
+                                                            .child("dataOfAdding")
+                                                            .child(String.valueOf(sizeAndLastPLace+2))
+                                                            .setValue(lassAddingCount1)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                                                                    } else {
+
+                                                                    }
+
+                                                                }
+
+
+                                                            });
+                                                    FirebaseDatabase.getInstance()
+                                                            .getReference("products")
+                                                            .child(theKeyOfProduct1)
+                                                            .child("quantity")
+                                                            .setValue(updatedQnty)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+
+                                                                    } else {
+
+                                                                    }
+
+                                                                }
+
+
+                                                            });
+//
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "DONT ORDER",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+
+//                builder1.setNeutralButton(
+//                        "ORDER THE SAME AMOUNT",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                productUpdateQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                                        if (dataSnapshot.exists()) {
+//                                            // dataSnapshot is the "issue" node with all children with id 0
+//                                            for (DataSnapshot product : dataSnapshot.getChildren()) {
+//                                                if(product.child("nameOfProduct").getValue().equals(productList.get(position).getNameOfProduct())){
+//
+//                                                    dateOfAdding1 = (ArrayList) product.child("dataOfAdding").getValue();
+//                                                    theNowQuantity1 =  Long.parseLong(product.child("quantity").getValue().toString());
+//
+//                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size()-1);
+//
+//                                                    System.out.println("THE LAST count of added qnty " + theLastCountAdding);
+//                                                    theKeyOfProduct1 = product.getKey();
+//                                                    long lassAddingCount1 = (long) (theLastCountAdding*1.0);
+//                                                    long updatedQnty = theNowQuantity1 + lassAddingCount1;
+//                                                    int sizeAndLastPLace = dateOfAdding1.size();
+//                                                    long time= System.currentTimeMillis();
+//                                                    FirebaseDatabase.getInstance()
+//                                                            .getReference("products")
+//                                                            .child(theKeyOfProduct1)
+//                                                            .child("dataOfAdding")
+//                                                            .child(String.valueOf(sizeAndLastPLace+1))
+//                                                            .setValue(time)
+//                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                                public void onComplete(@NonNull Task<Void> task) {
+//                                                                    if (task.isSuccessful()) {
+//                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+//
+//                                                                    } else {
+//
+//                                                                    }
+//
+//                                                                }
+//
+//
+//                                                            });
+//                                                    FirebaseDatabase.getInstance()
+//                                                            .getReference("products")
+//                                                            .child(theKeyOfProduct1)
+//                                                            .child("dataOfAdding")
+//                                                            .child(String.valueOf(sizeAndLastPLace+2))
+//                                                            .setValue(lassAddingCount1)
+//                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                                public void onComplete(@NonNull Task<Void> task) {
+//                                                                    if (task.isSuccessful()) {
+//                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+//
+//                                                                    } else {
+//
+//                                                                    }
+//
+//                                                                }
+//
+//
+//                                                            });
+//                                                    FirebaseDatabase.getInstance()
+//                                                            .getReference("products")
+//                                                            .child(theKeyOfProduct1)
+//                                                            .child("quantity")
+//                                                            .setValue(updatedQnty)
+//                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                                public void onComplete(@NonNull Task<Void> task) {
+//                                                                    if (task.isSuccessful()) {
+//                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+//
+//                                                                    } else {
+//
+//                                                                    }
+//
+//                                                                }
+//
+//
+//                                                            });
+////
+//                                                }
+//
+//                                            }
+//
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(DatabaseError databaseError) {
+//
+//                                    }
+//                                });
+//
+//
+//
+//
+//                                dialog.cancel();
+//                            }
+//                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+
+
+
+
             }
         }
             readingDataCount++;
