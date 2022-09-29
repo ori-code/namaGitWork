@@ -39,9 +39,6 @@
         <activity
             android:name=".GraphClass"
             android:exported="false"/>
-
-
-
         <activity
             android:theme="@style/Theme.NamaProjectFirebase.CustomTheme"
             android:name=".Order"

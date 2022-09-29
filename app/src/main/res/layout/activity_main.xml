@@ -5,7 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:layout_marginTop="0dp"
+   >
+
+
 
     <EditText
         android:id="@+id/editTextSearch"
@@ -13,6 +17,7 @@
         android:layout_height="45dp"
         android:hint="Enter the property of product                                        "
         android:textSize="15dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -144,9 +149,108 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allItemsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="699dp"
+        android:layout_height="576dp"
         android:layout_marginTop="100dp" />
 
+    <RelativeLayout
+        android:layout_width="411dp"
+        android:layout_height="50dp"
+        android:paddingHorizontal="2dp"
+        android:layout_marginTop="650dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.975">
+
+        <ImageButton
+            android:id="@+id/showAllProducts"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/show">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/cartActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cart">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/showAllOrders"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="100dp"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/orders">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/addProductActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="200dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newnew">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/allGraphs"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="150dp"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/graf">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/overdueActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="250dp"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/overdue">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/userListActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="350dp"
+            android:padding="5dp"
+            android:src="@drawable/users"
+            android:scaleType="fitCenter">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/addUserActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="300dp"
+            android:onClick="loginFunc"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newuser">
+
+        </ImageButton>
+    </RelativeLayout>
 </RelativeLayout>
 
 

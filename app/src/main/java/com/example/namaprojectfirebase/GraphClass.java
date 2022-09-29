@@ -1,6 +1,7 @@
 package com.example.namaprojectfirebase;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -102,6 +104,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static String shipmentsDates [];
     public static int shipmentsCount [];
 //    private int mFillColorAll = Color.argb(150,51,181,229)
+public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
 
 
     @Override
@@ -218,6 +221,69 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
 
             }
         });
+
+
+
+        showAllProducts = findViewById(R.id.showAllProducts);
+        cartActivity = findViewById(R.id.cartActivity);
+        showAllOrders = findViewById(R.id.showAllOrders);
+        addProductActivity = findViewById(R.id.addProductActivity);
+        allGraphs = findViewById(R.id.allGraphs);
+        overdueActivity = findViewById(R.id.overdueActivity);
+        userListActivity = findViewById(R.id.userListActivity);
+        addUserActivity = findViewById(R.id.addUserActivity);
+
+
+        showAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GraphClass.this, MainActivity.class));
+            }
+        });
+        cartActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GraphClass.this, Cart.class));
+            }
+        });
+        showAllOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GraphClass.this, Orders.class));
+            }
+        });
+        addProductActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GraphClass.this, AddProduct.class));
+            }
+        });
+        allGraphs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GraphClass.this, GraphClass.class));
+            }
+        });
+        overdueActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GraphClass.this, ExpDateItems.class));
+            }
+        });
+        addUserActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                System.out.println("TRY TO GO T REGISTER");
+                startActivity(new Intent(GraphClass.this, Register.class));
+            }
+        });
+        userListActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GraphClass.this, UserRecycleViewClass.class));
+            }
+        });
+
 
     }
 
@@ -350,6 +416,15 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
             if(dates!=null){
                 System.out.println("I GET DATESSS");
                 getPieChartData();
+            }
+        }
+        if(graphSelected == 3) {
+            if(dates!=null){
+                System.out.println("OVERALL shipments");
+                runLineAllShipments();
+            }
+            else{
+                runLineAllShipments();
             }
         }
     }
@@ -973,10 +1048,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
         LineDataSet lineDataSet1 = new LineDataSet(dataValues(), "Data Set 1");
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet1);
-
         LineData data = new LineData(dataSets);
-
-
         lineChart.setData(data);
         lineChart.invalidate();
     }

@@ -38,7 +38,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        System.out.println("IM IN REGISTER");
         banner = (TextView) findViewById(R.id.banner);
         banner.setOnClickListener(this);
 
