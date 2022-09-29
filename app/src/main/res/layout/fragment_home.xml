@@ -30,19 +30,20 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="404dp"
         android:layout_height="90dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.162">
+        app:layout_constraintVertical_bias="0.185">
 
         <ImageButton
             android:id="@+id/orderButton2"
-            android:layout_width="match_parent"
+            android:layout_width="414dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:padding="0px"
@@ -65,17 +66,17 @@
         app:layout_constraintVertical_bias="0.102" />
 
     <LinearLayout
-        android:layout_width="404dp"
-        android:layout_height="90dp"
+        android:layout_width="412dp"
+        android:layout_height="165dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.302">
+        app:layout_constraintVertical_bias="0.369">
 
-        <LinearLayout
+         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -86,26 +87,27 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.302">
 
-            <ImageButton
-                android:id="@+id/tableButton"
-                android:layout_width="201sp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/white"
-                android:padding="0px"
-                android:soundEffectsEnabled="true"
-                android:src="@drawable/show"
-                tools:ignore="MissingConstraints" />
+             <ImageButton
+                 android:id="@+id/tableButton"
 
-            <ImageButton
-                android:id="@+id/orderButton"
-                android:layout_width="201sp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/white"
-                android:padding="0px"
-                android:soundEffectsEnabled="true"
-                android:src="@drawable/cart"
-                tools:ignore="MissingConstraints" />
-        </LinearLayout>
+                 android:layout_width="302dp"
+                 android:layout_height="match_parent"
+                 android:backgroundTint="@color/white"
+                 android:padding="0px"
+                 android:soundEffectsEnabled="true"
+                 android:src="@drawable/show"
+                 tools:ignore="MissingConstraints" />
+
+             <ImageButton
+                 android:id="@+id/orderButton"
+                 android:layout_width="106dp"
+                 android:layout_height="match_parent"
+                 android:backgroundTint="@color/white"
+                 android:padding="0px"
+                 android:soundEffectsEnabled="true"
+                 android:src="@drawable/cart"
+                 tools:ignore="MissingConstraints" />
+         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -120,17 +122,30 @@
         app:layout_constraintVertical_bias="0.723">
 
         <ImageButton
-            android:id="@+id/grafBtn"
-            android:layout_width="match_parent"
+            android:id="@+id/addUser"
+            android:layout_width="235dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:padding="0px"
             android:soundEffectsEnabled="true"
-            android:src="@drawable/graf"
-            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+            android:src="@drawable/newuser"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/controlUser"
+            android:layout_width="171dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:onClick="userList"
+            android:padding="0px"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/users"
+            tools:ignore="MissingConstraints" />
+
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="404dp"
         android:layout_height="90dp"
         android:orientation="horizontal"
@@ -142,59 +157,39 @@
         app:layout_constraintVertical_bias="0.583">
 
         <ImageButton
-            android:id="@+id/addUser"
-            android:layout_width="201sp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
-            android:padding="0px"
-            android:soundEffectsEnabled="true"
-            android:src="@drawable/newuser"
-            tools:ignore="MissingConstraints" />
-
-        <ImageButton
-            android:id="@+id/controlUser"
-            android:layout_width="201sp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
-            android:padding="0px"
-            android:onClick="userList"
-            android:soundEffectsEnabled="true"
-            android:src="@drawable/users"
-            tools:ignore="MissingConstraints" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="404dp"
-        android:layout_height="90dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.443">
-
-        <ImageButton
-            android:id="@+id/plusButton"
-            android:layout_width="201sp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
-            android:onClick="addProduct"
-            android:padding="0px"
-            android:soundEffectsEnabled="true"
-            android:src="@drawable/newnew"
-            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
-
-        <ImageButton
             android:id="@+id/overdueBtn"
-            android:layout_width="201sp"
+            android:layout_width="158dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:padding="0px"
             android:soundEffectsEnabled="true"
             android:src="@drawable/overdue"
             tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/plusButton"
+            android:layout_width="249dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:onClick="addProduct"
+            android:padding="0px"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/newpro"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/grafBtn"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:backgroundTint="@color/white"
+        android:padding="0px"
+        android:soundEffectsEnabled="true"
+        android:src="@drawable/graf"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteY="554dp" />
 
     <!--    <TextView-->
     <!--        android:id="@+id/iRemember"-->
