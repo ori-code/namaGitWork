@@ -859,7 +859,6 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
 
         nameOfProductsInAllBuyingAndSale = new String[count];
-
         for (int i = 0; i < Login.anArrayOfProducts.length; i = i + 2) {
             ////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
             if (Login.anArrayOfProducts[i] != null) {
@@ -1045,7 +1044,8 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
     }
 
     private void setupLineChart(){
-        LineDataSet lineDataSet1 = new LineDataSet(dataValues(), "Data Set 1");
+        LineDataSet lineDataSet1 = new LineDataSet(dataValues(), "Shipments per date");
+        System.out.println("THE CHART NEED TO BE PRINTED");
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet1);
         LineData data = new LineData(dataSets);
