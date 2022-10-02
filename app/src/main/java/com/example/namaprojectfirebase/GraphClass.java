@@ -61,6 +61,7 @@ import java.util.Locale;
 
 public class GraphClass extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     public static ArrayList barArryList;
+    public static ArrayList deliveryMansList;
     LineChart mpLineChart;
     public static String[] datesArr = new String[500]; // array of dates for graph first date and second the value of sales
     public static String[] datesArrStrings = {"12/05/22","13/05/22"};
@@ -82,7 +83,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static int finishedGetDataAllShipments;
     DatabaseReference finalCheckPurchases;
     DatabaseReference refAllShipments;
-    public static DatabaseReference refForGraphs, salesAndBuyingProducts;
+    public static DatabaseReference refForGraphs, salesAndBuyingProducts,specificShipmentsUsers;
     public static DatabaseReference graphRef;
     public static ValueEventListener valueEventListenerSalesOfProduct;
     public static ValueEventListener valueEventListenerAllShipments;
@@ -99,7 +100,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public BarChart barChart;
     public LineChart lineChart;
     public TextView pieChartTotalRevenue;
-    public static Query shipmentsQuery;
+    public static Query shipmentsQuery,specificShipments;
     public int graphSelected = 0;
     public static String shipmentsDates [];
     public static int shipmentsCount [];
@@ -115,7 +116,12 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         refAllShipments = FirebaseDatabase.getInstance().getReference("orders");
         refForGraphs = FirebaseDatabase.getInstance().getReference("orders");
         salesAndBuyingProducts = FirebaseDatabase.getInstance().getReference("products");
+        specificShipmentsUsers = FirebaseDatabase.getInstance().getReference("users");
+
         shipmentsQuery = refAllShipments.orderByChild("timeOfPlacedOrder");
+
+
+        specificShipments = specificShipmentsUsers.orderByKey();
 
         purchasesForGraphs = new ArrayList<String>();
         pieChart = findViewById(R.id.pie_chart);
@@ -196,9 +202,6 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                 }
                 if (item == "Overall shipments") {
                     graphSelected = 3;
-
-
-
                     ////System.out.println("THE SALES BUYING");
                     ////System.out.println(Login.anArrayOfProducts[0]);
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
@@ -210,6 +213,21 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
 
 
                     runLineAllShipments();
+//                    getLineChart();
+                }
+                if (item == "Specific shipments") {
+                    graphSelected = 4;
+                    ////System.out.println("THE SALES BUYING");
+                    ////System.out.println(Login.anArrayOfProducts[0]);
+//                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+//                    runSalesAndBuyingProduct();
+//                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+                    barChart.setVisibility(View.GONE);
+                    pieChart.setVisibility(View.GONE);
+                    lineChart.setVisibility(View.VISIBLE);
+
+
+                    runSpecificShipments();
 //                    getLineChart();
                 }
 
@@ -425,6 +443,16 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
             }
             else{
                 runLineAllShipments();
+            }
+        }
+        if(graphSelected == 4) {
+            if(dates!=null){
+                System.out.println("Specific shipments");
+//                runSpecificShipments();
+            }
+            else{
+                System.out.println("Specific shipments");
+//                runSpecificShipments();
             }
         }
     }
@@ -1196,6 +1224,42 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 //        dataVals.add(new Entry(2,2f));
         return dataVals;
     }
+
+
+//Specific shipments
+public void runSpecificShipments()
+{
+    {
+        deliveryMansList = new ArrayList();
+        System.out.println("SPECIFIC SHIPMENTS");
+        specificShipments.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot shipmentSnapshot : dataSnapshot.getChildren()) {
+                    User deliveryMan = shipmentSnapshot.getValue(User.class);
+                    if(deliveryMan.getPermission() == 3){
+                        System.out.println("HE IS DELIVERY MAN " + deliveryMan.getEmail());
+                        deliveryMansList.add(deliveryMan.getEmail());
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
+    }
+}
+
+
+
+
 }
 
 
