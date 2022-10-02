@@ -9,10 +9,9 @@
 
     <EditText
         android:id="@+id/editTextSearchUser"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:hint="Enter the name of user"
-        android:layout_marginLeft="10dp"
+        android:hint="Enter the name of user                                                     "
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/usersRecycleView"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,22 +37,19 @@
         android:id="@+id/adminCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
-        android:buttonTint="@color/black"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="50dp"
         android:checked="true"
         android:text="Admin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <CheckBox
         android:id="@+id/workerCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="48dp"
-        android:buttonTint="@color/black"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="50dp"
         android:checked="true"
         android:text="Worker"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,9 +59,8 @@
         android:id="@+id/courierCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
-        android:layout_marginTop="48dp"
-        android:buttonTint="@color/black"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="50dp"
         android:checked="true"
         android:text="Courier"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,33 +70,132 @@
         android:id="@+id/accountantCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="292dp"
-        android:layout_marginTop="48dp"
-        android:buttonTint="@color/black"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="80dp"
         android:checked="true"
         android:text="Accountant"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <CheckBox
         android:id="@+id/userClientCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
-        android:buttonTint="@color/black"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="80dp"
         android:checked="true"
         android:text="Client"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersRecycleView"
-        android:layout_width="413dp"
-        android:layout_height="589dp"
-        tools:layout_editor_absoluteY="143dp">
+        android:layout_width="411dp"
+        android:layout_height="538dp"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="138dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <RelativeLayout
+        android:layout_width="411dp"
+        android:layout_height="50dp"
+        android:paddingHorizontal="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.975">
 
+        <ImageButton
+            android:id="@+id/showAllProducts"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/show">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/cartActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cart">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/showAllOrders"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="100dp"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/orders">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/addProductActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="200dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newnew">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/allGraphs"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="150dp"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/graf">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/overdueActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="250dp"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/overdue">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/userListActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="350dp"
+            android:padding="5dp"
+            android:src="@drawable/users"
+            android:scaleType="fitCenter">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/addUserActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="300dp"
+            android:onClick="loginFunc"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newuser">
+
+        </ImageButton>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

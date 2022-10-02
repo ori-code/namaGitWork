@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,6 +35,7 @@ public class Orders extends AppCompatActivity {
     List<OrderForList> ordersList;
     DatabaseReference dbOrdersPlaced;
     public static OrderForListAdapter adapterOrders;
+    public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
 
 
 
@@ -50,6 +53,18 @@ public class Orders extends AppCompatActivity {
         dbOrdersPlaced = FirebaseDatabase.getInstance().getReference("orders");
         dbOrdersPlaced.addListenerForSingleValueEvent(valueEventListener);
 
+        showAllProducts = findViewById(R.id.showAllProducts);
+        cartActivity = findViewById(R.id.cartActivity);
+        showAllOrders = findViewById(R.id.showAllOrders);
+        addProductActivity = findViewById(R.id.addProductActivity);
+        allGraphs = findViewById(R.id.allGraphs);
+        overdueActivity = findViewById(R.id.overdueActivity);
+        userListActivity = findViewById(R.id.userListActivity);
+        addUserActivity = findViewById(R.id.addUserActivity);
+
+
+
+
 //        ordersList.add(new OrderForList("dkl", "ldkld", "lkdl", "dlkdl", "ldklkd", "dlkd","dlkd"));
 //        ordersList.add(new OrderForList(1, "hey", "Hey", 12, 13345677));
 //
@@ -60,7 +75,61 @@ public class Orders extends AppCompatActivity {
         recyclerViewOrders.setAdapter(adapterOrders);
 
 
+//
+        showAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(Orders.this, MainActivity.class));
+            }
+        });
+        cartActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Orders.this, Cart.class));
+            }
+        });
+        showAllOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Orders.this, Orders.class));
+            }
+        });
+        addProductActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Orders.this, AddProduct.class));
+            }
+        });
+        allGraphs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Orders.this, GraphClass.class));
+            }
+        });
+        overdueActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Orders.this, ExpDateItems.class));
+            }
+        });
+        addUserActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                System.out.println("TRY TO GO T REGISTER");
+                startActivity(new Intent(Orders.this, Register.class));
+            }
+        });
+        userListActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Orders.this, UserRecycleViewClass.class));
+            }
+        });
+
     }
+
+
 
 
     ValueEventListener valueEventListener = new ValueEventListener() {

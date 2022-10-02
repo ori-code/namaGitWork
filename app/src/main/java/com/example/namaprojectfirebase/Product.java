@@ -62,6 +62,10 @@ public class Product {
         this.minQty = minQty;
     }
 
+    public double getMinQty() {
+        return minQty;
+    }
+
     public String getNameOfProduct() {
         return nameOfProduct;
     }

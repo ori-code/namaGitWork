@@ -4,8 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!--    android:background="#30000000"-->
+    android:layout_height="match_parent"
+
+    >
+<!--    android:background="#30000000"-->
 
 
     <!--    <ListView-->
@@ -18,7 +20,6 @@
     <!--        app:layout_constraintTop_toTopOf="parent"-->
     <!--        app:layout_constraintVertical_bias="0.082">-->
     <!--    </ListView>-->
-
 
     <TextView
         android:id="@+id/textView8"
@@ -38,14 +39,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allItemsRecyclerViewCart"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_marginRight="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" /><![CDATA[
-
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
     />
 
-    ]]><!--<TextView
+
+
+    <!--<TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,66 +59,150 @@
 
     </TextView>-->
 
-    <androidx.appcompat.widget.AppCompatButton
+
+    <Button
         android:id="@+id/placeOrderBtn"
-        android:layout_width="160dp"
-        android:layout_height="45dp"
-        android:background="#CAC1C1"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/white"
         android:text="PLACE ORDER"
         android:textColor="@color/black"
-        android:textSize="11dp"
-        android:textStyle="bold"
+        android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.969"></androidx.appcompat.widget.AppCompatButton>
+        app:layout_constraintVertical_bias="0.878"></Button>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/removeOrderBtn"
-        android:layout_width="120dp"
-        android:layout_height="45dp"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="36dp"
-        android:background="#E34747"
+        android:backgroundTint="@color/white"
         android:text="REMOVE ORDER"
         android:textColor="@color/black"
-        android:textSize="11dp"
+        android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.969" />
+        app:layout_constraintVertical_bias="0.878"></Button>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white"
+        android:layout_width="411dp"
+        android:layout_height="50dp"
+        android:paddingHorizontal="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.875">
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.975">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/showAllProducts"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/show">
 
-            <TextView
-                android:id="@+id/sumTotal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-black"
-                android:text="TOTAL FOR THIS ORDER : "
-                android:textColor="@color/black"
-                android:textStyle="bold"></TextView>
-        </LinearLayout>
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/cartActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cart">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/showAllOrders"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="100dp"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/orders">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/addProductActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="200dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newnew">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/allGraphs"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="150dp"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/graf">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/overdueActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="250dp"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/overdue">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/userListActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="350dp"
+            android:padding="5dp"
+            android:src="@drawable/users"
+            android:scaleType="fitCenter">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/addUserActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="300dp"
+            android:onClick="loginFunc"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newuser">
+
+        </ImageButton>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/sumTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="TOTAL FOR THIS ORDER : "
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="558dp"></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

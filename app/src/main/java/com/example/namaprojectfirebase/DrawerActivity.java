@@ -45,13 +45,6 @@ public class DrawerActivity extends AppCompatActivity {
 
         action_settings = (Button)findViewById(R.id.action_settings);
 
-
-
-
-
-
-
-
         binding.appBarDrawer.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +91,7 @@ public class DrawerActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
@@ -107,6 +100,13 @@ public class DrawerActivity extends AppCompatActivity {
         ////System.out.println("HEHYYYYY LOGGOUT");
         Login.mAuth.signOut();
         Intent intent = new Intent(this, Login.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    public void Cart(MenuItem item) {
+
+        Intent intent = new Intent(this, Cart.class);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

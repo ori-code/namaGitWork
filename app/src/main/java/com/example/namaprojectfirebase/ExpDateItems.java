@@ -2,6 +2,7 @@ package com.example.namaprojectfirebase;
 
 import static com.example.namaprojectfirebase.Login.anArrayOfProducts;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,11 +11,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.core.view.ViewCompat;
 
@@ -40,7 +43,8 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
     public static int sumForOrder = 0, shipmentType = 0, shipmentFee = 0;
     public Button shipmentTypeUpdateBtn;
     public static long epochCurrent;
-
+    public Toolbar toolbar1;
+    public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,73 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
         Intent intent = getIntent();
         Date currentTime = Calendar.getInstance().getTime();
         epochCurrent= currentTime.getTime();
+
+
+        showAllProducts = findViewById(R.id.showAllProducts);
+        cartActivity = findViewById(R.id.cartActivity);
+        showAllOrders = findViewById(R.id.showAllOrders);
+        addProductActivity = findViewById(R.id.addProductActivity);
+        allGraphs = findViewById(R.id.allGraphs);
+        overdueActivity = findViewById(R.id.overdueActivity);
+        userListActivity = findViewById(R.id.userListActivity);
+        addUserActivity = findViewById(R.id.addUserActivity);
+
+
+        showAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExpDateItems.this, MainActivity.class));
+            }
+        });
+        cartActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExpDateItems.this, Cart.class));
+            }
+        });
+        showAllOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExpDateItems.this, Orders.class));
+            }
+        });
+        addProductActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExpDateItems.this, AddProduct.class));
+            }
+        });
+        allGraphs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExpDateItems.this, GraphClass.class));
+            }
+        });
+        overdueActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExpDateItems.this, ExpDateItems.class));
+            }
+        });
+        addUserActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                System.out.println("TRY TO GO T REGISTER");
+                startActivity(new Intent(ExpDateItems.this, Register.class));
+            }
+        });
+        userListActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExpDateItems.this, UserRecycleViewClass.class));
+            }
+        });
+
+//        toolbar1 = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar1);
+//        final ActionBar actionBar = getActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+
         //System.out.println("THE CURRENT " + epochCurrent/1000);
 
 //        int orderNumber = 0,shipmentType = 0;
@@ -97,8 +168,10 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-//            finalCheckList.clear();
+            finalCheckList.clear();
+            count = 0;
             if (dataSnapshot.exists()) {
+//                finalCheckList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     long exp = (long) snapshot.child("bestBefore").getValue();
                     exp = exp/1000;
@@ -162,29 +235,29 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
             }
 
 
-            for (int i = 0; i < finalCheckList.size() - 2; i++) {
-                TableRow row = new TableRow(ExpDateItems.this);
-                String debt = "\n\n" + "   " + finalCheckList.get(i) + "\n" + "\n" + "   " + finalCheckList.get(i + 1) + " x " + finalCheckList.get(i + 2);
-                TextView tvDebt = new TextView(ExpDateItems.this);
-                tvDebt.setTextSize(14);
-                tvDebt.setTextColor(Color.BLACK);
-                tvDebt.setText("" + debt);
-                row.addView(tvDebt);
-                table.addView(row);
-                int qnty, price;
-                qnty = Integer.parseInt(finalCheckList.get(i + 1));
-                price = Integer.parseInt(finalCheckList.get(i + 2));
-
-                sumForOrder = (sumForOrder + (qnty * price)) + shipmentFee;
-
-
-                sumTotalShipping.setText("SHIPPING : " + shipmentFee + "\nTOTAL IS : " + String.valueOf(sumForOrder));
-
-                //System.out.println("SUM IS IN THIS ORDER " + sumForOrder);
-                i++;
-                i++;
-
-            }
+//            for (int i = 0; i < finalCheckList.size() - 2; i++) {
+//                TableRow row = new TableRow(ExpDateItems.this);
+//                String debt = "\n\n" + "   " + finalCheckList.get(i) + "\n" + "\n" + "   " + finalCheckList.get(i + 1) + " x " + finalCheckList.get(i + 2);
+//                TextView tvDebt = new TextView(ExpDateItems.this);
+//                tvDebt.setTextSize(14);
+//                tvDebt.setTextColor(Color.BLACK);
+//                tvDebt.setText("" + debt);
+//                row.addView(tvDebt);
+//                table.addView(row);
+////                int qnty, price;
+////                qnty = Integer.parseInt(finalCheckList.get(i + 1));
+////                price = Integer.parseInt(finalCheckList.get(i + 2));
+//
+////                sumForOrder = (sumForOrder + (qnty * price)) + shipmentFee;
+//
+//
+////                sumTotalShipping.setText("SHIPPING : " + shipmentFee + "\nTOTAL IS : " + String.valueOf(sumForOrder));
+//
+//                //System.out.println("SUM IS IN THIS ORDER " + sumForOrder);
+//                i++;
+//                i++;
+//
+//            }
 
 
             ViewCompat.setNestedScrollingEnabled(table, true);

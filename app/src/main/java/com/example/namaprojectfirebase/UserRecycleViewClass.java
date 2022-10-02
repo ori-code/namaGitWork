@@ -1,11 +1,13 @@
 package com.example.namaprojectfirebase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +29,7 @@ public class UserRecycleViewClass extends AppCompatActivity {
         List <User> userList;
         public static DatabaseReference dataSnapshotUsers;
         public CheckBox adminCheckBox, workerCheckBox, courierCheckBox, accountantCheckBox, userClientCheckBox;
-
+        public ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +43,66 @@ public class UserRecycleViewClass extends AppCompatActivity {
         recyclerViewUsers.setHasFixedSize(true);
         recyclerViewUsers.setLayoutManager(new LinearLayoutManager(this));
         EditText editTextSearch = findViewById(R.id.editTextSearchUser);
+
+
+        showAllProducts = findViewById(R.id.showAllProducts);
+        cartActivity = findViewById(R.id.cartActivity);
+        showAllOrders = findViewById(R.id.showAllOrders);
+        addProductActivity = findViewById(R.id.addProductActivity);
+        allGraphs = findViewById(R.id.allGraphs);
+        overdueActivity = findViewById(R.id.overdueActivity);
+        userListActivity = findViewById(R.id.userListActivity);
+        addUserActivity = findViewById(R.id.addUserActivity);
+
+        showAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserRecycleViewClass.this, MainActivity.class));
+            }
+        });
+        cartActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserRecycleViewClass.this, Cart.class));
+            }
+        });
+        showAllOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserRecycleViewClass.this, Orders.class));
+            }
+        });
+        addProductActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserRecycleViewClass.this, AddProduct.class));
+            }
+        });
+        allGraphs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserRecycleViewClass.this, GraphClass.class));
+            }
+        });
+        overdueActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserRecycleViewClass.this, ExpDateItems.class));
+            }
+        });
+        addUserActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                System.out.println("TRY TO GO T REGISTER");
+                startActivity(new Intent(UserRecycleViewClass.this, Register.class));
+            }
+        });
+        userListActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserRecycleViewClass.this, UserRecycleViewClass.class));
+            }
+        });
 
 
         editTextSearch.addTextChangedListener(new TextWatcher() {

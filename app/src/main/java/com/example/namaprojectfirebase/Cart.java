@@ -4,6 +4,9 @@ import static com.example.namaprojectfirebase.Login.mAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +15,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.namaprojectfirebase.ui.home.HomeFragment;
@@ -27,7 +32,7 @@ import java.util.logging.Handler;
 
 
 public class Cart extends AppCompatActivity {
-    RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
     CartProductAdapter adapter;
     List<Product> productList;
     static DatabaseReference dbProducts,dbProductsInCart;
@@ -37,12 +42,90 @@ public class Cart extends AppCompatActivity {
     public TextView sumTotal;
     public DataSnapshot snapshotAllProducts;
     DatabaseReference orderDbSnap;
+    DrawerLayout drawerLayout;
+    public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart);
         productList = new ArrayList<>();
+
+
+        showAllProducts = findViewById(R.id.showAllProducts);
+        cartActivity = findViewById(R.id.cartActivity);
+        showAllOrders = findViewById(R.id.showAllOrders);
+        addProductActivity = findViewById(R.id.addProductActivity);
+        allGraphs = findViewById(R.id.allGraphs);
+        overdueActivity = findViewById(R.id.overdueActivity);
+        userListActivity = findViewById(R.id.userListActivity);
+        addUserActivity = findViewById(R.id.addUserActivity);
+
+        showAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Cart.this, MainActivity.class));
+            }
+        });
+        cartActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Cart.this, Cart.class));
+            }
+        });
+        showAllOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Cart.this, Orders.class));
+            }
+        });
+        addProductActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Cart.this, AddProduct.class));
+            }
+        });
+        allGraphs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Cart.this, GraphClass.class));
+            }
+        });
+        overdueActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Cart.this, ExpDateItems.class));
+            }
+        });
+        addUserActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                System.out.println("TRY TO GO T REGISTER");
+                startActivity(new Intent(Cart.this, Register.class));
+            }
+        });
+        userListActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Cart.this, UserRecycleViewClass.class));
+            }
+        });
+
+
+
+
+
+
+//        drawerLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_drawer, null);
+//        FrameLayout container = drawerLayout.findViewById(R.id.drawer_layout);
+//        container.addView(recyclerView);
+//        super.setContentView(drawerLayout);
+//
+//
+//        Toolbar toolbar = drawerLayout.findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
+
         orderPlaced=0;
         //////System.out.println("At the create orderPlaced flag " + orderPlaced);
 
@@ -98,6 +181,7 @@ public class Cart extends AppCompatActivity {
                 startActivity(new Intent(Cart.this, Order.class));
 
 
+
                 //////System.out.println(orderPlaced + " THIS IS ORDER PLACED FLAG BEFORE");
                 orderPlaced = 1;
                 //////System.out.println(orderPlaced + " THIS IS ORDER PLACED FLAG AFTER");
@@ -106,6 +190,7 @@ public class Cart extends AppCompatActivity {
 
             }
         });
+
     }
 
     ValueEventListener valueEventListener = new ValueEventListener() {
@@ -152,7 +237,9 @@ public class Cart extends AppCompatActivity {
                     ////System.out.println(sum + "the sum");
                     sumTotal.setText("TOTAL FOR THIS ORDER: " + sum);
                 }
+
                 adapter.notifyDataSetChanged();
+
             }
 
         }
@@ -198,16 +285,20 @@ public class Cart extends AppCompatActivity {
                 }
                 createNewCart();
             }
+
             }
 
         @Override
         public void onCancelled(@NonNull DatabaseError error) {
 
         }
+
     };
 
 
+    public void resetGraph(){
 
+    }
 
 
 
