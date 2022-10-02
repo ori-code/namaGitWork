@@ -63,7 +63,7 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:text="Show Card">-->
 
-<!--    </Button>-->
+<!--    </Button>-->//////
 
     <CheckBox
         android:id="@+id/checkBoxFood"
