@@ -41,16 +41,6 @@
 
     </ImageView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:text="ORDERS LIST"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        android:textStyle="bold"></TextView>
-
 
     <!--    <RelativeLayout-->
 <!--        android:layout_width="414dp"-->
@@ -141,6 +131,16 @@
 <!--        android:checked="true"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="10dp"
+        android:text="ORDERS LIST"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allItemsRecyclerViewOrders"

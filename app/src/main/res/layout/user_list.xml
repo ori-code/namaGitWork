@@ -9,9 +9,10 @@
 
     <EditText
         android:id="@+id/editTextSearchUser"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="45dp"
-        android:hint="Enter the name of user                                                     "
+        android:hint="Enter the name of user"
+        android:layout_marginLeft="10dp"
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/usersRecycleView"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,19 +38,22 @@
         android:id="@+id/adminCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:buttonTint="@color/black"
         android:checked="true"
         android:text="Admin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <CheckBox
         android:id="@+id/workerCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="105dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="48dp"
+        android:buttonTint="@color/black"
         android:checked="true"
         android:text="Worker"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,8 +63,9 @@
         android:id="@+id/courierCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginTop="48dp"
+        android:buttonTint="@color/black"
         android:checked="true"
         android:text="Courier"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,38 +75,33 @@
         android:id="@+id/accountantCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="48dp"
+        android:buttonTint="@color/black"
         android:checked="true"
         android:text="Accountant"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <CheckBox
         android:id="@+id/userClientCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="96dp"
+        android:buttonTint="@color/black"
         android:checked="true"
         android:text="Client"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
-
-
     <androidx.recyclerview.widget.RecyclerView
-    android:layout_marginTop="130dp"
-    android:id="@+id/usersRecycleView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+        android:id="@+id/usersRecycleView"
+        android:layout_width="413dp"
+        android:layout_height="589dp"
+        tools:layout_editor_absoluteY="143dp">
 
-</androidx.recyclerview.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

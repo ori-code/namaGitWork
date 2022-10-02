@@ -6,8 +6,29 @@
         <entry key="../../../../../../../../../layout/custom_preview.xml" value="0.1447841726618705" />
         <entry key="../../../../../../../Library/Android/sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.18802083333333333" />
         <entry key="../../../../../../../Library/Android/sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.20625" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/activity_login.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/activity_main.xml" value="0.2953125" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/activity_order_form.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/activity_orders.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/activity_product.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/activity_product_edit.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/activity_purchases.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/activity_register.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/app_bar_drawer.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/cart.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/content_drawer.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/fragment_gallery.xml" value="0.37135416666666665" />
         <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/fragment_home.xml" value="0.2953125" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/fragment_slideshow.xml" value="0.36564102564102563" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/graphs_layout.xml" value="0.36564102564102563" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/nav_header_drawer.xml" value="0.36564102564102563" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/one_user_layout.xml" value="0.36564102564102563" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/order_layout.xml" value="0.36564102564102563" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/overdue_table.xml" value="0.36564102564102563" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/recyclerlist.xml" value="0.36564102564102563" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/recyclerlistcart.xml" value="0.36564102564102563" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/update_order.xml" value="0.36564102564102563" />
+        <entry key="..\:/Users/veron/AndroidStudioProjects/namaGitWork1/app/src/main/res/layout/user_list.xml" value="0.36564102564102563" />
         <entry key="..\:/Users/veron/AndroidStudioProjects/namaProjectFirebase/Veronika13/app/src/main/res/layout/activity_login.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/veron/AndroidStudioProjects/namaProjectFirebase/Veronika13/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/veron/AndroidStudioProjects/namaProjectFirebase/Veronika13/app/src/main/res/layout/activity_order_form.xml" value="0.25" />

@@ -12,6 +12,22 @@
     >
 
     <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#484646"
+        android:text="Attention, this field is for manual editing\nof the automatic order, be careful of any changes"
+        android:textColor="#FF0000"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.738" />
+
+    <TextView
         android:id="@+id/nameOfProductEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,7 +53,7 @@
         android:text="Choose the field you want to change"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:textSize="20dp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,168 +61,198 @@
         app:layout_constraintVertical_bias="0.075" />
 
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/buyPriceEditPage"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        android:layout_marginTop="5dp"-->
-    <!--        android:background="@color/white"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint=" Purchase Price"-->
-    <!--        android:inputType="text"-->
-    <!--        android:textColor="@color/black"-->
-    <!--        android:textColorHint="@color/black"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.114"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.305" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/editDateAddPage"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        android:background="@color/white"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Date Of Adding"-->
-    <!--        android:inputType="text"-->
-    <!--        android:textColor="@color/black"-->
-    <!--        android:textColorHint="@color/black"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.114"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.57" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/editDescriptionPage"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        android:background="@color/white"-->
-    <!--        android:ems="10"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:hint="Description"-->
-    <!--        android:inputType="text"-->
-    <!--        android:textColor="@color/black"-->
-    <!--        android:textColorHint="@color/black"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.114"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.633" />-->
-
-    <TextView
-        android:id="@+id/please3"
-        android:layout_width="342dp"
-        android:layout_height="55dp"
-        android:text="For full delete of the product push on the button"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.797" />
-
-    <TextView
-        android:id="@+id/please2"
-        android:layout_width="348dp"
-        android:layout_height="91dp"
-        android:text="Attention, this field is for manual control of automatic orders, be careful of any changes "
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.365"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.434" />
-
     <EditText
-        android:id="@+id/sellPriceEditPage"
-        android:layout_width="wrap_content"
+        android:id="@+id/buyPriceEditPage"
+        android:layout_width="300dp"
         android:layout_height="40dp"
+        android:layout_marginTop="5dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Sell Price"
+        android:hint=" Purchase Price"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintVertical_bias="0.357" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/nameOfProductEditPage"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:background="@color/white"-->
-<!--        android:ems="10"-->
-<!--        android:hint=" Product Name"-->
-<!--        android:inputType="textEmailAddress"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textColorHint="@color/black"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.114"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.16" />-->
+    <!-- <EditText
+        android:id="@+id/editDescriptionPage"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.679" />-->
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/bestBeforeEditPage"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        android:background="@color/white"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Best Before"-->
-    <!--        android:inputType="text"-->
-    <!--        android:textColor="@color/black"-->
-    <!--        android:textColorHint="@color/black"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.114"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.505" />-->
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="202dp"
-    android:layout_marginLeft="23dp"
-    android:text="Quantity"
-    android:textColor="@color/white"/>
+    <EditText
+        android:id="@+id/editDateAddPage"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="Date Of Adding"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461" />
+
+    <EditText
+        android:id="@+id/bestBeforeEditPage"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="Best Before"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.564" />
+
+    <EditText
+        android:id="@+id/nameOfProductEditPage"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint=" Product Name"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.163" />
+
+    <EditText
+        android:id="@+id/sellPriceEditPage"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint=" Sell price"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.261" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="132dp"
-        android:layout_marginLeft="23dp"
-        android:text="Selling price"
-        android:textColor="@color/white">
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Field for edit the selling price"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.226" />
 
-</TextView>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="23dp"
-        android:text="Min. quantity"
-        android:textColor="@color/white"/>
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Field for edit the selling price"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
 
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Field for edit the purchase price"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.324" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For change the date of adding to the system"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.201"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.421" />
+
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For change the best before for the ptoduct"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.183"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For change the quantity fill the field"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.617" />
 
     <EditText
         android:id="@+id/quantityOfProductEditPage"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="40dp"
         android:background="@color/white"
         android:ems="10"
@@ -216,14 +262,14 @@
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.334" />
+        app:layout_constraintVertical_bias="0.664" />
 
     <EditText
         android:id="@+id/minQuantityOfProductEditPage"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="99dp"
         android:background="@color/white"
@@ -234,122 +280,45 @@
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.479" />
+        app:layout_constraintVertical_bias="0.761" />
 
     <Button
         android:id="@+id/productButtonPageEditUpdate"
-        android:layout_width="213dp"
-        android:layout_height="54dp"
+        android:layout_width="170dp"
+        android:layout_height="51dp"
         android:backgroundTint="@color/black"
         android:fontFamily="@font/aldrich"
         android:text="UPDATE"
         android:textColor="@color/white"
-        app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663" />
+        app:layout_constraintVertical_bias="0.958" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/productButtonPageEditDelete"
-        android:layout_width="169dp"
-        android:layout_height="50dp"
-        android:background="#F07979"
+        android:layout_width="167dp"
+        android:layout_height="51dp"
         android:backgroundTint="@color/design_default_color_primary"
         android:fontFamily="@font/aldrich"
-        android:text="DELETE"
+        android:text="DELETE the product"
         android:textColor="@color/white"
+        app:backgroundTint="#E03D3D"
         app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.906" />
-
-    <!--    <Button-->
-    <!--        android:id="@+id/chooserBtn"-->
-    <!--        android:layout_width="100dp"-->
-    <!--        android:layout_height="41dp"-->
-    <!--        android:layout_marginBottom="432dp"-->
-    <!--        android:backgroundTint="@color/black"-->
-    <!--        android:fontFamily="@font/aldrich"-->
-    <!--        android:onClick="onClickChooseImage"-->
-    <!--        android:text="Choose the Pic"-->
-    <!--        android:textColor="@color/white"-->
-    <!--        android:textSize="10dp"-->
-    <!--        app:cornerRadius="5dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.9"-->
-    <!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/loginButton"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="Choose the type of product"-->
-    <!--        android:textColor="@color/white"-->
-    <!--        android:textColorHint="@color/white"-->
-    <!--        android:textSize="20dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.136"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.723" />-->
-
-    <!--    <RelativeLayout-->
-    <!--        android:layout_width="300dp"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        android:background="@color/white"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.207"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.795">-->
-
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:orientation="vertical">-->
-
-    <!--            <Spinner-->
-    <!--                android:id="@+id/spinner1"-->
-    <!--                android:layout_width="300dp"-->
-    <!--                android:layout_height="40dp"-->
-    <!--                android:popupBackground="@color/white"-->
-    <!--                tools:ignore="MissingConstraints" />-->
-    <!--        </LinearLayout>-->
+        app:layout_constraintVertical_bias="0.958" />-->
 
 
-    <!--    </RelativeLayout>-->
 
-    <!--    <RelativeLayout-->
-    <!--        android:layout_width="127dp"-->
-    <!--        android:layout_height="128dp"-->
-    <!--        android:background="@drawable/gallery"-->
-    <!--        android:backgroundTint="@color/white"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.933"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.207"-->
-    <!--        tools:ignore="MissingConstraints">-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/imageView"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-
-    <!--            tools:srcCompat="@tools:sample/avatars" />-->
-    <!--    </RelativeLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

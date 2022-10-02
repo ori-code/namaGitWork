@@ -18,13 +18,13 @@
         android:text="Choose the type of delivery"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:textSize="17dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.601" />
+        app:layout_constraintVertical_bias="0.525" />
 
     <TextView
         android:id="@+id/banner"
@@ -52,13 +52,13 @@
         android:text="Please, fill the form:"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:textSize="17dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.132" />
 
     <EditText
         android:id="@+id/nameOfTheClient"
@@ -69,7 +69,7 @@
         android:layout_marginEnd="16dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Client Name"
+        android:hint=" Full name"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -81,7 +81,6 @@
         app:layout_constraintVertical_bias="0.179" />
 
 
-
     <EditText
         android:id="@+id/editAddressClient"
         android:layout_width="300dp"
@@ -89,7 +88,7 @@
 
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Address of Client"
+        android:hint=" Address"
         android:inputType="textEmailAddress"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -98,7 +97,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.266" />
+        app:layout_constraintVertical_bias="0.248" />
 
     <EditText
         android:id="@+id/phoneOfClient"
@@ -107,7 +106,7 @@
         android:layout_marginTop="5dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Phone Number of Client"
+        android:hint=" Contact number"
         android:inputType="number"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -116,13 +115,12 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.336" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <EditText
         android:id="@+id/editComments"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
         android:background="@color/white"
         android:ems="10"
         android:hint=" Comments"
@@ -134,7 +132,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
+        app:layout_constraintVertical_bias="0.397" />
 
     <Button
         android:id="@+id/markOrderRecieved"
@@ -154,57 +152,53 @@
         app:layout_constraintVertical_bias="1.0" />
 
 
-<RadioGroup
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="460dp"
-    android:orientation="horizontal">
-    <RadioButton
-        android:id="@+id/radioTypeMan"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:text="Deliveryman "
-        android:onClick="radioTypeButtonDeliveryMan"
-        android:textColor="@color/black"
-        android:checked="true"
-        android:textSize="17dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.688" />
+    <RadioGroup
+        android:layout_width="428dp"
+        android:layout_height="113dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="618dp">
+
+    </RadioGroup>
 
     <RadioButton
         android:id="@+id/radioTypeDrone"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:background="@color/white"
-        android:text="Drone "
-        android:textSize="17dp"
         android:onClick="radioTypeDrone"
+        android:text="Drone\n+30₪"
+        android:buttonTint="@color/black"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintVertical_bias="0.668" />
 
     <RadioButton
         android:id="@+id/radioTypePickup"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:background="@color/white"
-        android:text="Pickup "
-        android:textSize="17dp"
         android:onClick="radioTypePickup"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.688" />
-</RadioGroup>
+        android:text="Pickup\nFree "
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="505dp" />
+
+    <RadioButton
+        android:id="@+id/radioTypeMan"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:buttonTint="@color/black"
+        android:checked="true"
+        android:onClick="radioTypeButtonDeliveryMan"
+        android:text="Deliveryman\n+60₪"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="405dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
