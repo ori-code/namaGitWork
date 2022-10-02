@@ -62,6 +62,8 @@ import java.util.Locale;
 public class GraphClass extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     public static ArrayList barArryList;
     public static ArrayList deliveryMansList;
+    public static ArrayList<User> deliveryMansListUsers;
+    public String theCurrentEamil;
     LineChart mpLineChart;
     public static String[] datesArr = new String[500]; // array of dates for graph first date and second the value of sales
     public static String[] datesArrStrings = {"12/05/22","13/05/22"};
@@ -77,6 +79,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static String [] workArray1 = new String[100];
     public int workArrayCount = 0;
     public List<String> nameOfProducts;
+    public static ArrayList<String> dataForSpecificShipmentGraphs;
     StringBuffer dates = new StringBuffer();
     public static List <String> checkArray = new ArrayList<>();
     ArrayList<String> purchasesForGraphs;
@@ -100,7 +103,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public BarChart barChart;
     public LineChart lineChart;
     public TextView pieChartTotalRevenue;
-    public static Query shipmentsQuery,specificShipments;
+    public static Query shipmentsQuery,specificShipments, specificShipmentsGraphQuery;
     public int graphSelected = 0;
     public static String shipmentsDates [];
     public static int shipmentsCount [];
@@ -117,7 +120,8 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         refForGraphs = FirebaseDatabase.getInstance().getReference("orders");
         salesAndBuyingProducts = FirebaseDatabase.getInstance().getReference("products");
         specificShipmentsUsers = FirebaseDatabase.getInstance().getReference("users");
-
+        refAllShipments = FirebaseDatabase.getInstance().getReference("orders");
+        specificShipmentsGraphQuery = refAllShipments.orderByChild("timeOfPlacedOrder");
         shipmentsQuery = refAllShipments.orderByChild("timeOfPlacedOrder");
 
 
@@ -210,8 +214,6 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                     barChart.setVisibility(View.GONE);
                     pieChart.setVisibility(View.GONE);
                     lineChart.setVisibility(View.VISIBLE);
-
-
                     runLineAllShipments();
 //                    getLineChart();
                 }
@@ -222,9 +224,9 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
 //                    runSalesAndBuyingProduct();
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
-                    barChart.setVisibility(View.GONE);
+                    barChart.setVisibility(View.VISIBLE);
                     pieChart.setVisibility(View.GONE);
-                    lineChart.setVisibility(View.VISIBLE);
+                    lineChart.setVisibility(View.GONE);
 
 
                     runSpecificShipments();
@@ -447,11 +449,12 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         }
         if(graphSelected == 4) {
             if(dates!=null){
-                System.out.println("Specific shipments");
-//                runSpecificShipments();
+                System.out.println("Specific shipments  the name of delivery " + textFromAutoComplete + " WITH DATES " + dates);
+
+                runSpecificShipmentsGraphData(textFromAutoComplete);
             }
             else{
-                System.out.println("Specific shipments");
+                System.out.println("Specific shipments and the name of delivery" + textFromAutoComplete + " DATES " + dates);
 //                runSpecificShipments();
             }
         }
@@ -1231,6 +1234,7 @@ public void runSpecificShipments()
 {
     {
         deliveryMansList = new ArrayList();
+        deliveryMansListUsers = new ArrayList<>();
         System.out.println("SPECIFIC SHIPMENTS");
         specificShipments.addValueEventListener(new ValueEventListener() {
             @Override
@@ -1240,10 +1244,15 @@ public void runSpecificShipments()
                     User deliveryMan = shipmentSnapshot.getValue(User.class);
                     if(deliveryMan.getPermission() == 3){
                         System.out.println("HE IS DELIVERY MAN " + deliveryMan.getEmail());
-                        deliveryMansList.add(deliveryMan.getEmail());
+
+                        deliveryMansList.add(deliveryMan.getFullName());
+                        deliveryMansListUsers.add(deliveryMan);
                     }
 
                 }
+                editText = findViewById(R.id.autoComplete);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(GraphClass.this, android.R.layout.simple_list_item_1, deliveryMansList);
+                editText.setAdapter(adapter);
 
             }
 
@@ -1256,6 +1265,48 @@ public void runSpecificShipments()
 
     }
 }
+
+
+  public void runSpecificShipmentsGraphData(String nameOfDelivery){
+
+        theCurrentEamil = new String();
+        System.out.println(" runSpecificShipmentsGraphData ||| " + nameOfDelivery);
+        for(int i = 0; i < deliveryMansListUsers.size(); i++){
+
+           if(nameOfDelivery.equals(deliveryMansListUsers.get(i).getFullName())){
+               System.out.println(" THE SAME NAME  " + deliveryMansListUsers.get(i).getFullName() + " || the edit text "  + nameOfDelivery);
+               theCurrentEamil = deliveryMansListUsers.get(i).getEmail();
+           }
+        }
+
+
+      specificShipmentsGraphQuery.addValueEventListener(new ValueEventListener(){
+          @Override
+
+
+          public void onDataChange(@NonNull DataSnapshot snapshot) {
+              dataForSpecificShipmentGraphs = new ArrayList <String> ();
+              for (DataSnapshot shipmentSnapshot : snapshot.getChildren()) {
+                  System.out.println(" runSpecificShipmentsGraphData  WWWW" + shipmentSnapshot.child("orderer") + " AND THE CURRENT " + theCurrentEamil);
+
+                  if(theCurrentEamil.equals(shipmentSnapshot.child("orderer").getValue().toString())){
+                        dataForSpecificShipmentGraphs.add(shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+//                        System.out.println("qqqqq" + dataForSpecificShipmentGraphs.get(0));
+                  }
+
+
+
+              }
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError error) {
+
+          }
+
+      });
+  }
+
 
 
 
