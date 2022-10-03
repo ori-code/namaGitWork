@@ -186,7 +186,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
 
 
-//
+    //
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -234,7 +234,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             public void onComplete(@NonNull Task<Uri> task) {
                 uploadUri = task.getResult(); //tyt hranitsa ssilka
                 SaveProduct();
-                ////System.out.println("Heyy, the pic is uploaded  " + uploadUri);
+                System.out.println("Heyy, the pic is uploaded  " + uploadUri);
             }
         });
     }
@@ -307,7 +307,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         String bestBefore = BestBefore.getText().toString().trim();
 
 
-
+//        String URL = "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg";
         String URL = uploadUri.toString();
         String description = editDescription.getText().toString().trim();
 
@@ -326,11 +326,11 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             editBuyPrice.requestFocus ();
             return;
         }
-         if(CellPrice.isEmpty()) {
-             editSellPrice.setError("Cell price is required");
-             editSellPrice.requestFocus();
-             return;
-         }
+        if(CellPrice.isEmpty()) {
+            editSellPrice.setError("Cell price is required");
+            editSellPrice.requestFocus();
+            return;
+        }
 
         try {
             buyPr = StoNum(BuyPrice);
@@ -365,15 +365,15 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         FirebaseDatabase.getInstance().getReference("products")
                 .child(uniqueOfProducID)
                 .setValue(dataOfProduct).addOnCompleteListener(new OnCompleteListener<Void>() {
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    //System.out.println("The product has been added with UNIQUE ID " + uniqueOfProducID);
-                } else {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            //System.out.println("The product has been added with UNIQUE ID " + uniqueOfProducID);
+                        } else {
 //                            Toast.makeText(Register.this, " Failed to register! Try again!", Toast.LENGTH_LONG).show();
 
-                }
-            }
-        });
+                        }
+                    }
+                });
 
 
         FirebaseDatabase.getInstance()

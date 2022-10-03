@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.namaprojectfirebase.ui.home.HomeFragment;
@@ -44,6 +45,7 @@ public class Cart extends AppCompatActivity {
     DatabaseReference orderDbSnap;
     DrawerLayout drawerLayout;
     public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
+    public static ImageView toHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,49 @@ public class Cart extends AppCompatActivity {
         overdueActivity = findViewById(R.id.overdueActivity);
         userListActivity = findViewById(R.id.userListActivity);
         addUserActivity = findViewById(R.id.addUserActivity);
+        toHome = findViewById(R.id.toHome);
+
+        toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Cart.this, DrawerActivity.class));
+            }
+        });
+
+
+        if (Login.globalPermission == 2) {
+            //general worker
+            allGraphs.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 3) {
+            //deliveryman
+            addProductActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 4) {
+            //accountant
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+        if(Login.globalPermission == 5) {
+            //client
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            showAllOrders.setVisibility(View.INVISIBLE);
+
+        }
+
+
 
         showAllProducts.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -73,7 +73,7 @@ public class HomeFragment<puiblic> extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+System.out.println("IM IN HOME FARGMENT");
         dbCarts = FirebaseDatabase.getInstance().getReference().child("carts");
 
 
@@ -162,15 +162,13 @@ public class HomeFragment<puiblic> extends Fragment {
             btnPLus.setVisibility(View.INVISIBLE);
             grafBtn.setVisibility(View.INVISIBLE);
             overdueBtn.setVisibility(View.INVISIBLE);
-            ordrButton.setVisibility(View.INVISIBLE);
+            //ordrButton.setVisibility(View.INVISIBLE);
         }
 
         if (Login.globalPermission == 4) {
             //accountant
             btnAdd.setVisibility(View.INVISIBLE);
             btnPLus.setVisibility(View.INVISIBLE);
-            overdueBtn.setVisibility(View.INVISIBLE);
-            ordrButton.setVisibility(View.INVISIBLE);
         }
         if(Login.globalPermission == 5) {
             //client

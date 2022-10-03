@@ -252,6 +252,37 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         overdueActivity = findViewById(R.id.overdueActivity);
         userListActivity = findViewById(R.id.userListActivity);
         addUserActivity = findViewById(R.id.addUserActivity);
+        if (Login.globalPermission == 2) {
+            //general worker
+            allGraphs.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 3) {
+            //deliveryman
+            addProductActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 4) {
+            //accountant
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+        if(Login.globalPermission == 5) {
+            //client
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            showAllOrders.setVisibility(View.INVISIBLE);
+
+        }
 
 
         showAllProducts.setOnClickListener(new View.OnClickListener() {

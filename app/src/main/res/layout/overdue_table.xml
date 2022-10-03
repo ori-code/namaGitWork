@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/tablebck"
     tools:context=".ExpDateItems">
 
 
@@ -56,15 +57,18 @@
 
     </ScrollView>
 
-    <RelativeLayout
-        android:layout_width="411dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:paddingHorizontal="2dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.975">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageButton
             android:id="@+id/showAllProducts"
@@ -73,15 +77,16 @@
             android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/show">
-
-        </ImageButton>
+            android:src="@drawable/show"
+            app:layout_constraintHorizontal_bias="0.011"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"></ImageButton>
 
         <ImageButton
             android:id="@+id/cartActivity"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="50dp"
             android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
@@ -91,21 +96,18 @@
 
         <ImageButton
             android:id="@+id/showAllOrders"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="100dp"
             android:background="@color/white"
             android:padding="7dp"
             android:scaleType="fitCenter"
             android:src="@drawable/orders">
 
         </ImageButton>
-
         <ImageButton
             android:id="@+id/addProductActivity"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="200dp"
             android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
@@ -115,9 +117,8 @@
 
         <ImageButton
             android:id="@+id/allGraphs"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="150dp"
             android:background="@color/white"
             android:padding="4dp"
             android:scaleType="fitCenter"
@@ -129,7 +130,6 @@
             android:id="@+id/overdueActivity"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="250dp"
             android:background="#CDCDCD"
             android:padding="6dp"
             android:scaleType="fitCenter"
@@ -139,9 +139,8 @@
 
         <ImageButton
             android:id="@+id/userListActivity"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="350dp"
             android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
@@ -151,60 +150,28 @@
 
         <ImageButton
             android:id="@+id/addUserActivity"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="300dp"
             android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/newuser">
 
         </ImageButton>
-    </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/toHome"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.017"
+        app:srcCompat="@drawable/home" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/linearLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-<!--        <Spinner-->
-<!--            android:id="@+id/spinner2"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_marginLeft="50dp"-->
-<!--            android:layout_marginTop="660dp"-->
-<!--            android:popupBackground="@color/white"-->
-<!--            tools:ignore="MissingConstraints" />-->
-<!--    </LinearLayout>-->
-
-<!--    <Button-->
-<!--        android:id="@+id/shipmentTypeUpdateBtn"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginTop="530dp"-->
-<!--        android:layout_marginLeft="150dp"-->
-<!--        android:text="Update Status"-->
-<!--        android:onClick="updateStatusOfOrder"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/scrollView2">-->
-<!--    </Button>-->
-
-
-
-
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/finishedOrder"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_marginTop="50dp"-->
-    <!--        android:padding="10dp"-->
-    <!--        tools:layout_editor_absoluteX="1dp"-->
-    <!--        tools:layout_editor_absoluteY="1dp" />-->

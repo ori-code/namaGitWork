@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bckrgd"
+    android:background="#DCDCDC"
     tools:context=".AddProduct"
     tools:layout_editor_absoluteX="-92dp"
     tools:layout_editor_absoluteY="146dp">
@@ -15,12 +15,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/aldrich"
-        android:shadowColor="@color/black"
         android:shadowDx="15"
         android:shadowDy="15"
         android:shadowRadius="15"
         android:text="New Product"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,27 +28,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
+
     <TextView
         android:id="@+id/please"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please, fill the form carefully:"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:text="Please, fill the table carefully:"
+        android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
-
+        app:layout_constraintVertical_bias="0.13" />
 
     <EditText
         android:id="@+id/editID"
-        android:layout_width="match_parent"
+        android:layout_width="230dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/white"
         android:ems="10"
         android:hint=" Inventory Number"
@@ -58,113 +58,104 @@
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintVertical_bias="0.168" />
 
     <EditText
         android:id="@+id/editBuyPrice"
-        android:layout_width="match_parent"
+        android:layout_width="230dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Purchase price"
+        android:hint=" Purchase Price"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.291" />
 
     <EditText
         android:id="@+id/editCellPrice"
-        android:layout_width="match_parent"
+        android:layout_width="230dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Cell price"
+        android:hint=" Cell Price"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.354" />
 
     <EditText
         android:id="@+id/editName"
-        android:layout_width="match_parent"
+        android:layout_width="230dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Product name"
+        android:hint=" Product Name"
         android:inputType="textEmailAddress"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.193" />
+        app:layout_constraintVertical_bias="0.238" />
 
     <EditText
         android:id="@+id/editDateAdd"
-        android:layout_width="match_parent"
+        android:layout_width="230dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Date Of Adding"
+        android:hint="Date Of Adding"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.481" />
+        app:layout_constraintVertical_bias="0.528" />
 
     <EditText
         android:id="@+id/editDescription"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginLeft="10dp"
+        android:layout_width="230dp"
+        android:layout_height="60dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Description"
+        android:hint="Description"
         android:inputType="text"
+        android:paddingBottom="30dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.557" />
+        app:layout_constraintVertical_bias="0.597" />
 
     <EditText
         android:id="@+id/quantity"
-        android:layout_width="match_parent"
+        android:layout_width="230dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/white"
         android:ems="10"
         android:hint=" Quantity"
@@ -173,60 +164,55 @@
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintVertical_bias="0.412" />
 
     <EditText
         android:id="@+id/editBestBefore"
-        android:layout_width="match_parent"
+        android:layout_width="230dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Best Before"
+        android:hint="Best Before"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.424" />
+        app:layout_constraintVertical_bias="0.47" />
 
     <Button
         android:id="@+id/addProductButton"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="80dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/aldrich"
         android:text="ADD"
         android:textColor="@color/black"
-        app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.889"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/chooserBtn"
         android:layout_width="100dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="152dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="412dp"
         android:backgroundTint="@color/white"
-        android:fontFamily="@font/aldrich"
         android:onClick="onClickChooseImage"
-        android:text="Choose the image"
+        android:text="Choose picture"
         android:textColor="@color/black"
         android:textSize="10dp"
-        app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -234,28 +220,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose the type of product"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.629" />
+        app:layout_constraintVertical_bias="0.694" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68">
+        app:layout_constraintVertical_bias="0.746">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -264,49 +247,167 @@
 
             <Spinner
                 android:id="@+id/spinner1"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:popupBackground="@color/white"
                 tools:ignore="MissingConstraints" />
         </LinearLayout>
 
-
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="135dp"
-        android:layout_height="136dp"
+        android:layout_width="127dp"
+        android:layout_height="128dp"
         android:background="@drawable/gallery"
         android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.036"
+        app:layout_constraintHorizontal_bias="0.933"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87"
+        app:layout_constraintVertical_bias="0.207"
         tools:ignore="MissingConstraints">
 
-        <!-- <ImageView
+        <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            tools:srcCompat="@tools:sample/avatars" />-->
+            tools:srcCompat="@tools:sample/avatars" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Optimal size is 480x480px\nand not bigger than 1MB"
-        android:textColor="@color/white"
-        android:textSize="15dp"
+        android:text="Recommended size\nfor adding ig up to 1MB"
+        android:textColor="@color/black"
+        android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.638"
+        app:layout_constraintHorizontal_bias="0.936"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.835" />
+        app:layout_constraintVertical_bias="0.464" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageButton
+            android:id="@+id/showAllProducts"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/show"
+            app:layout_constraintHorizontal_bias="0.011"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/cartActivity"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cart">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/showAllOrders"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/orders">
+
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/addProductActivity"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="#CDCDCD"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newnew">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/overdueActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/overdue">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/allGraphs"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/graf">
+
+        </ImageButton>
+
+
+
+        <ImageButton
+            android:id="@+id/userListActivity"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/users">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/addUserActivity"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:onClick="loginFunc"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newuser">
+
+        </ImageButton>
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/toHome"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022"
+        app:srcCompat="@drawable/home" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

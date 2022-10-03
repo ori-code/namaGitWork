@@ -65,6 +65,38 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
         userListActivity = findViewById(R.id.userListActivity);
         addUserActivity = findViewById(R.id.addUserActivity);
 
+        if (Login.globalPermission == 2) {
+            //general worker
+            allGraphs.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 3) {
+            //deliveryman
+            addProductActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 4) {
+            //accountant
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+        if(Login.globalPermission == 5) {
+            //client
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            showAllOrders.setVisibility(View.INVISIBLE);
+
+        }
+
 
         showAllProducts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,20 +222,13 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
                         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
                         //dd-MM-yyyy
                         String time = df.format(date);
-
-                        String debt = "\n\n"  + finalCheckList.get(count) + "                         " + time.toString();;
+                        String debt = "\n" + finalCheckList.get(count) + "\n\n                                                  " + time.toString();;
                         TextView tvDebt = new TextView(ExpDateItems.this);
-                        tvDebt.setTextSize(16);
+                        tvDebt.setTextSize(19);
                         tvDebt.setTextColor(Color.BLACK);
                         tvDebt.setText("" + debt);
                         row.addView(tvDebt);
-//                        Button currentButton = new Button(ExpDateItems.this);
-                        // you could initialize them here
-
-                        // you can store them
-
-                        // and you have to add them to the TableRow
-//                        table.addView(currentButton);
+//
                         table.addView(row);
                         count++;
                         count++;

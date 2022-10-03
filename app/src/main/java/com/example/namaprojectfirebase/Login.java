@@ -35,6 +35,7 @@ public class Login extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private ProgressBar progressBar;
     public static String nameFromDB;
+    public static int finishedRunning = 0;
     public Query currentUser;
     DatabaseReference databaseReference,finalCheckAllProducts;
     public static int globalPermission;
@@ -51,11 +52,11 @@ public class Login extends AppCompatActivity {
         editTextPassword = (EditText) findViewById (R.id.editTextTextPassword);
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         currentUser = databaseReference.orderByChild("adressText");
+        System.out.println("The email before if  : " + email);
 
-        if(!email.equals("s")) {
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
-            databaseReference.addListenerForSingleValueEvent(valueEventListenerNew);
-        }
+        // bilo !
+
+
 
 
         finalCheckAllProducts = FirebaseDatabase.getInstance().getReference("products");
@@ -69,18 +70,19 @@ public class Login extends AppCompatActivity {
     ValueEventListener valueEventListenerNew = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            //System.out.println("BEFORE RUNNNING" + FirebaseAuth.getInstance().getCurrentUser());
+            System.out.println("BEFORE RUNNNING" + FirebaseAuth.getInstance().getCurrentUser());
             if(!FirebaseAuth.getInstance().getCurrentUser().equals(null)) {
-                //System.out.println("AFTER RUNNNING" + FirebaseAuth.getInstance().getCurrentUser());
+                System.out.println("AFTER RUNNNING" + FirebaseAuth.getInstance().getCurrentUser());
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshotUserType : dataSnapshot.getChildren()) {
                         //System.out.println("IUSERRR" + snapshotUserType.child("permission").getValue());
                         if (snapshotUserType.child("email").getValue().equals(mAuth.getCurrentUser().getEmail())) {
-                            //System.out.println("THE TYPE IS : " + snapshotUserType.child("permission").getValue() + "The user " + mAuth.getCurrentUser().getEmail());
+                            System.out.println("@@@THE TYPE IS : " + snapshotUserType.child("permission").getValue() + "The user " + mAuth.getCurrentUser().getEmail());
                             globalPermission = Integer.parseInt(snapshotUserType.child("permission").getValue().toString());
                             //System.out.println("THE permission : " + globalPermission);
                         }
                     }
+                    finishedRunning = 1;
 //                adapter.notifyDataSetChanged();
                 }
             }
@@ -105,54 +107,51 @@ public class Login extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener( new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if (task.isSuccessful()) {
-                    //redirect to the activity profile
-                    ////System.out.println("Yeeeeey we got in to the system with email !!!! " + mAuth.getCurrentUser().getEmail());
-                    if(globalPermission == 5){
-                        //System.out.println("IM USERRR");
-                        Intent i = new Intent(Login.this, MainActivity.class);
+
+                    if (!email.equals("s")) {
+                        System.out.println("The email : " + email);
+                        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+                        databaseReference.addListenerForSingleValueEvent(valueEventListenerNew);
+
+                    }
+
+                    if (finishedRunning == 1) {
+
+
+                        System.out.println(globalPermission + "f,mgvdkmgndkvndknvGLOBAL");
+                        ////System.out.println("Yeeeeey we got in to the system with email !!!! " + mAuth.getCurrentUser().getEmail());
+
+                        if (globalPermission == 5) {
+                            //System.out.println("IM USERRR");
+                            Intent i = new Intent(Login.this, MainActivity.class);
+                            i.putExtra("id", nameFromDB);
+                            ////System.out.println(nameFromDB);
+//                    if(nameFromDB!=null) {
+                            startActivity(i);
+//                    }
+                        }
+
+
+                        Intent i = new Intent(Login.this, DrawerActivity.class);
                         i.putExtra("id", nameFromDB);
                         ////System.out.println(nameFromDB);
 //                    if(nameFromDB!=null) {
                         startActivity(i);
 //                    }
+                    } else {
+                        ////System.out.println("Yeeeeey we DONT got in to the system with name because mAuth dont works" );
+                        Toast.makeText(Login.this, "You need to try again to login", Toast.LENGTH_LONG).show();
                     }
 
-                    Intent i = new Intent(Login.this, DrawerActivity.class);
-                    i.putExtra("id", nameFromDB);
-                    ////System.out.println(nameFromDB);
-//                    if(nameFromDB!=null) {
-                        startActivity(i);
-//                    }
-                } else {
-                    ////System.out.println("Yeeeeey we DONT got in to the system with name because mAuth dont works" );
-                    Toast.makeText(Login.this, "You need to try again to login", Toast.LENGTH_LONG).show();
                 }
-
 
             }
         });
 
 
-//        //pull the current user
-//        currentUser.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                nameFromDB = dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("fullName").getValue(String.class);
-//
-//                if(dataSnapshot.exists()){
-//                    ////System.out.println("Data snap shoot work" );
-//                    ////System.out.println("Password is " +  nameFromDB);
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
-        ////System.out.println("IM in LOGIN");
 
 
     }

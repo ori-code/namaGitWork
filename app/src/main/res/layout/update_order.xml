@@ -7,42 +7,32 @@
     tools:context=".FinalCheck">
 
 
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:text="Order details"-->
-<!--        android:textSize="20dp"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColor="@color/black">-->
-
-<!--    </TextView>-->
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="fill_parent"
-        android:layout_height="590dp"
-        android:padding="10dp"
-        android:dividerHeight="1dp"
-        android:background="@color/browser_actions_bg_grey"
-        android:paddingBottom="57dp"
-        android:fillViewport="true"
+        android:layout_height="550dp"
         android:layout_weight="1"
+        android:background="@color/browser_actions_bg_grey"
+        android:dividerHeight="1dp"
+        android:fillViewport="true"
+        android:padding="10dp"
+        android:paddingBottom="57dp"
         android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
             android:id="@+id/myTableLayout"
-            android:fillViewport="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-
+            android:fillViewport="true"
             android:orientation="horizontal"
+
+            android:paddingBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,93 +43,183 @@
                 android:id="@+id/firstRow"
                 android:layout_width="356dp"
                 android:layout_height="match_parent">
-                <!-- first element of the row-->
-                <!--            <TextView-->
-                <!--                android:id="@+id/simpleTextView"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:background="#b0b0b0"-->
-                <!--                android:padding="18dip"-->
-                <!--                android:text="Name of Product"-->
-                <!--                android:textColor="#000"-->
-                <!--                android:textSize="12dp" />-->
-                <!--  android:id="@+id/simpleTextView"-->
 
                 <TextView
                     android:id="@+id/orderFinalDetails"
-                    android:layout_width="343dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="18dip"
+                    android:layout_marginLeft="60dp"
+                    android:fontFamily="@font/aldrich"
                     android:text="Summary order details"
                     android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </TableRow>
-
-
-
         </TableLayout>
 
     </ScrollView>
 
 
-
     <TextView
         android:id="@+id/sumTotalForThisOrder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
         android:text="TOTAL + SHIPPING : "
-        android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="600dp"
-        android:layout_marginLeft="20dp">
-
-    </TextView>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.767">
 
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="660dp"
-            android:popupBackground="@color/white"
-            tools:ignore="MissingConstraints" />
-    </LinearLayout>
+    </TextView>
 
-    <Button
-        android:id="@+id/shipmentTypeUpdateBtn"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="530dp"
-        android:layout_marginLeft="150dp"
-        android:text="Update Status"
-        android:onClick="updateStatusOfOrder"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:popupBackground="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2">
-    </Button>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824"
+        tools:ignore="MissingConstraints" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/shipmentTypeUpdateBtn"
+        android:layout_width="133dp"
+        android:layout_height="60dp"
+        android:onClick="updateStatusOfOrder"
+        android:text="Update Status"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.902"></androidx.appcompat.widget.AppCompatButton>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
+        <ImageButton
+            android:id="@+id/showAllProducts"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/show"
+            app:layout_constraintHorizontal_bias="0.011"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"></ImageButton>
 
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/finishedOrder"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        android:padding="10dp"-->
-<!--        tools:layout_editor_absoluteX="1dp"-->
-<!--        tools:layout_editor_absoluteY="1dp" />-->
+        <ImageButton
+            android:id="@+id/cartActivity"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cart">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/showAllOrders"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="#CDCDCD"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/orders">
+
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/addProductActivity"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newnew">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/allGraphs"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/graf">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/overdueActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/overdue">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/userListActivity"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/users">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/addUserActivity"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:onClick="loginFunc"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/newuser">
+
+        </ImageButton>
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/toHome"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022"
+        app:srcCompat="@drawable/home" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

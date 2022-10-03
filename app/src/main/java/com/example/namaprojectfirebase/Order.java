@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +37,8 @@ public class Order extends Activity {
     public EditText editClientName, editAddress, editPhone, editComments ;
     public Button addPurchases;
     public static int deliveryType = 0;
+    public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +54,47 @@ public class Order extends Activity {
 
         allProducts = FirebaseDatabase.getInstance().getReference("products");
         updateQuantityFromGlobal = allProducts.orderByKey();
+
+        showAllProducts = findViewById(R.id.showAllProducts);
+        cartActivity = findViewById(R.id.cartActivity);
+        showAllOrders = findViewById(R.id.showAllOrders);
+        addProductActivity = findViewById(R.id.addProductActivity);
+        allGraphs = findViewById(R.id.allGraphs);
+        overdueActivity = findViewById(R.id.overdueActivity);
+        userListActivity = findViewById(R.id.userListActivity);
+        addUserActivity = findViewById(R.id.addUserActivity);
+
+        if (Login.globalPermission == 2) {
+            //general worker
+            allGraphs.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 3) {
+            //deliveryman
+            addProductActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 4) {
+            //accountant
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+        if(Login.globalPermission == 5) {
+            //client
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            showAllOrders.setVisibility(View.INVISIBLE);
+
+        }
 
 
         //ORDERS QUERY

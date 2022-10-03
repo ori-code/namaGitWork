@@ -9,18 +9,18 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="350dp"
-        android:layout_height="35dp"
+        android:layout_width="351dp"
+        android:layout_height="28dp"
         android:layout_marginStart="5dp"
         android:text="SELECT GRAPH AND DATES YOU NEED TO SHOW"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintHorizontal_bias="0.181"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.018">
+        app:layout_constraintVertical_bias="0.028">
 
     </TextView>
 
@@ -123,9 +123,9 @@
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/line_chart"
-                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:visibility="visible"></com.github.mikephil.charting.charts.LineChart>
         </RelativeLayout>
 
@@ -148,15 +148,18 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="411dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:paddingHorizontal="2dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.975">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageButton
             android:id="@+id/showAllProducts"
@@ -165,15 +168,16 @@
             android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/show">
-
-        </ImageButton>
+            android:src="@drawable/show"
+            app:layout_constraintHorizontal_bias="0.011"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"></ImageButton>
 
         <ImageButton
             android:id="@+id/cartActivity"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="50dp"
             android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
@@ -183,22 +187,19 @@
 
         <ImageButton
             android:id="@+id/showAllOrders"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="100dp"
             android:background="@color/white"
             android:padding="7dp"
             android:scaleType="fitCenter"
             android:src="@drawable/orders">
 
         </ImageButton>
-
         <ImageButton
             android:id="@+id/addProductActivity"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:layout_marginLeft="200dp"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/newnew">
@@ -207,9 +208,8 @@
 
         <ImageButton
             android:id="@+id/allGraphs"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="150dp"
             android:background="#CDCDCD"
             android:padding="4dp"
             android:scaleType="fitCenter"
@@ -221,7 +221,6 @@
             android:id="@+id/overdueActivity"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="250dp"
             android:background="@color/white"
             android:padding="6dp"
             android:scaleType="fitCenter"
@@ -231,10 +230,9 @@
 
         <ImageButton
             android:id="@+id/userListActivity"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:layout_marginLeft="350dp"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/users">
@@ -243,15 +241,26 @@
 
         <ImageButton
             android:id="@+id/addUserActivity"
-            android:layout_width="50dp"
+            android:layout_width="48dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="300dp"
             android:background="@color/white"
+            android:onClick="loginFunc"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/newuser">
 
         </ImageButton>
-    </RelativeLayout>
 
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/toHome"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022"
+        app:srcCompat="@drawable/home" />
 </androidx.constraintlayout.widget.ConstraintLayout>

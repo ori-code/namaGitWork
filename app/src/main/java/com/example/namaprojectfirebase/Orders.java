@@ -63,7 +63,37 @@ public class Orders extends AppCompatActivity {
         addUserActivity = findViewById(R.id.addUserActivity);
 
 
+        if (Login.globalPermission == 2) {
+            //general worker
+            allGraphs.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+        }
 
+        if (Login.globalPermission == 3) {
+            //deliveryman
+            addProductActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 4) {
+            //accountant
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+        if(Login.globalPermission == 5) {
+            //client
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            showAllOrders.setVisibility(View.INVISIBLE);
+
+        }
 
 //        ordersList.add(new OrderForList("dkl", "ldkld", "lkdl", "dlkdl", "ldklkd", "dlkd","dlkd"));
 //        ordersList.add(new OrderForList(1, "hey", "Hey", 12, 13345677));

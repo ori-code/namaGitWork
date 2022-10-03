@@ -8,21 +8,21 @@
 
     <EditText
         android:id="@+id/editTextSearch"
-        android:layout_width="331dp"
-        android:layout_height="46dp"
+        android:layout_width="301dp"
+        android:layout_height="45dp"
         android:hint="Enter the property of product                                        "
         android:textSize="15dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.145"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026"></EditText>
+        app:layout_constraintVertical_bias="0.023"></EditText>
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="48dp"
+        android:layout_width="44dp"
+        android:layout_height="43dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="5dp"
         android:background="@color/white"
@@ -32,10 +32,10 @@
         android:src="@drawable/searchglass"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.969"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026">
+        app:layout_constraintVertical_bias="0.023">
 
     </ImageView>
 
@@ -136,6 +136,7 @@
         android:layout_height="513dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:paddingLeft="5dp"
         android:background="#F3F3F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -203,6 +204,17 @@
         </ImageButton>
 
         <ImageButton
+            android:id="@+id/overdueActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/overdue">
+
+        </ImageButton>
+
+        <ImageButton
             android:id="@+id/allGraphs"
             android:layout_width="48dp"
             android:layout_height="50dp"
@@ -213,16 +225,6 @@
 
         </ImageButton>
 
-        <ImageButton
-            android:id="@+id/overdueActivity"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:padding="6dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/overdue">
-
-        </ImageButton>
 
         <ImageButton
             android:id="@+id/userListActivity"
@@ -253,6 +255,17 @@
 
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/toHome"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022"
+        app:srcCompat="@drawable/home" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

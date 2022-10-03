@@ -48,8 +48,10 @@
                 android:id="@+id/textViewQuantityCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="220dp"
+                android:layout_marginLeft="290dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="21dp"
+                android:layout_toStartOf="@+id/quantityMinus"
                 android:text="100"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textStyle="bold" />
@@ -59,8 +61,8 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:layout_marginEnd="69dp"
-                android:layout_toStartOf="@+id/quantityMinus"
+                android:layout_marginEnd="17dp"
+                android:layout_toStartOf="@+id/textViewQuantityCart"
                 android:backgroundTint="#ACACAC"
                 android:text="+">
 
@@ -79,8 +81,8 @@
                 android:id="@+id/deleteFromCart"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="160dp"
+                android:layout_marginEnd="11dp"
+                android:layout_toStartOf="@+id/quantityPlus"
                 android:backgroundTint="#FE0100"
                 android:text="x" />
 
