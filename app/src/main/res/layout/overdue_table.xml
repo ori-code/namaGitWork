@@ -8,30 +8,10 @@
     tools:context=".ExpDateItems">
 
 
-
-
-    <!--    <TextView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:text="Order details"-->
-    <!--        android:textSize="20dp"-->
-    <!--        android:textStyle="bold"-->
-    <!--        android:textColor="@color/black">-->
-
-    <!--    </TextView>-->
-
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp">-->
-<!--        <include layout="@layout/app_bar_drawer"></include>-->
-<!--    </RelativeLayout>-->
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="411dp"
         android:layout_height="662dp"
-        android:layout_weight="1"
-        android:background="@color/browser_actions_bg_grey"
         android:dividerHeight="1dp"
         android:fillViewport="true"
         android:padding="10dp"
@@ -50,8 +30,6 @@
             android:layout_marginBottom="8dp"
             android:fillViewport="true"
             android:orientation="horizontal"
-
-            android:paddingBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,48 +38,24 @@
 
             <TableRow
                 android:id="@+id/firstRow"
-                android:layout_width="356dp"
+                android:layout_width="360dp"
                 android:layout_height="match_parent">
-                <!-- first element of the row-->
-                <!--            <TextView-->
-                <!--                android:id="@+id/simpleTextView"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:background="#b0b0b0"-->
-                <!--                android:padding="18dip"-->
-                <!--                android:text="Name of Product"-->
-                <!--                android:textColor="#000"-->
-                <!--                android:textSize="12dp" />-->
-                <!--  android:id="@+id/simpleTextView"-->
 
                 <TextView
                     android:id="@+id/orderFinalDetails"
-                    android:layout_width="343dp"
-                    android:layout_height="wrap_content"
-                    android:padding="18dip"
-                    android:text="Products with near exp.date"
+                    android:layout_width="364dp"
+                    android:layout_height="match_parent"
+                    android:text="OVERDUE PRODUCTS"
+                    android:fontFamily="@font/aldrich"
                     android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
             </TableRow>
-
-
         </TableLayout>
 
     </ScrollView>
 
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/sumTotalForThisOrder"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:text="TOTAL + SHIPPING : "-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_marginTop="600dp"-->
-<!--        android:layout_marginLeft="20dp">-->
     <RelativeLayout
         android:layout_width="411dp"
         android:layout_height="50dp"
@@ -110,13 +64,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
         app:layout_constraintVertical_bias="0.975">
 
         <ImageButton
             android:id="@+id/showAllProducts"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/show">
@@ -128,6 +82,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="50dp"
+            android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/cart">
@@ -139,6 +94,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="100dp"
+            android:background="@color/white"
             android:padding="7dp"
             android:scaleType="fitCenter"
             android:src="@drawable/orders">
@@ -150,6 +106,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="200dp"
+            android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/newnew">
@@ -161,6 +118,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="150dp"
+            android:background="@color/white"
             android:padding="4dp"
             android:scaleType="fitCenter"
             android:src="@drawable/graf">
@@ -172,6 +130,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="250dp"
+            android:background="#CDCDCD"
             android:padding="6dp"
             android:scaleType="fitCenter"
             android:src="@drawable/overdue">
@@ -183,9 +142,10 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="350dp"
+            android:background="@color/white"
             android:padding="5dp"
-            android:src="@drawable/users"
-            android:scaleType="fitCenter">
+            android:scaleType="fitCenter"
+            android:src="@drawable/users">
 
         </ImageButton>
 
@@ -194,7 +154,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="300dp"
-            android:onClick="loginFunc"
+            android:background="@color/white"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/newuser">

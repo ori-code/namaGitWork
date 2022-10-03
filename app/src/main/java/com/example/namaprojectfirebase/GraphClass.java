@@ -664,7 +664,7 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                             }
                         }
                         Date df = new java.util.Date(dv);
-                        String vv = new SimpleDateFormat("MM-dd-yyyy hh:mma").format(df);
+                        String vv = new SimpleDateFormat("MM-dd-yyyy").format(df);
                         ////System.out.println("VV " + vv);
                         ////System.out.println("THE EPOCH " + datesArr[i + 1] + " AFTER CONVERSION DATE NEW" + vv);
                         days[j] = vv;
@@ -1000,7 +1000,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 //        valuesOfProductsSales // <= allsalescounting
 //        revenueProductsArr // <= revenue
 
-        pieChartTotalRevenue = findViewById(R.id.pie_chart_total_revenue);
+        //pieChartTotalRevenue = findViewById(R.id.pie_chart_total_revenue);
 
         for(int i = 0; i < nameOfProductsInAllBuyingAndSale.length; i++){
             System.out.println("THE TOTAl" + revenueProductsArr[i]  + " HEY " + Integer.parseInt(String.valueOf(valuesOfProductsSales[i])));
@@ -1009,7 +1009,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
             entries.add(new PieEntry(total, nameOfProductsInAllBuyingAndSale[i] + " | " + valuesOfProductsSales[i] + " | " + total));
             summaryRev = total + summaryRev;
         }
-        pieChartTotalRevenue.setText("THE TOTAL REVENUE IS :" + summaryRev);
+        //pieChartTotalRevenue.setText("THE TOTAL REVENUE IS :" + summaryRev);
 
 
         //percentage in value

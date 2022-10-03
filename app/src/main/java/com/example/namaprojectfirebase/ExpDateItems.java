@@ -27,9 +27,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class ExpDateItems extends Activity implements AdapterView.OnItemSelectedListener {
     //    public static ArrayList <String> finalCheckList;
@@ -178,15 +180,21 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
                     //System.out.println("EXP DATE IS " + exp + " AND CURRENT IS " + epochCurrent/1000 + "THE NAME OF PRODUCT "+ snapshot.child("nameOfProduct").getValue() );
                     if((exp - epochCurrent/1000) < 604800*5){
                         //System.out.println("RESULT LESS THEN 5 WEEKS  "+604800*5 + " "+(exp - epochCurrent/1000) + " " + snapshot.child("nameOfProduct").getValue());
+
                         finalCheckList.add(snapshot.child("nameOfProduct").getValue().toString());
                         finalCheckList.add(snapshot.child("bestBefore").getValue().toString());
 //                        //System.out.println("THE PRODUCT IN LIST" + finalCheckList.get(count) + "THE DATE IS " + finalCheckList.get(count+1));
                         TableRow row = new TableRow(ExpDateItems.this);
                         Date date = new Date(Long.parseLong(finalCheckList.get(count + 1)));
-                        String debt = "\n\n" + "   " + finalCheckList.get(count) + "\n" + "\n" + "   " + date.toString();;
+
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+                        //dd-MM-yyyy
+                        String time = df.format(date);
+
+                        String debt = "\n\n"  + finalCheckList.get(count) + "                         " + time.toString();;
                         TextView tvDebt = new TextView(ExpDateItems.this);
-                        tvDebt.setTextSize(14);
-                        tvDebt.setTextColor(Color.RED);
+                        tvDebt.setTextSize(16);
+                        tvDebt.setTextColor(Color.BLACK);
                         tvDebt.setText("" + debt);
                         row.addView(tvDebt);
 //                        Button currentButton = new Button(ExpDateItems.this);
