@@ -82,6 +82,10 @@
 
         </ImageButton>
 
+
+
+
+
         <ImageButton
             android:id="@+id/addProductActivity"
             android:layout_width="48dp"
@@ -93,16 +97,7 @@
 
         </ImageButton>
 
-        <ImageButton
-            android:id="@+id/allGraphs"
-            android:layout_width="48dp"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:padding="4dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/graf">
 
-        </ImageButton>
 
         <ImageButton
             android:id="@+id/overdueActivity"
@@ -112,6 +107,17 @@
             android:padding="6dp"
             android:scaleType="fitCenter"
             android:src="@drawable/overdue">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/allGraphs"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/graf">
 
         </ImageButton>
 

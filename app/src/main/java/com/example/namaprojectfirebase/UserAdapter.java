@@ -104,8 +104,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
-        holder.textViewInUserListType.setText(user.getLicenseNum());
+        holder.textViewInUserListType.setText(user.getEmail());
         holder.nameOfUserInList.setText(user.getFullName());
+        holder.textViewShortDescInUserList.setText(user.getLicenseNum());
         if(user.getPermission()==1){
             holder.userPermisionImageInlist.setImageResource(R.drawable.accountant);
         }

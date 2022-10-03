@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -58,6 +59,8 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     public Uri uploadUri;
     public String UriStr;
     public  Calendar calendarExp, calendarAdd;
+    public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
+    public static ImageView toHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +70,110 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 //        rootDataBase.addListenerForSingleValueEvent(rootDataBase.addValueEventListener());
         mStorageRef = FirebaseStorage.getInstance().getReference("ImageDB");
 
+        showAllProducts = findViewById(R.id.showAllProducts);
+        cartActivity = findViewById(R.id.cartActivity);
+        showAllOrders = findViewById(R.id.showAllOrders);
+        addProductActivity = findViewById(R.id.addProductActivity);
+        allGraphs = findViewById(R.id.allGraphs);
+        overdueActivity = findViewById(R.id.overdueActivity);
+        userListActivity = findViewById(R.id.userListActivity);
+        addUserActivity = findViewById(R.id.addUserActivity);
+        toHome = findViewById(R.id.toHome);
+
+          toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddProduct.this, DrawerActivity.class));
+            }
+        });
+        showAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddProduct.this, MainActivity.class));
+            }
+        });
+        cartActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddProduct.this, Cart.class));
+            }
+        });
+        showAllOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddProduct.this, Orders.class));
+            }
+        });
+        addProductActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddProduct.this, AddProduct.class));
+            }
+        });
+        allGraphs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddProduct.this, GraphClass.class));
+            }
+        });
+        overdueActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddProduct.this, ExpDateItems.class));
+            }
+        });
+        addUserActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                System.out.println("TRY TO GO T REGISTER");
+                startActivity(new Intent(AddProduct.this, Register.class));
+            }
+        });
+        userListActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddProduct.this, UserRecycleViewClass.class));
+            }
+        });
+
+        if (Login.globalPermission == 2) {
+            //general worker
+            allGraphs.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 3) {
+            //deliveryman
+            addProductActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+
+        if (Login.globalPermission == 4) {
+            //accountant
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+        }
+        if(Login.globalPermission == 5) {
+            //client
+            addProductActivity.setVisibility(View.INVISIBLE);
+            addUserActivity.setVisibility(View.INVISIBLE);
+            overdueActivity.setVisibility(View.INVISIBLE);
+            userListActivity.setVisibility(View.INVISIBLE);
+            allGraphs.setVisibility(View.INVISIBLE);
+            showAllOrders.setVisibility(View.INVISIBLE);
+
+        }
+
+
         DateAdding = (TextView) findViewById(R.id.editDateAdd);
         BestBefore = (TextView) findViewById(R.id.editBestBefore);
+
+
+
 
 
 

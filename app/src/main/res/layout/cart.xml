@@ -182,16 +182,6 @@
 
         </ImageButton>
 
-        <ImageButton
-            android:id="@+id/allGraphs"
-            android:layout_width="48dp"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:padding="4dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/graf">
-
-        </ImageButton>
 
         <ImageButton
             android:id="@+id/overdueActivity"
@@ -203,6 +193,20 @@
             android:src="@drawable/overdue">
 
         </ImageButton>
+
+
+        <ImageButton
+            android:id="@+id/allGraphs"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/graf">
+
+        </ImageButton>
+
+
 
         <ImageButton
             android:id="@+id/userListActivity"

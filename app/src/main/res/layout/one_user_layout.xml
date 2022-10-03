@@ -25,8 +25,9 @@
                 android:id="@+id/nameOfUserInList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="40dp"
+                android:layout_toEndOf="@+id/textView15"
                 android:text="Name of User"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#000000"
@@ -66,6 +67,16 @@
                 android:text="EMAIL"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="40dp"
+                android:text="Full name:"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
 
         </RelativeLayout>
 
