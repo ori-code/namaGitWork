@@ -1291,7 +1291,7 @@ public void runSpecificShipments()
 
                   if(theCurrentEamil.equals(shipmentSnapshot.child("orderer").getValue().toString())){
                         dataForSpecificShipmentGraphs.add(shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
-//                        System.out.println("qqqqq" + dataForSpecificShipmentGraphs.get(0));
+                        System.out.println("qqqqq" + dataForSpecificShipmentGraphs.get(0));
                   }
 
 
