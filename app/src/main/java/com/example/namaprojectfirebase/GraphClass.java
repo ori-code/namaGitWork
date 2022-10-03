@@ -61,6 +61,9 @@ import java.util.Locale;
 
 public class GraphClass extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     public static ArrayList barArryList;
+    public static ArrayList deliveryMansList;
+    public static ArrayList<User> deliveryMansListUsers;
+    public String theCurrentEamil;
     LineChart mpLineChart;
     public static String[] datesArr = new String[500]; // array of dates for graph first date and second the value of sales
     public static String[] datesArrStrings = {"12/05/22","13/05/22"};
@@ -76,13 +79,14 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static String [] workArray1 = new String[100];
     public int workArrayCount = 0;
     public List<String> nameOfProducts;
+    public static ArrayList<String> dataForSpecificShipmentGraphs;
     StringBuffer dates = new StringBuffer();
     public static List <String> checkArray = new ArrayList<>();
     ArrayList<String> purchasesForGraphs;
     public static int finishedGetDataAllShipments;
     DatabaseReference finalCheckPurchases;
     DatabaseReference refAllShipments;
-    public static DatabaseReference refForGraphs, salesAndBuyingProducts;
+    public static DatabaseReference refForGraphs, salesAndBuyingProducts,specificShipmentsUsers;
     public static DatabaseReference graphRef;
     public static ValueEventListener valueEventListenerSalesOfProduct;
     public static ValueEventListener valueEventListenerAllShipments;
@@ -99,7 +103,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public BarChart barChart;
     public LineChart lineChart;
     public TextView pieChartTotalRevenue;
-    public static Query shipmentsQuery;
+    public static Query shipmentsQuery,specificShipments, specificShipmentsGraphQuery;
     public int graphSelected = 0;
     public static String shipmentsDates [];
     public static int shipmentsCount [];
@@ -115,7 +119,13 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         refAllShipments = FirebaseDatabase.getInstance().getReference("orders");
         refForGraphs = FirebaseDatabase.getInstance().getReference("orders");
         salesAndBuyingProducts = FirebaseDatabase.getInstance().getReference("products");
+        specificShipmentsUsers = FirebaseDatabase.getInstance().getReference("users");
+        refAllShipments = FirebaseDatabase.getInstance().getReference("orders");
+        specificShipmentsGraphQuery = refAllShipments.orderByChild("timeOfPlacedOrder");
         shipmentsQuery = refAllShipments.orderByChild("timeOfPlacedOrder");
+
+
+        specificShipments = specificShipmentsUsers.orderByKey();
 
         purchasesForGraphs = new ArrayList<String>();
         pieChart = findViewById(R.id.pie_chart);
@@ -196,9 +206,6 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                 }
                 if (item == "Overall shipments") {
                     graphSelected = 3;
-
-
-
                     ////System.out.println("THE SALES BUYING");
                     ////System.out.println(Login.anArrayOfProducts[0]);
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
@@ -207,9 +214,22 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                     barChart.setVisibility(View.GONE);
                     pieChart.setVisibility(View.GONE);
                     lineChart.setVisibility(View.VISIBLE);
-
-
                     runLineAllShipments();
+//                    getLineChart();
+                }
+                if (item == "Specific shipments") {
+                    graphSelected = 4;
+                    ////System.out.println("THE SALES BUYING");
+                    ////System.out.println(Login.anArrayOfProducts[0]);
+//                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+//                    runSalesAndBuyingProduct();
+//                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
+                    barChart.setVisibility(View.VISIBLE);
+                    pieChart.setVisibility(View.GONE);
+                    lineChart.setVisibility(View.GONE);
+
+
+                    runSpecificShipments();
 //                    getLineChart();
                 }
 
@@ -425,6 +445,17 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
             }
             else{
                 runLineAllShipments();
+            }
+        }
+        if(graphSelected == 4) {
+            if(dates!=null){
+                System.out.println("Specific shipments  the name of delivery " + textFromAutoComplete + " WITH DATES " + dates);
+
+                runSpecificShipmentsGraphData(textFromAutoComplete);
+            }
+            else{
+                System.out.println("Specific shipments and the name of delivery" + textFromAutoComplete + " DATES " + dates);
+//                runSpecificShipments();
             }
         }
     }
@@ -1196,6 +1227,90 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 //        dataVals.add(new Entry(2,2f));
         return dataVals;
     }
+
+
+//Specific shipments
+public void runSpecificShipments()
+{
+    {
+        deliveryMansList = new ArrayList();
+        deliveryMansListUsers = new ArrayList<>();
+        System.out.println("SPECIFIC SHIPMENTS");
+        specificShipments.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot shipmentSnapshot : dataSnapshot.getChildren()) {
+                    User deliveryMan = shipmentSnapshot.getValue(User.class);
+                    if(deliveryMan.getPermission() == 3){
+                        System.out.println("HE IS DELIVERY MAN " + deliveryMan.getEmail());
+
+                        deliveryMansList.add(deliveryMan.getFullName());
+                        deliveryMansListUsers.add(deliveryMan);
+                    }
+
+                }
+                editText = findViewById(R.id.autoComplete);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(GraphClass.this, android.R.layout.simple_list_item_1, deliveryMansList);
+                editText.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
+    }
+}
+
+
+  public void runSpecificShipmentsGraphData(String nameOfDelivery){
+
+        theCurrentEamil = new String();
+        System.out.println(" runSpecificShipmentsGraphData ||| " + nameOfDelivery);
+        for(int i = 0; i < deliveryMansListUsers.size(); i++){
+
+           if(nameOfDelivery.equals(deliveryMansListUsers.get(i).getFullName())){
+               System.out.println(" THE SAME NAME  " + deliveryMansListUsers.get(i).getFullName() + " || the edit text "  + nameOfDelivery);
+               theCurrentEamil = deliveryMansListUsers.get(i).getEmail();
+           }
+        }
+
+
+      specificShipmentsGraphQuery.addValueEventListener(new ValueEventListener(){
+          @Override
+
+
+          public void onDataChange(@NonNull DataSnapshot snapshot) {
+              dataForSpecificShipmentGraphs = new ArrayList <String> ();
+              for (DataSnapshot shipmentSnapshot : snapshot.getChildren()) {
+                  System.out.println(" runSpecificShipmentsGraphData  WWWW" + shipmentSnapshot.child("orderer") + " AND THE CURRENT " + theCurrentEamil);
+
+                  if(theCurrentEamil.equals(shipmentSnapshot.child("orderer").getValue().toString())){
+                        dataForSpecificShipmentGraphs.add(shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                        System.out.println("qqqqq" + dataForSpecificShipmentGraphs.get(0));
+                  }
+
+
+
+              }
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError error) {
+
+          }
+
+      });
+  }
+
+
+
+
+
 }
 
 
