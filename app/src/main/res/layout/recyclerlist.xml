@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/overallCart"
     android:layout_width="match_parent"
     android:layout_height="160dp"
@@ -165,6 +166,14 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/add_to_cart"
                 android:text="+"></ImageButton>
+
+            <ImageView
+                android:id="@+id/hotIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="70dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/hot" />
 
         </RelativeLayout>
 

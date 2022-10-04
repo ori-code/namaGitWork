@@ -86,13 +86,14 @@ public class Order extends Activity {
             addUserActivity.setVisibility(View.INVISIBLE);
         }
         if(Login.globalPermission == 5) {
+            //DONT GET WHY I NEED THIS ?? BUT THIS IS DOING
             //client
-            addProductActivity.setVisibility(View.INVISIBLE);
-            addUserActivity.setVisibility(View.INVISIBLE);
-            overdueActivity.setVisibility(View.INVISIBLE);
-            userListActivity.setVisibility(View.INVISIBLE);
-            allGraphs.setVisibility(View.INVISIBLE);
-            showAllOrders.setVisibility(View.INVISIBLE);
+//            addProductActivity.setVisibility(View.INVISIBLE);
+//            addUserActivity.setVisibility(View.INVISIBLE);
+//            overdueActivity.setVisibility(View.INVISIBLE);
+//            userListActivity.setVisibility(View.INVISIBLE);
+//            allGraphs.setVisibility(View.INVISIBLE);
+//            showAllOrders.setVisibility(View.INVISIBLE);
 
         }
 

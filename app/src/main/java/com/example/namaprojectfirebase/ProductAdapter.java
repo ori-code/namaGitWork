@@ -74,11 +74,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public static long lassAddingCount = 0;
     public static long minQuantity = 0;
     public static ArrayList dateOfAdding1;
+    public static ImageView hotIcon;
 
 
     public ProductAdapter(Context mCtx, List<Product> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
+
     }
 
 
@@ -149,7 +151,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             }
 
 
-
         if(Login.globalPermission == 1 || Login.globalPermission == 2 || Login.globalPermission == 4 ) {
 
 //GREEN PRODUCT
@@ -157,6 +158,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             ////System.out.println("Im THE GREEN PRODUCT " + theLastTimeAdded);
             if(epochCurrent - theLastTimeAdded < 1662508800){
                 ////System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
+
                 overallCart.setBackgroundColor(Color.parseColor("#007F00"));
             }
 
@@ -654,6 +656,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 
 
+        if(Login.globalPermission == 5){
+
+            if(theLastQntyAdded*0.5 > productList.get(position).getQuantity()){
+                ////System.out.println("Im THE GREEN PRODUCT " + theLastTimeAdded);
+                if(epochCurrent - theLastTimeAdded < 1662508800){
+                    ////System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
+
+                    hotIcon.setVisibility(View.VISIBLE);
+                    overallCart.setBackgroundColor(Color.parseColor("#DADADA"));
+                }
+
+            }
+        }
+
+
 
 
 
@@ -679,7 +696,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.textViewRating.setText("Available Quantity: " + String.valueOf((int) product.getQuantity()));
 
 
-
     }
 
     @Override
@@ -694,7 +710,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+         public ImageView imageViewHot;
         TextView textViewTitle, textViewDesc, textViewRating, textViewPrice, expDateInList, counter;
         ImageButton addToCardRecycle;
 
@@ -714,6 +730,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             expDateInList = itemView.findViewById(R.id.expDateInList);
             imageArrow = itemView.findViewById(R.id.imageArrow);
             cardForRecycle = itemView.findViewById(R.id.cardForRecycle);
+            hotIcon = itemView.findViewById(R.id.hotIcon);
 
 
             overallCart = itemView.findViewById(R.id.overallCart);
