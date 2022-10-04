@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +37,7 @@ public class Orders extends AppCompatActivity {
     DatabaseReference dbOrdersPlaced;
     public static OrderForListAdapter adapterOrders;
     public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
-
+    public static ImageView toHome;
 
 
 
@@ -61,6 +62,8 @@ public class Orders extends AppCompatActivity {
         overdueActivity = findViewById(R.id.overdueActivity);
         userListActivity = findViewById(R.id.userListActivity);
         addUserActivity = findViewById(R.id.addUserActivity);
+        toHome = findViewById(R.id.toHome);
+
 
 
         if (Login.globalPermission == 2) {
@@ -106,11 +109,17 @@ public class Orders extends AppCompatActivity {
 
 
 //
+        toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Orders.this, DrawerActivity.class));
+            }
+        });
         showAllProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(Orders.this, MainActivity.class));
+                startActivity(new Intent(Orders.this, DrawerActivity.class));
             }
         });
         cartActivity.setOnClickListener(new View.OnClickListener() {

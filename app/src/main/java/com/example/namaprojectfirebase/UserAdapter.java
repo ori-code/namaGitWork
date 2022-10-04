@@ -39,7 +39,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
 
     class UserViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewInUserListType,nameOfUserInList,textViewShortDescInUserList;
+        public TextView textViewInUserListType,nameOfUserInList,textViewShortDescInUserList, textViewShortDescInUserList2, textViewShortDescInUserList3, textViewShortDescInUserList4;
         public ImageView userPermisionImageInlist;
         public ImageButton deleteUserBtn;
         public UserViewHolder(@NonNull View itemView) {
@@ -48,33 +48,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             nameOfUserInList = itemView.findViewById(R.id.nameOfUserInList);
             textViewShortDescInUserList = itemView.findViewById(R.id.textViewShortDescInUserList);
             userPermisionImageInlist = itemView.findViewById(R.id.userPermisionImageInlist);
+            textViewShortDescInUserList2 = itemView.findViewById(R.id.textViewShortDescInUserList2);
+            textViewShortDescInUserList3 = itemView.findViewById(R.id.textViewShortDescInUserList3);
+            textViewShortDescInUserList4 = itemView.findViewById(R.id.textViewShortDescInUserList4);
             deleteUserBtn = itemView.findViewById(R.id.deleteUserBtn);
 
-
-
-
-
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(View v) {
-//                                                int position = getAdapterPosition();
-//                                                Product product = productList.get(position);
-//
-//
-//                                                String strNameOfProduct = productList.get(position).getNameOfProduct();
-//                                                ////System.out.println("Send String " + strNameOfProduct);
-//
-//                                                Intent intentToEditProduct = new Intent(mCtx, editProduct.class);
-//                                                intentToEditProduct.putExtra("keyName", strNameOfProduct);
-//                                                if(Login.globalPermission == 1) {
-//                                                    v.getContext().startActivity(intentToEditProduct);
-//                                                }
-//                                                ////System.out.println("THE NAME THAT SENDED " + strNameOfProduct);
-//                                            }
-//                                        }
-//
-//
-//            );
 
 
             deleteUserBtn.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +85,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.textViewInUserListType.setText(user.getEmail());
         holder.nameOfUserInList.setText(user.getFullName());
         holder.textViewShortDescInUserList.setText(user.getLicenseNum());
+        holder.textViewShortDescInUserList2.setText(user.getPhoneNum());
+        holder.textViewShortDescInUserList3.setText(user.getAddress());
+        //holder.textViewShortDescInUserList4.setText(user.getAddress());
         if(user.getPermission()==1){
             holder.userPermisionImageInlist.setImageResource(R.drawable.accountant);
         }

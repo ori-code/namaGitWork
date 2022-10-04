@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -109,7 +110,7 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public static int shipmentsCount [];
 //    private int mFillColorAll = Color.argb(150,51,181,229)
 public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
-
+    public static ImageView toHome;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -252,6 +253,15 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         overdueActivity = findViewById(R.id.overdueActivity);
         userListActivity = findViewById(R.id.userListActivity);
         addUserActivity = findViewById(R.id.addUserActivity);
+        toHome = findViewById(R.id.toHome);
+
+        toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GraphClass.this, DrawerActivity.class));
+            }
+        });
+
         if (Login.globalPermission == 2) {
             //general worker
             allGraphs.setVisibility(View.INVISIBLE);

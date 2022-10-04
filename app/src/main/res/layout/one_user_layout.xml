@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="33dp"
                 android:layout_toEndOf="@+id/textView15"
                 android:text="Name of User"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -48,22 +48,57 @@
 
             </ImageButton>
 
+
             <TextView
                 android:id="@+id/textViewShortDescInUserList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="65dp"
-                android:text="13.3 Inch, 256 GB"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="53dp"
+                android:layout_toEndOf="@+id/textView18"
+                android:text="1license"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/black" />
 
+            <TextView
+                android:id="@+id/textViewShortDescInUserList2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="73dp"
+                android:layout_toEndOf="@+id/textView19"
+                android:text="telephone"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textViewShortDescInUserList3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="93dp"
+                android:layout_toEndOf="@+id/textView20"
+                android:text="address"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textViewShortDescInUserList4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="113dp"
+                android:layout_toEndOf="@+id/textView21"
+                android:text="salary"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textViewInUserListType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:text="EMAIL"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textStyle="bold" />
@@ -73,10 +108,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="33dp"
                 android:text="Full name:"
-                android:textSize="15dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="53dp"
+                android:text="License No.:"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="73dp"
+                android:text="Tel.:"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="93dp"
+                android:text="Address:"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="113dp"
+                android:text="Salary:"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
         </RelativeLayout>
 
