@@ -172,7 +172,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
 
 
-
+//
 if(Login.globalPermission == 1 || Login.globalPermission == 2) {
     if (readingDataCount < productList.size()) {
 
