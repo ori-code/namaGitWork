@@ -150,6 +150,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 
 
+        if(Login.globalPermission == 1 || Login.globalPermission == 2 || Login.globalPermission == 4 ) {
+
 //GREEN PRODUCT
         if(theLastQntyAdded*0.5 > productList.get(position).getQuantity()){
             ////System.out.println("Im THE GREEN PRODUCT " + theLastTimeAdded);
@@ -173,7 +175,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 
 ////
-if(Login.globalPermission == 1 || Login.globalPermission == 2) {
+
     if (readingDataCount < productList.size()) {
 
         System.out.println("MIN QNTY " + productList.get(position).getMinQty());

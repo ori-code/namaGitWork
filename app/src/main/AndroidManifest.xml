@@ -34,6 +34,10 @@
             android:name=".FinalCheck"
             android:exported="false"/>
         <activity
+            android:name=".UserEdit"
+            android:exported="false"/>
+        UserEdit
+        <activity
             android:name=".UserRecycleViewClass"
             android:exported="false"/>
         <activity
