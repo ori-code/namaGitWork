@@ -105,9 +105,9 @@ public class DrawerActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Cart(MenuItem item) {
+    public void Update(MenuItem item) {
 
-        Intent intent = new Intent(this, Cart.class);
+        Intent intent = new Intent(this, UserEdit.class);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

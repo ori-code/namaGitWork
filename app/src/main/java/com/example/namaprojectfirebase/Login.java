@@ -83,6 +83,32 @@ public class Login extends AppCompatActivity {
                         }
                     }
                     finishedRunning = 1;
+
+                    if (finishedRunning == 1) {
+                        System.out.println(globalPermission + "f,mgvdkmgndkvndknvGLOBAL");
+                        ////System.out.println("Yeeeeey we got in to the system with email !!!! " + mAuth.getCurrentUser().getEmail());
+
+                        if (globalPermission == 5) {
+                            //System.out.println("IM USERRR");
+                            Intent i = new Intent(Login.this, MainActivity.class);
+                            i.putExtra("id", nameFromDB);
+                            ////System.out.println(nameFromDB);
+//                    if(nameFromDB!=null) {
+                            startActivity(i);
+//                    }
+                        }
+
+
+                        Intent i = new Intent(Login.this, DrawerActivity.class);
+                        i.putExtra("id", nameFromDB);
+                        ////System.out.println(nameFromDB);
+//                    if(nameFromDB!=null) {
+                        startActivity(i);
+//                    }
+                    } else {
+                        ////System.out.println("Yeeeeey we DONT got in to the system with name because mAuth dont works" );
+                        Toast.makeText(Login.this, "You need to try again to login", Toast.LENGTH_LONG).show();
+                    }
 //                adapter.notifyDataSetChanged();
                 }
             }
@@ -117,33 +143,7 @@ public class Login extends AppCompatActivity {
 
                     }
 
-                    if (finishedRunning == 1) {
 
-
-                        System.out.println(globalPermission + "f,mgvdkmgndkvndknvGLOBAL");
-                        ////System.out.println("Yeeeeey we got in to the system with email !!!! " + mAuth.getCurrentUser().getEmail());
-
-                        if (globalPermission == 5) {
-                            //System.out.println("IM USERRR");
-                            Intent i = new Intent(Login.this, MainActivity.class);
-                            i.putExtra("id", nameFromDB);
-                            ////System.out.println(nameFromDB);
-//                    if(nameFromDB!=null) {
-                            startActivity(i);
-//                    }
-                        }
-
-
-                        Intent i = new Intent(Login.this, DrawerActivity.class);
-                        i.putExtra("id", nameFromDB);
-                        ////System.out.println(nameFromDB);
-//                    if(nameFromDB!=null) {
-                        startActivity(i);
-//                    }
-                    } else {
-                        ////System.out.println("Yeeeeey we DONT got in to the system with name because mAuth dont works" );
-                        Toast.makeText(Login.this, "You need to try again to login", Toast.LENGTH_LONG).show();
-                    }
 
                 }
 

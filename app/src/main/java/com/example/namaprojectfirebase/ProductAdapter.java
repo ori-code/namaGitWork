@@ -150,6 +150,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 
 
+        if(Login.globalPermission == 1 || Login.globalPermission == 2 || Login.globalPermission == 4 ) {
+
 //GREEN PRODUCT
         if(theLastQntyAdded*0.5 > productList.get(position).getQuantity()){
             ////System.out.println("Im THE GREEN PRODUCT " + theLastTimeAdded);
@@ -172,36 +174,36 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
 
 
+////
 
+    if (readingDataCount < productList.size()) {
 
-        if(readingDataCount < productList.size()){
-
-            System.out.println("MIN QNTY " + productList.get(position).getMinQty());
-            System.out.println("Reading Count  " + readingDataCount); // products count in list
+        System.out.println("MIN QNTY " + productList.get(position).getMinQty());
+        System.out.println("Reading Count  " + readingDataCount); // products count in list
         //last adding and min quantity algorithm
 
 
-            System.out.println("THE NAME OF PRODUCT " + productList.get(position).getNameOfProduct());
-            System.out.println("THE LAST TIME ADDED " + theLastTimeAdded+ " epochCurrent " +epochCurrent+ " THE RESULT " + (epochCurrent - theLastTimeAdded)/1000);
+        System.out.println("THE NAME OF PRODUCT " + productList.get(position).getNameOfProduct());
+        System.out.println("THE LAST TIME ADDED " + theLastTimeAdded + " epochCurrent " + epochCurrent + " THE RESULT " + (epochCurrent - theLastTimeAdded) / 1000);
 
-        if(productList.get(position).getMinQty() >= productList.get(position).getQuantity()){
+        if (productList.get(position).getMinQty() >= productList.get(position).getQuantity()) {
             //less than 1 week reached
-            if((epochCurrent - theLastTimeAdded)/1000 < 604800){
+            if ((epochCurrent - theLastTimeAdded) / 1000 < 604800) {
                 //less than week
                 System.out.println("THE NAME OF PRODUCT AFTER IF " + productList.get(position).getNameOfProduct());
-                System.out.println("THE LAST TIME ADDED " + theLastTimeAdded+ " epochCurrent " +epochCurrent+ " THE RESULT " + (epochCurrent - theLastTimeAdded));
+                System.out.println("THE LAST TIME ADDED " + theLastTimeAdded + " epochCurrent " + epochCurrent + " THE RESULT " + (epochCurrent - theLastTimeAdded));
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(mCtx);
                 builder1.setMessage("The " + productList.get(position).getNameOfProduct() + " reached the minimum quantity parameter in LESS THAN WEEK, are you want to order 150% of quantity from the last adding? ");
                 builder1.setCancelable(true);
                 long[] longAddingDateArr;// = new long[productList.get(position).getAddingDate().toString().length()];
                 longAddingDateArr = productList.get(position).getAddingDate();
 
-                for(int i = 0; i < longAddingDateArr.length; i++){
-                    if(longAddingDateArr[i] == 0){
-                        lastAddingDate = longAddingDateArr[i-2];
-                        lassAddingCount = longAddingDateArr[i-1];
-                        System.out.println("HHHH in place: " + i + " DATA=> " +longAddingDateArr[i-1] + " and " + longAddingDateArr[i-2]);
-                        System.out.println("GGGG in place: " + i + " DATA=> " +lassAddingCount + " and " + lastAddingDate);
+                for (int i = 0; i < longAddingDateArr.length; i++) {
+                    if (longAddingDateArr[i] == 0) {
+                        lastAddingDate = longAddingDateArr[i - 2];
+                        lassAddingCount = longAddingDateArr[i - 1];
+                        System.out.println("HHHH in place: " + i + " DATA=> " + longAddingDateArr[i - 1] + " and " + longAddingDateArr[i - 2]);
+                        System.out.println("GGGG in place: " + i + " DATA=> " + lassAddingCount + " and " + lastAddingDate);
                         break;
                     }
 
@@ -218,24 +220,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                         if (dataSnapshot.exists()) {
                                             // dataSnapshot is the "issue" node with all children with id 0
                                             for (DataSnapshot product : dataSnapshot.getChildren()) {
-                                                if(product.child("nameOfProduct").getValue().equals(productList.get(position).getNameOfProduct())){
+                                                if (product.child("nameOfProduct").getValue().equals(productList.get(position).getNameOfProduct())) {
 
                                                     dateOfAdding1 = (ArrayList) product.child("dataOfAdding").getValue();
-                                                    theNowQuantity1 =  Long.parseLong(product.child("quantity").getValue().toString());
+                                                    theNowQuantity1 = Long.parseLong(product.child("quantity").getValue().toString());
 
-                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size()-1);
+                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size() - 1);
 
                                                     System.out.println("THE LAST count of added qnty " + theLastCountAdding);
                                                     theKeyOfProduct1 = product.getKey();
-                                                    long lassAddingCount1 = (long) (theLastCountAdding*1.5);
+                                                    long lassAddingCount1 = (long) (theLastCountAdding * 1.5);
                                                     long updatedQnty = theNowQuantity1 + lassAddingCount1;
                                                     int sizeAndLastPLace = dateOfAdding1.size();
-                                                    long time= System.currentTimeMillis();
+                                                    long time = System.currentTimeMillis();
                                                     FirebaseDatabase.getInstance()
                                                             .getReference("products")
                                                             .child(theKeyOfProduct1)
                                                             .child("dataOfAdding")
-                                                            .child(String.valueOf(sizeAndLastPLace+1))
+                                                            .child(String.valueOf(sizeAndLastPLace + 1))
                                                             .setValue(time)
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -254,7 +256,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .getReference("products")
                                                             .child(theKeyOfProduct1)
                                                             .child("dataOfAdding")
-                                                            .child(String.valueOf(sizeAndLastPLace+2))
+                                                            .child(String.valueOf(sizeAndLastPLace + 2))
                                                             .setValue(lassAddingCount1)
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -322,24 +324,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                         if (dataSnapshot.exists()) {
                                             // dataSnapshot is the "issue" node with all children with id 0
                                             for (DataSnapshot product : dataSnapshot.getChildren()) {
-                                                if(product.child("nameOfProduct").getValue().equals(productList.get(position).getNameOfProduct())){
+                                                if (product.child("nameOfProduct").getValue().equals(productList.get(position).getNameOfProduct())) {
 
                                                     dateOfAdding1 = (ArrayList) product.child("dataOfAdding").getValue();
-                                                    theNowQuantity1 =  Long.parseLong(product.child("quantity").getValue().toString());
+                                                    theNowQuantity1 = Long.parseLong(product.child("quantity").getValue().toString());
 
-                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size()-1);
+                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size() - 1);
 
                                                     System.out.println("THE LAST count of added qnty " + theLastCountAdding);
                                                     theKeyOfProduct1 = product.getKey();
-                                                    long lassAddingCount1 = (long) (theLastCountAdding*1.0);
+                                                    long lassAddingCount1 = (long) (theLastCountAdding * 1.0);
                                                     long updatedQnty = theNowQuantity1 + lassAddingCount1;
                                                     int sizeAndLastPLace = dateOfAdding1.size();
-                                                    long time= System.currentTimeMillis();
+                                                    long time = System.currentTimeMillis();
                                                     FirebaseDatabase.getInstance()
                                                             .getReference("products")
                                                             .child(theKeyOfProduct1)
                                                             .child("dataOfAdding")
-                                                            .child(String.valueOf(sizeAndLastPLace+1))
+                                                            .child(String.valueOf(sizeAndLastPLace + 1))
                                                             .setValue(time)
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -358,7 +360,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .getReference("products")
                                                             .child(theKeyOfProduct1)
                                                             .child("dataOfAdding")
-                                                            .child(String.valueOf(sizeAndLastPLace+2))
+                                                            .child(String.valueOf(sizeAndLastPLace + 2))
                                                             .setValue(lassAddingCount1)
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -406,31 +408,28 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                 });
 
 
-
-
                                 dialog.cancel();
                             }
                         });
 
                 AlertDialog alert11 = builder1.create();
                 alert11.show();
-            }
-            else{
+            } else {
 
                 System.out.println("THE NAME OF PRODUCT AFTER IF " + productList.get(position).getNameOfProduct());
-                System.out.println("THE LAST TIME ADDED " + theLastTimeAdded+ " epochCurrent " +epochCurrent+ " THE RESULT " + (epochCurrent - theLastTimeAdded));
+                System.out.println("THE LAST TIME ADDED " + theLastTimeAdded + " epochCurrent " + epochCurrent + " THE RESULT " + (epochCurrent - theLastTimeAdded));
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(mCtx);
                 builder1.setMessage("The " + productList.get(position).getNameOfProduct() + " reached the minimum quantity parameter, are you want to order 100% of quantity from the last adding? ");
                 builder1.setCancelable(true);
                 long[] longAddingDateArr;// = new long[productList.get(position).getAddingDate().toString().length()];
                 longAddingDateArr = productList.get(position).getAddingDate();
 
-                for(int i = 0; i < longAddingDateArr.length; i++){
-                    if(longAddingDateArr[i] == 0){
-                        lastAddingDate = longAddingDateArr[i-2];
-                        lassAddingCount = longAddingDateArr[i-1];
-                        System.out.println("HHHH in place: " + i + " DATA=> " +longAddingDateArr[i-1] + " and " + longAddingDateArr[i-2]);
-                        System.out.println("GGGG in place: " + i + " DATA=> " +lassAddingCount + " and " + lastAddingDate);
+                for (int i = 0; i < longAddingDateArr.length; i++) {
+                    if (longAddingDateArr[i] == 0) {
+                        lastAddingDate = longAddingDateArr[i - 2];
+                        lassAddingCount = longAddingDateArr[i - 1];
+                        System.out.println("HHHH in place: " + i + " DATA=> " + longAddingDateArr[i - 1] + " and " + longAddingDateArr[i - 2]);
+                        System.out.println("GGGG in place: " + i + " DATA=> " + lassAddingCount + " and " + lastAddingDate);
                         break;
                     }
 
@@ -447,24 +446,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                         if (dataSnapshot.exists()) {
                                             // dataSnapshot is the "issue" node with all children with id 0
                                             for (DataSnapshot product : dataSnapshot.getChildren()) {
-                                                if(product.child("nameOfProduct").getValue().equals(productList.get(position).getNameOfProduct())){
+                                                if (product.child("nameOfProduct").getValue().equals(productList.get(position).getNameOfProduct())) {
 
                                                     dateOfAdding1 = (ArrayList) product.child("dataOfAdding").getValue();
-                                                    theNowQuantity1 =  Long.parseLong(product.child("quantity").getValue().toString());
+                                                    theNowQuantity1 = Long.parseLong(product.child("quantity").getValue().toString());
 
-                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size()-1);
+                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size() - 1);
 
                                                     System.out.println("THE LAST count of added qnty " + theLastCountAdding);
                                                     theKeyOfProduct1 = product.getKey();
-                                                    long lassAddingCount1 = (long) (theLastCountAdding*1.0);
+                                                    long lassAddingCount1 = (long) (theLastCountAdding * 1.0);
                                                     long updatedQnty = theNowQuantity1 + lassAddingCount1;
                                                     int sizeAndLastPLace = dateOfAdding1.size();
-                                                    long time= System.currentTimeMillis();
+                                                    long time = System.currentTimeMillis();
                                                     FirebaseDatabase.getInstance()
                                                             .getReference("products")
                                                             .child(theKeyOfProduct1)
                                                             .child("dataOfAdding")
-                                                            .child(String.valueOf(sizeAndLastPLace+1))
+                                                            .child(String.valueOf(sizeAndLastPLace + 1))
                                                             .setValue(time)
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -483,7 +482,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .getReference("products")
                                                             .child(theKeyOfProduct1)
                                                             .child("dataOfAdding")
-                                                            .child(String.valueOf(sizeAndLastPLace+2))
+                                                            .child(String.valueOf(sizeAndLastPLace + 2))
                                                             .setValue(lassAddingCount1)
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -647,15 +646,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 alert11.show();
 
 
-
-
-
             }
         }
-            readingDataCount++;
-        }
-
-
+        readingDataCount++;
+    }
+}
 
 
 
