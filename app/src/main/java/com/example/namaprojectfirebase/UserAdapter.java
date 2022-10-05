@@ -53,7 +53,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             textViewShortDescInUserList2 = itemView.findViewById(R.id.textViewShortDescInUserList2);
             textViewShortDescInUserList3 = itemView.findViewById(R.id.textViewShortDescInUserList3);
             textViewShortDescInUserList4 = itemView.findViewById(R.id.textViewShortDescInUserList4);
-            deleteUserBtn = itemView.findViewById(R.id.deleteUserBtn);
+            //deleteUserBtn = itemView.findViewById(R.id.deleteUserBtn);
 
 
 
