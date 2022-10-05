@@ -319,6 +319,7 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
             shipmentTypeUpdate=2;
         }
         if (text.equals("Shipped")) {
+
             shipmentTypeUpdate=3;
         }
 //        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();

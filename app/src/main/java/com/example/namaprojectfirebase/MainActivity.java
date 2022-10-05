@@ -297,8 +297,9 @@ public class MainActivity extends AppCompatActivity {
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshotUserType : dataSnapshot.getChildren()) {
+                    //@@@@@
                     ////System.out.println("IUSERRR"  + snapshotUserType.child("permission").getValue());
-                    if(snapshotUserType.child("email").getValue().equals(mAuth.getCurrentUser().getEmail())){
+                    if(snapshotUserType.child("email").getValue().equals(Login.mAuth.getCurrentUser().getEmail())){
                         ////System.out.println("THE TYPE IS : " + snapshotUserType.child("permission").getValue() + "The user " + mAuth.getCurrentUser().getEmail());
                         Login.globalPermission = Integer.parseInt(snapshotUserType.child("permission").getValue().toString()) ;
                         ////System.out.println("THE permission : " + Login.globalPermission);

@@ -73,7 +73,7 @@ public class DrawerActivity extends AppCompatActivity {
         TextView activeUserEmail = (TextView) headerView.findViewById(R.id.activeUserEmail);
         TextView activeUserName = (TextView) headerView.findViewById(R.id.activeUserName);
         activeUserEmail.setText("You are logged with " + Login.mAuth.getCurrentUser().getEmail());
-        activeUserName.setText("Welcome, " + Login.nameFromDB);
+//        activeUserName.setText("Welcome, " + "Login.nameFromDB");
 
 
 
