@@ -137,7 +137,7 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
         addUserActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                System.out.println("TRY TO GO T REGISTER");
+//                //System.out.println("TRY TO GO T REGISTER");
                 startActivity(new Intent(ExpDateItems.this, Register.class));
             }
         });
@@ -153,7 +153,7 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
 //        final ActionBar actionBar = getActionBar();
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        //System.out.println("THE CURRENT " + epochCurrent/1000);
+        ////System.out.println("THE CURRENT " + epochCurrent/1000);
 
 //        int orderNumber = 0,shipmentType = 0;
 //        orderFinalDetails = findViewById(R.id.orderFinalDetails);
@@ -164,7 +164,7 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
 //        orderNumber = intent.getIntExtra("orderNumber", orderNumber);
 //        shipmentType = intent.getIntExtra("shipmentType",shipmentType);
 //
-//        //System.out.println( "WHY hhh" + shipmentType);
+//        ////System.out.println( "WHY hhh" + shipmentType);
 //        if(shipmentType == 1){
 //            shipmentFee =100;
 //        }
@@ -174,7 +174,7 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
 //        if(shipmentType == 3){
 //            shipmentFee =0;
 //        }
-//        //System.out.println("FEE" + shipmentFee);
+//        ////System.out.println("FEE" + shipmentFee);
 //        int tmpInt = orderNumber;
 //        String tmpStr10 = String.valueOf(tmpInt);
 
@@ -209,13 +209,13 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     long exp = (long) snapshot.child("bestBefore").getValue();
                     exp = exp/1000;
-                    //System.out.println("EXP DATE IS " + exp + " AND CURRENT IS " + epochCurrent/1000 + "THE NAME OF PRODUCT "+ snapshot.child("nameOfProduct").getValue() );
+                    ////System.out.println("EXP DATE IS " + exp + " AND CURRENT IS " + epochCurrent/1000 + "THE NAME OF PRODUCT "+ snapshot.child("nameOfProduct").getValue() );
                     if((exp - epochCurrent/1000) < 604800*5){
-                        //System.out.println("RESULT LESS THEN 5 WEEKS  "+604800*5 + " "+(exp - epochCurrent/1000) + " " + snapshot.child("nameOfProduct").getValue());
+                        ////System.out.println("RESULT LESS THEN 5 WEEKS  "+604800*5 + " "+(exp - epochCurrent/1000) + " " + snapshot.child("nameOfProduct").getValue());
 
                         finalCheckList.add(snapshot.child("nameOfProduct").getValue().toString());
                         finalCheckList.add(snapshot.child("bestBefore").getValue().toString());
-//                        //System.out.println("THE PRODUCT IN LIST" + finalCheckList.get(count) + "THE DATE IS " + finalCheckList.get(count+1));
+//                        ////System.out.println("THE PRODUCT IN LIST" + finalCheckList.get(count) + "THE DATE IS " + finalCheckList.get(count+1));
                         TableRow row = new TableRow(ExpDateItems.this);
                         Date date = new Date(Long.parseLong(finalCheckList.get(count + 1)));
 
@@ -242,21 +242,21 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
 
 //                    try {
 //                        for (int i = 0; i < anArrayOfProducts.length; i++) {
-//                            //System.out.println("PRODUCTS FROM LIST :" + anArrayOfProducts[i].toString());
+//                            ////System.out.println("PRODUCTS FROM LIST :" + anArrayOfProducts[i].toString());
 //                            if (anArrayOfProducts[i].toString().equals(snapshot.getKey())) {
-//                                //System.out.println("FOUNDED!!!! " + anArrayOfProducts[i].toString());
-//                                //System.out.println("HEYY " + anArrayOfProducts[i].toString() + " : " + snapshot.getValue().toString());
+//                                ////System.out.println("FOUNDED!!!! " + anArrayOfProducts[i].toString());
+//                                ////System.out.println("HEYY " + anArrayOfProducts[i].toString() + " : " + snapshot.getValue().toString());
 //                                finalCheckList.add(anArrayOfProducts[i].toString());
 //                                finalCheckList.add(snapshot.getValue().toString());
 //                                finalCheckList.add(anArrayOfProducts[i + 1]);
 //                                i++;
 //
 //
-//                                //System.out.println("LIST STRING" + finalCheckList);
+//                                ////System.out.println("LIST STRING" + finalCheckList);
 //                            }
 //                        }
 //                    } catch (Exception e) {
-//                        //System.out.println(e);
+//                        ////System.out.println(e);
 //                    }
 
 
@@ -286,7 +286,7 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
 //
 ////                sumTotalShipping.setText("SHIPPING : " + shipmentFee + "\nTOTAL IS : " + String.valueOf(sumForOrder));
 //
-//                //System.out.println("SUM IS IN THIS ORDER " + sumForOrder);
+//                ////System.out.println("SUM IS IN THIS ORDER " + sumForOrder);
 //                i++;
 //                i++;
 //
@@ -338,7 +338,7 @@ public class ExpDateItems extends Activity implements AdapterView.OnItemSelected
 //    }
 //
 //    public void updateStatusOfOrder(View view) {
-//        //System.out.println("SHIPMENT UPDATE" + shipmentTypeUpdate);
+//        ////System.out.println("SHIPMENT UPDATE" + shipmentTypeUpdate);
 //        String forUpdateShipmentType = String.valueOf(shipmentTypeUpdate);
 //        finalCheckSnapShot.child("status").setValue(forUpdateShipmentType);
 //        Long tsLong = System.currentTimeMillis()/1000;

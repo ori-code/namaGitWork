@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +22,6 @@ import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -39,11 +37,9 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.Utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,9 +47,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -108,9 +104,14 @@ public class GraphClass extends AppCompatActivity implements DatePickerDialog.On
     public int graphSelected = 0;
     public static String shipmentsDates [];
     public static int shipmentsCount [];
+    public static String specificShipmentsDates [];
+    public static Integer[] specificShipmentsCount;
+
 //    private int mFillColorAll = Color.argb(150,51,181,229)
 public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
     public static ImageView toHome;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -147,7 +148,7 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         lineChart.setBackgroundColor(Color.WHITE);
         lineChart.setGridBackgroundColor(Color.WHITE);
         lineChart.setDrawGridBackground(true);
-        
+
 
 
         //to fill your Spinner
@@ -185,16 +186,16 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                     barChart.setVisibility(View.VISIBLE);
                     pieChart.setVisibility(View.GONE);
                     lineChart.setVisibility(View.GONE);
-                    ////System.out.println("THE SALES BUYING");
-                    ////System.out.println(Login.anArrayOfProducts[0]);
+                    //////System.out.println("THE SALES BUYING");
+                    //////System.out.println(Login.anArrayOfProducts[0]);
                     finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                     runSalesAndBuyingProduct();
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
                 }
                 if (item == "Overall sales") {
                     graphSelected = 2;
-                    ////System.out.println("THE SALES BUYING");
-                    ////System.out.println(Login.anArrayOfProducts[0]);
+                    //////System.out.println("THE SALES BUYING");
+                    //////System.out.println(Login.anArrayOfProducts[0]);
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
 //                    runSalesAndBuyingProduct();
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
@@ -207,8 +208,8 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                 }
                 if (item == "Overall shipments") {
                     graphSelected = 3;
-                    ////System.out.println("THE SALES BUYING");
-                    ////System.out.println(Login.anArrayOfProducts[0]);
+                    //////System.out.println("THE SALES BUYING");
+                    //////System.out.println(Login.anArrayOfProducts[0]);
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
 //                    runSalesAndBuyingProduct();
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
@@ -220,8 +221,8 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                 }
                 if (item == "Specific shipments") {
                     graphSelected = 4;
-                    ////System.out.println("THE SALES BUYING");
-                    ////System.out.println(Login.anArrayOfProducts[0]);
+                    //////System.out.println("THE SALES BUYING");
+                    //////System.out.println(Login.anArrayOfProducts[0]);
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
 //                    runSalesAndBuyingProduct();
 //                    finalCheckPurchases.addListenerForSingleValueEvent(valueEventListenerSalesOfProduct);
@@ -334,7 +335,7 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         addUserActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                System.out.println("TRY TO GO T REGISTER");
+//                //System.out.println("TRY TO GO T REGISTER");
                 startActivity(new Intent(GraphClass.this, Register.class));
             }
         });
@@ -414,9 +415,9 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
     //converting dates to epoch
 
     public void startData(View view) {
-        //////System.out.println("the send is clicked");
+        ////////System.out.println("the send is clicked");
         String textFromAutoComplete = editText.getText().toString();
-        ////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+        //////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
             showDatePickerDialogStart();
 
 
@@ -429,9 +430,9 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
     }
 
     public void endData(View view) {
-        //////System.out.println("the send is clicked");
+        ////////System.out.println("the send is clicked");
         String textFromAutoComplete = editText.getText().toString();
-        ////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
+        //////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete);
         showDatePickerDialogEnd();
 //        if(dates!=null){
 //            dates.delete(0,dates.length());
@@ -445,43 +446,43 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         calendarStartTime = new GregorianCalendar(year, month, day);
         if(flagDateSet == 0){
             startDateInMilliseconds = calendarStartTime.getTimeInMillis();
-            ////System.out.println("LONG START  " + startDateInMilliseconds);
+            //////System.out.println("LONG START  " + startDateInMilliseconds);
             dates.append(calendarStartTime.getTimeInMillis());
             dates.append("|");
             flagDateSet = 1;
-            ////System.out.println("START TIME " + calendarStartTime.getTimeInMillis());
+            //////System.out.println("START TIME " + calendarStartTime.getTimeInMillis());
         }
         else{
             calendarEndTime = calendarStartTime;
 
             endDateInMilliseconds = calendarEndTime.getTimeInMillis();
-            ////System.out.println("LONG END  " + endDateInMilliseconds);
+            //////System.out.println("LONG END  " + endDateInMilliseconds);
             dates.append(calendarEndTime.getTimeInMillis());
             dates.append("|");
-            ////System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
+            //////System.out.println("END TIME " + calendarEndTime.getTimeInMillis());
         }
-        ////System.out.println("DATES : START | END " + dates);
+        //////System.out.println("DATES : START | END " + dates);
     }
 
     //BUTTON SENDING
     public void showGraph(View view) {
         String textFromAutoComplete = editText.getText().toString();
-        ////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete + " DATES " + dates);
+        //////System.out.println("THE AUTOCOMPLETE " + textFromAutoComplete + " DATES " + dates);
         if(graphSelected == 0){
             createSalesProductGraph(textFromAutoComplete, dates);
         }
         if(graphSelected == 1) {
-            System.out.println("NOTHING IN DATES");
+            //System.out.println("NOTHING IN DATES");
         }
         if(graphSelected == 2) {
             if(dates!=null){
-                System.out.println("I GET DATESSS");
+                //System.out.println("I GET DATESSS");
                 getPieChartData();
             }
         }
         if(graphSelected == 3) {
             if(dates!=null){
-                System.out.println("OVERALL shipments");
+                //System.out.println("OVERALL shipments");
                 runLineAllShipments();
             }
             else{
@@ -490,12 +491,12 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         }
         if(graphSelected == 4) {
             if(dates!=null){
-                System.out.println("Specific shipments  the name of delivery " + textFromAutoComplete + " WITH DATES " + dates);
+                //System.out.println("Specific shipments  the name of delivery " + textFromAutoComplete + " WITH DATES " + dates);
 
                 runSpecificShipmentsGraphData(textFromAutoComplete);
             }
             else{
-                System.out.println("Specific shipments and the name of delivery" + textFromAutoComplete + " DATES " + dates);
+                //System.out.println("Specific shipments and the name of delivery" + textFromAutoComplete + " DATES " + dates);
 //                runSpecificShipments();
             }
         }
@@ -503,7 +504,7 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
 
     //GETTING SELLING VALUES AND DATES
     public void createSalesProductGraph (String name, StringBuffer dates) {
-        ////System.out.println(name + " THE DATES IS " + dates);
+        //////System.out.println(name + " THE DATES IS " + dates);
         refForGraphs.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -515,22 +516,22 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                         i++;
                         datesArr[i] = snapshot.child("timeOfPlacedOrder").getValue().toString();
                         i++;
-                        ////System.out.println("QNTY PLEASE FROM DB" + snapshot.child(name).getValue());
-                        ////System.out.println("DATE PLEASE " + snapshot.child("timeOfPlacedOrder").getValue());
+                        //////System.out.println("QNTY PLEASE FROM DB" + snapshot.child(name).getValue());
+                        //////System.out.println("DATE PLEASE " + snapshot.child("timeOfPlacedOrder").getValue());
                         for(int j = 0; j < datesArr.length; j++){
                             if(datesArr[j]!=null){
-                                ////System.out.println("THE AQTUALY => " + datesArr[j]);
+                                //////System.out.println("THE AQTUALY => " + datesArr[j]);
                             }
                         }
 
 
                         //time and quantity
                     }
-                    ////System.out.println("WORK PLEASE " + snapshot.child(name).getValue());
+                    //////System.out.println("WORK PLEASE " + snapshot.child(name).getValue());
 
                 }
                 flagFinishedRead = 1;
-                ////System.out.println(datesArr[0] + " <- 0 " + datesArr[1] + " <- 1 "+ datesArr[2]+  " <-2 " + datesArr[3]+  " <-3 " );
+                //////System.out.println(datesArr[0] + " <- 0 " + datesArr[1] + " <- 1 "+ datesArr[2]+  " <-2 " + datesArr[3]+  " <-3 " );
                 createGraphAgainVisual(datesArr);
             }
 
@@ -543,31 +544,31 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
 
     //SALES OF PRODUCT GETTER
     private void runSalesProduct() {
-        ////System.out.println("HEY IM GETTING THE PRODUCTS FOR THE LIST");
+        //////System.out.println("HEY IM GETTING THE PRODUCTS FOR THE LIST");
         valueEventListenerSalesOfProduct = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     nameOfProducts = new ArrayList<String>();
-                    ////System.out.println("PRODUCTS " + nameOfProducts);
+                    //////System.out.println("PRODUCTS " + nameOfProducts);
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Product product = snapshot.getValue(Product.class);
-                        ////System.out.println("PURCHASES DATA : " + snapshot);
+                        //////System.out.println("PURCHASES DATA : " + snapshot);
                         String runningString = snapshot.getValue().toString();
                         String search = new String();
                         String sentence = runningString;
                         for (int i = 0; i < Login.anArrayOfProducts.length - 1; i++) {
                             if (Login.anArrayOfProducts[i] != null) {
-                                ////System.out.println("PRODUCT NAME RUNNING "+ Login.anArrayOfProducts[i]);
+                                //////System.out.println("PRODUCT NAME RUNNING "+ Login.anArrayOfProducts[i]);
                                 if (Login.anArrayOfProducts[i].charAt(0) <'0' ||  Login.anArrayOfProducts[i].charAt(0)>'9') {
                                     search = Login.anArrayOfProducts[i];
-                                    ////System.out.println("SHUGAR " + search);
+                                    //////System.out.println("SHUGAR " + search);
                                     if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1) {
                                         if (nameOfProducts.toString().toLowerCase().indexOf(search.toLowerCase()) == -1) {
                                                  nameOfProducts.add(search);
-                                             ////System.out.println("THE LIST IS HHH" + nameOfProducts);
+                                             //////System.out.println("THE LIST IS HHH" + nameOfProducts);
                                         } else {
-                                              ////System.out.println("NOTHING");
+                                              //////System.out.println("NOTHING");
                                         }
                                     }
                                 }
@@ -592,11 +593,11 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         int count = 0;
         int place = 0 ;
         int checkPlace = 0;
-        ////System.out.println("HEY IM THE SALES BUYING");
+        //////System.out.println("HEY IM THE SALES BUYING");
         for(int i = 0; i < Login.anArrayOfProducts.length; i=i+2){
-            ////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
+            //////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
             if(Login.anArrayOfProducts[i]!=null){
-//                System.out.println("THE PRODUCTS  iSSSS"  + Login.anArrayOfProducts[i]);
+//                //System.out.println("THE PRODUCTS  iSSSS"  + Login.anArrayOfProducts[i]);
                 count ++;
             }
         }
@@ -605,10 +606,10 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
        nameOfProductsInAllBuyingAndSale = new String[count];
 
         for (int i = 0; i < Login.anArrayOfProducts.length; i = i + 2) {
-            ////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
+            //////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
             if (Login.anArrayOfProducts[i] != null) {
                 nameOfProductsInAllBuyingAndSale[place] = Login.anArrayOfProducts[i];
-                System.out.println("THE PRODUCT ISssss " + nameOfProductsInAllBuyingAndSale[place]);
+                //System.out.println("THE PRODUCT ISssss " + nameOfProductsInAllBuyingAndSale[place]);
                 place++;
             }
         }
@@ -625,7 +626,7 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         //TODO need to count from the string all values and
-                        ////System.out.println("RUNNING IN PRODUCTSsss " + " THE NAME IS " + snapshot.child("nameOfProduct").getValue() + " DATA OF ADDING " + snapshot.child("dataOfAdding").getValue());
+                        //////System.out.println("RUNNING IN PRODUCTSsss " + " THE NAME IS " + snapshot.child("nameOfProduct").getValue() + " DATA OF ADDING " + snapshot.child("dataOfAdding").getValue());
                         String arrrayOfAdding = new String();
                         arrrayOfAdding = snapshot.child("dataOfAdding").getValue().toString();
                         String[] words = arrrayOfAdding.split("\\s+");
@@ -638,27 +639,27 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                             words[i] = words[i].replaceAll("[^\\w]", "");
                             try {
                                 if (!words[i].equals(null)) {
-                                    ////System.out.println("THE WORDS IS " + words[i]);
+                                    //////System.out.println("THE WORDS IS " + words[i]);
                                     if (Long.parseLong(words[i]) < 160000000000L) {
-                                        ////System.out.println("THE WORDS IS AFTER IF" + words[i]);
+                                        //////System.out.println("THE WORDS IS AFTER IF" + words[i]);
                                         sumOfValues = Long.parseLong(words[i]) + sumOfValues;
-                                        ////System.out.println("THE SUM IS AFTER IF" + sumOfValues);
+                                        //////System.out.println("THE SUM IS AFTER IF" + sumOfValues);
 
                                     }
 //                                    valuesOfProductsInAllBuyingAndSale[0] = String.valueOf(sumOfValues);
 
                                 }
                             } catch (Exception e) {
-                                ////System.out.println("THE VALUE OF E " + e);
+                                //////System.out.println("THE VALUE OF E " + e);
                             }
                         }
                         valuesOfProductsInAllBuyingAndSale[placceForValues] = String.valueOf(sumOfValues);
-                        System.out.println("THE SUM IN STRING " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
-                        System.out.println("PLACE OF VALUES IS " + placceForValues + " NAME : " + nameOfProductsInAllBuyingAndSale[placceForValues] + " GOING TO NEXT PRODUCT ON SNAPSHOOT RUN and VALUES is " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
+                        //System.out.println("THE SUM IN STRING " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
+                        //System.out.println("PLACE OF VALUES IS " + placceForValues + " NAME : " + nameOfProductsInAllBuyingAndSale[placceForValues] + " GOING TO NEXT PRODUCT ON SNAPSHOOT RUN and VALUES is " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
                         placceForValues++;
 
                         if(placceForValues == nameOfProductsInAllBuyingAndSale.length){
-                            System.out.println("I FINISHED RUNNN ");
+                            //System.out.println("I FINISHED RUNNN ");
                             createSalesAndBuyingGraph();
 
                         }
@@ -683,10 +684,10 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                         int sum = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 //                            for (int j = 0; j < nameOfProductsInAllBuyingAndSale.length; j++) {
-                                System.out.println("NAME IS " + nameOfProductsInAllBuyingAndSale[j] + " VALUE FROM DB " + snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue());
+                                //System.out.println("NAME IS " + nameOfProductsInAllBuyingAndSale[j] + " VALUE FROM DB " + snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue());
                                 if(snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()!=null) {
                                     sum = Integer.parseInt((String) snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()) + sum;
-                                    System.out.println("SALES SUM " + sum);
+                                    //System.out.println("SALES SUM " + sum);
                                  }
                         }
                         valuesOfProductsSales[j] = sum;
@@ -701,10 +702,10 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
 
             });
           if(salesFinished==1 ){
-              System.out.println("IT IS DONE ");
+              //System.out.println("IT IS DONE ");
           }
           else{
-              System.out.println("NOT FINISHED YET");
+              //System.out.println("NOT FINISHED YET");
           }
 
         }
@@ -722,14 +723,14 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                 valuesFromDb[k] = datesArr[i];
                 if (datesArr[i + 1] != null) {
                     long dv = Long.valueOf(datesArr[i + 1])*1000;// its need to be in milisecond
-                    ////System.out.println("THE DV IS " + dv);
-                    ////System.out.println("THE EPOCH STAMP " + datesArr[i + 1]);
+                    //////System.out.println("THE DV IS " + dv);
+                    //////System.out.println("THE EPOCH STAMP " + datesArr[i + 1]);
                     if(dv>startDateInMilliseconds && dv<endDateInMilliseconds) {
                         //find the value
                         for(int t = 0 ; t < datesArr.length; t ++){
                             if(datesArr[t]!= null) {
                                 if (dv == (Long.parseLong(datesArr[t])) * 1000) {
-                                    ////System.out.println("The time is " + datesArr[t] + "the value of selling is " + datesArr[t - 1]);
+                                    //////System.out.println("The time is " + datesArr[t] + "the value of selling is " + datesArr[t - 1]);
                                     values[o] = Integer.parseInt(datesArr[t-1]);
                                     o++;
                                 }
@@ -737,15 +738,15 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
                         }
                         Date df = new java.util.Date(dv);
                         String vv = new SimpleDateFormat("MM-dd-yyyy").format(df);
-                        ////System.out.println("VV " + vv);
-                        ////System.out.println("THE EPOCH " + datesArr[i + 1] + " AFTER CONVERSION DATE NEW" + vv);
+                        //////System.out.println("VV " + vv);
+                        //////System.out.println("THE EPOCH " + datesArr[i + 1] + " AFTER CONVERSION DATE NEW" + vv);
                         days[j] = vv;
-                        ////System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
+                        //////System.out.println("Days in date after conversion at J place + " + j + " <-j " + days[j]);
                         j++;
                     }
                 }
                 if (valuesFromDb[k] != null) {
-                    ////System.out.println("VALUES FROM DB VALUES  in k place + " + k + " <-k " + valuesFromDb[k]);
+                    //////System.out.println("VALUES FROM DB VALUES  in k place + " + k + " <-k " + valuesFromDb[k]);
                 }
                 k++;
             }
@@ -785,13 +786,13 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
         ArrayList<String> ylabels = new ArrayList<>();
 
         for (int i = 0; i < days.length; i++) {
-//            ////System.out.println(" THE datesArr it is value " +datesArr[i]  +  " and DATE in epoch " + datesArr[i+1]);
-//            ////System.out.println(" THE valuesFromDb " + valuesFromDb[i]);
-            ////System.out.println(" THE days " + days[i]);
-//            ////System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
+//            //////System.out.println(" THE datesArr it is value " +datesArr[i]  +  " and DATE in epoch " + datesArr[i+1]);
+//            //////System.out.println(" THE valuesFromDb " + valuesFromDb[i]);
+            //////System.out.println(" THE days " + days[i]);
+//            //////System.out.println(" THE datesArrStrings FAKE " + datesArrStrings[i]);
            if(days[i]!=null) {
-               ////System.out.println(" THE days IN IF  " + days[i]);
-               ////System.out.println(" THE values IN IF  " + values[i]);
+               //////System.out.println(" THE days IN IF  " + days[i]);
+               //////System.out.println(" THE values IN IF  " + values[i]);
                BarEntry entry = new BarEntry(i, values[i]); // x - place in array of dates y - values in array of values
                valueSet1.add(entry);
                if(days[i+1]==null){
@@ -819,7 +820,7 @@ public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProdu
 
     public void createSalesAndBuyingGraph(){
 
-System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllBuyingAndSale[0] + " all ADDS "  + valuesOfProductsSales[0] + " VALUES " + valuesOfProductsInAllBuyingAndSale[0]);
+//System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllBuyingAndSale[0] + " all ADDS "  + valuesOfProductsSales[0] + " VALUES " + valuesOfProductsInAllBuyingAndSale[0]);
         BarChart mChart = (BarChart) findViewById(R.id.bar_chart);
         ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
         ArrayList<BarEntry> valueSet2 = new ArrayList<BarEntry>();
@@ -866,7 +867,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 //runSalesAndBuyingProduct
 
         for(int u = 0; u < nameOfProductsInAllBuyingAndSale.length; u++ ){
-            ////System.out.println("TRY TO RUN RED GRAPH NAME IS " + "ON U " + u + "AND NAME IS " +   nameOfProductsInAllBuyingAndSale[u] +  " THE VALUE IN THIS PLACE " + valuesOfProductsInAllBuyingAndSale[u]);
+            //////System.out.println("TRY TO RUN RED GRAPH NAME IS " + "ON U " + u + "AND NAME IS " +   nameOfProductsInAllBuyingAndSale[u] +  " THE VALUE IN THIS PLACE " + valuesOfProductsInAllBuyingAndSale[u]);
             //            red all added products
             BarEntry entry1 = new BarEntry(u, Integer.parseInt(valuesOfProductsInAllBuyingAndSale[u])); // x - place in array of dates y - values in array of values
             valueSet1.add(entry1);
@@ -920,11 +921,11 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
         int count = 0;
         int place = 0 ;
         int checkPlace = 0;
-        ////System.out.println("HEY IM THE SALES BUYING");
+        //////System.out.println("HEY IM THE SALES BUYING");
         for(int i = 0; i < Login.anArrayOfProducts.length; i=i+2){
-            ////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
+            //////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
             if(Login.anArrayOfProducts[i]!=null){
-//                System.out.println("THE PRODUCTS  iSSSS"  + Login.anArrayOfProducts[i]);
+//                //System.out.println("THE PRODUCTS  iSSSS"  + Login.anArrayOfProducts[i]);
                 count ++;
             }
         }
@@ -932,10 +933,10 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
         nameOfProductsInAllBuyingAndSale = new String[count];
         for (int i = 0; i < Login.anArrayOfProducts.length; i = i + 2) {
-            ////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
+            //////System.out.println("PRODUCTS  runSalesAndBuyingProduct " + Login.anArrayOfProducts[i]);
             if (Login.anArrayOfProducts[i] != null) {
                 nameOfProductsInAllBuyingAndSale[place] = Login.anArrayOfProducts[i];
-                System.out.println("THE PRODUCT ISssss " + nameOfProductsInAllBuyingAndSale[place]);
+                //System.out.println("THE PRODUCT ISssss " + nameOfProductsInAllBuyingAndSale[place]);
                 place++;
             }
         }
@@ -954,7 +955,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     //TODO need to count from the string all values and
-                    ////System.out.println("RUNNING IN PRODUCTSsss " + " THE NAME IS " + snapshot.child("nameOfProduct").getValue() + " DATA OF ADDING " + snapshot.child("dataOfAdding").getValue());
+                    //////System.out.println("RUNNING IN PRODUCTSsss " + " THE NAME IS " + snapshot.child("nameOfProduct").getValue() + " DATA OF ADDING " + snapshot.child("dataOfAdding").getValue());
                     String arrrayOfAdding = new String();
                     String priceOfBuying = new String();
                     String priceOfSale = new String();
@@ -965,7 +966,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
                     revenueResult = Integer.parseInt(priceOfSale) - Integer.parseInt(priceOfBuying);
                     revenueProductsArr[placceForValues] = revenueResult;
-                    System.out.println("REVENUE " + revenueProductsArr[placceForValues]);
+                    //System.out.println("REVENUE " + revenueProductsArr[placceForValues]);
                     String[] words = arrrayOfAdding.split("\\s+");
                     long sumOfValues = 0;
                     //convert string to words of each product
@@ -976,27 +977,27 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
                         words[i] = words[i].replaceAll("[^\\w]", "");
                         try {
                             if (!words[i].equals(null)) {
-                                ////System.out.println("THE WORDS IS " + words[i]);
+                                //////System.out.println("THE WORDS IS " + words[i]);
                                 if (Long.parseLong(words[i]) < 160000000000L) {
-                                    ////System.out.println("THE WORDS IS AFTER IF" + words[i]);
+                                    //////System.out.println("THE WORDS IS AFTER IF" + words[i]);
                                     sumOfValues = Long.parseLong(words[i]) + sumOfValues;
-                                    ////System.out.println("THE SUM IS AFTER IF" + sumOfValues);
+                                    //////System.out.println("THE SUM IS AFTER IF" + sumOfValues);
 
                                 }
 //                                    valuesOfProductsInAllBuyingAndSale[0] = String.valueOf(sumOfValues);
 
                             }
                         } catch (Exception e) {
-                            ////System.out.println("THE VALUE OF E " + e);
+                            //////System.out.println("THE VALUE OF E " + e);
                         }
                     }
                     valuesOfProductsInAllBuyingAndSale[placceForValues] = String.valueOf(sumOfValues);
-                    System.out.println("THE SUM IN STRING " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
-                    System.out.println("PLACE OF VALUES IS " + placceForValues + " NAME : " + nameOfProductsInAllBuyingAndSale[placceForValues] + " GOING TO NEXT PRODUCT ON SNAPSHOOT RUN and VALUES is " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
+                    //System.out.println("THE SUM IN STRING " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
+                    //System.out.println("PLACE OF VALUES IS " + placceForValues + " NAME : " + nameOfProductsInAllBuyingAndSale[placceForValues] + " GOING TO NEXT PRODUCT ON SNAPSHOOT RUN and VALUES is " + valuesOfProductsInAllBuyingAndSale[placceForValues]);
                     placceForValues++;
 
                     if(placceForValues == nameOfProductsInAllBuyingAndSale.length){
-                        System.out.println("I FINISHED RUNNN ");
+                        //System.out.println("I FINISHED RUNNN ");
 //                        createSalesAndBuyingGraph();
 
                     }
@@ -1024,15 +1025,15 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 //                            for (int j = 0; j < nameOfProductsInAllBuyingAndSale.length; j++) {
 
                         if(snapshot.child("timeOfPlacedOrder").getValue()!=null) {
-                            System.out.println(snapshot.child("timeOfPlacedOrder").getValue().toString()  + "JJJ");
+                            //System.out.println(snapshot.child("timeOfPlacedOrder").getValue().toString()  + "JJJ");
                             placedOrder = Long.valueOf(snapshot.child("timeOfPlacedOrder").getValue().toString());
                         }
                             if (placedOrder * 1000 > startDateInMilliseconds && placedOrder * 1000 < endDateInMilliseconds) {
-                                System.out.println("NAME IS PIE " + nameOfProductsInAllBuyingAndSale[j] + " VALUE FROM DB " + snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue());
+                                //System.out.println("NAME IS PIE " + nameOfProductsInAllBuyingAndSale[j] + " VALUE FROM DB " + snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue());
                                 if (snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue() != null)
                                 {
                                     sum = Integer.parseInt((String) snapshot.child(nameOfProductsInAllBuyingAndSale[j]).getValue()) + sum;
-                                    System.out.println("SALES SUM " + sum);
+                                    //System.out.println("SALES SUM " + sum);
                                 }
 
                             }
@@ -1053,10 +1054,10 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
 
         if(salesFinished==1 ){
-            System.out.println("IT IS DONE ");
+            //System.out.println("IT IS DONE ");
         }
         else{
-            System.out.println("NOT FINISHED YET");
+            //System.out.println("NOT FINISHED YET");
         }
 
 
@@ -1075,9 +1076,9 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
         //pieChartTotalRevenue = findViewById(R.id.pie_chart_total_revenue);
 
         for(int i = 0; i < nameOfProductsInAllBuyingAndSale.length; i++){
-            System.out.println("THE TOTAl" + revenueProductsArr[i]  + " HEY " + Integer.parseInt(String.valueOf(valuesOfProductsSales[i])));
+            //System.out.println("THE TOTAl" + revenueProductsArr[i]  + " HEY " + Integer.parseInt(String.valueOf(valuesOfProductsSales[i])));
             int total = revenueProductsArr[i]*Integer.parseInt(String.valueOf(valuesOfProductsSales[i]));
-            System.out.println("THE TOTAl" + total);
+            //System.out.println("THE TOTAl" + total);
             entries.add(new PieEntry(total, nameOfProductsInAllBuyingAndSale[i] + " | " + valuesOfProductsSales[i] + " | " + total));
             summaryRev = total + summaryRev;
         }
@@ -1117,7 +1118,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
     private void setupLineChart(){
         LineDataSet lineDataSet1 = new LineDataSet(dataValues(), "Shipments per date");
-        System.out.println("THE CHART NEED TO BE PRINTED");
+        //System.out.println("THE CHART NEED TO BE PRINTED");
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet1);
         LineData data = new LineData(dataSets);
@@ -1130,7 +1131,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
         finishedGetDataAllShipments = 0;
         shipmentsCount  = new int [100];
         shipmentsDates = new String[100];
-        ////System.out.println("HEY IM GETTING THE PRODUCTS FOR THE LIST");
+        //////System.out.println("HEY IM GETTING THE PRODUCTS FOR THE LIST");
         shipmentsQuery.addValueEventListener(new ValueEventListener() {
             int index = 0;
             @Override
@@ -1138,38 +1139,38 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 //                shipmentsDates[0]="start";
                 for (DataSnapshot shipmentSnapshot : dataSnapshot.getChildren()) {
                     try {
-                    System.out.println("HHH" + shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                    //System.out.println("HHH" + shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
                     if(index==0){
-                        System.out.println("The first time");
-                        System.out.println("THE DATA IS " + shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                        //System.out.println("The first time");
+                        //System.out.println("THE DATA IS " + shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
                         shipmentsDates[index] = (shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
                         shipmentsCount[index] = 1;
-                        System.out.println("DATE " +  shipmentsDates[index] + " COUNT " +  shipmentsCount[index]);
+                        //System.out.println("DATE " +  shipmentsDates[index] + " COUNT " +  shipmentsCount[index]);
                         index++;
                     }
                     else {
                         if (shipmentsDates[index - 1].equals(shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString()) ) {
-                            System.out.println("The same time ");
+                            //System.out.println("The same time ");
                             shipmentsCount[index - 1] = 1 + shipmentsCount[index - 1];
-                            System.out.println("DATE " + shipmentsDates[index - 1] + " COUNT " + shipmentsCount[index - 1]);
+                            //System.out.println("DATE " + shipmentsDates[index - 1] + " COUNT " + shipmentsCount[index - 1]);
                         } else {
-                            System.out.println("The new time");
+                            //System.out.println("The new time");
                             shipmentsDates[index] = (shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
                             shipmentsCount[index] = 1;
-                            System.out.println("DATE " + shipmentsDates[index] + " COUNT " + shipmentsCount[index]);
+                            //System.out.println("DATE " + shipmentsDates[index] + " COUNT " + shipmentsCount[index]);
                             index++;
                         }
                     }
                     }
                     catch (Exception e){
-                        System.out.println("tttt" + e);
+                        //System.out.println("tttt" + e);
                     }
                 }
 
 
                 for(int j = 0; j<shipmentsDates.length; j++){
                     if(shipmentsDates[j]!=null) {
-                        System.out.println("DATE ARR " + shipmentsDates[j] + " COUNT " + shipmentsCount[j]);
+                        //System.out.println("DATE ARR " + shipmentsDates[j] + " COUNT " + shipmentsCount[j]);
                         String epochString = shipmentsDates[j];
                         long epoch = Long.parseLong(epochString);
                         Date expiry = new Date(epoch * 1000);
@@ -1184,16 +1185,16 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
                 }
 
-                System.out.println("run setup line chart");
+                //System.out.println("run setup line chart");
                 setupLineChart();
 
 
-//                System.out.println("BEFORE FINISHED finishedGetDataAllShipments");
+//                //System.out.println("BEFORE FINISHED finishedGetDataAllShipments");
 //                if(finishedGetDataAllShipments == 1) {
-//                    System.out.println("INSIDE FINISHED finishedGetDataAllShipments");
+//                    //System.out.println("INSIDE FINISHED finishedGetDataAllShipments");
 //                    for (int j = 0; j < shipmentsDates.length; j++) {
 //                        if (shipmentsDates[j] != null) {
-//                            System.out.println("DATE ARR1 " + shipmentsDates[j] + " COUNT " + shipmentsCount[j]);
+//                            //System.out.println("DATE ARR1 " + shipmentsDates[j] + " COUNT " + shipmentsCount[j]);
 //                        }
 ////                        setupLineChart();
 //                    }
@@ -1223,10 +1224,10 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 //            try {
 //                if (!shipmentsDates[j].equals(null)) {
 //                    count++;
-//                    System.out.println("COUNT IS SSS " + count + " AND DATES ARR " + shipmentsDates[j] + " AND J IS " + j);
+//                    //System.out.println("COUNT IS SSS " + count + " AND DATES ARR " + shipmentsDates[j] + " AND J IS " + j);
 //                }
 //            }catch(Exception e) {
-////            System.out.println("THE PROBLEM CATCHED"  + e);
+////            //System.out.println("THE PROBLEM CATCHED"  + e);
 //            }
 //        }
 //
@@ -1236,19 +1237,19 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 //            try {
 //                if (!shipmentsDates[j].equals(null)) {
 //                    workArray1[j] = shipmentsDates[j];
-//                    System.out.println("COUNT IS SSS " + count + " AND DATES ARR " + shipmentsDates[j] + " AND J IS " + j);
+//                    //System.out.println("COUNT IS SSS " + count + " AND DATES ARR " + shipmentsDates[j] + " AND J IS " + j);
 //                }
 //            }catch(Exception e) {
-////            System.out.println("THE PROBLEM CATCHED"  + e);
+////            //System.out.println("THE PROBLEM CATCHED"  + e);
 //            }
 //        }
 
 
 
 //        for(int a = 0; a < workArray1.length; a ++ ) {
-//            System.out.println("INISDE DATA VALUES " + shipmentsCount[a] + "THE DATES IS " + shipmentsDates[a]);
+//            //System.out.println("INISDE DATA VALUES " + shipmentsCount[a] + "THE DATES IS " + shipmentsDates[a]);
 //            if(workArray1[a]!=null){
-//                System.out.println("THE DATE IN WORK ARRAY" + workArray1[a]);
+//                //System.out.println("THE DATE IN WORK ARRAY" + workArray1[a]);
 //                dataVals.add(new Entry(a, shipmentsCount[a]));
 //            }
 //        }
@@ -1257,7 +1258,7 @@ System.out.println("CREATE GRAPH OF SALES AND BUYING!!!!" + nameOfProductsInAllB
 
         for(int g = 0; g < workArray1.length; g++){
          if (workArray1[g] != null) {
-             System.out.println(" HYE " + g + " || " + workArray1[g] + " || " + shipmentsCount[g]);
+             //System.out.println(" HYE " + g + " || " + workArray1[g] + " || " + shipmentsCount[g]);
              dataVals.add(new Entry(g, shipmentsCount[g]));
          }
      }
@@ -1276,7 +1277,7 @@ public void runSpecificShipments()
     {
         deliveryMansList = new ArrayList();
         deliveryMansListUsers = new ArrayList<>();
-        System.out.println("SPECIFIC SHIPMENTS");
+        //System.out.println("SPECIFIC SHIPMENTS");
         specificShipments.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -1284,7 +1285,7 @@ public void runSpecificShipments()
                 for (DataSnapshot shipmentSnapshot : dataSnapshot.getChildren()) {
                     User deliveryMan = shipmentSnapshot.getValue(User.class);
                     if(deliveryMan.getPermission() == 3){
-                        System.out.println("HE IS DELIVERY MAN " + deliveryMan.getEmail());
+                        //System.out.println("HE IS DELIVERY MAN " + deliveryMan.getEmail());
 
                         deliveryMansList.add(deliveryMan.getFullName());
                         deliveryMansListUsers.add(deliveryMan);
@@ -1311,11 +1312,11 @@ public void runSpecificShipments()
   public void runSpecificShipmentsGraphData(String nameOfDelivery){
 
         theCurrentEamil = new String();
-        System.out.println(" runSpecificShipmentsGraphData ||| " + nameOfDelivery);
+        //System.out.println(" runSpecificShipmentsGraphData ||| " + nameOfDelivery);
         for(int i = 0; i < deliveryMansListUsers.size(); i++){
 
            if(nameOfDelivery.equals(deliveryMansListUsers.get(i).getFullName())){
-               System.out.println(" THE SAME NAME  " + deliveryMansListUsers.get(i).getFullName() + " || the edit text "  + nameOfDelivery);
+               //System.out.println(" THE SAME NAME  " + deliveryMansListUsers.get(i).getFullName() + " || the edit text "  + nameOfDelivery);
                theCurrentEamil = deliveryMansListUsers.get(i).getEmail();
            }
         }
@@ -1326,35 +1327,79 @@ public void runSpecificShipments()
           public void onDataChange(@NonNull DataSnapshot snapshot) {
               dataForSpecificShipmentGraphs = new ArrayList <String> ();
               for (DataSnapshot shipmentSnapshot : snapshot.getChildren()) {
-                  System.out.println(" runSpecificShipmentsGraphData  WWWW" + shipmentSnapshot.child("theShipper") + " AND THE CURRENT SELECTED " + theCurrentEamil);
+                  //System.out.println(" runSpecificShipmentsGraphData  WWWW" + shipmentSnapshot.child("theShipper") + " AND THE CURRENT SELECTED " + theCurrentEamil);
                   if(shipmentSnapshot.child("theShipper").getValue()!=null) {
                       if (theCurrentEamil.equals(shipmentSnapshot.child("theShipper").getValue().toString())) {
                           dataForSpecificShipmentGraphs.add(shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
-                          System.out.println("qqqqq" + dataForSpecificShipmentGraphs.get(0));
-                          System.out.println(" THE ADDING DATE : " + shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                          //System.out.println("qqqqq" + dataForSpecificShipmentGraphs.get(0));
+                          //System.out.println(" THE ADDING DATE : " + shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
                       }
                   }
               }
 
 
 
-              //shipmentsDates [];
-              //shipmentsCount [];
-              int k = 0;
-              int l = 0;
-              shipmentsCount = new int[200];
-              shipmentsDates = new String[200];
-
-//              shipmentsDates[k] = dataForSpecificShipmentGraphs.get(0);
+              ArrayList <Integer> shipmentsCount  = new ArrayList<>();
+              ArrayList <String> shipmentsDates  = new ArrayList<>();
+              ArrayList <String> shipmentsDatesFinal  = new ArrayList<>();
+              String data = new String();
+              int p = 0;
+              System.out.println("THE ORIGINAL START " + Arrays.toString(new ArrayList[]{dataForSpecificShipmentGraphs}));
+//              data = getDay(dataForSpecificShipmentGraphs.get(0));
 //              dataForSpecificShipmentGraphs.remove(0);
-//              shipmentsCount[l] = 1;
+//
+//              shipmentsDates.add(data);
+//              shipmentsCount.add(p,1);
 
-            while(dataForSpecificShipmentGraphs.isEmpty()) {
-                for (int j = 0; j < dataForSpecificShipmentGraphs.size(); j++) { // 1 poyavlenie
-                   System.out.println("Hh " + dataForSpecificShipmentGraphs.remove(j));
-                }
+              for(int j = 0; j < dataForSpecificShipmentGraphs.size(); j ++){
+                  System.out.println("THE ORIGINAL IN THE BEGINING OF FOR" + Arrays.toString(new ArrayList[]{dataForSpecificShipmentGraphs}));
+                  data = getDay(dataForSpecificShipmentGraphs.get(j));
+                  shipmentsDates.add(data);
+//                  if(data.equals(getDay(dataForSpecificShipmentGraphs.get(j)))){
+//                      shipmentsCount.add(p, shipmentsCount.get(p)+1);
+//                  }
+//                  else
+//                  {
+//                      p++;
+//                      data = getDay(dataForSpecificShipmentGraphs.get(j));
+//                      dataForSpecificShipmentGraphs.remove(j);
+//                      shipmentsDates.add(data);
+//                  }
+//
+//
+//                  System.out.println("THE ARRAY IS OF DATES IN THE END " + Arrays.toString(new ArrayList[]{shipmentsDates}));
+//                  System.out.println("THE ARRAY IS OF COUNTS IN THE END " + Arrays.toString(new ArrayList[]{shipmentsCount}));
+//                  System.out.println("THE ORIGINAL IN THE END OF FOR" + Arrays.toString(new ArrayList[]{dataForSpecificShipmentGraphs}))
+              }
+              System.out.println("THE ARRAY IS OF DATES IN THE BEGINING " + Arrays.toString(new ArrayList[]{shipmentsDates}));
+              System.out.println("THE ARRAY IS OF COUNTS IN THE BEGINING " + Arrays.toString(new ArrayList[]{shipmentsCount}));
+              for(int k = 0 ; k < shipmentsDates.size(); k++)
+              {
+                  int count = 1;
+                  String current = shipmentsDates.get(k);
+                  shipmentsDatesFinal.add(current);
+                  for(int l = 1; l < shipmentsDates.size(); l ++){
+                      if(shipmentsDates.get(l).equals(current)){
+                          count++;
+                          shipmentsDates.remove(l);
+                      }
+                  }
+                  shipmentsCount.add(count);
+                  System.out.println("THE ARRAY IS OF DATES IN THE END " + Arrays.toString(new ArrayList[]{shipmentsDatesFinal}));
+                  System.out.println("THE ARRAY IS OF COUNTS IN THE END " + Arrays.toString(new ArrayList[]{shipmentsCount}));
+              }
 
-            }
+
+
+
+
+
+         for(int f = 0 ; f < shipmentsDates.size(); f++) {
+
+
+             //System.out.println("Ready array the f is "+ f + " THE DATE " + shipmentsDates.get(f));
+             //System.out.println(shipmentsCount.get(f));
+          }
           }
 
           @Override
@@ -1365,6 +1410,18 @@ public void runSpecificShipments()
       });
 
 
+    }
+
+
+
+
+
+    public static String getDay(String date) {
+        long dv ;
+        dv = Long.parseLong(date) * 1000;
+        Date df = new java.util.Date(dv);
+        String vv = new SimpleDateFormat("MM-dd-yyyy").format(df);
+        return vv;
     }
 
 

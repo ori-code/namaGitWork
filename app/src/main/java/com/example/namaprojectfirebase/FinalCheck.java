@@ -52,7 +52,7 @@ public class FinalCheck extends Activity implements AdapterView.OnItemSelectedLi
         orderNumber = intent.getIntExtra("orderNumber", orderNumber);
         shipmentType = intent.getIntExtra("shipmentType",shipmentType);
 
-        //System.out.println( "WHY hhh" + shipmentType);
+        ////System.out.println( "WHY hhh" + shipmentType);
         if(shipmentType == 1){
             shipmentFee =100;
         }
@@ -62,7 +62,7 @@ public class FinalCheck extends Activity implements AdapterView.OnItemSelectedLi
         if(shipmentType == 3){
             shipmentFee =0;
         }
-        //System.out.println("FEE" + shipmentFee);
+        ////System.out.println("FEE" + shipmentFee);
         int tmpInt = orderNumber;
         String tmpStr10 = String.valueOf(tmpInt);
 
@@ -95,23 +95,23 @@ public class FinalCheck extends Activity implements AdapterView.OnItemSelectedLi
 //            finalCheckList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    //System.out.println("FINAL CHECK "  + snapshot.getKey());
+                    ////System.out.println("FINAL CHECK "  + snapshot.getKey());
                     try {
                         for(int i = 0; i < anArrayOfProducts.length; i++ ) {
-                           //System.out.println("PRODUCTS FROM LIST :" + anArrayOfProducts[i].toString());
+                           ////System.out.println("PRODUCTS FROM LIST :" + anArrayOfProducts[i].toString());
                             if(anArrayOfProducts[i].toString().equals(snapshot.getKey())){
-                                //System.out.println("FOUNDED!!!! " + anArrayOfProducts[i].toString());
-                                    //System.out.println("HEYY " + anArrayOfProducts[i].toString() + " : " + snapshot.getValue().toString());
+                                ////System.out.println("FOUNDED!!!! " + anArrayOfProducts[i].toString());
+                                    ////System.out.println("HEYY " + anArrayOfProducts[i].toString() + " : " + snapshot.getValue().toString());
                                     finalCheckList.add(anArrayOfProducts[i].toString());
                                     finalCheckList.add(snapshot.getValue().toString());
                                     finalCheckList.add(anArrayOfProducts[i+1]);
                                     i++;
-                                    //System.out.println("LIST STRING" + finalCheckList);
+                                    ////System.out.println("LIST STRING" + finalCheckList);
                             }
                         }
                     }
                     catch(Exception e) {
-                        //System.out.println(e);
+                        ////System.out.println(e);
                     }
 
 
@@ -145,7 +145,7 @@ public class FinalCheck extends Activity implements AdapterView.OnItemSelectedLi
 
                 sumTotalShipping.setText("SHIPPING : "+ shipmentFee + "\nTOTAL IS : " + String.valueOf(sumForOrder));
 
-                //System.out.println("SUM IS IN THIS ORDER " +sumForOrder );
+                ////System.out.println("SUM IS IN THIS ORDER " +sumForOrder );
                 i++;
                 i++;
 
@@ -194,7 +194,7 @@ public class FinalCheck extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     public void updateStatusOfOrder(View view) {
-        //System.out.println("SHIPMENT UPDATE" + shipmentTypeUpdate);
+        ////System.out.println("SHIPMENT UPDATE" + shipmentTypeUpdate);
         String forUpdateShipmentType = String.valueOf(shipmentTypeUpdate);
         finalCheckSnapShot.child("status").setValue(forUpdateShipmentType);
         finalCheckSnapShot.child("theShipper").setValue(Login.mAuth.getCurrentUser().getEmail());

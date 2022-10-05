@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         addUserActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                System.out.println("TRY TO GO T REGISTER");
+//                //System.out.println("TRY TO GO T REGISTER");
                 startActivity(new Intent(MainActivity.this, Register.class));
             }
         });
@@ -215,9 +215,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         for(Product item : productList ){
-            ////System.out.println("BEFORE FILTER");
+            //////System.out.println("BEFORE FILTER");
             if(item.getNameOfProduct().toLowerCase().contains(text.toLowerCase())){
-                ////System.out.println("PRODUCT FILTER TYPE IS " + item.getType());
+                //////System.out.println("PRODUCT FILTER TYPE IS " + item.getType());
                 //TODO type of Product ASK VERONIKA
                 if(FoodCheckBox.isChecked() && item.getType()==1)
                      filteredList.add(item);
@@ -246,12 +246,12 @@ public class MainActivity extends AppCompatActivity {
             productList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    ////System.out.println("THE BEST BEFORE FROM DB " +snapshot.child("bestBefore").getValue());
-                        ////System.out.println("NEW VALUES " + snapshot.getValue());
+                    //////System.out.println("THE BEST BEFORE FROM DB " +snapshot.child("bestBefore").getValue());
+                        //////System.out.println("NEW VALUES " + snapshot.getValue());
 
                     Product product = snapshot.getValue(Product.class);
                     String arr = snapshot.child("dataOfAdding").getValue().toString();
-                    ////System.out.println("THE ARR FROM DATABASE " + arr);
+                    //////System.out.println("THE ARR FROM DATABASE " + arr);
 
 
                     int count = 0;
@@ -260,24 +260,24 @@ public class MainActivity extends AppCompatActivity {
 
 
                         while (matcher.find()) {
-                            ////System.out.println("FOUNDED" + Long.valueOf(matcher.group()));
+                            //////System.out.println("FOUNDED" + Long.valueOf(matcher.group()));
                             dataOfAdding[count] = Long.valueOf(matcher.group());
                             count++;
                         }
 
                     for(int i = 0; i < arr.length(); i++){
-                        ////System.out.println("!!!" + dataOfAdding[i]);
+                        //////System.out.println("!!!" + dataOfAdding[i]);
                     }
 
                     product.setAddingDate(dataOfAdding);
 
-                    ////System.out.println("LOOKING FOR VALUE OF DATA ADDING " + snapshot + "AFTER BUILDER " + product.getAddingDate().toString());
+                    //////System.out.println("LOOKING FOR VALUE OF DATA ADDING " + snapshot + "AFTER BUILDER " + product.getAddingDate().toString());
 
                     product.setType(Integer.parseInt(snapshot.child("typeOfProduct").getValue().toString()));
-                    ////System.out.println("The before sending to list " + product.getBestBefore());
+                    //////System.out.println("The before sending to list " + product.getBestBefore());
                     productList.add(product);
 
-                    ////System.out.println("TYPE IS TO LISSS" + product.getType());
+                    //////System.out.println("TYPE IS TO LISSS" + product.getType());
 
                 }
                 adapter.notifyDataSetChanged();
@@ -298,11 +298,11 @@ public class MainActivity extends AppCompatActivity {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshotUserType : dataSnapshot.getChildren()) {
                     //@@@@@
-                    ////System.out.println("IUSERRR"  + snapshotUserType.child("permission").getValue());
+                    //////System.out.println("IUSERRR"  + snapshotUserType.child("permission").getValue());
                     if(snapshotUserType.child("email").getValue().equals(Login.mAuth.getCurrentUser().getEmail())){
-                        ////System.out.println("THE TYPE IS : " + snapshotUserType.child("permission").getValue() + "The user " + mAuth.getCurrentUser().getEmail());
+                        //////System.out.println("THE TYPE IS : " + snapshotUserType.child("permission").getValue() + "The user " + mAuth.getCurrentUser().getEmail());
                         Login.globalPermission = Integer.parseInt(snapshotUserType.child("permission").getValue().toString()) ;
-                        ////System.out.println("THE permission : " + Login.globalPermission);
+                        //////System.out.println("THE permission : " + Login.globalPermission);
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -334,13 +334,13 @@ public class MainActivity extends AppCompatActivity {
 //        {
 //            try {
 //                response = client.newCall(request).execute();
-//                ////System.out.println("WEATHER" + response);
+//                //////System.out.println("WEATHER" + response);
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
 //        }
 //    public void theLogOut(MenuItem item) {
-//        ////System.out.println("SIGNT OOUT");
+//        //////System.out.println("SIGNT OOUT");
 ////        FirebaseAuth.getInstance().signOut();
 //
 //    }

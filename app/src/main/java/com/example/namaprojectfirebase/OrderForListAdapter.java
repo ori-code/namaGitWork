@@ -51,30 +51,30 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
         OrderForList order = ordersList.get(position);
         String emailOfStatus = new String();
         if(order.getTheShipper().equals("default")){
-            System.out.println("the order only placed by orderer " + order.getOrderer());
+            //System.out.println("the order only placed by orderer " + order.getOrderer());
             emailOfStatus = order.getOrderer();
         }
         else{
-            System.out.println("the order status changed and now is " + order.getStatus() + " shipper "  + order.getTheShipper());
+            //System.out.println("the order status changed and now is " + order.getStatus() + " shipper "  + order.getTheShipper());
             emailOfStatus =  order.getTheShipper();
         }
-        System.out.println(order.getTheShipper() + " FROM LIST SHOWWWW");
+        //System.out.println(order.getTheShipper() + " FROM LIST SHOWWWW");
         holder.TextViewClientDetail.setText("The client name: " + order.getClientName() + " \nAdress: " + order.getClientAddress() + "\nPhone: " + order.getClientPhone());
         String status = new String();
         String orderType = new String();
         if (order.getStatus().equals("1")) {
             status = "Order Placed";
             holder.TextViewOrderStatus.setTextColor(Color.parseColor("#FE0100"));
-            ////System.out.println("Order Placed");
+            //////System.out.println("Order Placed");
         }
         if (order.getStatus().equals("2")) {
             status = "Ready for Shipment";
             holder.TextViewOrderStatus.setTextColor(Color.parseColor("#007AFF"));
-            //System.out.println("Order Shipped");
+            ////System.out.println("Order Shipped");
         }
         if (order.getStatus().equals("3")) {
             status = "Order Shipped";
-            //System.out.println("Order Received");
+            ////System.out.println("Order Received");
             holder.TextViewOrderStatus.setTextColor(Color.parseColor("#007F00"));
 
         }
@@ -82,10 +82,10 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
 //        long num = Long.parseLong(epochDate);
 //
         String epochString = order.getTimeOfPlacedOrder();
-        //System.out.println("The time " + epochString);
+        ////System.out.println("The time " + epochString);
         long epoch = Long.parseLong(epochString);
         Date expiry = new Date(epoch * 1000);
-        //System.out.println("The expiry  " + expiry);
+        ////System.out.println("The expiry  " + expiry);
 
 
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a", Locale.US);
@@ -108,7 +108,7 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
         //dd-M-yyyy hh:mm:ss
 
 
-             //System.out.println("The time " + order.getTimeOfPlacedOrder());
+             ////System.out.println("The time " + order.getTimeOfPlacedOrder());
 
             holder.TextViewOrderStatus.setText(status + " at "  + time + " by " + emailOfStatus);
             holder.TextViewOrderSum.setText("Shipment set by : " + orderType);
@@ -144,7 +144,7 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
                 public void onClick(View v) {
                     int position = getAdapterPosition();
 
-                     //System.out.println("IM CLICKABLE " + ordersList.get(position).getIdOfOrder());
+                     ////System.out.println("IM CLICKABLE " + ordersList.get(position).getIdOfOrder());
 
 
                      String orderForThisCard = new String();
@@ -165,7 +165,7 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
 //                        v.getContext().startActivity(intentToEditProduct);
 //                    }
 
-                    //System.out.println("THE ID THAT SENDED " + orderForThisCard);
+                    ////System.out.println("THE ID THAT SENDED " + orderForThisCard);
                 }
 
 

@@ -28,7 +28,7 @@ public class Purchases extends AppCompatActivity implements View.OnClickListener
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_form);
-        //System.out.println("IM IN ACTIVITY ORDER CARD ");
+        ////System.out.println("IM IN ACTIVITY ORDER CARD ");
         //CURRENT CART
         dataPurchasesCurrent = FirebaseDatabase.getInstance().getReference("cart").child(HomeFragment.uniqueOfCartID);
         dataPurchasesCurrent.addListenerForSingleValueEvent(valueEventListenerCurrentCart);
@@ -65,7 +65,7 @@ public class Purchases extends AppCompatActivity implements View.OnClickListener
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 //                    Product product = snapshot.getValue(Product.class);
-                  //System.out.println("PURCHASES DATA : " + snapshot);
+                  ////System.out.println("PURCHASES DATA : " + snapshot);
                 }
 
             }
@@ -86,7 +86,7 @@ public class Purchases extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.markOrderRecieved:
-                //System.out.println("Purchase is logged");
+                ////System.out.println("Purchase is logged");
 
                 break;
 

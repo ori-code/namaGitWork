@@ -97,7 +97,7 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     public void LogOut(MenuItem item) {
-        ////System.out.println("HEHYYYYY LOGGOUT");
+        //////System.out.println("HEHYYYYY LOGGOUT");
         Login.mAuth.signOut();
 
         Intent intent = new Intent(this, Login.class);

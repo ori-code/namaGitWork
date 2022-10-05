@@ -109,9 +109,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        //////System.out.println("Product before creation "+ productList.get(position).getBestBefore());
+        ////////System.out.println("Product before creation "+ productList.get(position).getBestBefore());
         Product product = productList.get(position);
-        //////System.out.println("Product xfksnfnfksdm "+ productList.get(position).getAddingDate());
+        ////////System.out.println("Product xfksnfnfksdm "+ productList.get(position).getAddingDate());
         //EPOCH TO STRING
         long bestBefore = productList.get(position).getBestBefore();
         Date date = new Date(bestBefore);
@@ -131,22 +131,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         long toOrder = bestBefore - 86400 * 3;
 
 //TODO changeBackground
-        ////System.out.println("HEYYY the list in adapter" +productList.get(position).getAddingDate() + "the name " + productList.get(position).getNameOfProduct());
+        //////System.out.println("HEYYY the list in adapter" +productList.get(position).getAddingDate() + "the name " + productList.get(position).getNameOfProduct());
         dataCounting = productList.get(position).getAddingDate();
         for(int i = 0; i < dataCounting.length; i++ ){
             if(i%2!=0){
                 allCountItem = dataCounting[i] + allCountItem;
-                ////System.out.println("ALL COUNT ITEM " + allCountItem);
+                //////System.out.println("ALL COUNT ITEM " + allCountItem);
                 if(dataCounting[i]!=0){
                     theLastQntyAdded = dataCounting[i];
                     theLastTimeAdded = dataCounting[i-1];
-                    ////System.out.println("LAST QUABTITY " + theLastQntyAdded*0.5 + " the real wuanityt "+  productList.get(position).getQuantity());
+                    //////System.out.println("LAST QUABTITY " + theLastQntyAdded*0.5 + " the real wuanityt "+  productList.get(position).getQuantity());
 
 
                 }
             }
             else{
-                ////System.out.println(" THE RECORDS IN THIS IS " + dataCounting[i]);
+                //////System.out.println(" THE RECORDS IN THIS IS " + dataCounting[i]);
             }
             }
 
@@ -155,9 +155,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 //GREEN PRODUCT
         if(theLastQntyAdded*0.5 > productList.get(position).getQuantity()){
-            ////System.out.println("Im THE GREEN PRODUCT " + theLastTimeAdded);
+            //////System.out.println("Im THE GREEN PRODUCT " + theLastTimeAdded);
             if(epochCurrent - theLastTimeAdded < 1662508800){
-                ////System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
+                //////System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
 
                 overallCart.setBackgroundColor(Color.parseColor("#007F00"));
             }
@@ -166,11 +166,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 //RED PRODUCT
         if(theLastQntyAdded*0.8 < productList.get(position).getQuantity()){
-            ////System.out.println("Im THE RED PRODUCT " + theLastTimeAdded);
+            //////System.out.println("Im THE RED PRODUCT " + theLastTimeAdded);
             if(epochCurrent - theLastTimeAdded > 1662508800){
 //                227238713
                 overallCart.setBackgroundColor(Color.parseColor("#FF0000"));
-                ////System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
+                //////System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
             }
 
         }
@@ -180,20 +180,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     if (readingDataCount < productList.size()) {
 
-        System.out.println("MIN QNTY " + productList.get(position).getMinQty());
-        System.out.println("Reading Count  " + readingDataCount); // products count in list
+        //System.out.println("MIN QNTY " + productList.get(position).getMinQty());
+        //System.out.println("Reading Count  " + readingDataCount); // products count in list
         //last adding and min quantity algorithm
 
 
-        System.out.println("THE NAME OF PRODUCT " + productList.get(position).getNameOfProduct());
-        System.out.println("THE LAST TIME ADDED " + theLastTimeAdded + " epochCurrent " + epochCurrent + " THE RESULT " + (epochCurrent - theLastTimeAdded) / 1000);
+        //System.out.println("THE NAME OF PRODUCT " + productList.get(position).getNameOfProduct());
+        //System.out.println("THE LAST TIME ADDED " + theLastTimeAdded + " epochCurrent " + epochCurrent + " THE RESULT " + (epochCurrent - theLastTimeAdded) / 1000);
 
         if (productList.get(position).getMinQty() >= productList.get(position).getQuantity()) {
             //less than 1 week reached
             if ((epochCurrent - theLastTimeAdded) / 1000 < 604800) {
                 //less than week
-                System.out.println("THE NAME OF PRODUCT AFTER IF " + productList.get(position).getNameOfProduct());
-                System.out.println("THE LAST TIME ADDED " + theLastTimeAdded + " epochCurrent " + epochCurrent + " THE RESULT " + (epochCurrent - theLastTimeAdded));
+                //System.out.println("THE NAME OF PRODUCT AFTER IF " + productList.get(position).getNameOfProduct());
+                //System.out.println("THE LAST TIME ADDED " + theLastTimeAdded + " epochCurrent " + epochCurrent + " THE RESULT " + (epochCurrent - theLastTimeAdded));
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(mCtx);
                 builder1.setMessage("The " + productList.get(position).getNameOfProduct() + " reached the minimum quantity parameter in LESS THAN WEEK, are you want to order 150% of quantity from the last adding? ");
                 builder1.setCancelable(true);
@@ -204,8 +204,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     if (longAddingDateArr[i] == 0) {
                         lastAddingDate = longAddingDateArr[i - 2];
                         lassAddingCount = longAddingDateArr[i - 1];
-                        System.out.println("HHHH in place: " + i + " DATA=> " + longAddingDateArr[i - 1] + " and " + longAddingDateArr[i - 2]);
-                        System.out.println("GGGG in place: " + i + " DATA=> " + lassAddingCount + " and " + lastAddingDate);
+                        //System.out.println("HHHH in place: " + i + " DATA=> " + longAddingDateArr[i - 1] + " and " + longAddingDateArr[i - 2]);
+                        //System.out.println("GGGG in place: " + i + " DATA=> " + lassAddingCount + " and " + lastAddingDate);
                         break;
                     }
 
@@ -229,7 +229,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
                                                     long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size() - 1);
 
-                                                    System.out.println("THE LAST count of added qnty " + theLastCountAdding);
+                                                    //System.out.println("THE LAST count of added qnty " + theLastCountAdding);
                                                     theKeyOfProduct1 = product.getKey();
                                                     long lassAddingCount1 = (long) (theLastCountAdding * 1.5);
                                                     long updatedQnty = theNowQuantity1 + lassAddingCount1;
@@ -244,7 +244,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                                                     } else {
 
@@ -263,7 +263,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                                                     } else {
 
@@ -281,7 +281,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                                                     } else {
 
@@ -333,7 +333,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
                                                     long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size() - 1);
 
-                                                    System.out.println("THE LAST count of added qnty " + theLastCountAdding);
+                                                    //System.out.println("THE LAST count of added qnty " + theLastCountAdding);
                                                     theKeyOfProduct1 = product.getKey();
                                                     long lassAddingCount1 = (long) (theLastCountAdding * 1.0);
                                                     long updatedQnty = theNowQuantity1 + lassAddingCount1;
@@ -348,7 +348,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                                                     } else {
 
@@ -367,7 +367,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                                                     } else {
 
@@ -385,7 +385,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                                                     } else {
 
@@ -418,8 +418,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 alert11.show();
             } else {
 
-                System.out.println("THE NAME OF PRODUCT AFTER IF " + productList.get(position).getNameOfProduct());
-                System.out.println("THE LAST TIME ADDED " + theLastTimeAdded + " epochCurrent " + epochCurrent + " THE RESULT " + (epochCurrent - theLastTimeAdded));
+                //System.out.println("THE NAME OF PRODUCT AFTER IF " + productList.get(position).getNameOfProduct());
+                //System.out.println("THE LAST TIME ADDED " + theLastTimeAdded + " epochCurrent " + epochCurrent + " THE RESULT " + (epochCurrent - theLastTimeAdded));
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(mCtx);
                 builder1.setMessage("The " + productList.get(position).getNameOfProduct() + " reached the minimum quantity parameter, are you want to order 100% of quantity from the last adding? ");
                 builder1.setCancelable(true);
@@ -430,14 +430,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     if (longAddingDateArr[i] == 0) {
                         lastAddingDate = longAddingDateArr[i - 2];
                         lassAddingCount = longAddingDateArr[i - 1];
-                        System.out.println("HHHH in place: " + i + " DATA=> " + longAddingDateArr[i - 1] + " and " + longAddingDateArr[i - 2]);
-                        System.out.println("GGGG in place: " + i + " DATA=> " + lassAddingCount + " and " + lastAddingDate);
+                        //System.out.println("HHHH in place: " + i + " DATA=> " + longAddingDateArr[i - 1] + " and " + longAddingDateArr[i - 2]);
+                        //System.out.println("GGGG in place: " + i + " DATA=> " + lassAddingCount + " and " + lastAddingDate);
                         break;
                     }
 
                 }
                 //not less than week
-                System.out.println("Another alerts and movements");
+                //System.out.println("Another alerts and movements");
                 builder1.setPositiveButton(
                         "ORDER 100% OF THE LAST ADDING AMOUNT",
                         new DialogInterface.OnClickListener() {
@@ -455,7 +455,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
                                                     long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size() - 1);
 
-                                                    System.out.println("THE LAST count of added qnty " + theLastCountAdding);
+                                                    //System.out.println("THE LAST count of added qnty " + theLastCountAdding);
                                                     theKeyOfProduct1 = product.getKey();
                                                     long lassAddingCount1 = (long) (theLastCountAdding * 1.0);
                                                     long updatedQnty = theNowQuantity1 + lassAddingCount1;
@@ -470,7 +470,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                                                     } else {
 
@@ -489,7 +489,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                                                     } else {
 
@@ -507,7 +507,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                                                                     } else {
 
@@ -561,7 +561,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 //
 //                                                    long theLastCountAdding = (long) dateOfAdding1.get(dateOfAdding1.size()-1);
 //
-//                                                    System.out.println("THE LAST count of added qnty " + theLastCountAdding);
+//                                                    //System.out.println("THE LAST count of added qnty " + theLastCountAdding);
 //                                                    theKeyOfProduct1 = product.getKey();
 //                                                    long lassAddingCount1 = (long) (theLastCountAdding*1.0);
 //                                                    long updatedQnty = theNowQuantity1 + lassAddingCount1;
@@ -576,7 +576,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 //                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
 //                                                                public void onComplete(@NonNull Task<Void> task) {
 //                                                                    if (task.isSuccessful()) {
-//                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+//                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 //
 //                                                                    } else {
 //
@@ -595,7 +595,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 //                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
 //                                                                public void onComplete(@NonNull Task<Void> task) {
 //                                                                    if (task.isSuccessful()) {
-//                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+//                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 //
 //                                                                    } else {
 //
@@ -613,7 +613,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 //                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
 //                                                                public void onComplete(@NonNull Task<Void> task) {
 //                                                                    if (task.isSuccessful()) {
-//                                                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+//                                                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 //
 //                                                                    } else {
 //
@@ -659,9 +659,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         if(Login.globalPermission == 5){
 
             if(theLastQntyAdded*0.5 > productList.get(position).getQuantity()){
-                ////System.out.println("Im THE GREEN PRODUCT " + theLastTimeAdded);
+                //////System.out.println("Im THE GREEN PRODUCT " + theLastTimeAdded);
                 if(epochCurrent - theLastTimeAdded < 1662508800){
-                    ////System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
+                    //////System.out.println(" THE TIME LOWER THAN WEEK" + (epochCurrent - theLastTimeAdded));
 
                     hotIcon.setVisibility(View.VISIBLE);
                     overallCart.setBackgroundColor(Color.parseColor("#DADADA"));
@@ -676,14 +676,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         if(epochCurrent >= toOrder )
         {
-            //////System.out.println("TO ORDERRRR" + toOrder);
-            ////System.out.println("CURRENT " + epochCurrent);
+            ////////System.out.println("TO ORDERRRR" + toOrder);
+            //////System.out.println("CURRENT " + epochCurrent);
             holder.expDateInList.setTextColor(Color.parseColor("#FE0100"));
             holder.expDateInList.setTypeface(holder.expDateInList.getTypeface(), Typeface.BOLD);
 
 
             //overdueProdList.add(product);
-            //////System.out.println("overdue name'" + product.getNameOfProduct() + "sfssfs" + overdueProdList);
+            ////////System.out.println("overdue name'" + product.getNameOfProduct() + "sfssfs" + overdueProdList);
         }
 
 
@@ -746,10 +746,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                             public void onClick(View v) {
                                                 int position = getAdapterPosition();
                                                 Product product = productList.get(position);
-                                                ////System.out.println("THE ADDING DATE LONG LIST  "  +  product.getAddingDate());
+                                                //////System.out.println("THE ADDING DATE LONG LIST  "  +  product.getAddingDate());
 
                                                 String strNameOfProduct = productList.get(position).getNameOfProduct();
-                                                ////System.out.println("Send String " + strNameOfProduct);
+                                                //////System.out.println("Send String " + strNameOfProduct);
 
                                                 Intent intentToEditProduct = new Intent(mCtx, editProduct.class);
                                                 intentToEditProduct.putExtra("keyName", strNameOfProduct);
@@ -761,7 +761,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                                 if(Login.globalPermission == 1) {
                                                     v.getContext().startActivity(intentToEditProduct);
                                                 }
-                                                ////System.out.println("THE NAME THAT SENDED " + strNameOfProduct);
+                                                //////System.out.println("THE NAME THAT SENDED " + strNameOfProduct);
                                             }
                                         }
 
@@ -889,7 +889,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                                ////////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
                             } else {
 
                             }

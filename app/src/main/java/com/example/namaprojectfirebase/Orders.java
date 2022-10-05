@@ -155,7 +155,7 @@ public class Orders extends AppCompatActivity {
         addUserActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                System.out.println("TRY TO GO T REGISTER");
+//                //System.out.println("TRY TO GO T REGISTER");
                 startActivity(new Intent(Orders.this, Register.class));
             }
         });
@@ -184,12 +184,12 @@ public class Orders extends AppCompatActivity {
                     else
                     {
 
-                        //System.out.println("IM IN SNAP ORDERS" + snapshot.getKey());
+                        ////System.out.println("IM IN SNAP ORDERS" + snapshot.getKey());
                         OrderForList order = snapshot.getValue(OrderForList.class);
-                        //System.out.println(snapshot.getValue().toString());
+                        ////System.out.println(snapshot.getValue().toString());
 
                         ordersList.add(order);
-                        //System.out.println("THE LIST " + ordersList.get(0).getTimeOfPlacedOrder());
+                        ////System.out.println("THE LIST " + ordersList.get(0).getTimeOfPlacedOrder());
                     }
 
 
@@ -282,9 +282,9 @@ public class Orders extends AppCompatActivity {
 //
 //
 //        for(Product item : productList ){
-//            //System.out.println("BEFORE FILTER");
+//            ////System.out.println("BEFORE FILTER");
 //            if(item.getNameOfProduct().toLowerCase().contains(text.toLowerCase())){
-//                //System.out.println("PRODUCT FILTER TYPE IS " + item.getType());
+//                ////System.out.println("PRODUCT FILTER TYPE IS " + item.getType());
 //                //TODO type of Product ASK VERONIKA
 //                if(FoodCheckBox.isChecked() && item.getType()==1)
 //                    filteredList.add(item);
@@ -312,15 +312,15 @@ public class Orders extends AppCompatActivity {
 //            productList.clear();
 //            if (dataSnapshot.exists()) {
 //                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    //System.out.println("THE BEST BEFORE FROM DB " +snapshot.child("bestBefore").getValue());
+//                    ////System.out.println("THE BEST BEFORE FROM DB " +snapshot.child("bestBefore").getValue());
 //                    Product product = snapshot.getValue(Product.class);
 //                    product.setType(Integer.parseInt(snapshot.child("typeOfProduct").getValue().toString()));
-//                    //System.out.println("The before sending to list " + product.getBestBefore());
+//                    ////System.out.println("The before sending to list " + product.getBestBefore());
 //
 //                    productList.add(product);
 //
 //
-//                    //System.out.println("TYPE IS TO LISSS" + product.getType());
+//                    ////System.out.println("TYPE IS TO LISSS" + product.getType());
 //
 //                }
 //                adapter.notifyDataSetChanged();
@@ -340,11 +340,11 @@ public class Orders extends AppCompatActivity {
 //        public void onDataChange(DataSnapshot dataSnapshot) {
 //            if (dataSnapshot.exists()) {
 //                for (DataSnapshot snapshotUserType : dataSnapshot.getChildren()) {
-//                    //System.out.println("IUSERRR"  + snapshotUserType.child("permission").getValue());
+//                    ////System.out.println("IUSERRR"  + snapshotUserType.child("permission").getValue());
 //                    if(snapshotUserType.child("email").getValue().equals(mAuth.getCurrentUser().getEmail())){
-//                        //System.out.println("THE TYPE IS : " + snapshotUserType.child("permission").getValue() + "The user " + mAuth.getCurrentUser().getEmail());
+//                        ////System.out.println("THE TYPE IS : " + snapshotUserType.child("permission").getValue() + "The user " + mAuth.getCurrentUser().getEmail());
 //                        Login.globalPermission = Integer.parseInt(snapshotUserType.child("permission").getValue().toString()) ;
-//                        //System.out.println("THE permission : " + Login.globalPermission);
+//                        ////System.out.println("THE permission : " + Login.globalPermission);
 //                    }
 //                }
 //                adapter.notifyDataSetChanged();
@@ -358,7 +358,7 @@ public class Orders extends AppCompatActivity {
 //    };
 //
 ////    public void theLogOut(MenuItem item) {
-////        //System.out.println("SIGNT OOUT");
+////        ////System.out.println("SIGNT OOUT");
 //////        FirebaseAuth.getInstance().signOut();
 ////
 ////    }

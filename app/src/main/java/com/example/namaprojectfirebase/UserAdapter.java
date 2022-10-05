@@ -62,7 +62,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                                             public void onClick(View v) {
                                                 int position = getAdapterPosition();
                                                 User user = userList.get(position);
-                                                ////System.out.println(user.getFullName() + "YJO");
+                                                //////System.out.println(user.getFullName() + "YJO");
 //                                                theDeleteUser = user.getEmail();
 //                                                deleteUserFunc(theDeleteUser);
                                             }
@@ -138,10 +138,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public void deleteUserFunc(String emailOfUser){
-        ////System.out.println("THE EMAIL IS " +emailOfUser );
+        //////System.out.println("THE EMAIL IS " +emailOfUser );
 //        UserRecycleViewClass.dataSnapshotUsers.addListenerForSingleValueEvent(valueEventListenerDeleteUser);
 
-//       ////System.out.println("From  EMAIL DB " +UserRecycleViewClass.dataSnapshotUsers.child("email").child(emailOfUser).getKey());
+//       //////System.out.println("From  EMAIL DB " +UserRecycleViewClass.dataSnapshotUsers.child("email").child(emailOfUser).getKey());
 //       deleteAccount();
 
     }
@@ -153,7 +153,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 //            @Override
 //            public void onComplete(@NonNull Task<Void> task) {
 //                if (task.isSuccessful()) {
-//                    ////System.out.println("DELETED");//
+//                    //////System.out.println("DELETED");//
 //
 //                } else {
 //
@@ -169,14 +169,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 //            userList.clear();
 //            if (dataSnapshot.exists()) {
 //                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    ////System.out.println("USERSSSSIN ADAPTER " +snapshot.getValue());
+//                    //////System.out.println("USERSSSSIN ADAPTER " +snapshot.getValue());
 //                    if(snapshot.getValue().equals(theDeleteUser)){
-//                        ////System.out.println("FOUNDED!!!!");
+//                        //////System.out.println("FOUNDED!!!!");
 //
 //                    }
 ////                    User user = snapshot.getValue(User.class);
 //
-////                    ////System.out.println("USERS EMAIL" + user.getEmail());
+////                    //////System.out.println("USERS EMAIL" + user.getEmail());
 //
 //                }
 ////                adapter2.notifyDataSetChanged();

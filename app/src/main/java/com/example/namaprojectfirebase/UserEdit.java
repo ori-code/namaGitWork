@@ -138,13 +138,13 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
     ValueEventListener valueEventListenerForUpdateUser = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
-            System.out.println("IN RUNNING ");
+            //System.out.println("IN RUNNING ");
             for (DataSnapshot snapshotRun : snapshot.getChildren()) {
                 if(snapshotRun.child("email").getValue().equals(mAuth.getCurrentUser().getEmail()))
                 {
                     String permission = new String();
                     userToEdit = snapshotRun.getValue(User.class);
-                    System.out.println("IN IF " + userToEdit.getEmail());
+                    //System.out.println("IN IF " + userToEdit.getEmail());
                     nameOfUserEditPage.setText(userToEdit.getFullName());
                     userIdEditPageLicense.setText(userToEdit.getLicenseNum());
                     userEditPageEmail.setText(userToEdit.getEmail());
@@ -171,8 +171,8 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
 
 
                 }
-                System.out.println("THE VALUE OF USER" +   snapshotRun.child("email").getValue());
-//                System.out.println("THE VALUE OF USER from phone is " + userToEdit.getEmail() );
+                //System.out.println("THE VALUE OF USER" +   snapshotRun.child("email").getValue());
+//                //System.out.println("THE VALUE OF USER from phone is " + userToEdit.getEmail() );
             }
         }
 
@@ -186,9 +186,9 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
 //    public void onClick(View v) {
 //        switch (v.getId()) {
 //            case  R.id.productButtonPageEditUpdate: {
-//                //System.out.println("FIRST ATTEMPT STRING "  + firstAttempQnty  + " EDIT" + editProductQnty.getText().toString());
+//                ////System.out.println("FIRST ATTEMPT STRING "  + firstAttempQnty  + " EDIT" + editProductQnty.getText().toString());
 //                if(!editProductQnty.getText().toString().isEmpty()){
-//                    //System.out.println("IM NOT NULLLL" +  findProduct.child(theKeyOfProduct).child("nameOfProfuct").getKey() + " REAL QUANTITY " +   findProduct.child(theKeyOfProduct).child("quantity").getKey());
+//                    ////System.out.println("IM NOT NULLLL" +  findProduct.child(theKeyOfProduct).child("nameOfProfuct").getKey() + " REAL QUANTITY " +   findProduct.child(theKeyOfProduct).child("quantity").getKey());
 //                    theNowQuantity = theNowQuantity + Integer.parseInt(editProductQnty.getText().toString());
 //                    findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(String.valueOf(theNowQuantity)));
 ////                     findProduct.child(theKeyOfProduct).child("quantity").setValue(Integer.parseInt(editProductQnty.getText().toString() + theNowQuantity));
@@ -210,7 +210,7 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
 //                            .addOnCompleteListener(new OnCompleteListener<Void>() {
 //                                public void onComplete(@NonNull Task<Void> task) {
 //                                    if (task.isSuccessful()) {
-//                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+//                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 //
 //                                    } else {
 //
@@ -229,7 +229,7 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
 //                            .addOnCompleteListener(new OnCompleteListener<Void>() {
 //                                public void onComplete(@NonNull Task<Void> task) {
 //                                    if (task.isSuccessful()) {
-//                                        ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+//                                        //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 //
 //                                    } else {
 //
@@ -256,12 +256,12 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
 //
 //                }
 //                if(!editProductMinQnty.getText().toString().isEmpty()){
-//                    //System.out.println("IM NOT MINQUANTITY" +  findProduct.child(theKeyOfProduct).child("minQty").getKey());
+//                    ////System.out.println("IM NOT MINQUANTITY" +  findProduct.child(theKeyOfProduct).child("minQty").getKey());
 //                    findProduct.child(theKeyOfProduct).child("minQty").setValue(Integer.parseInt(editProductMinQnty.getText().toString()));
 //
 //                }
 //                if(!editProductSellPrice.getText().toString().isEmpty()){
-//                    //System.out.println("IM NOT MINQUANTITY" +  findProduct.child(theKeyOfProduct).child("sellPrice").getKey());
+//                    ////System.out.println("IM NOT MINQUANTITY" +  findProduct.child(theKeyOfProduct).child("sellPrice").getKey());
 //                    findProduct.child(theKeyOfProduct).child("sellPrice").setValue(Integer.parseInt(editProductSellPrice.getText().toString()));
 //                }
 //                break;
@@ -294,13 +294,13 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
 //            public void onDataChange(DataSnapshot dataSnapshot) {
 ////                List<String> products = new ArrayList();
 //                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    //System.out.println("THE VALUE OF PRODUCT" + postSnapshot.getValue());
+//                    ////System.out.println("THE VALUE OF PRODUCT" + postSnapshot.getValue());
 //
 ////                    Product product = postSnapshot.getValue(Product.class);
-////                    //System.out.println("THE PRODUCT IS FROM SNAP " + product);
+////                    ////System.out.println("THE PRODUCT IS FROM SNAP " + product);
 ////
 ////                    if(postSnapshot.child("nameOfProduct").equals(nameOfProduct)){
-////                        //System.out.println("THE NAME FROM DB IS " + postSnapshot.child("nameOfProduct"));
+////                        ////System.out.println("THE NAME FROM DB IS " + postSnapshot.child("nameOfProduct"));
 ////                    }
 //                }
 //
@@ -316,10 +316,10 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
 //    ValueEventListener valueEventListenerForUpdateProduct = new ValueEventListener() {
 //        @Override
 //        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//            //System.out.println("IN RUNNING ");
+//            ////System.out.println("IN RUNNING ");
 //            for (DataSnapshot snapshotRun : snapshot.getChildren()) {
 //                if(nameOfProduct.equals(snapshotRun.child("nameOfProduct").getValue())){
-//                    //System.out.println("THE KEY IS FOUNDED" + snapshotRun.getKey());
+//                    ////System.out.println("THE KEY IS FOUNDED" + snapshotRun.getKey());
 //                    theKeyOfProduct = snapshotRun.getKey();
 ////                            editProductName = (EditText) findViewById(R.id.nameOfProductEditPage);
 //                    editProductSellPrice = (EditText) findViewById(R.id.sellPriceEditPage);
@@ -333,7 +333,7 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
 //                    firstAttempQnty = snapshotRun.child("quantity").getValue().toString();
 //                    editProductMinQnty.setHint(snapshotRun.child("minQty").getValue().toString());
 //                }
-//                //System.out.println("THE VALUE OF PRODUCT" + snapshotRun.getValue() + " AND NAME IS " + snapshotRun.child("nameOfProduct").getValue());
+//                ////System.out.println("THE VALUE OF PRODUCT" + snapshotRun.getValue() + " AND NAME IS " + snapshotRun.child("nameOfProduct").getValue());
 //            }
 //        }
 //
