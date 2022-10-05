@@ -36,7 +36,7 @@ public class Order extends Activity {
     public int count = 0,flagRunningCart =0,valueUpdated=0;
     public EditText editClientName, editAddress, editPhone, editComments ;
     public Button addPurchases;
-    public static int deliveryType = 0;
+    public static int deliveryType = 1;
     public static ImageButton showAllProducts ,cartActivity, showAllOrders, addProductActivity,allGraphs,overdueActivity,userListActivity,addUserActivity;
 
 
@@ -244,6 +244,7 @@ public class Order extends Activity {
                         dataOfCart.put("deliveryType",  deliveryType);
                         dataOfCart.put("idOfOrder", HomeFragment.uniqueOfCartID);
                         dataOfCart.put("numOfOrder", random);
+                        dataOfCart.put("theShipper", "default");
                         FirebaseDatabase.getInstance()
                                 .getReference("orders")
                                 .child(HomeFragment.uniqueOfCartID)
@@ -393,15 +394,15 @@ public class Order extends Activity {
 
     public void radioTypeButtonDeliveryMan(View view) {
         deliveryType=1;
-        ////System.out.println("radioTypeButtonDeliveryMan");
+        System.out.println("radioTypeButtonDeliveryMan" + deliveryType);
     }
     public void radioTypeDrone(View view) {
         deliveryType=2;
-        ////System.out.println("radioTypeDrone");
+        System.out.println("radioTypeDrone" + + deliveryType);
     }
     public void radioTypePickup(View view) {
         deliveryType=3;
-        ////System.out.println("radioTypePickup");
+        System.out.println("radioTypePickup" + + deliveryType);
     }
 
 }

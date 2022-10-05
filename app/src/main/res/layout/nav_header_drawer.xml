@@ -16,9 +16,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="116dp"
+        android:layout_width="65dp"
 
-        android:layout_height="wrap_content"
+        android:layout_height="82dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="20dp"
         app:srcCompat="@drawable/splashscreen" />
@@ -28,12 +28,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/activeUserEmail"
         android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:text="@string/nav_header_subtitle" />
 </LinearLayout>

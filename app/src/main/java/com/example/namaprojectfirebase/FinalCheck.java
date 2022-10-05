@@ -197,6 +197,7 @@ public class FinalCheck extends Activity implements AdapterView.OnItemSelectedLi
         //System.out.println("SHIPMENT UPDATE" + shipmentTypeUpdate);
         String forUpdateShipmentType = String.valueOf(shipmentTypeUpdate);
         finalCheckSnapShot.child("status").setValue(forUpdateShipmentType);
+        finalCheckSnapShot.child("theShipper").setValue(Login.mAuth.getCurrentUser().getEmail());
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
         finalCheckSnapShot.child("timeOfPlacedOrder").setValue(ts);
