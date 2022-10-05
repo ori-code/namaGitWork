@@ -1,6 +1,8 @@
 package com.example.namaprojectfirebase;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,22 +89,41 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.textViewShortDescInUserList.setText(user.getLicenseNum());
         holder.textViewShortDescInUserList2.setText(user.getPhoneNum());
         holder.textViewShortDescInUserList3.setText(user.getAddress());
-        //holder.textViewShortDescInUserList4.setText(user.getAddress());
-        if(user.getPermission()==1){
+        holder.textViewShortDescInUserList4.setText(String.valueOf(user.getSalary()));
+        if(user.getPermission()==4){
             holder.userPermisionImageInlist.setImageResource(R.drawable.accountant);
         }
-        if(user.getPermission()==2){
+        if(user.getPermission()==1){
             holder.userPermisionImageInlist.setImageResource(R.drawable.admin);
         }
-        if(user.getPermission()==3){
+        if(user.getPermission()==5){
             holder.userPermisionImageInlist.setImageResource(R.drawable.userclient);
         }
-        if(user.getPermission()==4){
+        if(user.getPermission()==3){
             holder.userPermisionImageInlist.setImageResource(R.drawable.deliveryman);
         }
-        if(user.getPermission()==5){
-            holder.userPermisionImageInlist.setImageResource(R.drawable.deliveryman);
+        if(user.getPermission()==2){
+            holder.userPermisionImageInlist.setImageResource(R.drawable.clerk);
         }
+
+        user.getEmail();
+
+        /*case R.id.productButtonPageEditDelete: {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("Are you sure?");
+            builder.setMessage("This action is nonreturnable. ");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    deleteProduct.child("products").child(theKeyOfProduct).removeValue();
+                }
+            });
+            builder.show();
+
+            break;
+        }*/
+
 
     }
 

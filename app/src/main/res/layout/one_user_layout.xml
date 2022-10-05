@@ -33,7 +33,7 @@
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
-            <ImageButton
+           <!-- <ImageButton
                 android:id="@+id/deleteUserBtn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -47,7 +47,7 @@
                 android:visibility="visible">
 
             </ImageButton>
-
+-->
 
             <TextView
                 android:id="@+id/textViewShortDescInUserList"
