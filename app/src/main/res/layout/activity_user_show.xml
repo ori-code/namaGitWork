@@ -12,7 +12,7 @@
     >
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/textViewAttention"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#484646"
@@ -22,10 +22,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.311"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.722" />
+        app:layout_constraintVertical_bias="0.738" />
 
     <TextView
         android:id="@+id/nameOfProductEdit"
@@ -83,7 +83,6 @@
         android:id="@+id/userEditPageEmail"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
         android:background="@color/white"
         android:ems="10"
         android:hint=" Email"
@@ -95,7 +94,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.357" />
+        app:layout_constraintVertical_bias="0.46" />
 
     <EditText
         android:id="@+id/userEditPhone"
@@ -103,7 +102,7 @@
         android:layout_height="40dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint="Phone"
+        android:hint=" No."
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -112,7 +111,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintVertical_bias="0.261" />
 
     <EditText
         android:id="@+id/userEditAddress"
@@ -120,7 +119,7 @@
         android:layout_height="40dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint="Address of User"
+        android:hint=" Address of user"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -129,7 +128,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.564" />
+        app:layout_constraintVertical_bias="0.36" />
 
     <EditText
         android:id="@+id/nameOfUserEditPage"
@@ -137,7 +136,7 @@
         android:layout_height="40dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" User Name"
+        android:hint=" Fullname"
         android:inputType="textEmailAddress"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -147,6 +146,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.163" />
+
 
     <EditText
         android:id="@+id/userIdEditPageLicense"
@@ -163,10 +163,10 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261" />
+        app:layout_constraintVertical_bias="0.57" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textViewID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ID of User"
@@ -174,27 +174,27 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.226" />
+        app:layout_constraintVertical_bias="0.526" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Name"
+        android:text="User name"
         android:textColor="@color/white"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.13" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User Email"
@@ -202,11 +202,10 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324" />
-
+        app:layout_constraintVertical_bias="0.419" />
 
     <TextView
         android:id="@+id/textView13"
@@ -220,24 +219,24 @@
         app:layout_constraintHorizontal_bias="0.102"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42" />
+        app:layout_constraintVertical_bias="0.226" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Addres of user"
+        android:text="Address"
         android:textColor="@color/white"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintVertical_bias="0.322" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/textViewSalary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Salary"
@@ -245,10 +244,10 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.102"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.617" />
+        app:layout_constraintVertical_bias="0.61" />
 
     <TextView
         android:id="@+id/salaryEditUser"
@@ -285,23 +284,23 @@
 
     <Button
         android:id="@+id/productButtonPageEditUpdate"
-        android:layout_width="170dp"
-        android:layout_height="51dp"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
         android:backgroundTint="@color/black"
         android:fontFamily="@font/aldrich"
         android:text="UPDATE"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="0.927"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.958" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/productButtonPageEditDelete"
-        android:layout_width="167dp"
-        android:layout_height="51dp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:backgroundTint="@color/design_default_color_primary"
         android:fontFamily="@font/aldrich"
         android:text="DELETE the product"
@@ -310,7 +309,7 @@
         app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.958" />-->

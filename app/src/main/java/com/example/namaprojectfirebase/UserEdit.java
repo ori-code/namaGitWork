@@ -39,6 +39,7 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
     public static String currentUserEmail;
     public static User userToEdit;
     Button updateBtn, deleteBtn;
+    public static TextView Attention, textID, textEmail, textSalary;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +49,20 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
         userEditPhone = findViewById(R.id.userEditPhone);
         userEditAddress = findViewById(R.id.userEditAddress);
 
+        Attention = findViewById(R.id.textViewAttention);
+        textID = findViewById(R.id.textViewID);
+        textEmail = findViewById(R.id.textViewEmail);
+        textSalary = findViewById(R.id.textViewSalary);
+
         userEditPageEmail = findViewById(R.id.userEditPageEmail);
         salaryEditUser = findViewById(R.id.salaryEditUser);
         permissionUserEdit = findViewById(R.id.permissionUserEdit);
+
+
+
+
+
+
 
 
 
@@ -58,6 +70,32 @@ public class UserEdit extends AppCompatActivity implements View.OnClickListener 
         updateBtn.setOnClickListener(this);
         deleteBtn = (Button) findViewById(R.id.productButtonPageEditDelete);
         deleteBtn.setOnClickListener(this);
+
+
+        if (Login.globalPermission !=1) {
+
+            //all
+            permissionUserEdit.setVisibility(View.INVISIBLE);
+            Attention.setVisibility(View.INVISIBLE);
+            userEditPageEmail.setVisibility(View.INVISIBLE);
+            textEmail.setVisibility(View.INVISIBLE);
+            //worker, deliveryman
+
+            userIdEditPageLicense.setVisibility(View.INVISIBLE);
+            textID.setVisibility(View.INVISIBLE);
+            salaryEditUser.setVisibility(View.INVISIBLE);
+            textSalary.setVisibility(View.INVISIBLE);
+            deleteBtn.setVisibility(View.INVISIBLE);
+        }
+        /*else {
+            userIdEditPageLicense.setVisibility(View.INVISIBLE);
+            permissionUserEdit.setVisibility(View.INVISIBLE);
+            textID.setVisibility(View.INVISIBLE);
+            salaryEditUser.setVisibility(View.INVISIBLE);
+            textSalary.setVisibility(View.INVISIBLE);
+            textEmail.setVisibility(View.INVISIBLE);
+        }*/
+
 
         Bundle extras = getIntent().getExtras();
 
