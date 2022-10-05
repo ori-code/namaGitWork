@@ -49,7 +49,16 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
     @Override
     public void onBindViewHolder(@NonNull OrderForListViewHolder holder, int position) {
         OrderForList order = ordersList.get(position);
-        ////System.out.println(order.toString() + " FROM LIST ");
+        String emailOfStatus = new String();
+        if(order.getTheShipper().equals("default")){
+            System.out.println("the order only placed by orderer " + order.getOrderer());
+            emailOfStatus = order.getOrderer();
+        }
+        else{
+            System.out.println("the order status changed and now is " + order.getStatus() + " shipper "  + order.getTheShipper());
+            emailOfStatus =  order.getTheShipper();
+        }
+        System.out.println(order.getTheShipper() + " FROM LIST SHOWWWW");
         holder.TextViewClientDetail.setText("The client name: " + order.getClientName() + " \nAdress: " + order.getClientAddress() + "\nPhone: " + order.getClientPhone());
         String status = new String();
         String orderType = new String();
@@ -101,7 +110,7 @@ public class OrderForListAdapter extends RecyclerView.Adapter<OrderForListAdapte
 
              //System.out.println("The time " + order.getTimeOfPlacedOrder());
 
-            holder.TextViewOrderStatus.setText(status + " at "  + time);
+            holder.TextViewOrderStatus.setText(status + " at "  + time + " by " + emailOfStatus);
             holder.TextViewOrderSum.setText("Shipment set by : " + orderType);
             holder.NumberOfOrder.setText("Number of Order : " + order.getNumOfOrder());
 
