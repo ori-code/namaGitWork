@@ -38,7 +38,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     @Override
     public void onBindViewHolder(@NonNull CartProductAdapterViewHolder holder, int position) {
          Product product = productList.get(position);
-         //////System.out.println("QNTY" + holder.textViewQuantity.getText());
+         ////////System.out.println("QNTY" + holder.textViewQuantity.getText());
          holder.textViewTitle.setText(product.getNameOfProduct());
          holder.textViewQuantity.setText(String.valueOf(product.getQuantity()));
          holder.textViewPrice.setText(String.valueOf("Price: " +product.getBuyPrice()));
@@ -67,13 +67,13 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                     int position = getAdapterPosition();
                     if(!productList.isEmpty()){
                         productList.get(position).setQuantity(productList.get(position).getQuantity() +1);
-                        System.out.println("QUANTITY FROM LIST "+ productList.get(position).getQuantity());
+                        //System.out.println("QUANTITY FROM LIST "+ productList.get(position).getQuantity());
                         Cart.dbProducts.child(productList.get(position).getNameOfProduct()).child("quantity").setValue(productList.get(position).getQuantity());
 
                     }
 
 //
-//                    //////System.out.println("PLUSS" + " To the product "+ Cart.dbProducts.child("-N75vtUd5iOR1aluZC7n").child("quantity").get());
+//                    ////////System.out.println("PLUSS" + " To the product "+ Cart.dbProducts.child("-N75vtUd5iOR1aluZC7n").child("quantity").get());
 
                 }
 
@@ -85,7 +85,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     productList.get(position).setQuantity(productList.get(position).getQuantity() - 1);
-                    //System.out.println("QUANTITY FROM LIST "+ productList.get(position).getQuantity());
+                    ////System.out.println("QUANTITY FROM LIST "+ productList.get(position).getQuantity());
                     Cart.dbProducts.child(productList.get(position).getNameOfProduct()).child("quantity").setValue(productList.get(position).getQuantity());
 
 
@@ -97,7 +97,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     productList.get(position).setQuantity(productList.get(position).getQuantity() - 1);
-                    //System.out.println("QUANTITY FROM LIST "+ productList.get(position).getQuantity());
+                    ////System.out.println("QUANTITY FROM LIST "+ productList.get(position).getQuantity());
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
                     builder.setCancelable(true);

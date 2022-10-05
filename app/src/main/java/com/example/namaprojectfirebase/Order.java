@@ -45,7 +45,7 @@ public class Order extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_form);
         Button getOrder = (Button) findViewById(R.id.markOrderRecieved);
-        ////System.out.println("IM IN ORDER CARD ");
+        //////System.out.println("IM IN ORDER CARD ");
         Query orderQueryCopyAllToOrders, updateQuantityFromGlobal,ordersQuery;
 
         orderDbSnap = FirebaseDatabase.getInstance().getReference("carts").child(HomeFragment.uniqueOfCartID);
@@ -73,11 +73,11 @@ public class Order extends Activity {
 
         if (Login.globalPermission == 3) {
             //deliveryman
-            addProductActivity.setVisibility(View.INVISIBLE);
-            userListActivity.setVisibility(View.INVISIBLE);
-            allGraphs.setVisibility(View.INVISIBLE);
-            overdueActivity.setVisibility(View.INVISIBLE);
-            addUserActivity.setVisibility(View.INVISIBLE);
+//            addProductActivity.setVisibility(View.INVISIBLE);
+//            userListActivity.setVisibility(View.INVISIBLE);
+//            allGraphs.setVisibility(View.INVISIBLE);
+//            overdueActivity.setVisibility(View.INVISIBLE);
+//            addUserActivity.setVisibility(View.INVISIBLE);
         }
 
         if (Login.globalPermission == 4) {
@@ -179,19 +179,19 @@ public class Order extends Activity {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-//                        ////System.out.println("CLICK BUTTON START RUNNING FUNC BEFORE FOR");
+//                        //////System.out.println("CLICK BUTTON START RUNNING FUNC BEFORE FOR");
                     if(flagRunningCart==0){
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             //LIST FROM CART
                             productsInCartNameQuantity.add(postSnapshot.getKey());
                             productsInCartNameQuantity.add(String.valueOf(postSnapshot.child("quantity").getValue()));
-//                            ////System.out.println("The values in list" + productsInCartNameQuantity);
-//                            ////System.out.println("COUNT IS" + count);
+//                            //////System.out.println("The values in list" + productsInCartNameQuantity);
+//                            //////System.out.println("COUNT IS" + count);
 
 
 
                             count++;
-//                            ////System.out.println("COUNT IS : "+ count);
+//                            //////System.out.println("COUNT IS : "+ count);
                         }
                         flagRunningCart = 1;
 
@@ -201,13 +201,13 @@ public class Order extends Activity {
                         Map<String, Object> dataOfCart = new HashMap<>();
                         dataOfCart.put("orderer", Login.mAuth.getCurrentUser().getEmail());
                         for(int z = 0; z < productsInCartNameQuantity.size()-2; z=z+2 ){
-                            ////System.out.println("THE PRODUCT IN CART" + productsInCartNameQuantity.get(z));
+                            //////System.out.println("THE PRODUCT IN CART" + productsInCartNameQuantity.get(z));
                             if(productsInCartNameQuantity.get(z).equals("currentUserEmail")){
-                                ////System.out.println("IM IN BREAKKK!!!");
+                                //////System.out.println("IM IN BREAKKK!!!");
                                 break;
                             }
 //                            if(!productsInCartNameQuantity.get(z).getClass().equals(Number.class)){
-                                ////System.out.println("CLASS IS" + productsInCartNameQuantity.get(z).getClass());
+                                //////System.out.println("CLASS IS" + productsInCartNameQuantity.get(z).getClass());
                                 dataOfCart.put(productsInCartNameQuantity.get(z).toString(), productsInCartNameQuantity.get(z+1));
 //                            }
                         }
@@ -224,13 +224,13 @@ public class Order extends Activity {
                         dataOfCart.put("timeOfPlacedOrder" , ts);
                         dataOfCart.put("clientName",editCName);
                         for(int i = 0; i< productsInCartNameQuantity.size()-2; i = i+2){
-                            ////System.out.println("THE ARRAY TO ADDD "  + productsInCartNameQuantity.get(i)) ;
+                            //////System.out.println("THE ARRAY TO ADDD "  + productsInCartNameQuantity.get(i)) ;
                             if(productsInCartNameQuantity.get(i).equals("currentUserEmail") ||
                                     productsInCartNameQuantity.get(i).equals("orderPlaced")){
-                                ////System.out.println("NOTHING");
+                                //////System.out.println("NOTHING");
                             }
                             else{
-                                ////System.out.println("PRODUCT TO ADD " + productsInCartNameQuantity.get(i) + "QNTY" +
+                                //////System.out.println("PRODUCT TO ADD " + productsInCartNameQuantity.get(i) + "QNTY" +
 //                                        productsInCartNameQuantity.get(i+1));
                                 dataOfCart.put(productsInCartNameQuantity.get(i).toString(),productsInCartNameQuantity.get(i+1));
                             }
@@ -264,7 +264,7 @@ public class Order extends Activity {
                                 });
                     }
                     else{
-//                        ////System.out.println("the flagRunningCart is : " +flagRunningCart);
+//                        //////System.out.println("the flagRunningCart is : " +flagRunningCart);
                     }
 
 
@@ -304,25 +304,25 @@ public class Order extends Activity {
                         if(valueUpdated==0){
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
-//                            ////System.out.println("Name from snap allProducts " + postSnapshot.child("nameOfProduct").getValue());
+//                            //////System.out.println("Name from snap allProducts " + postSnapshot.child("nameOfProduct").getValue());
                             for(int i = 0; i < productsInCartNameQuantity.size(); i++){
-//                               ////System.out.println("Data in list on i place :" +i +" "+productsInCartNameQuantity.get(i).toString());
+//                               //////System.out.println("Data in list on i place :" +i +" "+productsInCartNameQuantity.get(i).toString());
                                if (postSnapshot.child("nameOfProduct").getValue().equals(productsInCartNameQuantity.get(i).toString())) {
-//                                        ////System.out.println("the names the same in if");
+//                                        //////System.out.println("the names the same in if");
                                         int overallQnty = Integer.parseInt(postSnapshot.child("quantity").getValue().toString());
                                         int productQnty = Integer.parseInt(productsInCartNameQuantity.get(i+1).toString());
-//                                            ////System.out.println("OVERAL QNTY FROM DATABASE INT CASTED " + overallQnty);
-//                                            ////System.out.println("QNTY OF PRODUCT FROM LIST INT CASTED " + productQnty);
-//                                            ////System.out.println("NAME IN LIST ON THIS I PLACE IN IF " + productsInCartNameQuantity.get(i).toString());
-//                                            ////System.out.println("QUANTITY IN LIST ON THIS I+1 PLACE IN IF " + productsInCartNameQuantity.get(i+1).toString());
+//                                            //////System.out.println("OVERAL QNTY FROM DATABASE INT CASTED " + overallQnty);
+//                                            //////System.out.println("QNTY OF PRODUCT FROM LIST INT CASTED " + productQnty);
+//                                            //////System.out.println("NAME IN LIST ON THIS I PLACE IN IF " + productsInCartNameQuantity.get(i).toString());
+//                                            //////System.out.println("QUANTITY IN LIST ON THIS I+1 PLACE IN IF " + productsInCartNameQuantity.get(i+1).toString());
                                             int result = overallQnty -productQnty;
-//                                            ////System.out.println("RESULT" + result);
+//                                            //////System.out.println("RESULT" + result);
 
 
                                             postSnapshot.getRef().child("quantity").setValue(result);
 
                                    for(int j = 0; j < productsInCartNameQuantity.size(); j ++ ){
-                                       ////System.out.println("THE PRODUCT IN CART" + productsInCartNameQuantity.get(j));
+                                       //////System.out.println("THE PRODUCT IN CART" + productsInCartNameQuantity.get(j));
                                    }
                                 }
 
@@ -356,7 +356,7 @@ public class Order extends Activity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                   ////System.out.println(     "The value of list" + postSnapshot.getValue());
+                                   //////System.out.println(     "The value of list" + postSnapshot.getValue());
 
 
                             }
@@ -394,15 +394,15 @@ public class Order extends Activity {
 
     public void radioTypeButtonDeliveryMan(View view) {
         deliveryType=1;
-        System.out.println("radioTypeButtonDeliveryMan" + deliveryType);
+        //System.out.println("radioTypeButtonDeliveryMan" + deliveryType);
     }
     public void radioTypeDrone(View view) {
         deliveryType=2;
-        System.out.println("radioTypeDrone" + + deliveryType);
+        //System.out.println("radioTypeDrone" + + deliveryType);
     }
     public void radioTypePickup(View view) {
         deliveryType=3;
-        System.out.println("radioTypePickup" + + deliveryType);
+        //System.out.println("radioTypePickup" + + deliveryType);
     }
 
 }

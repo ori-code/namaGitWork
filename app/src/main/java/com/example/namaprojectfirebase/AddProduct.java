@@ -125,7 +125,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         addUserActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                System.out.println("TRY TO GO T REGISTER");
+//                //System.out.println("TRY TO GO T REGISTER");
                 startActivity(new Intent(AddProduct.this, Register.class));
             }
         });
@@ -196,7 +196,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                 addDate.set(year,month,day);
                 Long dateInMillies = addDate.getTimeInMillis();
                 String date = Long.toString(dateInMillies);
-                //System.out.println("date is DATE" + date);
+                ////System.out.println("date is DATE" + date);
                 DatePickerDialog dialog = new DatePickerDialog(
                         AddProduct.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
@@ -226,7 +226,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                 );
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
-                ////System.out.println("date out");
+                //////System.out.println("date out");
             }
         });
 
@@ -236,12 +236,12 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         AddingDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                ////System.out.println("the date is " + day + "/" + month + "/" + year + "/");
+                //////System.out.println("the date is " + day + "/" + month + "/" + year + "/");
 
                 String date = day + "/" + month + "/" + year;
                 calendarAdd = new GregorianCalendar(year, month, day);
                 calendarAdd.getTimeInMillis();
-                //System.out.println(calendarAdd.getTimeInMillis());
+                ////System.out.println(calendarAdd.getTimeInMillis());
                 DateAdding.setText(date);
             }
         };
@@ -250,12 +250,12 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         BestBeforeListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                ////System.out.println("the date is " + day + "/" + month + "/" + year + "/");
+                //////System.out.println("the date is " + day + "/" + month + "/" + year + "/");
                 String date = day + "/" + month + "/" + year;
 
                 calendarExp = new GregorianCalendar(year, month, day);
                 calendarExp.getTimeInMillis();
-                //System.out.println(calendarExp.getTimeInMillis());
+                ////System.out.println(calendarExp.getTimeInMillis());
                 BestBefore.setText(date);
 
             }
@@ -280,7 +280,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     public static double StoNum (@NonNull String s) throws ParsingException {
         try {
             double num = Double.parseDouble(s.trim());
-            ////System.out.println("the num is " + num);
+            //////System.out.println("the num is " + num);
             return num;
         }
         catch (NumberFormatException nfe) {
@@ -296,7 +296,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.addProductButton:
-                ////System.out.println("Product is added");
+                //////System.out.println("Product is added");
                 addProduct();
                 break;
 //            case R.id.backButton:
@@ -339,7 +339,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             public void onComplete(@NonNull Task<Uri> task) {
                 uploadUri = task.getResult(); //tyt hranitsa ssilka
                 SaveProduct();
-                System.out.println("Heyy, the pic is uploaded  " + uploadUri);
+                //System.out.println("Heyy, the pic is uploaded  " + uploadUri);
             }
         });
     }
@@ -359,27 +359,27 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         String text = parent.getItemAtPosition(position).toString();
         if (text.equals("Food")) {
             Type = 1;
-            ////System.out.println("The type is " + Type);
+            //////System.out.println("The type is " + Type);
         }
         if (text.equals("Drink")) {
             Type = 2;
-            ////System.out.println("The type is " + Type);
+            //////System.out.println("The type is " + Type);
         }
         if (text.equals("Meat")) {
             Type = 3;
-            ////System.out.println("The type is " + Type);
+            //////System.out.println("The type is " + Type);
         }
         if (text.equals("Grain")) {
             Type = 4;
-            ////System.out.println("The type is " + Type);
+            //////System.out.println("The type is " + Type);
         }
         if (text.equals("Dairy")) {
             Type = 5;
-            ////System.out.println("The type is " + Type);
+            //////System.out.println("The type is " + Type);
         }
         if (text.equals("Fruits and Vegetables")){
             Type = 6;
-            System.out.println("The type is " + Type);
+            //System.out.println("The type is " + Type);
 
         }
         Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
@@ -406,7 +406,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         double minQty = quantity*0.1;
         int minQuantity = (int) minQty;
 
-        ////System.out.println("QUANTITY" + quantity);
+        //////System.out.println("QUANTITY" + quantity);
 
         String addingDate = DateAdding.getText().toString().trim();
         String bestBefore = BestBefore.getText().toString().trim();
@@ -440,17 +440,17 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         try {
             buyPr = StoNum(BuyPrice);
         } catch (ParsingException e) {
-            ////System.out.println(e.getMessage());
+            //////System.out.println(e.getMessage());
         }
 
         try {
             sellPr = StoNum(CellPrice);
         } catch (ParsingException e) {
-            ////System.out.println(e.getMessage());
+            //////System.out.println(e.getMessage());
         }
 
 
-        ////System.out.println("tytytyty     " + UriStr);
+        //////System.out.println("tytytyty     " + UriStr);
         uniqueOfProducID = UUID.randomUUID().toString();
         Map<String, Object> dataOfProduct = new HashMap<>();
         dataOfProduct.put("id", ID);
@@ -465,14 +465,14 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         dataOfProduct.put("typeOfProduct", Type);
         dataOfProduct.put("description", description);
 
-        ////System.out.println("After builder new product");
+        //////System.out.println("After builder new product");
 
         FirebaseDatabase.getInstance().getReference("products")
                 .child(uniqueOfProducID)
                 .setValue(dataOfProduct).addOnCompleteListener(new OnCompleteListener<Void>() {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            //System.out.println("The product has been added with UNIQUE ID " + uniqueOfProducID);
+                            ////System.out.println("The product has been added with UNIQUE ID " + uniqueOfProducID);
                         } else {
 //                            Toast.makeText(Register.this, " Failed to register! Try again!", Toast.LENGTH_LONG).show();
 
@@ -490,7 +490,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                            //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                         } else {
 
@@ -511,7 +511,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            ////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
+                            //////System.out.println("The product added to cart " + HomeFragment.uniqueOfCartID);
 
                         } else {
 
