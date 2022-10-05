@@ -84,7 +84,7 @@ public class OrderForList {
         this.deliveryType = deliveryType;
     }
 
-    public OrderForList(String timeOfPlacedOrder, String clientName, String orderer, String clientAddress, String clientCommetns, String clientPhone, String status, String idOfOrder, int numOfOrder, Long deliveryType) {
+    public OrderForList(String timeOfPlacedOrder, String clientName, String orderer, String clientAddress, String clientCommetns, String clientPhone, String status, String theShipper,String idOfOrder, int numOfOrder, Long deliveryType) {
         this.timeOfPlacedOrder = timeOfPlacedOrder;
         this.clientName = clientName;
         this.orderer = orderer;
@@ -95,13 +95,21 @@ public class OrderForList {
         this.idOfOrder = idOfOrder;
         this.numOfOrder = numOfOrder;
         this.deliveryType = deliveryType;
+        this.theShipper = theShipper;
     }
 
-    private String timeOfPlacedOrder, clientName,orderer,clientAddress,clientCommetns,clientPhone,status, idOfOrder;
+    private String timeOfPlacedOrder, clientName,orderer,clientAddress,clientCommetns,clientPhone,status, idOfOrder, theShipper;
     private int numOfOrder;
     private Long deliveryType;
 
 
+    public String getTheShipper() {
+        return theShipper;
+    }
+
+    public void setTheShipper(String theShipper) {
+        this.theShipper = theShipper;
+    }
 
     public OrderForList() {
 

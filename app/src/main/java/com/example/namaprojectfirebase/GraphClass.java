@@ -1323,21 +1323,38 @@ public void runSpecificShipments()
 
       specificShipmentsGraphQuery.addValueEventListener(new ValueEventListener(){
           @Override
-
-
           public void onDataChange(@NonNull DataSnapshot snapshot) {
               dataForSpecificShipmentGraphs = new ArrayList <String> ();
               for (DataSnapshot shipmentSnapshot : snapshot.getChildren()) {
-                  System.out.println(" runSpecificShipmentsGraphData  WWWW" + shipmentSnapshot.child("orderer") + " AND THE CURRENT " + theCurrentEamil);
-
-                  if(theCurrentEamil.equals(shipmentSnapshot.child("orderer").getValue().toString())){
-                        dataForSpecificShipmentGraphs.add(shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
-                        System.out.println("qqqqq" + dataForSpecificShipmentGraphs.get(0));
+                  System.out.println(" runSpecificShipmentsGraphData  WWWW" + shipmentSnapshot.child("theShipper") + " AND THE CURRENT SELECTED " + theCurrentEamil);
+                  if(shipmentSnapshot.child("theShipper").getValue()!=null) {
+                      if (theCurrentEamil.equals(shipmentSnapshot.child("theShipper").getValue().toString())) {
+                          dataForSpecificShipmentGraphs.add(shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                          System.out.println("qqqqq" + dataForSpecificShipmentGraphs.get(0));
+                          System.out.println(" THE ADDING DATE : " + shipmentSnapshot.child("timeOfPlacedOrder").getValue().toString());
+                      }
                   }
-
-
-
               }
+
+
+
+              //shipmentsDates [];
+              //shipmentsCount [];
+              int k = 0;
+              int l = 0;
+              shipmentsCount = new int[200];
+              shipmentsDates = new String[200];
+
+//              shipmentsDates[k] = dataForSpecificShipmentGraphs.get(0);
+//              dataForSpecificShipmentGraphs.remove(0);
+//              shipmentsCount[l] = 1;
+
+            while(dataForSpecificShipmentGraphs.isEmpty()) {
+                for (int j = 0; j < dataForSpecificShipmentGraphs.size(); j++) { // 1 poyavlenie
+                   System.out.println("Hh " + dataForSpecificShipmentGraphs.remove(j));
+                }
+
+            }
           }
 
           @Override
@@ -1346,7 +1363,9 @@ public void runSpecificShipments()
           }
 
       });
-  }
+
+
+    }
 
 
 
