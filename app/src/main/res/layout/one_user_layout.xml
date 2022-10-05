@@ -48,7 +48,7 @@
 
             </ImageButton>
 -->
-
+///
             <TextView
                 android:id="@+id/textViewShortDescInUserList"
                 android:layout_width="wrap_content"
